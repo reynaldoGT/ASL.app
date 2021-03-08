@@ -11,16 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:contentDescription="@string/app_name"
-
-        android:src="@drawable/ic_oo_letter"
+        android:src="@drawable/ic_b_only_sing"
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.104" />
+
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="here see your text"
+        android:textSize="32sp"
+        android:visibility="gone"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagv" />
+
 
     <Button
         android:id="@+id/mybutton"
@@ -28,8 +40,9 @@
         android:layout_height="wrap_content"
         android:text="Cambiar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.265"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagv" />
+        app:layout_constraintTop_toBottomOf="@id/textViewMessage" />
 
     <Button
         android:id="@+id/btnSendMessage"
@@ -37,8 +50,10 @@
         android:layout_height="wrap_content"
         android:text="send Message"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mybutton" />
+        app:layout_constraintTop_toBottomOf="@id/textViewMessage"
+        tools:layout_editor_absoluteY="477dp" />
 
     <EditText
         android:id="@+id/editTextEnterMessage"

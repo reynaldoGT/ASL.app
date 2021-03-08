@@ -1,16 +1,20 @@
 package com.example.singlanguage
 
-import android.R.attr.name
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     var button: Button? = null
     var buttonSendMessage: Button? = null
     var edSendMessage: EditText? = null
+    var textViewMessage: TextView? = null
 
 
     var lettersArray: ArrayList<Letter>? = null
@@ -102,20 +107,20 @@ class MainActivity : AppCompatActivity() {
         lettersArray?.add(Letter("0", R.drawable.ic_0_number))
 
 
-
-
         imageview = findViewById(R.id.imagv)
-
         button = findViewById(R.id.mybutton)
-
         buttonSendMessage = findViewById(R.id.btnSendMessage)
-
         edSendMessage = findViewById(R.id.editTextEnterMessage)
+        textViewMessage = findViewById(R.id.textViewMessage)
 
         edSendMessage?.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 //Perform Code
-                Toast.makeText(this, edSendMessage?.text, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, edSendMessage?.text, Toast.LENGTH_SHORT).show()
+                textViewMessage?.text = edSendMessage?.text
+                textViewMessage?.visibility = View.VISIBLE
+                generateSingLanguageMessage(edSendMessage?.text.toString())
+
                 return@OnKeyListener true
             }
             false
@@ -127,11 +132,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonSendMessage?.setOnClickListener {
-            Toast.makeText(this, edSendMessage?.text, Toast.LENGTH_SHORT).show()
 
-            var newArray = generateSingLanguageMessage( (edSendMessage?.text.toString()).trim() )
+            // generate the message in array letters
+//            val newArray =
+//                generateSingLanguageMessage((edSendMessage?.text.toString()).trim().toLowerCase())
 
+            // show the message changing the main image view
+//            hideKeyboard()
 
+            generateSingLanguageMessage(edSendMessage?.text.toString())
         }
         button?.setOnClickListener {
 
@@ -154,14 +163,17 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun generateSingLanguageMessage(message: String): ArrayList<Letter> {
+    private fun generateSingLanguageMessage(message: String) {
+
+
+        hideKeyboard()
+
+        val cleanString = message.trim().toLowerCase()
 
         val arraySentenceSing = ArrayList<Letter>()
 //        val stringArray = message.toCharArray()
 
-        val stringArray = message.replace(" ", "").toCharArray()
-
-        print(stringArray)
+        val stringArray = cleanString.replace(" ", "").toCharArray()
 
         for (i in stringArray) {
 
@@ -173,6 +185,39 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        return arraySentenceSing
+        showMessageWithSing(arraySentenceSing, timeTimer = 800)
+
+    }
+
+    private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Letter>, timeTimer: Long) {
+
+
+        GlobalScope.launch(context = Dispatchers.Main) {
+            for (i in sentenceInArrayImage) {
+
+                delay(timeTimer)
+                println("Here after a delay of 2 $timeTimer")
+
+                imageview?.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext, // Context
+//                    sentenceInArrayImage[i].image
+                        i.image
+
+                    )
+                )
+            }
+
+
+        }
+    }
+
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm: InputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }
