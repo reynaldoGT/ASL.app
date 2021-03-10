@@ -20,7 +20,6 @@ class GridAllLetters : AppCompatActivity() {
         val lettersArray = ArrayList<Letter>()
 
 
-
         lettersArray?.add(Letter("a", R.drawable.ic_a_letter))
         lettersArray?.add(Letter("b", R.drawable.ic_b_letter))
         lettersArray?.add(Letter("c", R.drawable.ic_c_letter))
@@ -74,7 +73,10 @@ class GridAllLetters : AppCompatActivity() {
         lettersArray?.add(Letter("x", R.drawable.ic_x_only_sing))
         lettersArray?.add(Letter("y", R.drawable.ic_y_only_sing))
         lettersArray?.add(Letter("z", R.drawable.ic_z_only_sing))
-        //?  numbers
+
+        //?  numbers sings
+
+        lettersArray?.add(Letter("0", R.drawable.ic_0_number))
         lettersArray?.add(Letter("1", R.drawable.ic_1_number))
         lettersArray?.add(Letter("2", R.drawable.ic_2_number))
         lettersArray?.add(Letter("3", R.drawable.ic_3_number))
@@ -84,12 +86,17 @@ class GridAllLetters : AppCompatActivity() {
         lettersArray?.add(Letter("7", R.drawable.ic_7_number))
         lettersArray?.add(Letter("8", R.drawable.ic_8_number))
         lettersArray?.add(Letter("9", R.drawable.ic_9_number))
-        lettersArray?.add(Letter("9", R.drawable.ic_9_number))
         lettersArray?.add(Letter("10", R.drawable.ic_10_number))
-        lettersArray?.add(Letter("10", R.drawable.ic_10_number))
-        lettersArray?.add(Letter("0", R.drawable.ic_0_number))
+
+        /**
+            * TEst methido
+            *
+        */
+
+        // ? this is  a comnens
 
         lista = findViewById(R.id.gridList)
+
         lista?.setHasFixedSize(true)
 
         layoutManager = GridLayoutManager(this,2)

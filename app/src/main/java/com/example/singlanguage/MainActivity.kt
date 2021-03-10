@@ -166,6 +166,9 @@ class MainActivity : AppCompatActivity() {
     private fun generateSingLanguageMessage(message: String) {
 
 
+        buttonSendMessage?.isEnabled = false;
+        edSendMessage?.isEnabled = false;
+
         hideKeyboard()
 
         val cleanString = message.trim().toLowerCase()
@@ -186,30 +189,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         showMessageWithSing(arraySentenceSing, timeTimer = 800)
-
     }
 
     private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Letter>, timeTimer: Long) {
 
 
         GlobalScope.launch(context = Dispatchers.Main) {
-            for (i in sentenceInArrayImage) {
+            for (index in sentenceInArrayImage) {
 
                 delay(timeTimer)
-                println("Here after a delay of 2 $timeTimer")
+                println("Here after a delay of  $timeTimer milliseconds")
 
                 imageview?.setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext, // Context
-//                    sentenceInArrayImage[i].image
-                        i.image
-
+                        index.image
                     )
                 )
             }
-
-
+            buttonSendMessage?.isEnabled = true
+            edSendMessage?.isEnabled = true
         }
+
     }
 
     private fun hideKeyboard() {

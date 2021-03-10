@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">SingLanguage</string>
+<!--    <string name="app_name">SingLanguage</string>-->
+    <string name="app_name">Lenguaje de Señas</string>
 </resources>
