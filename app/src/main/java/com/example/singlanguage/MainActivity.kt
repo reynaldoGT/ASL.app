@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         lettersArray?.add(Letter("l", R.drawable.ic_l_only_sing))
         lettersArray?.add(Letter("m", R.drawable.ic_m_only_sing))
         lettersArray?.add(Letter("n", R.drawable.ic_n_only_sing))
+        lettersArray?.add(Letter("ñ", R.drawable.ic_nn_letter))
         lettersArray?.add(Letter("o", R.drawable.ic_o_only_sing))
         lettersArray?.add(Letter("p", R.drawable.ic_p_only_sing))
         lettersArray?.add(Letter("q", R.drawable.ic_q_only_sing))
@@ -119,7 +120,11 @@ class MainActivity : AppCompatActivity() {
 //                Toast.makeText(this, edSendMessage?.text, Toast.LENGTH_SHORT).show()
                 textViewMessage?.text = edSendMessage?.text
                 textViewMessage?.visibility = View.VISIBLE
-                generateSingLanguageMessage(edSendMessage?.text.toString())
+                val createMessage = edSendMessage?.text.toString()
+
+                if (createMessage.isNotEmpty()) {
+                    generateSingLanguageMessage(edSendMessage?.text.toString())
+                }
 
                 return@OnKeyListener true
             }

@@ -61,6 +61,7 @@ class GridAllLetters : AppCompatActivity() {
         lettersArray?.add(Letter("l", R.drawable.ic_l_only_sing))
         lettersArray?.add(Letter("m", R.drawable.ic_m_only_sing))
         lettersArray?.add(Letter("n", R.drawable.ic_n_only_sing))
+        lettersArray?.add(Letter("ñ", R.drawable.ic_nn_letter))
         lettersArray?.add(Letter("o", R.drawable.ic_o_only_sing))
         lettersArray?.add(Letter("p", R.drawable.ic_p_only_sing))
         lettersArray?.add(Letter("q", R.drawable.ic_q_only_sing))
@@ -88,12 +89,7 @@ class GridAllLetters : AppCompatActivity() {
         lettersArray?.add(Letter("9", R.drawable.ic_9_number))
         lettersArray?.add(Letter("10", R.drawable.ic_10_number))
 
-        /**
-            * TEst methido
-            *
-        */
 
-        // ? this is  a comnens
 
         lista = findViewById(R.id.gridList)
 
