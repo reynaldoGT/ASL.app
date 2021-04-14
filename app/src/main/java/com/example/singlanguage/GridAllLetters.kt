@@ -2,6 +2,7 @@ package com.example.singlanguage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -16,6 +17,11 @@ class GridAllLetters : AppCompatActivity() {
 
         setContentView(R.layout.activity_grid_all_letters)
 
+        val toolBar = findViewById<Toolbar>(R.id.toolbar)
+        toolBar?.setTitle(R.string.app_name)
+        //para decirle que esta es la toolbar oficial
+
+        setSupportActionBar(toolBar)
         val shared = Shared()
         val lettersArray = shared.getOnlyLettersArray()
 
