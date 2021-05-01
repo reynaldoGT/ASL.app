@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.singlanguage.databinding.TemplateLetterBinding
 
 class AdapterLetters(
     items: ArrayList<Letter>
@@ -42,13 +43,16 @@ class AdapterLetters(
     }
 
     class ViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
-        var vista = vista
+
+        // Using the binding
+        private val binding= TemplateLetterBinding.bind(vista)
+
         var foto: ImageView? = null
         var nombre: TextView? = null
 
         init {
-            foto = vista.findViewById(R.id.imageTemplateView)
-            nombre = vista.findViewById(R.id.textViewTemplateView)
+            foto = binding.imageTemplateView
+            nombre = binding.textViewTemplateView
         }
     }
 }

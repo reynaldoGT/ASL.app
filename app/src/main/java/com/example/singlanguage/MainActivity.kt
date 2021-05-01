@@ -2,36 +2,31 @@ package com.example.singlanguage
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.inputmethod.InputMethodManager
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.collections.ArrayList
+import com.example.singlanguage.databinding.ActivityMainBinding
+
 
 
 class MainActivity : AppCompatActivity() {
 
+    //1 using the binding in activities
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setTheme(R.style.Theme_SingLanguage)
 
         super.onCreate(savedInstanceState)
+        //2 using the binding in activities
+        binding = ActivityMainBinding.inflate((layoutInflater))
+        setContentView(binding.root)
 
-        setContentView(R.layout.activity_main)
         showSelectedFragment(SendMessage())
 
 
-        val botonNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        botonNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.page_1 -> {
                     showSelectedFragment(SendMessage())

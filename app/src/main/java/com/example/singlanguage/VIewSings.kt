@@ -7,10 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.singlanguage.databinding.FragmentSendMessageBinding
+import com.example.singlanguage.databinding.FragmentVIewSingsBinding
 
 
 class VIewSings : Fragment() {
-    var lista: RecyclerView? = null
+
+    private var _binding: FragmentVIewSingsBinding? = null
+    private val binding get() = _binding!!
+
     var adaptador: AdapterLetters? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
@@ -18,26 +23,27 @@ class VIewSings : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_v_iew_sings, container, false)
+    ): View {
+
+        // Using the binding
+        _binding = FragmentVIewSingsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val shared = Shared()
         val lettersArray = shared.getOnlyLettersArray()
 
-
-        lista = view.findViewById(R.id.gridList)
-
-        lista?.setHasFixedSize(true)
+        binding.gridList.setHasFixedSize(true)
 
         layoutManager = GridLayoutManager(activity!!.applicationContext, 2)
-        lista?.layoutManager = layoutManager
+        binding.gridList.layoutManager = layoutManager
 
         adaptador = AdapterLetters(lettersArray)
 
-        lista?.adapter = adaptador
-
-        return view
+        binding.gridList.adapter = adaptador
     }
 
 

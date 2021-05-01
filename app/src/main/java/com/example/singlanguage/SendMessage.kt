@@ -11,8 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.isGone
-import androidx.core.view.isInvisible
+import com.example.singlanguage.databinding.FragmentSendMessageBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -23,49 +22,43 @@ import kotlin.collections.ArrayList
 
 class SendMessage : Fragment() {
 
-
-    var imageview: ImageView? = null
-    var button: Button? = null
-    var buttonSendMessage: Button? = null
-    var edSendMessage: EditText? = null
-    var seeCurrentMessage: TextView? = null
-
     var lettersArrays: ArrayList<Letter>? = null
 
+    private var _binding: FragmentSendMessageBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
+        _binding = FragmentSendMessageBinding.inflate(inflater,container,false)
+        return binding.root
+    }
 
-        val view = inflater.inflate(R.layout.fragment_send_message, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val shared = Shared()
         lettersArrays = shared.getLetterArray()
 
 
-        imageview = view.findViewById(R.id.imagv)
-        buttonSendMessage = view.findViewById(R.id.btnSendMessage)
-        edSendMessage = view.findViewById(R.id.editTextEnterMessage)
-        seeCurrentMessage = view.findViewById(R.id.seeCurrentMessage)
 
+        binding.edSendMessage.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
 
-        edSendMessage?.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-
-            seeCurrentMessage?.visibility = View.VISIBLE
-            seeCurrentMessage?.text= edSendMessage?.text.toString()
+            binding.seeCurrentMessage.visibility = View.VISIBLE
+            binding.seeCurrentMessage.text = binding.edSendMessage.text.toString()
 
 
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
                 //Perform Code
 //                Toast.makeText(this, edSendMessage?.text, Toast.LENGTH_SHORT).show()
-                seeCurrentMessage?.text = edSendMessage?.text
+                 binding.seeCurrentMessage.text = binding.edSendMessage.text
                 /*seeCurrentMessage?.visibility = View.VISIBLE*/
-                val createMessage = edSendMessage?.text.toString()
+                val createMessage = binding.edSendMessage?.text.toString()
 
                 if (createMessage.isNotEmpty()) {
-                    generateSingLanguageMessage(edSendMessage?.text.toString())
+                    generateSingLanguageMessage(binding.edSendMessage.text.toString())
                 }
 
                 return@OnKeyListener true
@@ -74,20 +67,18 @@ class SendMessage : Fragment() {
         })
 
 
-        imageview?.setOnClickListener {
+        binding.ivSing.setOnClickListener {
 
             changeImage()
         }
 
-        buttonSendMessage?.setOnClickListener {
+        binding.btnSendMessage.setOnClickListener {
 
-            generateSingLanguageMessage(edSendMessage?.text.toString())
+            generateSingLanguageMessage(binding.edSendMessage.text.toString())
         }
 
-        return view
 
     }
-
 
     private fun changeImage() {
 
@@ -95,7 +86,7 @@ class SendMessage : Fragment() {
         val newLetter: String = lettersArrays!![randomLetter].letter
 //        Toast.makeText(this, newLetter, Toast.LENGTH_SHORT).show()
 
-        imageview?.setImageDrawable(
+        binding.ivSing.setImageDrawable(
             ContextCompat.getDrawable(
                 activity!!.applicationContext, // Context
                 lettersArrays!![randomLetter].image
@@ -105,11 +96,11 @@ class SendMessage : Fragment() {
 
     private fun generateSingLanguageMessage(message: String) {
 
-        seeCurrentMessage?.visibility = view!!.visibility
-        seeCurrentMessage?.text = message
+        binding.seeCurrentMessage.visibility = view!!.visibility
+        binding.seeCurrentMessage.text = message
 
-        buttonSendMessage?.isEnabled = false;
-        edSendMessage?.isEnabled = false;
+        binding.btnSendMessage.isEnabled = false;
+        binding.edSendMessage.isEnabled = false;
 
         /*hideKeyboard()*/
 
@@ -142,15 +133,15 @@ class SendMessage : Fragment() {
                 delay(timeTimer)
                 println("Here after a delay of  $timeTimer milliseconds")
 
-                imageview?.setImageDrawable(
+                binding.ivSing.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity!!.applicationContext, // Context
                         index.image
                     )
                 )
             }
-            buttonSendMessage?.isEnabled = true
-            edSendMessage?.isEnabled = true
+            binding.btnSendMessage.isEnabled = true
+            binding.edSendMessage.isEnabled = true
         }
 
     }
