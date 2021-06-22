@@ -16,8 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        setTheme(R.style.Theme_SingLanguage)
-
         super.onCreate(savedInstanceState)
         //2 using the binding in activities
         binding = ActivityMainBinding.inflate((layoutInflater))
