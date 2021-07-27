@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.singlanguage">
+    package="com.neo.singlanguage">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
-        <activity android:name=".SplashActivity"
+        <activity android:name="com.neo.singlanguage.SplashActivity"
             android:theme="@style/SplashTheme"
             >
             <intent-filter>
@@ -18,10 +18,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GridAllLetters"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.neo.singlanguage.GridAllLetters"
+            android:parentActivityName="com.neo.singlanguage.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.neo.singlanguage.MainActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
     </application>

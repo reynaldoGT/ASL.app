@@ -1,4 +1,4 @@
-package com.example.singlanguage
+package com.neo.singlanguage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.singlanguage.databinding.FragmentSendMessageBinding
-import com.example.singlanguage.databinding.FragmentVIewSingsBinding
+import com.neo.singlanguage.databinding.FragmentVIewSingsBinding
 
 
 class VIewSings : Fragment() {

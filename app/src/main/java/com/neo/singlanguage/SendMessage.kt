@@ -1,4 +1,4 @@
-package com.example.singlanguage
+package com.neo.singlanguage
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -6,12 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.singlanguage.databinding.FragmentSendMessageBinding
+import com.neo.singlanguage.databinding.FragmentSendMessageBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

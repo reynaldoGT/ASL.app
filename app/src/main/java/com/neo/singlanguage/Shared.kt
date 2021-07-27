@@ -1,4 +1,4 @@
-package com.example.singlanguage
+package com.neo.singlanguage
 
 class Shared {
     var lettersArray = ArrayList<Letter>()

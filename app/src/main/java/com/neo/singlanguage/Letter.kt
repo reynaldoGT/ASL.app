@@ -1,4 +1,4 @@
-package com.example.singlanguage
+package com.neo.singlanguage
 
 class Letter(letter: String, image: Int) {
     var letter = ""
