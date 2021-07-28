@@ -14,6 +14,8 @@
     <color name="primaryDarkColor">#007ac1</color>
     <color name="primaryTextColor">#000000</color>
 
+    <color name="splash_background">#00BCD4</color>
+
 
 
 </resources>

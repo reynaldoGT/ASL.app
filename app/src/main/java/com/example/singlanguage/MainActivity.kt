@@ -2,19 +2,10 @@ package com.example.singlanguage
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.inputmethod.InputMethodManager
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         showSelectedFragment(SendMessage())
 
 
-        val botonNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        botonNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.page_1 -> {
                     showSelectedFragment(SendMessage())

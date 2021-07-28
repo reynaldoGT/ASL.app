@@ -13,6 +13,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -32,7 +34,7 @@ class SendMessage : Fragment() {
 
     var lettersArrays: ArrayList<Letter>? = null
 
-
+    var bottomNavigationView: BottomNavigationView? = null;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,11 +52,12 @@ class SendMessage : Fragment() {
         edSendMessage = view.findViewById(R.id.editTextEnterMessage)
         seeCurrentMessage = view.findViewById(R.id.seeCurrentMessage)
 
+        bottomNavigationView = activity!!.findViewById(R.id.bottom_navigation)
 
         edSendMessage?.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
 
             seeCurrentMessage?.visibility = View.VISIBLE
-            seeCurrentMessage?.text= edSendMessage?.text.toString()
+            seeCurrentMessage?.text = edSendMessage?.text.toString()
 
 
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -138,7 +141,7 @@ class SendMessage : Fragment() {
 
         GlobalScope.launch(context = Dispatchers.Main) {
             for (index in sentenceInArrayImage) {
-
+                bottomNavigationView?.isVisible = false;
                 delay(timeTimer)
                 println("Here after a delay of  $timeTimer milliseconds")
 
@@ -151,8 +154,8 @@ class SendMessage : Fragment() {
             }
             buttonSendMessage?.isEnabled = true
             edSendMessage?.isEnabled = true
+            bottomNavigationView?.isVisible = true;
         }
-
     }
 
     /* private fun hideKeyboard() {
