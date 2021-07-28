@@ -1,12 +1,9 @@
 package com.example.singlanguage
 
+
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -18,20 +15,13 @@ import com.google.android.material.textfield.TextInputLayout
 import com.neo.signLanguage.R
 import com.neo.signLanguage.Shared
 import com.neo.signLanguage.Sing
-
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.DiskLogAdapter;
-import com.orhanobut.logger.FormatStrategy;
-import com.orhanobut.logger.Logger;
-import com.orhanobut.logger.PrettyFormatStrategy;
-
-
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
-
 import kotlin.collections.ArrayList
 
 
@@ -54,6 +44,7 @@ class SendMessage : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+        activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         Logger.addLogAdapter(AndroidLogAdapter())
 
         val view = inflater.inflate(R.layout.fragment_send_message, container, false)
