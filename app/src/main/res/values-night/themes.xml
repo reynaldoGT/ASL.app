@@ -14,9 +14,4 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="splashTheme" parent="Theme.SingLanguage">
-        <item name="android:windowBackground">
-            @drawable/splashscreen
-        </item>
-    </style>
 </resources>

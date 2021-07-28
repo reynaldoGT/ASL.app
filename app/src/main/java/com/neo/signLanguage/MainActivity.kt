@@ -1,10 +1,11 @@
-package com.example.singlanguage
+package com.neo.signLanguage
 
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.singlanguage.SendMessage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

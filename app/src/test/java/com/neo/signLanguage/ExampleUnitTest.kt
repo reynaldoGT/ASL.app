@@ -1,4 +1,4 @@
-package com.example.singlanguage
+package com.neo.signLanguage
 
 import org.junit.Test
 
