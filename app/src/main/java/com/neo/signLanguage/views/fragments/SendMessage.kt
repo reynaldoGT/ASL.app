@@ -1,4 +1,4 @@
-package com.example.singlanguage
+package com.neo.signLanguage.views.fragments
 
 
 import android.os.Bundle
@@ -17,10 +17,7 @@ import com.neo.signLanguage.Shared
 import com.neo.signLanguage.Sing
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -31,6 +28,7 @@ class SendMessage : Fragment() {
     var imageview: ImageView? = null
     var currentLetter: TextView? = null
     var buttonSendMessage: Button? = null
+    var buttonStopMessage: Button? = null
     var edSendMessage: TextInputLayout? = null
     var seeCurrentMessage: TextView? = null
     var parentLayout: View? = null
@@ -54,11 +52,13 @@ class SendMessage : Fragment() {
 
 
         imageview = view.findViewById(R.id.ivSing)
-        buttonSendMessage = view.findViewById(R.id.btnSendMessage)
         edSendMessage = view.findViewById(R.id.edSendMessage)
         seeCurrentMessage = view.findViewById(R.id.seeCurrentMessage)
         currentLetter = view.findViewById(R.id.currentLetter)
         parentLayout = view.findViewById(R.id.layoutSendMessage)
+        /* Buttons */
+        buttonSendMessage = view.findViewById(R.id.btnSendMessage)
+        buttonStopMessage = view.findViewById(R.id.btnSendMessageCancel)
 
         bottomNavigationView = activity!!.findViewById(R.id.bottom_navigation)
 
@@ -92,6 +92,11 @@ class SendMessage : Fragment() {
 
             sendMessage(edSendMessage?.editText?.text.toString())
         }
+
+        buttonStopMessage?.setOnClickListener {
+            /*break;*/
+        }
+
 
         return view
 
@@ -144,11 +149,17 @@ class SendMessage : Fragment() {
     }
 
     private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Sing>, timeTimer: Long) {
-
-
-        GlobalScope.launch(context = Dispatchers.Main) {
+        var job: Job? = null
+        job = GlobalScope.launch(context = Dispatchers.Main) {
             for (index in sentenceInArrayImage) {
+                buttonStopMessage?.isVisible = true
+                buttonStopMessage?.setOnClickListener {
+                    job?.cancel()
+                    resetStatus()
+                }
                 bottomNavigationView?.isVisible = false;
+                buttonSendMessage?.isVisible = false
+
                 delay(timeTimer)
                 println("Here after a delay of  $timeTimer milliseconds")
 
@@ -160,9 +171,7 @@ class SendMessage : Fragment() {
                     )
                 )
             }
-            buttonSendMessage?.isEnabled = true
-            edSendMessage?.isEnabled = true
-            bottomNavigationView?.isVisible = true;
+            resetStatus()
         }
     }
 
@@ -176,13 +185,21 @@ class SendMessage : Fragment() {
             Snackbar.make(
                 activity!!.findViewById(android.R.id.content),
                 "Mensaje Vacio",
-                    Snackbar.LENGTH_LONG,
+                Snackbar.LENGTH_LONG,
 
                 ).show();
 
         }
     }
 
+    private fun resetStatus() {
+        buttonStopMessage?.isVisible = false
+        buttonSendMessage?.isEnabled = true
+        edSendMessage?.isEnabled = true
+        bottomNavigationView?.isVisible = true
+        buttonSendMessage?.isVisible = true
+
+    }
     /* private fun hideKeyboard() {
         val view = this.currentFocus
         if (view != null) {

@@ -43,7 +43,6 @@ class AdapterLetters(
     }
 
     class ViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
-
         // Using the binding
         private val binding= TemplateLetterBinding.bind(vista)
 

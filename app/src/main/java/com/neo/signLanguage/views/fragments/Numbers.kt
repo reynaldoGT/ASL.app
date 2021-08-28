@@ -1,4 +1,4 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.views.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.databinding.FragmentVIewSingsBinding
+import com.neo.signLanguage.AdapterLetters
+import com.neo.signLanguage.Shared
+import com.neo.signLanguage.databinding.FragmentNumbersBinding
+
+class Numbers : Fragment() {
 
 
-class VIewSings : Fragment() {
-
-    private var _binding: FragmentVIewSingsBinding? = null
+    private var _binding: FragmentNumbersBinding? = null
     private val binding get() = _binding!!
 
     var adaptador: AdapterLetters? = null
@@ -25,7 +27,7 @@ class VIewSings : Fragment() {
     ): View {
 
         // Using the binding
-        _binding = FragmentVIewSingsBinding.inflate(inflater, container, false)
+        _binding = FragmentNumbersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,17 +35,15 @@ class VIewSings : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val shared = Shared()
-        val lettersArray = shared.getOnlyLettersArray()
+        val lettersArray = shared.getOnlyNumbersArray()
 
-        binding.gridList.setHasFixedSize(true)
+        binding.gridListSingNumbers.setHasFixedSize(true)
 
         layoutManager = GridLayoutManager(activity!!.applicationContext, 2)
-        binding.gridList.layoutManager = layoutManager
+        binding.gridListSingNumbers.layoutManager = layoutManager
 
         adaptador = AdapterLetters(lettersArray)
 
-        binding.gridList.adapter = adaptador
+        binding.gridListSingNumbers.adapter = adaptador
     }
-
-
 }

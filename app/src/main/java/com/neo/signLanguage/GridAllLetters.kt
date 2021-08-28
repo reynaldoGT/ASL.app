@@ -26,7 +26,7 @@ class GridAllLetters : AppCompatActivity() {
         val lettersArray = shared.getOnlyLettersArray()
 
 
-        lista = findViewById(R.id.gridList)
+        lista = findViewById(R.id.gridListSingNumbers)
 
         lista?.setHasFixedSize(true)
 

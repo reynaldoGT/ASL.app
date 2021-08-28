@@ -22,9 +22,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginVertical="8dp"
             android:text="Letra: A"
             android:textSize="24sp"
-            android:layout_marginVertical="8dp"
             android:visibility="visible" />
 
 
@@ -40,9 +40,9 @@
             android:id="@+id/seeCurrentMessage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
             android:layout_marginHorizontal="36dp"
             android:layout_marginVertical="8dp"
+            android:layout_weight="0.1"
             android:text="@string/here_see_your_text"
             android:textAlignment="center"
             android:textSize="32sp"
@@ -77,7 +77,22 @@
             android:paddingVertical="15dp"
             android:text="@string/send_message"
 
-            app:cornerRadius="50dp" />
+            app:cornerRadius="40dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSendMessageCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="50dp"
+
+            android:paddingVertical="15dp"
+            android:text="@string/cancel"
+
+            app:cornerRadius="40dp" />
 
         <!-- <EditText
              android:id="@+id/edSendMessage"

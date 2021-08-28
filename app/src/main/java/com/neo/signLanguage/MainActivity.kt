@@ -5,8 +5,10 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.example.singlanguage.SendMessage
+import com.neo.signLanguage.views.fragments.SendMessage
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.neo.signLanguage.views.fragments.Numbers
+import com.neo.signLanguage.views.fragments.VIewSings
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.page_2 -> {
                     showSelectedFragment(VIewSings())
+                    true
+                }
+                R.id.page_3-> {
+                    showSelectedFragment(Numbers())
                     true
                 }
 

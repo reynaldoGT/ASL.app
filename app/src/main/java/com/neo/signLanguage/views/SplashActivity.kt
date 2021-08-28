@@ -1,8 +1,9 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.neo.signLanguage.MainActivity
 
 
 class SplashActivity : AppCompatActivity() {

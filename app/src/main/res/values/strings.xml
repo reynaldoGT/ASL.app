@@ -2,8 +2,12 @@
     <!--    <string name="app_name">SingLanguage</string>-->
     <string name="app_name">Lenguaje de Señas</string>
     <string name="send_message">Enviar Mensaje</string>
+    <string name="cancel">Cancelar</string>
     <string name="write_your_text_here">Escriba su mensaje</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="here_see_your_text">Aquí verás tu texto</string>
+    <string name="create_message">Crear Mensaje</string>
+    <string name="view_sing">Señas</string>
+    <string name="view_numbers">Números</string>
 </resources>

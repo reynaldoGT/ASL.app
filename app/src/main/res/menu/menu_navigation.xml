@@ -3,12 +3,17 @@
     <item
         android:id="@+id/page_1"
         android:enabled="true"
-        android:icon="@drawable/ic_navigation_hand"
-        android:title="Crear Mensaje" />
+        android:icon="@drawable/ic_message"
+        android:title="@string/create_message" />
     <item
         android:id="@+id/page_2"
         android:enabled="true"
         android:icon="@drawable/ic_l_letter"
-        android:title="Ver señas" />
+        android:title="@string/view_sing" />
+    <item
+        android:id="@+id/page_3"
+        android:enabled="true"
+        android:icon="@drawable/ic_numbers"
+        android:title="@string/view_numbers" />
 
 </menu>

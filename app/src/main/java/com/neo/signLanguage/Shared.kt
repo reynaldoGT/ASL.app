@@ -1,9 +1,10 @@
 package com.neo.signLanguage
 
 class Shared {
-    var lettersArray = ArrayList<Sing>()
-    val letter = "Letra: "
-    val number = "Número: "
+    private var lettersArray = ArrayList<Sing>()
+    private var numbersArray = ArrayList<Sing>()
+    private val letter = "Letra: "
+    private val number = "Número: "
 
     fun getLetterArray(): ArrayList<Sing> {
         this.fillLetterArray()
@@ -15,6 +16,10 @@ class Shared {
         return this.lettersArray
     }
 
+    fun getOnlyNumbersArray(): ArrayList<Sing>{
+        this.fillOnlyNumbers()
+        return this.numbersArray
+    }
     private fun fillLetterArray() {
 
         lettersArray.add(Sing("b", R.drawable.ic_b_only_sing, letter))
@@ -62,7 +67,6 @@ class Shared {
     }
 
     private fun fillOnlyLetterArray() {
-
 
         lettersArray.add(Sing("A", R.drawable.ic_a_letter, letter))
         lettersArray.add(Sing("B", R.drawable.ic_b_letter, letter))
@@ -121,7 +125,7 @@ class Shared {
 
         //  numbers sings
 
-        lettersArray.add(Sing("0", R.drawable.ic_0_number, "number"))
+       /* lettersArray.add(Sing("0", R.drawable.ic_0_number, "number"))
         lettersArray.add(Sing("1", R.drawable.ic_1_number, "number"))
         lettersArray.add(Sing("2", R.drawable.ic_2_number, "number"))
         lettersArray.add(Sing("3", R.drawable.ic_3_number, "number"))
@@ -131,8 +135,20 @@ class Shared {
         lettersArray.add(Sing("7", R.drawable.ic_7_number, "number"))
         lettersArray.add(Sing("8", R.drawable.ic_8_number, "number"))
         lettersArray.add(Sing("9", R.drawable.ic_9_number, "number"))
-        lettersArray.add(Sing("10", R.drawable.ic_10_number, "number"))
+        lettersArray.add(Sing("10", R.drawable.ic_10_number, "number"))*/
+    }
 
-
+    private fun fillOnlyNumbers() {
+        numbersArray.add(Sing("0", R.drawable.ic_0_number, "number"))
+        numbersArray.add(Sing("1", R.drawable.ic_1_number, "number"))
+        numbersArray.add(Sing("2", R.drawable.ic_2_number, "number"))
+        numbersArray.add(Sing("3", R.drawable.ic_3_number, "number"))
+        numbersArray.add(Sing("4", R.drawable.ic_4_number, "number"))
+        numbersArray.add(Sing("5", R.drawable.ic_5_number, "number"))
+        numbersArray.add(Sing("6", R.drawable.ic_6_number, "number"))
+        numbersArray.add(Sing("7", R.drawable.ic_7_number, "number"))
+        numbersArray.add(Sing("8", R.drawable.ic_8_number, "number"))
+        numbersArray.add(Sing("9", R.drawable.ic_9_number, "number"))
+        numbersArray.add(Sing("10", R.drawable.ic_10_number, "number"))
     }
 }
