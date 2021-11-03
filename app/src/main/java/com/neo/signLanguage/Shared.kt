@@ -3,8 +3,8 @@ package com.neo.signLanguage
 class Shared {
     private var lettersArray = ArrayList<Sing>()
     private var numbersArray = ArrayList<Sing>()
-    private val letter = "Letra: "
-    private val number = "Número: "
+    private val letter = "letter"
+    private val number = "number"
 
     fun getLetterArray(): ArrayList<Sing> {
         this.fillLetterArray()

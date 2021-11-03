@@ -1,5 +1,6 @@
 package com.neo.signLanguage.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
 import com.neo.signLanguage.AdapterLetters
+import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.DetailsSingActivity
 import com.neo.signLanguage.Shared
 import com.neo.signLanguage.databinding.FragmentNumbersBinding
 
@@ -42,8 +46,25 @@ class Numbers : Fragment() {
         layoutManager = GridLayoutManager(activity!!.applicationContext, 2)
         binding.gridListSingNumbers.layoutManager = layoutManager
 
-        adaptador = AdapterLetters(lettersArray)
+        adaptador = AdapterLetters(lettersArray, object : ClickListener {
+            override fun onClick(v: View?, position: Int) {
+                val myIntent =
+                    Intent(activity!!.applicationContext, DetailsSingActivity::class.java)
+                myIntent.putExtra("image", lettersArray[position].image)
+                myIntent.putExtra("letter", lettersArray[position].letter)
+                myIntent.putExtra("type", lettersArray[position].type)
+
+                startActivity(myIntent)
+            }
+        })
 
         binding.gridListSingNumbers.adapter = adaptador
+        initLoad()
+
+    }
+
+    private fun initLoad() {
+        val adRequest = AdRequest.Builder().build()
+        binding.banner.loadAd(adRequest)
     }
 }

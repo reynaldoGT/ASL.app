@@ -1,7 +1,9 @@
 package com.neo.signLanguage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +27,6 @@ class GridAllLetters : AppCompatActivity() {
         val shared = Shared()
         val lettersArray = shared.getOnlyLettersArray()
 
-
         lista = findViewById(R.id.gridListSingNumbers)
 
         lista?.setHasFixedSize(true)
@@ -33,7 +34,16 @@ class GridAllLetters : AppCompatActivity() {
         layoutManager = GridLayoutManager(this, 2)
         lista?.layoutManager = layoutManager
 
-        adaptador = AdapterLetters(lettersArray)
+        adaptador = AdapterLetters(lettersArray, object : ClickListener {
+            override fun onClick(v: View?, position: Int) {
+                /*val myIntent =
+                    Intent(this, DetailsSingActivity::class.java)
+                myIntent.putExtra("image", lettersArray[position].image)
+                myIntent.putExtra("letter", lettersArray[position].letter)
+
+                startActivity(myIntent)*/
+            }
+        })
 
         lista?.adapter = adaptador
 

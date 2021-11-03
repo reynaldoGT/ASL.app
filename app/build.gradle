@@ -11,8 +11,8 @@ android {
         applicationId "com.neo.singlanguage"
         minSdkVersion 22
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.2.3"
+        versionCode 9
+        versionName "1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,5 +54,12 @@ dependencies {
 
     implementation 'com.orhanobut:logger:2.2.0'
 
+    implementation 'com.google.android.gms:play-services-ads:20.4.0'
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+
+    // Declare the dependencies for the Remote Config and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-config-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
 }

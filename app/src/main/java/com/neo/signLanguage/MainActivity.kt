@@ -3,6 +3,7 @@ package com.neo.signLanguage
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.neo.signLanguage.views.fragments.SendMessage
@@ -13,15 +14,22 @@ import com.neo.signLanguage.views.fragments.VIewSings
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        lateinit var pref: SharedPreferences
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        setTheme(R.style.Theme_SingLanguage)
-
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
         showSelectedFragment(SendMessage())
+        pref = SharedPreferences(this)
+
+        if (pref.getTheme()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -35,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                     showSelectedFragment(VIewSings())
                     true
                 }
-                R.id.page_3-> {
+                R.id.page_3 -> {
                     showSelectedFragment(Numbers())
                     true
                 }
@@ -43,7 +51,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
     }
 
 

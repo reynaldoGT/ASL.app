@@ -1,13 +1,27 @@
 <resources>
     <!--    <string name="app_name">SingLanguage</string>-->
-    <string name="app_name">Lenguaje de Señas</string>
-    <string name="send_message">Enviar Mensaje</string>
-    <string name="cancel">Cancelar</string>
-    <string name="write_your_text_here">Escriba su mensaje</string>
+    <string name="app_name">Sign language</string>
+    <string name="send_message">Send Message</string>
+    <string name="cancel">Cancel</string>
+    <string name="write_your_text_here">Write your message</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="here_see_your_text">Aquí verás tu texto</string>
-    <string name="create_message">Crear Mensaje</string>
-    <string name="view_sing">Señas</string>
-    <string name="view_numbers">Números</string>
+    <string name="here_see_your_text">Here your text will appear</string>
+    <string name="create_message">New Message</string>
+    <string name="view_sing">Sings</string>
+    <string name="view_numbers">Numbers</string>
+    <string name="empty_message">Empty Message!</string>
+    <string name="letter_a">Letter: A</string>
+    <string name="number">Number: </string>
+    <string name="letter">Letter: </string>
+
+
+    <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="text_intersititial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+
+    <string name="change_theme">Dark Theme</string>
+    <string name="current_delay_time">Current delay time</string>
+    <string name="delay_time">Delay time</string>
+    <string name="settings_title">Settings</string>
 </resources>

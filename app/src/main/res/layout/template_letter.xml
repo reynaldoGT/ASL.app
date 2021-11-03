@@ -16,9 +16,11 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
+        app:tint="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.02"
-        app:srcCompat="@drawable/ic_0_number" />
+        app:srcCompat="@drawable/ic_0_number"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/textViewTemplateView"

@@ -5,28 +5,32 @@
     android:id="@+id/layoutSendMessage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:paddingBottom="?android:attr/actionBarSize"
     tools:context=".SendMessage">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
 
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/currentLetter"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginVertical="8dp"
-            android:text="Letra: A"
+            android:text="@string/letter_a"
             android:textSize="24sp"
             android:visibility="visible" />
-
 
         <ImageView
             android:id="@+id/ivSing"
@@ -34,7 +38,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_a_only_sing" />
+            android:src="@drawable/ic_a_only_sing"
+            app:tint="?attr/colorPrimary" />
 
         <TextView
             android:id="@+id/seeCurrentMessage"
@@ -53,7 +58,6 @@
             android:id="@+id/edSendMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="@string/write_your_text_here">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,31 +87,14 @@
             android:id="@+id/btnSendMessageCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:paddingHorizontal="50dp"
-
             android:paddingVertical="15dp"
             android:text="@string/cancel"
-
+            android:visibility="gone"
             app:cornerRadius="40dp" />
-
-        <!-- <EditText
-             android:id="@+id/edSendMessage"
-             android:layout_width="0dp"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="16dp"
-             android:layout_marginEnd="16dp"
-             android:layout_marginTop="8dp"
-
-             android:hint="@string/write_your_text_here"
-             android:inputType="textCapSentences"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintHorizontal_bias="0.0"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@id/btnSendMessage" />-->
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

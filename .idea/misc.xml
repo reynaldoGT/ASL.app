@@ -3,13 +3,83 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_0_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_10_number.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_1_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_2_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_3_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_4_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_5_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_6_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_7_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_8_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_9_number.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_a_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_a_only_sing.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_b_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_b_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_c_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_c_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_d_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_d_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_e_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_e_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_f_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_f_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_g_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_g_only_sing.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_h_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_h_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_i_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_i_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_j_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_j_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_k_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_k_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_l_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_l_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_m_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_m_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_n_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_n_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_nn_letter.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_numbers.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_o_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_o_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_p_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_p_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_q_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_q_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_r_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_r_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_s_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_s_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_t_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_t_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_u_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_u_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_v_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_v_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_w_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_w_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_x_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_x_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_y_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_y_only_sing.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_z_letter.xml" value="0.21875" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_z_only_sing.xml" value="0.21875" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/layout_border.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/splash_background.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/activity_intersitial.xml" value="0.25" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/activity_main.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_numbers.xml" value="0.25" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_send_message.xml" value="0.1983695652173913" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_send_message.xml" value="0.25" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_v_iew_sings.xml" value="0.18" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_view_sings.xml" value="0.33177083333333335" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/template_letter.xml" value="0.75" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_navigation.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/settings_activity.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/template_letter.xml" value="0.22" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_navigation.xml" value="0.33" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/toolbar_menu.xml" value="0.33" />
       </map>
     </option>
   </component>

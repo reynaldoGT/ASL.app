@@ -10,8 +10,8 @@ class Letters {
     private fun createLetters() {
 
         // letters
-        val letter = "Letra: "
-        val number = "Número: "
+        val letter = "letter"
+        val number = "number"
 
         lettersArray.add(Sing("b", R.drawable.ic_b_letter, letter))
         lettersArray.add(Sing("a", R.drawable.ic_a_letter, letter))

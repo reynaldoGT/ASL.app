@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lenguaje de Señas</string>
+    <string name="send_message">Enviar Mensaje</string>
+    <string name="cancel">Cancelar</string>
+    <string name="write_your_text_here">Escriba su mensaje</string>
+    <string name="here_see_your_text">Aquí verás tu texto</string>
+    <string name="create_message">Crear Mensaje</string>
+    <string name="view_sing">Señas</string>
+    <string name="view_numbers">Números</string>
+    <string name="hello_blank_fragment">Hello</string>
+    <string name="empty_message">Mensaje Vacio</string>
+    <string name="letter_a">Letra: A</string>
+    <string name="number">Número: </string>
+    <string name="letter">Letra: </string>
+    <string name="change_theme">Tema Oscuro</string>
+    <string name="current_delay_time">Tiempo de retraso actual</string>
+    <string name="delay_time">Tiempo de retraso</string>
+    <string name="settings_title">Configuración</string>
+</resources>

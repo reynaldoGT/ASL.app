@@ -7,8 +7,8 @@
     <item
         android:left="10dp"
         android:right="10dp"
-        android:top="260dp"
-        android:bottom="260dp"
+        android:top="200dp"
+        android:bottom="200dp"
         >
         <bitmap android:src="@drawable/splash_background_image" />
     </item>

@@ -5,13 +5,22 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_rounded"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_rounded"
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
-        <activity android:name="com.neo.signLanguage.views.SplashActivity"
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DetailsSingActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".views.SplashActivity"
             android:theme="@style/SplashTheme"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,12 +28,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.neo.signLanguage.GridAllLetters"
-            android:parentActivityName="com.neo.signLanguage.MainActivity" />
-        <activity
-            android:name="com.neo.signLanguage.MainActivity"
-             />
+            android:name=".GridAllLetters"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MainActivity" />
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/prop_id_application_admob" />
     </application>
 
 </manifest>
