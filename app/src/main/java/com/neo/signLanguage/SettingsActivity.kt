@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.slider.Slider
+import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.MainActivity.Companion.pref
 import com.neo.signLanguage.databinding.SettingsActivityBinding
+
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: SettingsActivityBinding
@@ -21,7 +23,7 @@ class SettingsActivity : AppCompatActivity() {
         actionbar?.setDisplayHomeAsUpEnabled(true)
 
         binding.switchChangeTheme.isChecked = pref.getTheme()
-        binding.currentDelayValue.text = pref.getDelay().toString()+ " ms"
+        binding.currentDelayValue.text = pref.getDelay().toString() + " ms."
 
         binding.switchChangeTheme.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -38,9 +40,36 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             override fun onStopTrackingTouch(slider: Slider) {
-                binding.currentDelayValue.text = slider.value.toInt().toString() +" ms"
+                binding.currentDelayValue.text = slider.value.toInt().toString() + " ms"
                 pref.setDelay(slider.value.toInt())
             }
         })
+
+
+        binding.buttonPurple.setOnClickListener {
+            pref.setColor(R.color.purple_200)
+            showSnackBar()
+        }
+        binding.buttonBlue.setOnClickListener {
+            pref.setColor(R.color.primaryColor)
+            showSnackBar()
+        }
+        binding.buttonBlack.setOnClickListener {
+            pref.setColor(R.color.gray900)
+            showSnackBar()
+        }
+        binding.buttonWhite.setOnClickListener {
+            pref.setColor(R.color.gray300)
+            showSnackBar()
+        }
+    }
+
+    private fun showSnackBar() {
+        val snackBar = Snackbar.make(
+            binding.content,
+            getString(R.string.new_color_changed),
+            Snackbar.LENGTH_LONG,
+        ).setAction("OK") {}
+        snackBar.show()
     }
 }

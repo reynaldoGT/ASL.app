@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
-
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -47,18 +46,15 @@ class MainActivity : AppCompatActivity() {
                     showSelectedFragment(Numbers())
                     true
                 }
-
                 else -> false
             }
         }
     }
 
-
     private fun showSelectedFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

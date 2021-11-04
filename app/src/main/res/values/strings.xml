@@ -18,10 +18,23 @@
 
     <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="text_intersititial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="test_intersititial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+
+    <string name="prod_id_application_admob" translatable="false">_</string>
+    <string name="prod_banner_id" translatable="false">_</string>
+    <string name="prod_intersititial_id" translatable="false">_</string>
 
     <string name="change_theme">Dark Theme</string>
     <string name="current_delay_time">Current delay time</string>
     <string name="delay_time">Delay time</string>
     <string name="settings_title">Settings</string>
+
+    <string name="purple">Purple</string>
+    <string name="blue">Blue</string>
+    <string name="black">Black</string>
+    <string name="gray">Gray</string>
+    <string name="change_hand_color">Change Hand Color</string>
+    <string name="new_color_changed">The color of the hand has changed</string>
+
+
 </resources>

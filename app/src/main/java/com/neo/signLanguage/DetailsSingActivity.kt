@@ -9,6 +9,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.neo.signLanguage.databinding.ActivityIntersitialBinding
 import android.content.Intent
 import android.R
+import java.util.*
 
 
 class DetailsSingActivity : AppCompatActivity() {
@@ -21,8 +22,8 @@ class DetailsSingActivity : AppCompatActivity() {
         val myIntent = intent
 
         val image = intent.getIntExtra("image", R.drawable.btn_star_big_off)
-        val letter = myIntent.getStringExtra("letter") // will return "SecondKeyValue"
-        val type = myIntent.getStringExtra("type") // will return "SecondKeyValue"
+        val letter = myIntent.getStringExtra("letter")
+        val type = myIntent.getStringExtra("type")?.capitalize() // will return "SecondKeyValue"
 
 
         binding.textView.text = letter

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Android/Sdk/platforms/android-30/data/res/layout/auto_complete_list.xml" value="0.3234375" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_0_number.xml" value="0.21875" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_10_number.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_1_number.xml" value="0.21875" />
@@ -80,6 +81,15 @@
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/template_letter.xml" value="0.22" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_navigation.xml" value="0.33" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/toolbar_menu.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.3343589743589744" />
+        <entry key="app/src/main/res/drawable/ic_b_only_sing.xml" value="0.3343589743589744" />
+        <entry key="app/src/main/res/drawable/ic_d_letter.xml" value="0.3343589743589744" />
+        <entry key="app/src/main/res/drawable/ic_n_only_sing.xml" value="0.3343589743589744" />
+        <entry key="app/src/main/res/layout/activity_intersitial.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_numbers.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.3234375" />
+        <entry key="app/src/main/res/layout/fragment_view_sings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.3234375" />
       </map>
     </option>
   </component>

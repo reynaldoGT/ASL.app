@@ -17,4 +17,11 @@
     <string name="current_delay_time">Tiempo de retraso actual</string>
     <string name="delay_time">Tiempo de retraso</string>
     <string name="settings_title">Configuración</string>
+
+    <string name="purple">Purpura</string>
+    <string name="blue">Azul</string>
+    <string name="black">Negro</string>
+    <string name="gray">Gris</string>
+    <string name="change_hand_color">Cambiar color de Mano</string>
+    <string name="new_color_changed">The color of the hand has changed</string>
 </resources>

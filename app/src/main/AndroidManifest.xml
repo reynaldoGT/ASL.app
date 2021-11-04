@@ -19,8 +19,8 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".views.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,11 +30,14 @@
         <activity
             android:name=".GridAllLetters"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/prop_id_application_admob" />
+            android:value="@string/prod_id_application_admob" />
+
     </application>
 
 </manifest>

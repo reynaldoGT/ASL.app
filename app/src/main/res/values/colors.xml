@@ -6,7 +6,8 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-
+    <color name="gray900">#212121</color>
+    <color name="gray300">#e0e0e0</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
@@ -15,5 +16,6 @@
     <color name="primaryTextColor">#000000</color>
     <color name="primaryDarkColor">#00BCD4</color>
     <color name="splash_background">#00BCD4</color>
+
 
 </resources>
