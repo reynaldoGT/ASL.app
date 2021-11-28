@@ -1,13 +1,17 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.views.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.neo.signLanguage.views.fragments.SendMessage
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.neo.signLanguage.R
+import com.neo.signLanguage.utils.SharedPreferences
 import com.neo.signLanguage.views.fragments.Numbers
 import com.neo.signLanguage.views.fragments.VIewSings
 
@@ -16,6 +20,13 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var pref: SharedPreferences
+
+        fun getColorShared(context: Context): Int {
+            return ContextCompat.getColor(
+                context,
+                pref.getColor()
+            )
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         if (pref.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 

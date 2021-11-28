@@ -16,6 +16,17 @@
     <color name="primaryTextColor">#000000</color>
     <color name="primaryDarkColor">#00BCD4</color>
     <color name="splash_background">#00BCD4</color>
+    <color name="red_dark">#ba000d</color>
+    <color name="green_dark">#4caf50</color>
+    <color name="yellow">#ffeb3b</color>
+    <color name="orange">#ff9800</color>
+    <color name="brawn">#4b2c20</color>
+    <color name="pink">#e91e63</color>
+    <color name="indigo">#3f51b5</color>
+    <color name="lightGreen">#8bc34a</color>
+    <color name="deep_orange">#ff5722</color>
+    <color name="teal">#009688</color>
+
 
 
 </resources>

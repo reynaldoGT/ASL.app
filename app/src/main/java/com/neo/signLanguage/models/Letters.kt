@@ -1,4 +1,6 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.models
+
+import com.neo.signLanguage.R
 
 class Letters {
     private var lettersArray = ArrayList<Sing>()
@@ -55,7 +57,4 @@ class Letters {
         lettersArray.add(Sing("0", R.drawable.ic_0_number, number))
 
     }
-
-
-
 }

@@ -1,22 +1,17 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.neo.signLanguage.databinding.ActivityIntersitialBinding
-import android.content.Intent
+import com.neo.signLanguage.databinding.ActivityDetailsBinding
 import android.R
-import java.util.*
+import com.neo.signLanguage.views.activities.MainActivity
 
 
 class DetailsSingActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityIntersitialBinding
+    private lateinit var binding: ActivityDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityIntersitialBinding.inflate(layoutInflater)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val myIntent = intent
@@ -29,11 +24,14 @@ class DetailsSingActivity : AppCompatActivity() {
         binding.textView.text = letter
         binding.image.setImageResource(image)
 
+        if (MainActivity.pref.getColor() != 0)
+            binding.image.setColorFilter(
+                MainActivity.getColorShared(this)
+            )
         binding.settingsToolbar.title = "$type $letter"
         this.setSupportActionBar(binding.settingsToolbar)
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
-
 
     }
 

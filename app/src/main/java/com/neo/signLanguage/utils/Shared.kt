@@ -1,4 +1,7 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.utils
+
+import com.neo.signLanguage.R
+import com.neo.signLanguage.models.Sing
 
 class Shared {
     private var lettersArray = ArrayList<Sing>()
@@ -123,19 +126,7 @@ class Shared {
         lettersArray.add(Sing("y", R.drawable.ic_y_only_sing, letter))
         lettersArray.add(Sing("z", R.drawable.ic_z_only_sing, letter))
 
-        //  numbers sings
 
-       /* lettersArray.add(Sing("0", R.drawable.ic_0_number, "number"))
-        lettersArray.add(Sing("1", R.drawable.ic_1_number, "number"))
-        lettersArray.add(Sing("2", R.drawable.ic_2_number, "number"))
-        lettersArray.add(Sing("3", R.drawable.ic_3_number, "number"))
-        lettersArray.add(Sing("4", R.drawable.ic_4_number, "number"))
-        lettersArray.add(Sing("5", R.drawable.ic_5_number, "number"))
-        lettersArray.add(Sing("6", R.drawable.ic_6_number, "number"))
-        lettersArray.add(Sing("7", R.drawable.ic_7_number, "number"))
-        lettersArray.add(Sing("8", R.drawable.ic_8_number, "number"))
-        lettersArray.add(Sing("9", R.drawable.ic_9_number, "number"))
-        lettersArray.add(Sing("10", R.drawable.ic_10_number, "number"))*/
     }
 
     private fun fillOnlyNumbers() {

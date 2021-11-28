@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -18,9 +17,15 @@ import com.orhanobut.logger.Logger
 import kotlinx.coroutines.*
 import kotlin.collections.ArrayList
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.neo.signLanguage.*
-import com.neo.signLanguage.MainActivity.Companion.pref
+import com.neo.signLanguage.views.activities.MainActivity.Companion.getColorShared
+import com.neo.signLanguage.views.activities.MainActivity.Companion.pref
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
+import com.neo.signLanguage.models.Sing
+import com.neo.signLanguage.provider.GiphyActivity
+import com.neo.signLanguage.utils.Shared
+import com.neo.signLanguage.views.activities.SettingsActivity
 import java.util.*
 
 class SendMessage : Fragment() {
@@ -30,7 +35,6 @@ class SendMessage : Fragment() {
     private val binding get() = _binding!!
 
     private var interstitial: InterstitialAd? = null
-    private var count = 0
 
     private var job: Job? = null
 
@@ -64,10 +68,7 @@ class SendMessage : Fragment() {
 
         if (pref.getColor() != 0)
             binding.ivSing.setColorFilter(
-                ContextCompat.getColor(
-                    activity as AppCompatActivity,
-                    pref.getColor()
-                )
+                getColorShared(activity as AppCompatActivity)
             )
 
 
@@ -215,7 +216,7 @@ class SendMessage : Fragment() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             activity!!.applicationContext, // Context,
-            getString(R.string.prod_intersititial_id),
+            getString(R.string.test_intersititial_id),
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -229,10 +230,10 @@ class SendMessage : Fragment() {
     }
 
     private fun checkCounter() {
-        count += 1
-        if (count == 5) {
+        pref.addInOneCounterAd()
+        if (pref.getAdCount() == 5) {
             showAds()
-            count = 0
+            pref.resetAdCount()
             initAds()
         }
     }
@@ -251,6 +252,11 @@ class SendMessage : Fragment() {
                 startActivity(intent)
                 true
             }
+            R.id.giphy -> {
+                val intent = Intent(activity, GiphyActivity::class.java)
+                startActivity(intent)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -262,7 +268,7 @@ class SendMessage : Fragment() {
 
     override fun onDestroy() {
         job?.cancel()
-        resetStatus()
+        /*resetStatus()*/
         super.onDestroy()
     }
 

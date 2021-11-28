@@ -22,6 +22,19 @@
     <string name="blue">Azul</string>
     <string name="black">Negro</string>
     <string name="gray">Gris</string>
+    <string name="green">Verde</string>
+    <string name="red">Rojo</string>
+
+    <string name="yellow">Amarillo</string>
+    <string name="orange">Naranja</string>
+    <string name="brawn">Café</string>
+    <string name="pink">Rosa</string>
+    <string name="indigo">Indigo</string>
+
+    <string name="green_light">Verde Claro</string>
+    <string name="deep_orange">Naranja oscuro</string>
+    <string name="teal">Teal</string>
+
     <string name="change_hand_color">Cambiar color de Mano</string>
-    <string name="new_color_changed">The color of the hand has changed</string>
+    <string name="new_color_changed">El color de la mano fue cambiado a </string>
 </resources>

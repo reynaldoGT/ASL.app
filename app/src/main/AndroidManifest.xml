@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neo.signLanguage">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,15 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:name=".provider.GiphyActivity"
+            android:exported="false" />
         <activity
-            android:name=".DetailsSingActivity"
+            android:name=".views.activities.SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".views.activities.MainActivity" />
         <activity
-            android:name=".views.SplashActivity"
+            android:name=".views.DetailsSingActivity"
+            android:exported="false"
+            android:parentActivityName=".views.activities.MainActivity" />
+        <activity
+            android:name=".views.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -29,15 +33,14 @@
         </activity>
         <activity
             android:name=".GridAllLetters"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".views.activities.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".views.activities.MainActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/prod_id_application_admob" />
-
+            android:value="@string/test_id_application_admob" />
     </application>
 
 </manifest>

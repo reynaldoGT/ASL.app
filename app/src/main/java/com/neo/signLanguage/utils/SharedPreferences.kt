@@ -1,4 +1,4 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.utils
 
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
     private val DELAY = "DELAY"
     private val COLOR = "COLOR"
     private val CURRENT_MESSAGE = "CURRENTMESSAGE"
+    private val COUNT_AD_INTERTITIAL = "COUNT_AD_INTERTITIAL"
 
     fun getTheme(): Boolean {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
@@ -52,6 +53,23 @@ class SharedPreferences(var activity: AppCompatActivity) {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
         val editor = settings.edit()
         editor.putString(CURRENT_MESSAGE, newState).apply()
+    }
+
+    fun getAdCount(): Int {
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        return settings.getInt(COUNT_AD_INTERTITIAL, 0)
+    }
+    fun resetAdCount() {
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        val editor = settings.edit()
+        editor.putInt(COUNT_AD_INTERTITIAL, 1).apply()
+    }
+
+    fun addInOneCounterAd() {
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        val editor = settings.edit()
+        val add = getAdCount() + 1
+        editor.putInt(COUNT_AD_INTERTITIAL, add).apply()
     }
 
 

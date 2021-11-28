@@ -28,7 +28,7 @@
               app:layout_constraintTop_toTopOf="parent"
               app:popupTheme="@style/Theme.AppCompat.Light" />
   -->
-
+p
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gridListSingNumbers"
             android:layout_width="match_parent"
@@ -47,5 +47,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/prod_banner_id" />
+        ads:adUnitId="@string/test_banner_id" />
     </FrameLayout>

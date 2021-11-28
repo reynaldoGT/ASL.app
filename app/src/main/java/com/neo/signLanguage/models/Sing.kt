@@ -1,4 +1,4 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.models
 
 class Sing(letter: String, image: Int, type: String) {
     var letter = ""
