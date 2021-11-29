@@ -13,7 +13,7 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.SettingsActivityBinding
 import com.neo.signLanguage.models.Color
-import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 
 
 class SettingsActivity : AppCompatActivity() {

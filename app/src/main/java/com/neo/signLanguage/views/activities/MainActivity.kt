@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityMainBinding
 import com.neo.signLanguage.databinding.FragmentViewSingsBinding
-import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 import com.neo.signLanguage.views.fragments.Numbers
 import com.neo.signLanguage.views.fragments.ViewSings
 

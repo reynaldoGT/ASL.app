@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="?android:attr/actionBarSize"
     tools:context=".views.fragments.Numbers">
 
     <!-- TODO: Update blank fragment layout -->
@@ -28,7 +27,8 @@
               app:layout_constraintTop_toTopOf="parent"
               app:popupTheme="@style/Theme.AppCompat.Light" />
   -->
-p
+        p
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gridListSingNumbers"
             android:layout_width="match_parent"
@@ -48,4 +48,4 @@ p
         android:layout_height="wrap_content"
         ads:adSize="BANNER"
         ads:adUnitId="@string/test_banner_id" />
-    </FrameLayout>
+</FrameLayout>

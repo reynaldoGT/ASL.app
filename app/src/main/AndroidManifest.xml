@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
         <activity
-            android:name=".provider.TabNavigatorActivity"
+            android:name=".views.activities.TabNavigatorActivity"
             android:exported="false" />
         <activity
-            android:name=".provider.GiphyActivity"
+            android:name=".views.activities.GiphyActivity"
             android:exported="false" />
         <activity
             android:name=".views.activities.SettingsActivity"
             android:exported="false"
             android:parentActivityName=".views.activities.MainActivity" />
         <activity
-            android:name=".views.DetailsSingActivity"
+            android:name=".views.activities.DetailsSingActivity"
             android:exported="false"
             android:parentActivityName=".views.activities.MainActivity" />
         <activity

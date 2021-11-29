@@ -10,8 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.databinding.TemplateLetterBinding
 import com.neo.signLanguage.models.Sing
-import com.neo.signLanguage.views.activities.MainActivity
-import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 
 
 interface ClickListener {

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
 import com.neo.signLanguage.AdapterLetters
 import com.neo.signLanguage.ClickListener
-import com.neo.signLanguage.views.DetailsSingActivity
+import com.neo.signLanguage.views.activities.DetailsSingActivity
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.databinding.FragmentNumbersBinding
 

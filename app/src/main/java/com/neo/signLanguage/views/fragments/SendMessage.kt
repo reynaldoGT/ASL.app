@@ -21,15 +21,14 @@ import androidx.core.view.isVisible
 import com.neo.signLanguage.*
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.models.Sing
-import com.neo.signLanguage.provider.GiphyActivity
+import com.neo.signLanguage.views.activities.GiphyActivity
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.views.activities.SettingsActivity
-import com.neo.signLanguage.views.activities.SplashActivity.Companion.getColorShared
-import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 import java.util.*
 
 class SendMessage : Fragment() {
-
 
     private var _binding: FragmentSendMessageBinding? = null
     private val binding get() = _binding!!
@@ -70,7 +69,6 @@ class SendMessage : Fragment() {
             binding.ivSing.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
             )
-
 
         binding.seeCurrentMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 

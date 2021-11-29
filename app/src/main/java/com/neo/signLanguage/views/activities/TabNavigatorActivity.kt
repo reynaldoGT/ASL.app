@@ -1,31 +1,44 @@
-package com.neo.signLanguage.provider
+package com.neo.signLanguage.views.activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
-import com.neo.signLanguage.databinding.ActivityDetailsBinding.inflate
 import com.neo.signLanguage.databinding.ActivityTabnavigatorBinding
-import com.neo.signLanguage.databinding.SettingsActivityBinding
-import com.neo.signLanguage.views.activities.SettingsActivity
+import com.neo.signLanguage.utils.SharedPreferences
 
 class TabNavigatorActivity : AppCompatActivity() {
+
+    companion object {
+        lateinit var pref: SharedPreferences
+
+        fun getColorShared(context: Context): Int {
+            return ContextCompat.getColor(
+                context,
+                pref.getColor()
+            )
+        }
+    }
+
     private lateinit var binding: ActivityTabnavigatorBinding
     var tabLayout: TabLayout? = null
     var viewPager2: ViewPager2? = null
     var fragmentAdapter: TabAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pref = SharedPreferences(this)
         binding = ActivityTabnavigatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var fm: FragmentManager = supportFragmentManager
+        val fm: FragmentManager = supportFragmentManager
         fragmentAdapter = TabAdapter(fm, lifecycle)
         binding.viewPager2.adapter = fragmentAdapter
 
@@ -50,6 +63,12 @@ class TabNavigatorActivity : AppCompatActivity() {
 
             }
 
+        })
+        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                tabLayout?.selectTab(tabLayout!!.getTabAt(position))
+                super.onPageSelected(position)
+            }
         })
     }
 

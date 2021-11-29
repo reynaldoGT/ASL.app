@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="?android:attr/actionBarSize"
     tools:context=".views.fragments.ViewSings">
 
     <!-- TODO: Update blank fragment layout -->

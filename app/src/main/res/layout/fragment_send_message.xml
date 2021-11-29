@@ -5,16 +5,13 @@
     android:id="@+id/layoutSendMessage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="?android:attr/actionBarSize"
+
     tools:context=".SendMessage">
-
-
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/currentLetter"
             android:layout_width="wrap_content"

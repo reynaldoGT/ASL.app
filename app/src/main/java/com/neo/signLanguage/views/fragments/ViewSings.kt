@@ -13,7 +13,7 @@ import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.databinding.FragmentViewSingsBinding
 import android.content.Intent
-import com.neo.signLanguage.views.DetailsSingActivity
+import com.neo.signLanguage.views.activities.DetailsSingActivity
 
 
 class ViewSings : Fragment() {

@@ -1,10 +1,7 @@
-package com.neo.signLanguage.provider
+package com.neo.signLanguage.views.activities
 
-import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.neo.signLanguage.adapters.GiphyAdapter
 import com.neo.signLanguage.databinding.ActivityGiphyBinding
-import com.neo.signLanguage.databinding.ActivityMainBinding
 import com.neo.signLanguage.models.Datum
+import com.neo.signLanguage.provider.ApiInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,12 +1,11 @@
-package com.neo.signLanguage.views
+package com.neo.signLanguage.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
-import android.R
-import com.neo.signLanguage.views.activities.MainActivity
-import com.neo.signLanguage.views.activities.SplashActivity.Companion.getColorShared
-import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 
 
 class DetailsSingActivity : AppCompatActivity() {
@@ -18,7 +17,7 @@ class DetailsSingActivity : AppCompatActivity() {
 
         val myIntent = intent
 
-        val image = intent.getIntExtra("image", R.drawable.btn_star_big_off)
+        val image = intent.getIntExtra("image", R.drawable.circle_shape)
         val letter = myIntent.getStringExtra("letter")
         val type = myIntent.getStringExtra("type")?.capitalize() // will return "SecondKeyValue"
 
