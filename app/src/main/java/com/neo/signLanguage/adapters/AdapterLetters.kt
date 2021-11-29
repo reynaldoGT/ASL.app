@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.databinding.TemplateLetterBinding
 import com.neo.signLanguage.models.Sing
 import com.neo.signLanguage.views.activities.MainActivity
+import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
 
 
 interface ClickListener {
@@ -64,11 +65,11 @@ class AdapterLetters(
 
         init {
             foto = binding.imageTemplateView
-            if (MainActivity.pref.getColor() != 0)
+            if (pref.getColor() != 0)
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(
                         context!!,
-                        MainActivity.pref.getColor()
+                        pref.getColor()
                     )
                 )
             nombre = binding.textViewTemplateView

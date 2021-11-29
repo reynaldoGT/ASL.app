@@ -11,12 +11,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ColorAdapter
-import com.neo.signLanguage.views.activities.MainActivity.Companion.pref
 import com.neo.signLanguage.databinding.SettingsActivityBinding
 import com.neo.signLanguage.models.Color
+import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
 
 
 class SettingsActivity : AppCompatActivity() {
+
     private lateinit var binding: SettingsActivityBinding
     private var adaptador: ColorAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null

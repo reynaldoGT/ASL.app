@@ -8,18 +8,11 @@
     android:paddingBottom="?android:attr/actionBarSize"
     tools:context=".SendMessage">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:layout_marginTop="?android:attr/actionBarSize"
         android:orientation="vertical">
 
         <TextView

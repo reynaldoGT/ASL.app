@@ -16,7 +16,7 @@ import android.content.Intent
 import com.neo.signLanguage.views.DetailsSingActivity
 
 
-class VIewSings : Fragment() {
+class ViewSings : Fragment() {
 
     private var _binding: FragmentViewSingsBinding? = null
     private val binding get() = _binding!!
@@ -37,7 +37,6 @@ class VIewSings : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val lettersArray = shared.getOnlyLettersArray()
 

@@ -5,6 +5,8 @@ import android.os.Bundle
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
 import android.R
 import com.neo.signLanguage.views.activities.MainActivity
+import com.neo.signLanguage.views.activities.SplashActivity.Companion.getColorShared
+import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
 
 
 class DetailsSingActivity : AppCompatActivity() {
@@ -24,9 +26,9 @@ class DetailsSingActivity : AppCompatActivity() {
         binding.textView.text = letter
         binding.image.setImageResource(image)
 
-        if (MainActivity.pref.getColor() != 0)
+        if (pref.getColor() != 0)
             binding.image.setColorFilter(
-                MainActivity.getColorShared(this)
+                getColorShared(this)
             )
         binding.settingsToolbar.title = "$type $letter"
         this.setSupportActionBar(binding.settingsToolbar)

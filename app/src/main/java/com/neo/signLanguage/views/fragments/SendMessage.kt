@@ -19,13 +19,13 @@ import kotlin.collections.ArrayList
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.neo.signLanguage.*
-import com.neo.signLanguage.views.activities.MainActivity.Companion.getColorShared
-import com.neo.signLanguage.views.activities.MainActivity.Companion.pref
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.models.Sing
 import com.neo.signLanguage.provider.GiphyActivity
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.views.activities.SettingsActivity
+import com.neo.signLanguage.views.activities.SplashActivity.Companion.getColorShared
+import com.neo.signLanguage.views.activities.SplashActivity.Companion.pref
 import java.util.*
 
 class SendMessage : Fragment() {
@@ -62,9 +62,9 @@ class SendMessage : Fragment() {
         val shared = Shared()
         lettersArrays = shared.getLetterArray()
 
-        //toolbar
+        /*//toolbar
         binding.toolbar.setTitle(R.string.app_name)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)*/
 
         if (pref.getColor() != 0)
             binding.ivSing.setColorFilter(
