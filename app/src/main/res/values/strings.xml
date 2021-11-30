@@ -30,7 +30,7 @@
     <string name="black">Black</string>
     <string name="gray">Gray</string>
     <string name="change_hand_color">Change Hand Color</string>
-    <string name="new_color_changed">The color of the hand has changed to </string>
+    <string name="new_color_changed">The color of the hand has changed to: </string>
     <string name="green">Green</string>
     <string name="red">Red</string>
     <string name="yellow">Yellow</string>

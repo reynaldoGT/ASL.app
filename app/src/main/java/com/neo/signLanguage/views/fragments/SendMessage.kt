@@ -43,10 +43,8 @@ class SendMessage : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        setHasOptionsMenu(false)
-        _binding = FragmentSendMessageBinding.inflate(inflater, container, false)
 
+        _binding = FragmentSendMessageBinding.inflate(inflater, container, false)
         return binding.root
     }
 

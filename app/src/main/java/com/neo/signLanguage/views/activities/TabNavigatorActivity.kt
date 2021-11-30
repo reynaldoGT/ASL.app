@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
@@ -30,8 +29,7 @@ class TabNavigatorActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityTabnavigatorBinding
-    var tabLayout: TabLayout? = null
-    var viewPager2: ViewPager2? = null
+
     var fragmentAdapter: TabAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +40,17 @@ class TabNavigatorActivity : AppCompatActivity() {
         fragmentAdapter = TabAdapter(fm, lifecycle)
         binding.viewPager2.adapter = fragmentAdapter
 
-
         //toolbar
         binding.toolbar.setTitle(R.string.app_name)
         setSupportActionBar(binding.toolbar)
 
-        tabLayout?.addTab(tabLayout!!.newTab().setText("First"))
-        tabLayout?.addTab(tabLayout!!.newTab().setText("Second"))
 
-        tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("First"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Second"))
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewPager2?.currentItem = tab!!.position
+                binding.viewPager2.currentItem = tab!!.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -66,7 +64,7 @@ class TabNavigatorActivity : AppCompatActivity() {
         })
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                tabLayout?.selectTab(tabLayout!!.getTabAt(position))
+                binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
                 super.onPageSelected(position)
             }
         })

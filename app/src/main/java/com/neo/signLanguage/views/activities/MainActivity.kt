@@ -35,7 +35,7 @@ class MainActivity : Fragment() {
         if (pref.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NstO)
         }
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
