@@ -7,10 +7,4 @@
         android:icon="@drawable/ic_settings"
         app:showAsAction="ifRoom"
         android:title="@string/create_message" />
-    <item
-        android:id="@+id/giphy"
-        android:enabled="true"
-        android:icon="@drawable/ic_message"
-        app:showAsAction="ifRoom"
-        android:title="@string/create_message" />
 </menu>

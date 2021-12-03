@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class GiphyActivity : Fragment(), SearchView.OnQueryTextListener {
+class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var giphyImages = mutableListOf<Datum>()
 

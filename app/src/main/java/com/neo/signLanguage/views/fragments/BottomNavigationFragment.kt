@@ -2,15 +2,13 @@ package com.neo.signLanguage.views.activities
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.neo.signLanguage.views.fragments.SendMessage
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityMainBinding
-import com.neo.signLanguage.databinding.FragmentViewSingsBinding
+
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 import com.neo.signLanguage.views.fragments.Numbers
 import com.neo.signLanguage.views.fragments.ViewSings
@@ -35,7 +33,7 @@ class MainActivity : Fragment() {
         if (pref.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NstO)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
@@ -63,17 +61,10 @@ class MainActivity : Fragment() {
             ?.commit()
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_navigation, menu)
-        return super.onCreateOptionsMenu(menu)
-    }*/
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_navigation, menu)
-        return super.onCreateOptionsMenu(menu)
-    }*/
 }

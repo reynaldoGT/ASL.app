@@ -59,10 +59,6 @@ class SendMessage : Fragment() {
         val shared = Shared()
         lettersArrays = shared.getLetterArray()
 
-        /*//toolbar
-        binding.toolbar.setTitle(R.string.app_name)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)*/
-
         if (pref.getColor() != 0)
             binding.ivSing.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
@@ -241,26 +237,6 @@ class SendMessage : Fragment() {
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.settings -> {
-                val intent = Intent(activity, SettingsActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            R.id.giphy -> {
-                val intent = Intent(activity, GiphyActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
 
     override fun onDestroy() {
         job?.cancel()
