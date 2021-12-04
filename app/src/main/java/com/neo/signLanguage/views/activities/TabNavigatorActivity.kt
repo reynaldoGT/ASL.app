@@ -13,19 +13,27 @@ import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
+import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
+import java.util.*
 
 class TabNavigatorActivity : AppCompatActivity() {
 
     companion object {
         lateinit var pref: SharedPreferences
-
         fun getColorShared(context: Context): Int {
             return ContextCompat.getColor(
                 context,
                 pref.getColor()
             )
         }
+
+        fun getLanguagePhone(): Boolean {
+            val language = Locale.getDefault().displayLanguage.toString().toLowerCase()
+            return language == "english"
+        }
+
+        lateinit var networkState: NetworkState;
     }
 
     private lateinit var binding: FragmentTabnavigatorBinding
@@ -33,6 +41,7 @@ class TabNavigatorActivity : AppCompatActivity() {
     var fragmentAdapter: TabAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        networkState = NetworkState(this)
         pref = SharedPreferences(this)
         binding = FragmentTabnavigatorBinding.inflate(layoutInflater)
         setContentView(binding.root)

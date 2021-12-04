@@ -171,7 +171,7 @@ class SendMessageFragment : Fragment() {
         } else {
             Logger.d("Empty message")
             Snackbar.make(
-                activity!!.findViewById(android.R.id.content),
+                activity!!.findViewById(R.id.content),
                 R.string.empty_message,
                 Snackbar.LENGTH_LONG,
             ).show()
@@ -205,7 +205,7 @@ class SendMessageFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             activity!!.applicationContext, // Context,
-            getString(R.string.test_intersititial_id),
+            getString(R.string.test_interstitial_id),
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -233,7 +233,6 @@ class SendMessageFragment : Fragment() {
             activity!!
         )
     }
-
 
     override fun onDestroy() {
         job?.cancel()

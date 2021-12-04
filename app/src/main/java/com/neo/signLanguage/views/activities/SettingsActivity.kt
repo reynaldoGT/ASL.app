@@ -28,8 +28,8 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.settingsToolbar.setTitle(R.string.settings_title)
-        this.setSupportActionBar(binding.settingsToolbar)
+        binding.detailToolbar.setTitle(R.string.settings_title)
+        this.setSupportActionBar(binding.detailToolbar)
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
 

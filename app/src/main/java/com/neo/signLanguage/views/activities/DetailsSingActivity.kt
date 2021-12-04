@@ -1,13 +1,11 @@
 package com.neo.signLanguage.views.activities
 
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
-
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 import com.orhanobut.logger.Logger
@@ -29,7 +27,7 @@ class DetailsSingActivity : AppCompatActivity() {
 
 
         Logger.d(image)
-        binding.textView.text = letter
+        binding.imageTitle.text = letter
         if (netWorkImage && image != null) {
             Glide.with(this)
                 .asGif()
@@ -37,6 +35,8 @@ class DetailsSingActivity : AppCompatActivity() {
                 .placeholder(R.drawable.ic_0_number)
                 .error(R.drawable.ic_x_letter)
                 .into(binding.image)
+            binding.detailToolbar.title = letter
+            binding.imageTitle.visibility = View.GONE
         } else {
             binding.image.setImageResource(intent.getIntExtra("image", R.drawable.circle_shape))
         }
@@ -45,8 +45,8 @@ class DetailsSingActivity : AppCompatActivity() {
             binding.image.setColorFilter(
                 getColorShared(this)
             )
-        binding.settingsToolbar.title = "$type $letter"
-        this.setSupportActionBar(binding.settingsToolbar)
+        binding.detailToolbar.title = "$type $letter"
+        this.setSupportActionBar(binding.detailToolbar)
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
 

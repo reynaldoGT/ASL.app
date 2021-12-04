@@ -37,4 +37,8 @@
 
     <string name="change_hand_color">Cambiar color de Mano</string>
     <string name="new_color_changed">El color de la mano fue cambiado a </string>
+    <string name="no_connection">No hay conexión</string>
+
+    <string name="find_sing">Buscar seña</string>
+    <string name="Error">Error</string>
 </resources>

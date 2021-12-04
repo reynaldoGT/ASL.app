@@ -7,7 +7,7 @@
     tools:context=".views.activities.DetailsSingActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/settings_toolbar"
+        android:id="@+id/detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -31,7 +31,7 @@
         app:tint="?attr/colorPrimary" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/imageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

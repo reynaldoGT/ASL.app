@@ -11,12 +11,17 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.GiphyAdapter
 import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.models.Datum
-import com.neo.signLanguage.provider.ApiInterface
+import com.neo.signLanguage.provider.ApiInterfaceGiphy
+import com.neo.signLanguage.provider.ApiInterfaceTranslate
 import com.neo.signLanguage.views.activities.DetailsSingActivity
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getLanguagePhone
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.networkState
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +52,8 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
         binding.searchBreed.setOnQueryTextListener(this)
         initRecyclerView()
-        searchGiphy("sign with Robert")
+        searchGiphy("ASL")
+
     }
 
     private fun initRecyclerView() {
@@ -56,7 +62,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 val myIntent =
                     Intent(activity!!.applicationContext, DetailsSingActivity::class.java)
                 myIntent.putExtra("image", giphyImages[position].images.original.url)
-                myIntent.putExtra("letter", giphyImages[position].username)
+                myIntent.putExtra("letter", giphyImages[position].title)
                 myIntent.putExtra("type", giphyImages[position].source)
                 myIntent.putExtra("networkImage", true)
 
@@ -76,12 +82,67 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
             .build()
     }
 
+    private fun getRetrofitTranslate(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://mymemory.translated.net/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     private fun searchGiphy(query: String) {
+
+        var getQuery = query
+        if (!getLanguagePhone()) {
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val call = getRetrofitTranslate().create(ApiInterfaceTranslate::class.java)
+                    .getWordTranslated(
+                        query,
+                        "ES|EN",
+                    )
+                val translated = call.body()
+                activity?.runOnUiThread {
+                    if (call.isSuccessful) {
+                        getQuery = translated?.responseData?.translatedText!!
+                        fillRecyclerView(getQuery)
+                    } else {
+                        showError()
+                    }
+                    hideKeyboard()
+                }
+            }
+        }
+        Logger.d(getQuery)
+        if (networkState.isOnline()) {
+            fillRecyclerView(getQuery)
+        } else {
+            Snackbar.make(
+                activity!!.findViewById(android.R.id.content),
+                getString(R.string.no_connection),
+                Snackbar.LENGTH_LONG,
+
+                ).setAction("OK") {
+            }
+                .show()
+        }
+    }
+
+    private fun hideKeyboard() {
+        val imm =
+            activity?.applicationContext!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
+    }
+
+    private fun showError() {
+        Toast.makeText(activity?.applicationContext!!, getString(R.string.Error), Toast.LENGTH_SHORT)
+            .show()
+    }
+    private fun fillRecyclerView(getQuery:String){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(ApiInterface::class.java)
+            val call = getRetrofit().create(ApiInterfaceGiphy::class.java)
                 .getGiphyImage(
-                    "Fx16au8XaXm3cKQb9QsK2RoOR7rZL7G9",
-                    "sign with Robert  $query",
+                    getString(R.string.giphy_api_key),
+                    "ASL $getQuery",
                     15
                 )
 
@@ -100,17 +161,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 hideKeyboard()
             }
         }
-    }
-
-    private fun hideKeyboard() {
-        val imm =
-            activity?.applicationContext!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.viewRoot.windowToken, 0)
-    }
-
-    private fun showError() {
-        Toast.makeText(activity?.applicationContext!!, "Ha ocurrido un error", Toast.LENGTH_SHORT)
-            .show()
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
