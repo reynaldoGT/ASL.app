@@ -21,8 +21,7 @@ class GridAllLetters : AppCompatActivity() {
 
         val toolBar = findViewById<Toolbar>(R.id.toolbar)
         toolBar?.setTitle(R.string.app_name)
-        //para decirle que esta es la toolbar oficial
-
+        //set toolbar
         setSupportActionBar(toolBar)
         val shared = Shared()
         val lettersArray = shared.getOnlyLettersArray()

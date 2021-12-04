@@ -1,34 +1,32 @@
-package com.neo.signLanguage.views.activities
+package com.neo.signLanguage.views.fragments
 
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.neo.signLanguage.views.fragments.SendMessage
 import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.ActivityMainBinding
+import com.neo.signLanguage.databinding.FragmentBottomNavigationBinding
 
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
-import com.neo.signLanguage.views.fragments.Numbers
-import com.neo.signLanguage.views.fragments.ViewSings
+import com.orhanobut.logger.Logger
 
 
-class MainActivity : Fragment() {
-    private var _binding: ActivityMainBinding? = null
+class BottomNavigationFragment : Fragment() {
+    private var _binding: FragmentBottomNavigationBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Using the binding
-        _binding = ActivityMainBinding.inflate(inflater, container, false)
+        _binding = FragmentBottomNavigationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showSelectedFragment(SendMessage())
+        showSelectedFragment(SendMessageFragment())
 
         if (pref.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -36,18 +34,20 @@ class MainActivity : Fragment() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
+
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.page_1 -> {
-                    showSelectedFragment(SendMessage())
+                    showSelectedFragment(SendMessageFragment())
                     true
                 }
                 R.id.page_2 -> {
-                    showSelectedFragment(ViewSings())
+                    showSelectedFragment(ViewSingsFragment())
                     true
                 }
                 R.id.page_3 -> {
-                    showSelectedFragment(Numbers())
+                    showSelectedFragment(ViewNumbersFragment())
                     true
                 }
                 else -> false
@@ -56,15 +56,16 @@ class MainActivity : Fragment() {
     }
 
     private fun showSelectedFragment(fragment: Fragment) {
-        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
-            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            ?.commit()
+        childFragmentManager.beginTransaction().replace(R.id.container, fragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .commit()
+
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
+
+
 }

@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
-import com.neo.signLanguage.databinding.ActivityTabnavigatorBinding
+import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
 import com.neo.signLanguage.utils.SharedPreferences
 
 class TabNavigatorActivity : AppCompatActivity() {
@@ -28,13 +28,13 @@ class TabNavigatorActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var binding: ActivityTabnavigatorBinding
+    private lateinit var binding: FragmentTabnavigatorBinding
 
     var fragmentAdapter: TabAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pref = SharedPreferences(this)
-        binding = ActivityTabnavigatorBinding.inflate(layoutInflater)
+        binding = FragmentTabnavigatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val fm: FragmentManager = supportFragmentManager
         fragmentAdapter = TabAdapter(fm, lifecycle)
@@ -45,8 +45,8 @@ class TabNavigatorActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("First"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Second"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Crear mensaje"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Ver Señas"))
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -77,17 +77,12 @@ class TabNavigatorActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
-            R.id.giphy -> {
-                val intent = Intent(this, GiphyActivity::class.java)
-                startActivity(intent)
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

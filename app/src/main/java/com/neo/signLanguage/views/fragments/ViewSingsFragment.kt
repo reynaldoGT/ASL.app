@@ -16,14 +16,14 @@ import android.content.Intent
 import com.neo.signLanguage.views.activities.DetailsSingActivity
 
 
-class ViewSings : Fragment() {
+class ViewSingsFragment : Fragment() {
 
     private var _binding: FragmentViewSingsBinding? = null
     private val binding get() = _binding!!
 
     private var adaptador: AdapterLetters? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
-    val shared = Shared()
+    private val shared = Shared()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

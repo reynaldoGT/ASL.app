@@ -19,7 +19,8 @@ interface ClickListener {
 
 class AdapterLetters(
     context: Context,
-    items: ArrayList<Sing>, var listener: ClickListener
+    items: ArrayList<Sing>,
+    var listener: ClickListener
 ) : RecyclerView.Adapter<AdapterLetters.ViewHolder>() {
 
     var items: ArrayList<Sing>? = null

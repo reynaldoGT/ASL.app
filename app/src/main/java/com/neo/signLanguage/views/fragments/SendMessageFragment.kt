@@ -1,6 +1,5 @@
 package com.neo.signLanguage.views.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
@@ -21,14 +20,12 @@ import androidx.core.view.isVisible
 import com.neo.signLanguage.*
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.models.Sing
-import com.neo.signLanguage.views.activities.GiphyActivity
 import com.neo.signLanguage.utils.Shared
-import com.neo.signLanguage.views.activities.SettingsActivity
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 import java.util.*
 
-class SendMessage : Fragment() {
+class SendMessageFragment : Fragment() {
 
     private var _binding: FragmentSendMessageBinding? = null
     private val binding get() = _binding!!
@@ -242,6 +239,14 @@ class SendMessage : Fragment() {
         job?.cancel()
         /*resetStatus()*/
         super.onDestroy()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (pref.getColor() != 0)
+            binding.ivSing.setColorFilter(
+                getColorShared(activity as AppCompatActivity)
+            )
     }
 
 }

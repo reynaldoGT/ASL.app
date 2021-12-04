@@ -15,16 +15,16 @@
             android:name=".views.activities.TabNavigatorActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.GiphyActivity"
+            android:name=".views.fragments.GiphyFragment"
             android:exported="false" />
         <activity
             android:name=".views.activities.SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".views.activities.MainActivity" />
+            android:parentActivityName=".views.fragments.BottomNavigationFragment" />
         <activity
             android:name=".views.activities.DetailsSingActivity"
             android:exported="false"
-            android:parentActivityName=".views.activities.MainActivity" />
+            android:parentActivityName=".views.fragments.BottomNavigationFragment" />
         <activity
             android:name=".views.activities.SplashActivity"
             android:exported="true"
@@ -36,9 +36,9 @@
         </activity>
         <activity
             android:name=".GridAllLetters"
-            android:parentActivityName=".views.activities.MainActivity" />
+            android:parentActivityName=".views.fragments.BottomNavigationFragment" />
         <activity
-            android:name=".views.activities.MainActivity"
+            android:name=".views.fragments.BottomNavigationFragment"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <meta-data

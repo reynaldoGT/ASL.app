@@ -1,18 +1,13 @@
 package com.neo.signLanguage.adapters
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.ColorTemplateBinding
-import com.neo.signLanguage.databinding.TemplateLetterBinding
+import com.neo.signLanguage.databinding.TemplateColorBinding
 import com.neo.signLanguage.models.Color
 import com.neo.signLanguage.ClickListener
 import java.lang.ref.WeakReference
@@ -36,7 +31,7 @@ class ColorAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.color_template, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.template_color, parent, false)
         viewHolder = ViewHolder(view, clickListener, this.context)
         return viewHolder!!
     }
@@ -58,7 +53,7 @@ class ColorAdapter(
     class ViewHolder(vista: View, listener: ClickListener, context: Context?) :
         RecyclerView.ViewHolder(vista),
         View.OnClickListener {
-        private val binding = ColorTemplateBinding.bind(vista)
+        private val binding = TemplateColorBinding.bind(vista)
 
         var buttonColor: MaterialButton? = null
 
@@ -66,7 +61,6 @@ class ColorAdapter(
 
         init {
             buttonColor = binding.btnColor
-
             listenerRef = WeakReference(listener)
             buttonColor!!.setOnClickListener(this)
         }

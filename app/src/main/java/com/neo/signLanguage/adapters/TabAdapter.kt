@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.neo.signLanguage.views.activities.GiphyActivity
-import com.neo.signLanguage.views.activities.MainActivity
+import com.neo.signLanguage.views.fragments.GiphyFragment
+import com.neo.signLanguage.views.fragments.BottomNavigationFragment
 
 class TabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
@@ -15,9 +15,11 @@ class TabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            1 -> return GiphyActivity()
+            0 -> return BottomNavigationFragment()
+            1 -> return GiphyFragment()
+
         }
-        return MainActivity()
+        return BottomNavigationFragment()
     }
 
 }

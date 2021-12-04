@@ -15,7 +15,7 @@ import com.neo.signLanguage.views.activities.DetailsSingActivity
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.databinding.FragmentNumbersBinding
 
-class Numbers : Fragment() {
+class ViewNumbersFragment : Fragment() {
 
 
     private var _binding: FragmentNumbersBinding? = null
