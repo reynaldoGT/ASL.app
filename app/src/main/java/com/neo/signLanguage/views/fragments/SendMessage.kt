@@ -215,7 +215,7 @@ class SendMessage : Fragment() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             activity!!.applicationContext, // Context,
-            getString(R.string.prod_intersititial_id),
+            getString(R.string.test_intersititial_id),
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
