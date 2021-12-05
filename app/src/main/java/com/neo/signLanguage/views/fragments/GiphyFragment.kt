@@ -52,7 +52,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
         binding.searchBreed.setOnQueryTextListener(this)
         initRecyclerView()
-        searchGiphy("ASL")
+        searchGiphy("American Sign Language")
 
     }
 
@@ -142,7 +142,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
             val call = getRetrofit().create(ApiInterfaceGiphy::class.java)
                 .getGiphyImage(
                     getString(R.string.giphy_api_key),
-                    "ASL $getQuery",
+                    "American Sign Language $getQuery",
                     15
                 )
 

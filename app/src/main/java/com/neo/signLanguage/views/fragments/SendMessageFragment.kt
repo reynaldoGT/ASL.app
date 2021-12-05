@@ -67,10 +67,10 @@ class SendMessageFragment : Fragment() {
         val shared = Shared()
         lettersArrays = shared.getLetterArray()
 
-        /*if (pref.getColor() != 0)
-            binding.ivSing.setColorFilter(
+        if (pref.getColor() != 0)
+            imageView?.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
-            )*/
+            )
 
         binding.seeCurrentMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
@@ -78,8 +78,7 @@ class SendMessageFragment : Fragment() {
             binding.seeCurrentMessage.text = binding.edSendMessage.editText!!.text.toString()
 
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                //Perform Code
-//                Toast.makeText(this, edSendMessage?.text, Toast.LENGTH_SHORT).show()
+
                 binding.seeCurrentMessage.text = binding.edSendMessage.editText?.text
                 /*seeCurrentMessage?.visibility = View.VISIBLE*/
                 val createMessage = binding.edSendMessage.editText?.text.toString()
@@ -127,12 +126,12 @@ class SendMessageFragment : Fragment() {
         val out: Animation = AnimationUtils.loadAnimation(activity, R.anim.to_left)
         val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_rigth)
 
-        /*binding.imageSwitcher.outAnimation = out
-        binding.imageSwitcher.inAnimation = `in`*/
+        binding.imageSwitcher.outAnimation = out
+        binding.imageSwitcher.inAnimation = `in`
 
-        binding.imageSwitcher.inAnimation = AnimationUtils.loadAnimation(activity, R.anim.to_rigth)
+        /*binding.imageSwitcher.inAnimation = AnimationUtils.loadAnimation(activity, R.anim.to_rigth)
         binding.imageSwitcher.outAnimation =
-            AnimationUtils.loadAnimation(activity, R.anim.from_left)
+            AnimationUtils.loadAnimation(activity, R.anim.from_left)*/
 
 
     }
@@ -217,7 +216,7 @@ class SendMessageFragment : Fragment() {
         } else {
             Logger.d("Empty message")
             Snackbar.make(
-                activity!!.findViewById(R.id.content),
+                activity!!.findViewById(android.R.id.content),
                 R.string.empty_message,
                 Snackbar.LENGTH_LONG,
             ).show()
@@ -288,10 +287,10 @@ class SendMessageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        /*if (pref.getColor() != 0)
-            binding.ivSing.setColorFilter(
+        if (pref.getColor() != 0)
+            imageView?.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
-            )*/
+            )
     }
 
 }
