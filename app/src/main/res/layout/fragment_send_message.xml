@@ -21,8 +21,8 @@
             android:textSize="24sp"
             android:visibility="visible" />
 
-        <ImageView
-            android:id="@+id/ivSing"
+        <ImageSwitcher
+            android:id="@+id/imageSwitcher"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

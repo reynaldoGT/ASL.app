@@ -1,7 +1,11 @@
 package com.neo.signLanguage.views.fragments
 
+import android.app.ActionBar
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.AdError
@@ -25,6 +29,12 @@ import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getC
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
 import java.util.*
 
+import android.widget.ImageSwitcher
+import android.widget.ViewSwitcher
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+
+
 class SendMessageFragment : Fragment() {
 
     private var _binding: FragmentSendMessageBinding? = null
@@ -35,6 +45,7 @@ class SendMessageFragment : Fragment() {
     private var job: Job? = null
 
     private var lettersArrays: ArrayList<Sing>? = null
+    private var imageView: ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,10 +67,10 @@ class SendMessageFragment : Fragment() {
         val shared = Shared()
         lettersArrays = shared.getLetterArray()
 
-        if (pref.getColor() != 0)
+        /*if (pref.getColor() != 0)
             binding.ivSing.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
-            )
+            )*/
 
         binding.seeCurrentMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
@@ -81,9 +92,9 @@ class SendMessageFragment : Fragment() {
         })
 
 
-        binding.ivSing.setOnClickListener {
+        /*binding.ivSing.setOnClickListener {
             changeImage()
-        }
+        }*/
 
         binding.btnSendMessage.setOnClickListener {
             sendMessage(binding.edSendMessage.editText?.text.toString())
@@ -94,9 +105,39 @@ class SendMessageFragment : Fragment() {
         }
 
         setHasOptionsMenu(true)
+        binding.imageSwitcher.setFactory {
+            imageView = ImageView(activity)
+            imageView!!.layoutParams =
+                FrameLayout.LayoutParams(
+                    ActionBar.LayoutParams.MATCH_PARENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT
+                )
+
+            imageView!!.scaleType = ImageView.ScaleType.FIT_CENTER
+            imageView!!.setImageResource(R.drawable.ic_a_letter)
+            if (pref.getColor() != 0)
+                imageView!!.setColorFilter(
+                    getColorShared(activity as AppCompatActivity)
+                )
+            imageView
+        }
+
+        /*val out: Animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left)
+        val `in`: Animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_out_right)*/
+        val out: Animation = AnimationUtils.loadAnimation(activity, R.anim.to_left)
+        val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_rigth)
+
+        /*binding.imageSwitcher.outAnimation = out
+        binding.imageSwitcher.inAnimation = `in`*/
+
+        binding.imageSwitcher.inAnimation = AnimationUtils.loadAnimation(activity, R.anim.to_rigth)
+        binding.imageSwitcher.outAnimation =
+            AnimationUtils.loadAnimation(activity, R.anim.from_left)
+
+
     }
 
-    private fun changeImage() {
+    /*private fun changeImage() {
 
         val randomLetter = (0 until lettersArrays!!.size).random()
         val type =
@@ -111,7 +152,7 @@ class SendMessageFragment : Fragment() {
                 lettersArrays!![randomLetter].image
             )
         )
-    }
+    }*/
 
     private fun generateSingLanguageMessage(message: String) {
 
@@ -140,7 +181,7 @@ class SendMessageFragment : Fragment() {
     }
 
     private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Sing>) {
-
+        var counter = -1
         job = GlobalScope.launch(context = Dispatchers.Main) {
             for (index in sentenceInArrayImage) {
                 binding.btnSendMessageCancel.isVisible = true
@@ -154,12 +195,17 @@ class SendMessageFragment : Fragment() {
                 val type =
                     if (index.type == "letter") getString(R.string.letter) else getString(R.string.number)
                 binding.currentLetter.text = "$type ${index.letter.toUpperCase(Locale.ROOT)}"
-                binding.ivSing.setImageDrawable(
+                /*binding.ivSing.setImageDrawable(
                     ContextCompat.getDrawable(
                         activity!!.applicationContext, // Context
                         index.image
                     )
-                )
+                )*/
+                if (counter == sentenceInArrayImage.size) {
+                    binding.imageSwitcher.setImageResource(index.image);
+                } else {
+                    binding.imageSwitcher.setImageResource(index.image);
+                }
             }
             resetStatus()
         }
@@ -242,10 +288,10 @@ class SendMessageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (pref.getColor() != 0)
+        /*if (pref.getColor() != 0)
             binding.ivSing.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
-            )
+            )*/
     }
 
 }
