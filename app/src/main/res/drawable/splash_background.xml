@@ -2,7 +2,7 @@
 <layer-list android:opacity="opaque"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/splash_background"/>
+    <item android:drawable="@color/primaryLightColor"/>
 
     <item
         android:left="10dp"
@@ -10,6 +10,6 @@
         android:top="200dp"
         android:bottom="200dp"
         >
-        <bitmap android:src="@drawable/splash_background_image" />
+        <bitmap android:src="@drawable/splash_image" />
     </item>
 </layer-list>
