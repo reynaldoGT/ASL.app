@@ -90,7 +90,6 @@ class SendMessageFragment : Fragment() {
             false
         })
 
-
         /*binding.ivSing.setOnClickListener {
             changeImage()
         }*/
@@ -127,10 +126,6 @@ class SendMessageFragment : Fragment() {
         val out: Animation = AnimationUtils.loadAnimation(activity, R.anim.to_left)
         val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_right)
 
-        /*val out: Animation = AnimationUtils.loadAnimation(activity, R.anim.to_down)
-        val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_up)
-
-        */
         binding.imageSwitcher.outAnimation = out
         binding.imageSwitcher.inAnimation = `in`
 

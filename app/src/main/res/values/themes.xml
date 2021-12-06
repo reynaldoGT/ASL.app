@@ -6,9 +6,7 @@
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
         <item name="color">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorOnSecondary">@color/primaryDarkColor</item>
-        <!-- Customize your theme here. -->
+
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
