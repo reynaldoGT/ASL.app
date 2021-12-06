@@ -47,6 +47,7 @@
             android:id="@+id/edSendMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
             android:hint="@string/write_your_text_here">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -54,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
+
                 android:background="@android:color/transparent"
                 android:inputType="textCapSentences" />
 

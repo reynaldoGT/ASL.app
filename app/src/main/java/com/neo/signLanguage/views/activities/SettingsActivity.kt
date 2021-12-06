@@ -86,7 +86,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun showSnackBar(colorName: String) {
         val snackBar = Snackbar.make(
-            binding.content,
+            findViewById(android.R.id.content),
             "${getString(R.string.new_color_changed)} $colorName",
             Snackbar.LENGTH_LONG,
         ).setAction("OK") {}

@@ -100,7 +100,8 @@ class SendMessageFragment : Fragment() {
         }
 
         binding.btnSendMessageCancel.setOnClickListener {
-            /*break*/
+            job?.cancel()
+            resetStatus()
         }
 
         setHasOptionsMenu(true)
@@ -124,8 +125,12 @@ class SendMessageFragment : Fragment() {
         /*val out: Animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left)
         val `in`: Animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_out_right)*/
         val out: Animation = AnimationUtils.loadAnimation(activity, R.anim.to_left)
-        val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_rigth)
+        val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_right)
 
+        /*val out: Animation = AnimationUtils.loadAnimation(activity, R.anim.to_down)
+        val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_up)
+
+        */
         binding.imageSwitcher.outAnimation = out
         binding.imageSwitcher.inAnimation = `in`
 
@@ -184,10 +189,7 @@ class SendMessageFragment : Fragment() {
         job = GlobalScope.launch(context = Dispatchers.Main) {
             for (index in sentenceInArrayImage) {
                 binding.btnSendMessageCancel.isVisible = true
-                binding.btnSendMessageCancel.setOnClickListener {
-                    job?.cancel()
-                    resetStatus()
-                }
+
                 binding.btnSendMessage.isVisible = false
 
                 delay(pref.getDelay().toLong())
@@ -201,9 +203,9 @@ class SendMessageFragment : Fragment() {
                     )
                 )*/
                 if (counter == sentenceInArrayImage.size) {
-                    binding.imageSwitcher.setImageResource(index.image);
+                    binding.imageSwitcher.setImageResource(index.image)
                 } else {
-                    binding.imageSwitcher.setImageResource(index.image);
+                    binding.imageSwitcher.setImageResource(index.image)
                 }
             }
             resetStatus()

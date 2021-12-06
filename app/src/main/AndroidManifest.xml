@@ -13,18 +13,17 @@
         android:theme="@style/Theme.SingLanguage">
         <activity
             android:name=".views.activities.TabNavigatorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.fragments.GiphyFragment"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".views.activities.SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".views.fragments.BottomNavigationFragment" />
+            android:parentActivityName=".views.activities.TabNavigatorActivity" />
         <activity
             android:name=".views.activities.DetailsSingActivity"
             android:exported="false"
-            android:parentActivityName=".views.fragments.BottomNavigationFragment" />
+            android:parentActivityName=".views.activities.TabNavigatorActivity" />
         <activity
             android:name=".views.activities.SplashActivity"
             android:exported="true"
@@ -34,12 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".GridAllLetters"
-            android:parentActivityName=".views.fragments.BottomNavigationFragment" />
-        <activity
-            android:name=".views.fragments.BottomNavigationFragment"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name=".GridAllLetters" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

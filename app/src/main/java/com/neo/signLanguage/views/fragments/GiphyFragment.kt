@@ -51,6 +51,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.searchBreed.setOnQueryTextListener(this)
+
         initRecyclerView()
         searchGiphy("American Sign Language")
 

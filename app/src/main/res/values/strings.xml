@@ -44,5 +44,6 @@
     <string name="find_sing">Search for a sign</string>
     <string name="Error">Error</string>
     <string name="giphy_api_key" translatable="false">Fx16au8XaXm3cKQb9QsK2RoOR7rZL7G9</string>
+    <string name="transition">Transition</string>
 
 </resources>
