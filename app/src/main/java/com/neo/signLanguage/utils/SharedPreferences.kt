@@ -12,6 +12,8 @@ class SharedPreferences(var activity: AppCompatActivity) {
     private val COLOR = "COLOR"
     private val CURRENT_MESSAGE = "CURRENTMESSAGE"
     private val COUNT_AD_INTERTITIAL = "COUNT_AD_INTERTITIAL"
+    private val SHOW_TRANSITIONS = "SHOW_TRANSITIONS"
+    private val SELECTED_TRANSITION = "SELECTED_TRANSITION"
     private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
     private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
 
@@ -80,6 +82,29 @@ class SharedPreferences(var activity: AppCompatActivity) {
         val add = getAdCount() + 1
         editor.putInt(COUNT_AD_INTERTITIAL, add).apply()
     }
+
+    fun getShowTransition(): Boolean{
+        val settings = activity.getSharedPreferences(SETTINGS, -1)
+        return settings.getBoolean(SHOW_TRANSITIONS, false)
+    }
+
+    fun setShowTransition(newState: Boolean) {
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        val editor = settings.edit()
+        editor.putBoolean(SHOW_TRANSITIONS, newState).apply()
+    }
+
+    fun getSelectedTransition(): Int{
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        return settings.getInt(SELECTED_TRANSITION, 0)
+    }
+
+    fun setSelectedTransition(newState: Int) {
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        val editor = settings.edit()
+        editor.putInt(SELECTED_TRANSITION, newState).apply()
+    }
+
 
 
 }

@@ -41,4 +41,10 @@
 
     <string name="find_sing">Buscar seña</string>
     <string name="Error">Error</string>
+    <string name="transition">Transition</string>
+    <string name="fade">Desvanecer</string>
+    <string name="vertical_slide">Deslizamiento vertical</string>
+    <string name="left_to_right">Izquierda a derecha</string>
+    <string name="right_to_left">Derecha a izquierda</string>
+    <string name="theme">Tema</string>
 </resources>

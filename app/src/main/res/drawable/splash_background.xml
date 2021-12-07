@@ -3,11 +3,10 @@
     android:opacity="opaque">
 
 
-    <item android:drawable="@color/primaryLightColor" />
+    <item android:drawable="@color/primaryDarkColor" />
 
 
     <item
-
         android:bottom="200dp"
         android:left="10dp"
         android:right="10dp"

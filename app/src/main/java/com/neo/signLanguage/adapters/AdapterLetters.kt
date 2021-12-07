@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.databinding.TemplateLetterBinding
 import com.neo.signLanguage.models.Sing
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
 
 
 interface ClickListener {
@@ -65,11 +65,11 @@ class AdapterLetters(
 
         init {
             foto = binding.imageTemplateView
-            if (pref.getColor() != 0)
+            if (sharedPrefs.getColor() != 0)
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(
                         context!!,
-                        pref.getColor()
+                        sharedPrefs.getColor()
                     )
                 )
             nombre = binding.textViewTemplateView

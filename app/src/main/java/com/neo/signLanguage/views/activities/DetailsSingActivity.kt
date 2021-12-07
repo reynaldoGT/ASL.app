@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
 import com.orhanobut.logger.Logger
 
 
@@ -41,7 +41,7 @@ class DetailsSingActivity : AppCompatActivity() {
             binding.image.setImageResource(intent.getIntExtra("image", R.drawable.circle_shape))
         }
 
-        if (pref.getColor() != 0)
+        if (sharedPrefs.getColor() != 0)
             binding.image.setColorFilter(
                 getColorShared(this)
             )

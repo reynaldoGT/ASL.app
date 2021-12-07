@@ -31,8 +31,8 @@
                 android:id="@+id/themeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:text="Thema"
+
+                android:text="@string/theme"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -108,69 +108,75 @@
                 android:overScrollMode="never"
                 app:layout_constraintTop_toBottomOf="@+id/tvChangeHandColor" />
 
+
             <TextView
                 android:id="@+id/titleRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/transition"
                 android:layout_marginVertical="8dp"
+                android:text="@string/transition"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+                app:layout_constraintBottom_toTopOf="@+id/cbTransition"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvColors" />
+                app:layout_constraintTop_toBottomOf="@id/rvColors"
+                app:layout_constraintVertical_bias="0" />
+
+            <CheckBox
+                android:id="@+id/cbTransition"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="@string/transition"
+                app:layout_constraintBottom_toTopOf="@+id/radioGroup" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleRadio">
+                app:layout_constraintTop_toBottomOf="@+id/cbTransition">
 
                 <RadioButton
+                    android:id="@+id/fadeTransition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="sin transition " />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="devanecmiento" />
+                    android:text="@string/fade" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Deslazamiento vertical"
+                    android:text="@string/vertical_slide"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <RadioButton
+                    android:id="@+id/leftToRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Abajo " />
+                    android:text="@string/left_to_right" />
 
                 <RadioButton
+                    android:id="@+id/rightToLeft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/right_to_left" />
 
-                    android:text="Arriba" />
+                <!--<RadioButton
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Deslazamiento horizontal" android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Deslazamiento horizontal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Arriba" />
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Arriba" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Abajo " />
+                                <RadioButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Abajo " />-->
 
             </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>

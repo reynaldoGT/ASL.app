@@ -1,12 +1,10 @@
 package com.neo.signLanguage.views.fragments
 
 import android.app.ActionBar
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -26,11 +24,9 @@ import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.models.Sing
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
 import java.util.*
 
-import android.widget.ImageSwitcher
-import android.widget.ViewSwitcher
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 
@@ -67,7 +63,7 @@ class SendMessageFragment : Fragment() {
         val shared = Shared()
         lettersArrays = shared.getLetterArray()
 
-        if (pref.getColor() != 0)
+        if (sharedPrefs.getColor() != 0)
             imageView?.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
             )
@@ -114,44 +110,58 @@ class SendMessageFragment : Fragment() {
 
             imageView!!.scaleType = ImageView.ScaleType.FIT_CENTER
             imageView!!.setImageResource(R.drawable.ic_a_letter)
-            if (pref.getColor() != 0)
+            if (sharedPrefs.getColor() != 0)
                 imageView!!.setColorFilter(
                     getColorShared(activity as AppCompatActivity)
                 )
             imageView
         }
 
-        /*val out: Animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left)
-        val `in`: Animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_out_right)*/
-        val out: Animation = AnimationUtils.loadAnimation(activity, R.anim.to_left)
-        val `in`: Animation = AnimationUtils.loadAnimation(activity, R.anim.from_right)
-
-        binding.imageSwitcher.outAnimation = out
-        binding.imageSwitcher.inAnimation = `in`
-
-        /*binding.imageSwitcher.inAnimation = AnimationUtils.loadAnimation(activity, R.anim.to_rigth)
-        binding.imageSwitcher.outAnimation =
-            AnimationUtils.loadAnimation(activity, R.anim.from_left)*/
-
+        setHandAnimation()
 
     }
 
-    /*private fun changeImage() {
+    private fun setHandAnimation() {
 
-        val randomLetter = (0 until lettersArrays!!.size).random()
-        val type =
-            if (lettersArrays!![randomLetter].type == "letter") getString(R.string.letter) else getString(
-                R.string.number
-            )
-        binding.currentLetter.text =
-            "$type ${lettersArrays!![randomLetter].letter.toUpperCase(Locale.ROOT)}"
-        binding.ivSing.setImageDrawable(
-            ContextCompat.getDrawable(
-                activity!!.applicationContext, // Context
-                lettersArrays!![randomLetter].image
-            )
-        )
-    }*/
+        var out: Animation? = null
+        var `in`: Animation? = null
+        when (sharedPrefs.getSelectedTransition()) {
+            0 -> {
+                out = AnimationUtils.loadAnimation(activity, android.R.anim.fade_out)
+                `in` = AnimationUtils.loadAnimation(activity, android.R.anim.fade_out)
+            }
+            2 -> {
+                out = AnimationUtils.loadAnimation(activity, R.anim.to_left)
+                `in` = AnimationUtils.loadAnimation(activity, R.anim.from_right)
+            }
+            3 -> {
+                out = AnimationUtils.loadAnimation(activity, R.anim.to_right)
+                `in` = AnimationUtils.loadAnimation(activity, R.anim.from_left)
+            }
+            else -> {
+                return
+            }
+        }
+        binding.imageSwitcher.outAnimation = out
+        binding.imageSwitcher.inAnimation = `in`
+    }
+
+/*private fun changeImage() {
+
+val randomLetter = (0 until lettersArrays!!.size).random()
+val type =
+    if (lettersArrays!![randomLetter].type == "letter") getString(R.string.letter) else getString(
+        R.string.number
+    )
+binding.currentLetter.text =
+    "$type ${lettersArrays!![randomLetter].letter.toUpperCase(Locale.ROOT)}"
+binding.ivSing.setImageDrawable(
+    ContextCompat.getDrawable(
+        activity!!.applicationContext, // Context
+        lettersArrays!![randomLetter].image
+    )
+)
+}*/
 
     private fun generateSingLanguageMessage(message: String) {
 
@@ -161,7 +171,7 @@ class SendMessageFragment : Fragment() {
         binding.btnSendMessage.isEnabled = false
         binding.edSendMessage.isEnabled = false
 
-        /*hideKeyboard()*/
+/*hideKeyboard()*/
         val cleanString = message.trim().toLowerCase(Locale.ROOT)
 
         val arraySentenceSing = ArrayList<Sing>()
@@ -187,7 +197,7 @@ class SendMessageFragment : Fragment() {
 
                 binding.btnSendMessage.isVisible = false
 
-                delay(pref.getDelay().toLong())
+                delay(sharedPrefs.getDelay().toLong())
                 val type =
                     if (index.type == "letter") getString(R.string.letter) else getString(R.string.number)
                 binding.currentLetter.text = "$type ${index.letter.toUpperCase(Locale.ROOT)}"
@@ -261,10 +271,10 @@ class SendMessageFragment : Fragment() {
     }
 
     private fun checkCounter() {
-        pref.addInOneCounterAd()
-        if (pref.getAdCount() == 5) {
+        sharedPrefs.addInOneCounterAd()
+        if (sharedPrefs.getAdCount() == 5) {
             showAds()
-            pref.resetAdCount()
+            sharedPrefs.resetAdCount()
             initAds()
         }
     }
@@ -278,13 +288,13 @@ class SendMessageFragment : Fragment() {
 
     override fun onDestroy() {
         job?.cancel()
-        /*resetStatus()*/
+/*resetStatus()*/
         super.onDestroy()
     }
 
     override fun onResume() {
         super.onResume()
-        if (pref.getColor() != 0)
+        if (sharedPrefs.getColor() != 0)
             imageView?.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
             )

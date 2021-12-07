@@ -20,11 +20,11 @@ import java.util.*
 class TabNavigatorActivity : AppCompatActivity() {
 
     companion object {
-        lateinit var pref: SharedPreferences
+        lateinit var sharedPrefs: SharedPreferences
         fun getColorShared(context: Context): Int {
             return ContextCompat.getColor(
                 context,
-                pref.getColor()
+                sharedPrefs.getColor()
             )
         }
 
@@ -42,7 +42,7 @@ class TabNavigatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         networkState = NetworkState(this)
-        pref = SharedPreferences(this)
+        sharedPrefs = SharedPreferences(this)
         binding = FragmentTabnavigatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val fm: FragmentManager = supportFragmentManager

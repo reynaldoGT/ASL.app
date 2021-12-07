@@ -8,8 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.FragmentBottomNavigationBinding
 
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.pref
-import com.orhanobut.logger.Logger
+import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
 
 
 class BottomNavigationFragment : Fragment() {
@@ -28,7 +27,7 @@ class BottomNavigationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showSelectedFragment(SendMessageFragment())
 
-        if (pref.getTheme()) {
+        if (sharedPrefs.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

@@ -45,5 +45,10 @@
     <string name="Error">Error</string>
     <string name="giphy_api_key" translatable="false">Fx16au8XaXm3cKQb9QsK2RoOR7rZL7G9</string>
     <string name="transition">Transition</string>
+    <string name="fade">Fade</string>
+    <string name="vertical_slide">Vertical slide</string>
+    <string name="left_to_right">Left to right</string>
+    <string name="right_to_left">Right to left</string>
+    <string name="theme">Theme</string>
 
 </resources>
