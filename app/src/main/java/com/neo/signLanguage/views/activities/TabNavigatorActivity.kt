@@ -54,8 +54,8 @@ class TabNavigatorActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Crear mensaje"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Ver Señas"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.send_message)))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.movement_signs)))
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

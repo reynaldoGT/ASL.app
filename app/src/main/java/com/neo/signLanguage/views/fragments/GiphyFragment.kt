@@ -19,7 +19,7 @@ import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.models.Datum
 import com.neo.signLanguage.provider.ApiInterfaceGiphy
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
-import com.neo.signLanguage.views.activities.DetailsSingActivity
+import com.neo.signLanguage.views.activities.DetailsSignActivity
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getLanguagePhone
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.networkState
 import com.orhanobut.logger.Logger
@@ -61,7 +61,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
         adapter = GiphyAdapter(activity?.applicationContext!!, giphyImages, object : ClickListener {
             override fun onClick(v: View?, position: Int) {
                 val myIntent =
-                    Intent(activity!!.applicationContext, DetailsSingActivity::class.java)
+                    Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
                 myIntent.putExtra("image", giphyImages[position].images.original.url)
                 myIntent.putExtra("letter", giphyImages[position].title)
                 myIntent.putExtra("type", giphyImages[position].source)

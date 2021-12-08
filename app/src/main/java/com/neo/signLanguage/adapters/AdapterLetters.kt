@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.databinding.TemplateLetterBinding
-import com.neo.signLanguage.models.Sing
+import com.neo.signLanguage.models.Sign
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
 
 
@@ -19,11 +19,11 @@ interface ClickListener {
 
 class AdapterLetters(
     context: Context,
-    items: ArrayList<Sing>,
+    items: ArrayList<Sign>,
     var listener: ClickListener
 ) : RecyclerView.Adapter<AdapterLetters.ViewHolder>() {
 
-    var items: ArrayList<Sing>? = null
+    var items: ArrayList<Sign>? = null
     var viewHolder: ViewHolder? = null
     var context: Context? = null
 

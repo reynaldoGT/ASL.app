@@ -11,14 +11,14 @@ import com.google.android.gms.ads.AdRequest
 import com.neo.signLanguage.AdapterLetters
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.utils.Shared
-import com.neo.signLanguage.databinding.FragmentViewSingsBinding
 import android.content.Intent
-import com.neo.signLanguage.views.activities.DetailsSingActivity
+import com.neo.signLanguage.databinding.FragmentViewSignsBinding
+import com.neo.signLanguage.views.activities.DetailsSignActivity
 
 
-class ViewSingsFragment : Fragment() {
+class ViewSignsFragment : Fragment() {
 
-    private var _binding: FragmentViewSingsBinding? = null
+    private var _binding: FragmentViewSignsBinding? = null
     private val binding get() = _binding!!
 
     private var adaptador: AdapterLetters? = null
@@ -31,7 +31,7 @@ class ViewSingsFragment : Fragment() {
     ): View {
 
         // Using the binding
-        _binding = FragmentViewSingsBinding.inflate(inflater, container, false)
+        _binding = FragmentViewSignsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,7 +49,7 @@ class ViewSingsFragment : Fragment() {
             AdapterLetters(activity!!.applicationContext, lettersArray, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {
                     val myIntent =
-                        Intent(activity!!.applicationContext, DetailsSingActivity::class.java)
+                        Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
                     myIntent.putExtra("image", lettersArray[position].image)
                     myIntent.putExtra("letter", lettersArray[position].letter)
                     myIntent.putExtra("type", lettersArray[position].type)

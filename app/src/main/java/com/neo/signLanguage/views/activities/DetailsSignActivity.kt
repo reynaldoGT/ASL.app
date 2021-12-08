@@ -11,7 +11,7 @@ import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.shar
 import com.orhanobut.logger.Logger
 
 
-class DetailsSingActivity : AppCompatActivity() {
+class DetailsSignActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

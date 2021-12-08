@@ -1,5 +1,6 @@
 package com.neo.signLanguage.views.fragments
 
+
 import android.app.ActionBar
 import android.os.Bundle
 import android.view.*
@@ -21,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.neo.signLanguage.*
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
-import com.neo.signLanguage.models.Sing
+import com.neo.signLanguage.models.Sign
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
@@ -40,14 +41,13 @@ class SendMessageFragment : Fragment() {
 
     private var job: Job? = null
 
-    private var lettersArrays: ArrayList<Sing>? = null
+    private var lettersArrays: ArrayList<Sign>? = null
     private var imageView: ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentSendMessageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -67,7 +67,9 @@ class SendMessageFragment : Fragment() {
             imageView?.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
             )
-
+        binding.seeCurrentMessage.text = if (sharedPrefs.getCurrentMessage()
+                .isNotEmpty()
+        ) sharedPrefs.getCurrentMessage() else getString(R.string.here_see_your_text)
         binding.seeCurrentMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
             binding.seeCurrentMessage.visibility = View.VISIBLE
@@ -89,7 +91,7 @@ class SendMessageFragment : Fragment() {
         /*binding.ivSing.setOnClickListener {
             changeImage()
         }*/
-
+        binding.edSendMessage.editText?.setText(sharedPrefs.getCurrentMessage())
         binding.btnSendMessage.setOnClickListener {
             sendMessage(binding.edSendMessage.editText?.text.toString())
         }
@@ -123,8 +125,8 @@ class SendMessageFragment : Fragment() {
 
     private fun setHandAnimation() {
 
-        var out: Animation? = null
-        var `in`: Animation? = null
+        var out: Animation?
+        var `in`: Animation?
         when (sharedPrefs.getSelectedTransition()) {
             0 -> {
                 out = AnimationUtils.loadAnimation(activity, android.R.anim.fade_out)
@@ -164,7 +166,7 @@ binding.ivSing.setImageDrawable(
 }*/
 
     private fun generateSingLanguageMessage(message: String) {
-
+        sharedPrefs.setCurrentMessage(message)
         binding.seeCurrentMessage.visibility = view!!.visibility
         binding.seeCurrentMessage.text = message
 
@@ -174,7 +176,7 @@ binding.ivSing.setImageDrawable(
 /*hideKeyboard()*/
         val cleanString = message.trim().toLowerCase(Locale.ROOT)
 
-        val arraySentenceSing = ArrayList<Sing>()
+        val arraySentenceSing = ArrayList<Sign>()
 
         val stringArray = cleanString.replace(" ", "").toCharArray()
 
@@ -189,7 +191,7 @@ binding.ivSing.setImageDrawable(
         showMessageWithSing(arraySentenceSing)
     }
 
-    private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Sing>) {
+    private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Sign>) {
         var counter = -1
         job = GlobalScope.launch(context = Dispatchers.Main) {
             for (index in sentenceInArrayImage) {
@@ -201,12 +203,12 @@ binding.ivSing.setImageDrawable(
                 val type =
                     if (index.type == "letter") getString(R.string.letter) else getString(R.string.number)
                 binding.currentLetter.text = "$type ${index.letter.toUpperCase(Locale.ROOT)}"
-                /*binding.ivSing.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        activity!!.applicationContext, // Context
-                        index.image
-                    )
-                )*/
+                /*  binding.ivSing.setImageDrawable(
+                      ContextCompat.getDrawable(
+                          activity!!.applicationContext, // Context
+                          index.image
+                      )
+                  )*/
                 if (counter == sentenceInArrayImage.size) {
                     binding.imageSwitcher.setImageResource(index.image)
                 } else {

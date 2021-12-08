@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.neo.signLanguage.R
 
 class SharedPreferences(var activity: AppCompatActivity) {
-    private val SETTINGS =
-        "${activity.applicationContext.resources.getString(R.string.app_name)} SHARED_PREFERENCES"
+    private val SETTINGS = "SHARED_PREFERENCES"
     private val DARK_THEME = "DARK_THEME"
     private val DELAY = "DELAY"
     private val COLOR = "COLOR"
@@ -54,9 +53,9 @@ class SharedPreferences(var activity: AppCompatActivity) {
         editor.putInt(COLOR, state).apply()
     }
 
-    fun getCurrentMessage(): String? {
+    fun getCurrentMessage(): String {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
-        return settings.getString(CURRENT_MESSAGE, "")
+        return settings.getString(CURRENT_MESSAGE, "").toString()
     }
 
     fun setCurrentMessage(newState: String) {
@@ -83,7 +82,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
         editor.putInt(COUNT_AD_INTERTITIAL, add).apply()
     }
 
-    fun getShowTransition(): Boolean{
+    fun getShowTransition(): Boolean {
         val settings = activity.getSharedPreferences(SETTINGS, -1)
         return settings.getBoolean(SHOW_TRANSITIONS, false)
     }
@@ -94,7 +93,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
         editor.putBoolean(SHOW_TRANSITIONS, newState).apply()
     }
 
-    fun getSelectedTransition(): Int{
+    fun getSelectedTransition(): Int {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
         return settings.getInt(SELECTED_TRANSITION, 0)
     }
@@ -104,7 +103,6 @@ class SharedPreferences(var activity: AppCompatActivity) {
         val editor = settings.edit()
         editor.putInt(SELECTED_TRANSITION, newState).apply()
     }
-
 
 
 }
