@@ -117,16 +117,14 @@ class SendMessageFragment : Fragment() {
                 )
 
             imageView!!.scaleType = ImageView.ScaleType.FIT_CENTER
-            imageView!!.setImageResource(R.drawable.ic_a_letter)
+            imageView!!.setImageResource(R.drawable.ic_a_only_sing)
             if (sharedPrefs.getColor() != 0)
                 imageView!!.setColorFilter(
                     getColorShared(activity as AppCompatActivity)
                 )
             imageView
         }
-
         setHandAnimation()
-
     }
 
     private fun setHandAnimation() {
@@ -135,16 +133,16 @@ class SendMessageFragment : Fragment() {
         val `in`: Animation?
         when (sharedPrefs.getSelectedTransition()) {
             0 -> {
+                `in` = AnimationUtils.loadAnimation(activity, android.R.anim.fade_in)
                 out = AnimationUtils.loadAnimation(activity, android.R.anim.fade_out)
-                `in` = AnimationUtils.loadAnimation(activity, android.R.anim.fade_out)
             }
             2 -> {
-                out = AnimationUtils.loadAnimation(activity, R.anim.to_left)
                 `in` = AnimationUtils.loadAnimation(activity, R.anim.from_right)
+                out = AnimationUtils.loadAnimation(activity, R.anim.to_left)
             }
             3 -> {
-                out = AnimationUtils.loadAnimation(activity, R.anim.to_right)
                 `in` = AnimationUtils.loadAnimation(activity, R.anim.from_left)
+                out = AnimationUtils.loadAnimation(activity, R.anim.to_right)
             }
             else -> {
                 return
@@ -183,8 +181,8 @@ binding.ivSing.setImageDrawable(
         val cleanString = message.trim().toLowerCase(Locale.ROOT)
 
         val arraySentenceSing = ArrayList<Sign>()
-        stringCleaned = cleanString.replace(" ", "")
-        val stringArray = cleanString.replace(" ", "").toCharArray()
+        stringCleaned = cleanString.replace(" ", "").replace(",","").replace(".","")
+        val stringArray = cleanString.replace(" ", "").replace(",","").replace(".","").toCharArray()
 
         for (i in stringArray) {
             for (letterPosition in lettersArrays!!) {
@@ -216,7 +214,7 @@ binding.ivSing.setImageDrawable(
                           index.image
                       )
                   )*/
-                val spannable = SpannableStringBuilder(stringCleaned?.capitalize())
+                val spannable = SpannableStringBuilder(stringCleaned?.capitalize(Locale.ROOT))
                 spannable.setSpan(
                     ForegroundColorSpan(
                         ContextCompat.getColor(

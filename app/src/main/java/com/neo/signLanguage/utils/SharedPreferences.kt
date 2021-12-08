@@ -29,7 +29,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
 
     fun getDelay(): Int {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
-        return settings.getInt(DELAY, minDelayTime)
+        return settings.getInt(DELAY, maxDelayTime/2 )
     }
 
     fun setDelay(state: Int) {
@@ -43,7 +43,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
 
     fun getColor(): Int {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
-        return settings.getInt(COLOR, Shared.getColorsList()[0].colorValue)
+        return settings.getInt(COLOR, Shared.getColorsList(activity.applicationContext)[0].colorValue)
     }
 
     fun setColor(state: Int) {

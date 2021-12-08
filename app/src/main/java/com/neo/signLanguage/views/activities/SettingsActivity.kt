@@ -16,6 +16,7 @@ import com.neo.signLanguage.models.Color
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import com.neo.signLanguage.utils.Shared
 import com.orhanobut.logger.Logger
 
 class SettingsActivity : AppCompatActivity() {
@@ -60,23 +61,7 @@ class SettingsActivity : AppCompatActivity() {
         layoutManager = GridLayoutManager(this, 7)
         binding.rvColors.layoutManager = layoutManager
 
-
-        val colorList = ArrayList<Color>()
-        colorList.add(Color(getString(R.string.blue), R.color.primaryDarkColor))
-        colorList.add(Color(getString(R.string.teal), R.color.teal))
-        colorList.add(Color(getString(R.string.indigo), R.color.indigo))
-        colorList.add(Color(getString(R.string.purple), R.color.purple_200))
-        colorList.add(Color(getString(R.string.black), R.color.gray900))
-        colorList.add(Color(getString(R.string.gray), R.color.gray300))
-        colorList.add(Color(getString(R.string.green), R.color.green_dark))
-        colorList.add(Color(getString(R.string.green_light), R.color.lightGreen))
-        colorList.add(Color(getString(R.string.deep_orange), R.color.deep_orange))
-        colorList.add(Color(getString(R.string.red), R.color.red_dark))
-        colorList.add(Color(getString(R.string.pink), R.color.pink))
-        colorList.add(Color(getString(R.string.orange), R.color.orange))
-        colorList.add(Color(getString(R.string.yellow), R.color.yellow))
-        colorList.add(Color(getString(R.string.brawn), R.color.brawn))
-
+        val colorList = Shared.getColorsList(this)
         adaptador =
             ColorAdapter(this, colorList, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {
@@ -89,7 +74,6 @@ class SettingsActivity : AppCompatActivity() {
         if (sharedPrefs.getShowTransition()) {
             setupRadioGroup()
         }
-
     }
 
     private fun showSnackBar(colorName: String) {
