@@ -8,7 +8,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="here_see_your_text">Here your text will appear</string>
     <string name="create_message">New Message</string>
-    <string name="view_sing">Sings</string>
+    <string name="view_sing">Signs</string>
     <string name="view_numbers">Numbers</string>
     <string name="empty_message">Empty Message!</string>
     <string name="letter_a">Letter: A</string>
@@ -50,5 +50,6 @@
     <string name="left_to_right">Left to right</string>
     <string name="right_to_left">Right to left</string>
     <string name="theme">Theme</string>
+    <string name="movement_signs">Movement Signs</string>
 
 </resources>

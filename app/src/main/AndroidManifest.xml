@@ -21,7 +21,7 @@
             android:exported="false"
             android:parentActivityName=".views.activities.TabNavigatorActivity" />
         <activity
-            android:name=".views.activities.DetailsSingActivity"
+            android:name=".views.activities.DetailsSignActivity"
             android:exported="false"
             android:parentActivityName=".views.activities.TabNavigatorActivity" />
         <activity

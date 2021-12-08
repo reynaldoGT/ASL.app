@@ -1,6 +1,6 @@
 package com.neo.signLanguage.models
 
-class Sing(letter: String, image: Int, type: String) {
+class Sign(letter: String, image: Int, type: String) {
     var letter = ""
     var image = 0
     var type = ""

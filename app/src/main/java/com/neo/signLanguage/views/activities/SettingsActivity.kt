@@ -85,7 +85,7 @@ class SettingsActivity : AppCompatActivity() {
                 }
             })
         binding.rvColors.adapter = adaptador
-            showOptionsTransition()
+        showOptionsTransition()
         if (sharedPrefs.getShowTransition()) {
             setupRadioGroup()
         }
@@ -105,10 +105,13 @@ class SettingsActivity : AppCompatActivity() {
 
         if (sharedPrefs.getShowTransition()) {
             binding.radioGroup.visibility = View.VISIBLE
-            if (binding.radioGroup.visibility == View.VISIBLE) {
+            if (sharedPrefs.getSelectedTransition() != -1) {
                 (binding.radioGroup.getChildAt(sharedPrefs.getSelectedTransition()) as RadioButton).isChecked =
                     true
+            } else {
+                return
             }
+
         } else {
             binding.radioGroup.visibility = View.GONE
         }
@@ -117,11 +120,15 @@ class SettingsActivity : AppCompatActivity() {
             if (isChecked) {
                 binding.radioGroup.visibility = View.VISIBLE
                 sharedPrefs.setShowTransition(true)
+                (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
+
+
             } else {
                 binding.radioGroup.visibility = View.GONE
                 sharedPrefs.setShowTransition(false)
-                binding.radioGroup.clearCheck()
-                sharedPrefs.setSelectedTransition(-1)
+
+                /*binding.radioGroup.clearCheck()*/
+                sharedPrefs.setSelectedTransition(0)
 
             }
         }

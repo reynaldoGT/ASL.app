@@ -42,7 +42,7 @@ class BottomNavigationFragment : Fragment() {
                     true
                 }
                 R.id.page_2 -> {
-                    showSelectedFragment(ViewSingsFragment())
+                    showSelectedFragment(ViewSignsFragment())
                     true
                 }
                 R.id.page_3 -> {

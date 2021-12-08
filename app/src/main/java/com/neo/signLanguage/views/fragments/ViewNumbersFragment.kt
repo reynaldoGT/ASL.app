@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
 import com.neo.signLanguage.AdapterLetters
 import com.neo.signLanguage.ClickListener
-import com.neo.signLanguage.views.activities.DetailsSingActivity
+import com.neo.signLanguage.views.activities.DetailsSignActivity
 import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.databinding.FragmentNumbersBinding
 
@@ -50,7 +50,7 @@ class ViewNumbersFragment : Fragment() {
             AdapterLetters(activity!!.applicationContext, lettersArray, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {
                     val myIntent =
-                        Intent(activity!!.applicationContext, DetailsSingActivity::class.java)
+                        Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
                     myIntent.putExtra("image", lettersArray[position].image)
                     myIntent.putExtra("letter", lettersArray[position].letter)
                     myIntent.putExtra("type", lettersArray[position].type)
