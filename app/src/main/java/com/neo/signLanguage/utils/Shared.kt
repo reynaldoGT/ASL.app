@@ -1,6 +1,8 @@
 package com.neo.signLanguage.utils
 
+import android.content.res.Resources
 import com.neo.signLanguage.R
+import com.neo.signLanguage.models.Color
 import com.neo.signLanguage.models.Sign
 
 class Shared {
@@ -19,10 +21,11 @@ class Shared {
         return this.lettersArray
     }
 
-    fun getOnlyNumbersArray(): ArrayList<Sign>{
+    fun getOnlyNumbersArray(): ArrayList<Sign> {
         this.fillOnlyNumbers()
         return this.numbersArray
     }
+
     private fun fillLetterArray() {
 
         lettersArray.add(Sign("b", R.drawable.ic_b_only_sing, letter))
@@ -141,5 +144,51 @@ class Shared {
         numbersArray.add(Sign("8", R.drawable.ic_8_number, "number"))
         numbersArray.add(Sign("9", R.drawable.ic_9_number, "number"))
         numbersArray.add(Sign("10", R.drawable.ic_10_number, "number"))
+    }
+
+    companion object {
+        fun getColorsList(): ArrayList<Color> {
+            val colorList = ArrayList<Color>()
+            colorList.add(
+                Color(
+                    Resources.getSystem().getString(R.string.blue),
+                    R.color.primaryDarkColor
+                )
+            )
+            colorList.add(Color(Resources.getSystem().getString(R.string.teal), R.color.teal))
+            colorList.add(Color(Resources.getSystem().getString(R.string.indigo), R.color.indigo))
+            colorList.add(
+                Color(
+                    Resources.getSystem().getString(R.string.purple),
+                    R.color.purple_200
+                )
+            )
+            colorList.add(Color(Resources.getSystem().getString(R.string.black), R.color.gray900))
+            colorList.add(Color(Resources.getSystem().getString(R.string.gray), R.color.gray300))
+            colorList.add(
+                Color(
+                    Resources.getSystem().getString(R.string.green),
+                    R.color.green_dark
+                )
+            )
+            colorList.add(
+                Color(
+                    Resources.getSystem().getString(R.string.green_light),
+                    R.color.lightGreen
+                )
+            )
+            colorList.add(
+                Color(
+                    Resources.getSystem().getString(R.string.deep_orange),
+                    R.color.deep_orange
+                )
+            )
+            colorList.add(Color(Resources.getSystem().getString(R.string.red), R.color.red_dark))
+            colorList.add(Color(Resources.getSystem().getString(R.string.pink), R.color.pink))
+            colorList.add(Color(Resources.getSystem().getString(R.string.orange), R.color.orange))
+            colorList.add(Color(Resources.getSystem().getString(R.string.yellow), R.color.yellow))
+            colorList.add(Color(Resources.getSystem().getString(R.string.brawn), R.color.brawn))
+            return colorList
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.neo.signLanguage.utils
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import com.neo.signLanguage.R
 
@@ -44,7 +43,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
 
     fun getColor(): Int {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
-        return settings.getInt(COLOR, 0)
+        return settings.getInt(COLOR, Shared.getColorsList()[0].colorValue)
     }
 
     fun setColor(state: Int) {
