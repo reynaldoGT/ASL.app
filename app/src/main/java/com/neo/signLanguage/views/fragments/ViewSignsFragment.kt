@@ -8,23 +8,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.neo.signLanguage.AdapterLetters
 import com.neo.signLanguage.ClickListener
-import com.neo.signLanguage.Shared
-import com.neo.signLanguage.databinding.FragmentViewSingsBinding
+import com.neo.signLanguage.utils.Shared
 import android.content.Intent
-import com.neo.signLanguage.DetailsSingActivity
+import com.neo.signLanguage.databinding.FragmentViewSignsBinding
+import com.neo.signLanguage.views.activities.DetailsSignActivity
 
 
-class VIewSings : Fragment() {
+class ViewSignsFragment : Fragment() {
 
-    private var _binding: FragmentViewSingsBinding? = null
+    private var _binding: FragmentViewSignsBinding? = null
     private val binding get() = _binding!!
 
     private var adaptador: AdapterLetters? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
-    val shared = Shared()
+    private val shared = Shared()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +31,12 @@ class VIewSings : Fragment() {
     ): View {
 
         // Using the binding
-        _binding = FragmentViewSingsBinding.inflate(inflater, container, false)
+        _binding = FragmentViewSignsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val lettersArray = shared.getOnlyLettersArray()
 
@@ -47,15 +45,17 @@ class VIewSings : Fragment() {
         layoutManager = GridLayoutManager(activity!!.applicationContext, 2)
         binding.gridListSing.layoutManager = layoutManager
 
-        adaptador = AdapterLetters(lettersArray,object:ClickListener{
-            override fun onClick(v: View?, position: Int) {
-                val myIntent = Intent(activity!!.applicationContext, DetailsSingActivity::class.java)
-                myIntent.putExtra("image", lettersArray[position].image)
-                myIntent.putExtra("letter", lettersArray[position].letter)
-                myIntent.putExtra("type", lettersArray[position].type)
-                startActivity(myIntent)
-            }
-        })
+        adaptador =
+            AdapterLetters(activity!!.applicationContext, lettersArray, object : ClickListener {
+                override fun onClick(v: View?, position: Int) {
+                    val myIntent =
+                        Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
+                    myIntent.putExtra("image", lettersArray[position].image)
+                    myIntent.putExtra("letter", lettersArray[position].letter)
+                    myIntent.putExtra("type", lettersArray[position].type)
+                    startActivity(myIntent)
+                }
+            })
 
         binding.gridListSing.adapter = adaptador
 

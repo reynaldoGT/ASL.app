@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neo.signLanguage">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,29 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".views.activities.TabNavigatorActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:screenOrientation="portrait" />
+
         <activity
-            android:name=".DetailsSingActivity"
+            android:name=".views.activities.SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".views.activities.TabNavigatorActivity" />
         <activity
-            android:name=".views.SplashActivity"
+            android:name=".views.activities.DetailsSignActivity"
+            android:exported="false"
+            android:parentActivityName=".views.activities.TabNavigatorActivity" />
+        <activity
+            android:name=".views.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".GridAllLetters"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name=".GridAllLetters" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

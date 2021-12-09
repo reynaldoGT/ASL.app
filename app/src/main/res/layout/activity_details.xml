@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsSingActivity">
+    tools:context=".views.activities.DetailsSignActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/settings_toolbar"
+        android:id="@+id/detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -21,17 +21,16 @@
         android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="500dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginHorizontal="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_toolbar"
         app:srcCompat="@drawable/ic_0_number"
-        app:tint="?attr/colorPrimary" />
+        android:contentDescription="@string/simple_description" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/imageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
