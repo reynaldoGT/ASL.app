@@ -48,4 +48,5 @@
     <string name="right_to_left">Derecha a izquierda</string>
     <string name="theme">Tema</string>
     <string name="movement_signs">Señas con movimiento</string>
+    <string name="simple_description">simple_description</string>
 </resources>

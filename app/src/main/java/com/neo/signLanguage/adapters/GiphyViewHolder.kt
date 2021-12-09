@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.TemplateGiphyBinding
-import com.orhanobut.logger.Logger
+
 
 
 class GiphyViewHolder(
@@ -31,9 +31,11 @@ class GiphyViewHolder(
         Glide.with(context)
             .asGif()
             .load(image)
-            .placeholder(R.drawable.ic_0_number)
+            .placeholder(R.drawable.ic_2_number)
             .error(R.drawable.ic_x_letter)
+            .fitCenter()
             .into(binding.ivDog)
+
 
     }
 

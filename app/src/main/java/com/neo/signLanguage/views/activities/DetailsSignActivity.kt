@@ -1,14 +1,19 @@
 package com.neo.signLanguage.views.activities
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
 import com.orhanobut.logger.Logger
+import java.util.*
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 
 
 class DetailsSignActivity : AppCompatActivity() {
@@ -21,20 +26,26 @@ class DetailsSignActivity : AppCompatActivity() {
         val myIntent = intent
 
         val letter = myIntent.getStringExtra("letter")
-        val type = myIntent.getStringExtra("type")?.capitalize() // will return "SecondKeyValue"
+        val type =
+            myIntent.getStringExtra("type")?.capitalize(Locale.ROOT) // will return "SecondKeyValue"
         val netWorkImage = myIntent.getBooleanExtra("networkImage", false)
-        val image = intent.getStringExtra("image")
+        val imageURL = intent.getStringExtra("imageUrl")
+
+        val circularProgressDrawable = CircularProgressDrawable(this)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
 
 
-        Logger.d(image)
         binding.imageTitle.text = letter
-        if (netWorkImage && image != null) {
-            Glide.with(this)
+        if (netWorkImage ) {
+            Glide.with(applicationContext)
                 .asGif()
-                .load(image)
-                .placeholder(R.drawable.ic_0_number)
+                .load(imageURL)
+                .placeholder(circularProgressDrawable)
                 .error(R.drawable.ic_x_letter)
                 .into(binding.image)
+
             binding.detailToolbar.title = letter
             binding.imageTitle.visibility = View.GONE
         } else {

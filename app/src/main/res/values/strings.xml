@@ -51,5 +51,6 @@
     <string name="right_to_left">Right to left</string>
     <string name="theme">Theme</string>
     <string name="movement_signs">Movement ASL</string>
+    <string name="simple_description">simple_description</string>
 
 </resources>

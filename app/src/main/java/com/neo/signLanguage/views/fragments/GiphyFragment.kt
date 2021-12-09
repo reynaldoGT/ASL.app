@@ -28,6 +28,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -60,14 +62,15 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun initRecyclerView() {
         adapter = GiphyAdapter(activity?.applicationContext!!, giphyImages, object : ClickListener {
             override fun onClick(v: View?, position: Int) {
-                val myIntent =
+                /*val myIntent =
                     Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
-                myIntent.putExtra("image", giphyImages[position].images.original.url)
+
+                myIntent.putExtra("imageUrl", giphyImages[position].images.original.url)
+                myIntent.putExtra("networkImage", true)
                 myIntent.putExtra("letter", giphyImages[position].title)
                 myIntent.putExtra("type", giphyImages[position].source)
-                myIntent.putExtra("networkImage", true)
 
-                startActivity(myIntent)
+                startActivity(myIntent)*/
             }
 
         })
@@ -105,6 +108,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 activity?.runOnUiThread {
                     if (call.isSuccessful) {
                         getQuery = translated?.responseData?.translatedText!!
+                        Logger.d(getQuery)
                         fillRecyclerView(getQuery)
                     } else {
                         showError()
@@ -113,7 +117,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
         }
-        Logger.d(getQuery)
         if (networkState.isOnline()) {
             fillRecyclerView(getQuery)
         } else {
@@ -135,15 +138,28 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun showError() {
-        Toast.makeText(activity?.applicationContext!!, getString(R.string.Error), Toast.LENGTH_SHORT)
+        Toast.makeText(
+            activity?.applicationContext!!,
+            getString(R.string.Error),
+            Toast.LENGTH_SHORT
+        )
             .show()
     }
-    private fun fillRecyclerView(getQuery:String){
+
+    private fun fillRecyclerView(getQuery: String) {
+
+        var cleanString = getQuery
+        val match: Matcher = Pattern.compile("\\((.*?)\\)").matcher(getQuery)
+        while (match.find()) {
+            System.out.println(match.group(1))
+            cleanString = match.group(1)
+            Logger.d(cleanString)
+        }
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiInterfaceGiphy::class.java)
                 .getGiphyImage(
                     getString(R.string.giphy_api_key),
-                    "American Sign Language $getQuery",
+                    "American Sign Language $cleanString",
                     15
                 )
 
