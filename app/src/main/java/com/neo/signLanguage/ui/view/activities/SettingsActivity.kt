@@ -1,4 +1,4 @@
-package com.neo.signLanguage.views.activities
+package com.neo.signLanguage.ui.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,10 +12,8 @@ import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.SettingsActivityBinding
-import com.neo.signLanguage.models.Color
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import com.neo.signLanguage.utils.Shared
 import com.orhanobut.logger.Logger
 

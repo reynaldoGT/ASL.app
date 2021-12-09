@@ -12,20 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
         <activity
-            android:name=".views.activities.TabNavigatorActivity"
+            android:name=".ui.view.activities.TabNavigatorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".views.activities.SettingsActivity"
+            android:name=".ui.view.activities.SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".views.activities.TabNavigatorActivity" />
+            android:parentActivityName=".ui.view.activities.TabNavigatorActivity" />
         <activity
-            android:name=".views.activities.DetailsSignActivity"
+            android:name=".ui.view.activities.DetailsSignActivity"
             android:exported="false"
-            android:parentActivityName=".views.activities.TabNavigatorActivity" />
+            android:parentActivityName=".ui.view.activities.TabNavigatorActivity" />
         <activity
-            android:name=".views.activities.SplashActivity"
+            android:name=".ui.view.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>

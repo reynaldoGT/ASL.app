@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.TemplateColorBinding
-import com.neo.signLanguage.models.Color
+import com.neo.signLanguage.data.models.Color
 import com.neo.signLanguage.ClickListener
 import java.lang.ref.WeakReference
 

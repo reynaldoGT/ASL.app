@@ -1,5 +1,6 @@
-package com.neo.signLanguage.views.fragments
+package com.neo.signLanguage.ui.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,20 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
 import com.neo.signLanguage.AdapterLetters
 import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.utils.Shared
-import android.content.Intent
-import com.neo.signLanguage.databinding.FragmentViewSignsBinding
-import com.neo.signLanguage.views.activities.DetailsSignActivity
+import com.neo.signLanguage.databinding.FragmentNumbersBinding
+
+class ViewNumbersFragment : Fragment() {
 
 
-class ViewSignsFragment : Fragment() {
-
-    private var _binding: FragmentViewSignsBinding? = null
+    private var _binding: FragmentNumbersBinding? = null
     private val binding get() = _binding!!
 
-    private var adaptador: AdapterLetters? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private val shared = Shared()
+    var adaptador: AdapterLetters? = null
+    var layoutManager: RecyclerView.LayoutManager? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,19 +31,20 @@ class ViewSignsFragment : Fragment() {
     ): View {
 
         // Using the binding
-        _binding = FragmentViewSignsBinding.inflate(inflater, container, false)
+        _binding = FragmentNumbersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lettersArray = shared.getOnlyLettersArray()
+        val shared = Shared()
+        val lettersArray = shared.getOnlyNumbersArray()
 
-        binding.gridListSing.setHasFixedSize(true)
+        binding.gridListSingNumbers.setHasFixedSize(true)
 
         layoutManager = GridLayoutManager(activity!!.applicationContext, 2)
-        binding.gridListSing.layoutManager = layoutManager
+        binding.gridListSingNumbers.layoutManager = layoutManager
 
         adaptador =
             AdapterLetters(activity!!.applicationContext, lettersArray, object : ClickListener {
@@ -53,13 +54,14 @@ class ViewSignsFragment : Fragment() {
                     myIntent.putExtra("image", lettersArray[position].image)
                     myIntent.putExtra("letter", lettersArray[position].letter)
                     myIntent.putExtra("type", lettersArray[position].type)
+
                     startActivity(myIntent)
                 }
             })
 
-        binding.gridListSing.adapter = adaptador
-
+        binding.gridListSingNumbers.adapter = adaptador
         initLoad()
+
     }
 
     private fun initLoad() {

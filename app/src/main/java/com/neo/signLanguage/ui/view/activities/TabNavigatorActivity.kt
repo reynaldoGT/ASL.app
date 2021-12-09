@@ -1,4 +1,4 @@
-package com.neo.signLanguage.views.activities
+package com.neo.signLanguage.ui.view.activities
 
 import android.content.Context
 import android.content.Intent

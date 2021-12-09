@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".views.activities.SettingsActivity">
+        tools:context=".ui.view.activities.SettingsActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/detail_toolbar"

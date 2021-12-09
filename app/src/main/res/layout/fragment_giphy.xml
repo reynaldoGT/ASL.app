@@ -5,7 +5,7 @@
     android:id="@+id/viewRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragments.GiphyFragment">
+    tools:context=".ui.view.fragments.GiphyFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchBreed"

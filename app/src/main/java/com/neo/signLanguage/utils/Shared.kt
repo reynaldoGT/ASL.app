@@ -3,8 +3,8 @@ package com.neo.signLanguage.utils
 import android.content.Context
 import android.content.res.Resources
 import com.neo.signLanguage.R
-import com.neo.signLanguage.models.Color
-import com.neo.signLanguage.models.Sign
+import com.neo.signLanguage.data.models.Color
+import com.neo.signLanguage.data.models.Sign
 
 class Shared {
     private var lettersArray = ArrayList<Sign>()

@@ -1,4 +1,4 @@
-package com.neo.signLanguage.models
+package com.neo.signLanguage.data.models
 
 data class GiphyResponse (
     val data: List<Datum>,

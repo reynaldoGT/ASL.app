@@ -1,8 +1,7 @@
-package com.neo.signLanguage.views.fragments
+package com.neo.signLanguage.ui.view.fragments
 
 
 import android.app.ActionBar
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -23,18 +22,18 @@ import com.orhanobut.logger.Logger
 import kotlinx.coroutines.*
 import kotlin.collections.ArrayList
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.neo.signLanguage.*
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
-import com.neo.signLanguage.models.Sign
+import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.utils.Shared
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 import java.util.*
 
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 
 
 class SendMessageFragment : Fragment() {

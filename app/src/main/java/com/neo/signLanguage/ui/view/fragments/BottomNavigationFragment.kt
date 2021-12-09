@@ -1,4 +1,4 @@
-package com.neo.signLanguage.views.fragments
+package com.neo.signLanguage.ui.view.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.FragmentBottomNavigationBinding
 
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 
 
 class BottomNavigationFragment : Fragment() {

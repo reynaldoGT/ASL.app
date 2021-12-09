@@ -1,4 +1,4 @@
-package com.neo.signLanguage.models
+package com.neo.signLanguage.data.models
 
 class Sign(letter: String, image: Int, type: String) {
     var letter = ""

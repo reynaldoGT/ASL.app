@@ -1,11 +1,8 @@
-package com.neo.signLanguage.views.activities
+package com.neo.signLanguage.ui.view.activities
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import com.neo.signLanguage.utils.SharedPreferences
 
 
 class SplashActivity : AppCompatActivity() {

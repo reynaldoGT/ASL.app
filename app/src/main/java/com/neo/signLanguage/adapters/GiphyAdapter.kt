@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
-import com.neo.signLanguage.models.Datum
+import com.neo.signLanguage.data.models.Datum
 
 class GiphyAdapter(
     var context: Context,

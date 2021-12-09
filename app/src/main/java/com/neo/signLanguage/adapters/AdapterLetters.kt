@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.databinding.TemplateLetterBinding
-import com.neo.signLanguage.models.Sign
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 
 
 interface ClickListener {

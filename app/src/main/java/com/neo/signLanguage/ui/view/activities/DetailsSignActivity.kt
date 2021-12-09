@@ -1,4 +1,4 @@
-package com.neo.signLanguage.views.activities
+package com.neo.signLanguage.ui.view.activities
 
 
 import androidx.appcompat.app.AppCompatActivity
@@ -8,12 +8,9 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getColorShared
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
-import com.orhanobut.logger.Logger
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 import java.util.*
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 
 
 class DetailsSignActivity : AppCompatActivity() {

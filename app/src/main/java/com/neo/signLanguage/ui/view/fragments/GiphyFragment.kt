@@ -1,7 +1,6 @@
-package com.neo.signLanguage.views.fragments
+package com.neo.signLanguage.ui.view.fragments
 
 import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +9,19 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.GiphyAdapter
 import com.neo.signLanguage.databinding.FragmentGiphyBinding
-import com.neo.signLanguage.models.Datum
-import com.neo.signLanguage.provider.ApiInterfaceGiphy
+import com.neo.signLanguage.data.models.Datum
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
-import com.neo.signLanguage.views.activities.DetailsSignActivity
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.getLanguagePhone
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.networkState
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getLanguagePhone
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.networkState
+import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +34,7 @@ import java.util.regex.Pattern
 class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var giphyImages = mutableListOf<Datum>()
+    private val giphyViewModel: GiphyViewModel by viewModels()
 
     private var _binding: FragmentGiphyBinding? = null
     private val binding get() = _binding!!
@@ -57,6 +58,15 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
         initRecyclerView()
         searchGiphy("American Sign Language")
 
+        giphyViewModel.getGiphys("ASL")
+        giphyViewModel.giphyModel.observe(viewLifecycleOwner,  {
+            giphyImages.clear()
+            giphyImages.addAll(it.data)
+            adapter.notifyDataSetChanged()
+            hideKeyboard()
+        })
+
+
     }
 
     private fun initRecyclerView() {
@@ -77,13 +87,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
         binding.rvDogs.layoutManager = GridLayoutManager(activity?.applicationContext!!, 2)
         binding.rvDogs.adapter = adapter
-    }
-
-    private fun getRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.giphy.com/v1/gifs/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
     }
 
     private fun getRetrofitTranslate(): Retrofit {
@@ -121,7 +124,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
             fillRecyclerView(getQuery)
         } else {
             Snackbar.make(
-                activity!!.findViewById(android.R.id.content),
+                requireActivity().findViewById(android.R.id.content),
                 getString(R.string.no_connection),
                 Snackbar.LENGTH_LONG,
 
@@ -155,29 +158,8 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
             cleanString = match.group(1)
             Logger.d(cleanString)
         }
-        CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(ApiInterfaceGiphy::class.java)
-                .getGiphyImage(
-                    getString(R.string.giphy_api_key),
-                    "American Sign Language $cleanString",
-                    15
-                )
+        giphyViewModel.getGiphys(cleanString)
 
-            val giphys = call.body()
-
-            activity?.runOnUiThread {
-                if (call.isSuccessful) {
-                    val images = giphys?.data ?: emptyList()
-                    giphyImages.clear()
-                    giphyImages.addAll(images)
-                    adapter.notifyDataSetChanged()
-                } else {
-                    //show error
-                    showError()
-                }
-                hideKeyboard()
-            }
-        }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
