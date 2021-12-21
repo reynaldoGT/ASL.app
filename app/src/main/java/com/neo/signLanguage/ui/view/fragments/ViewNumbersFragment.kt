@@ -12,8 +12,8 @@ import com.google.android.gms.ads.AdRequest
 import com.neo.signLanguage.AdapterLetters
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
-import com.neo.signLanguage.utils.Shared
 import com.neo.signLanguage.databinding.FragmentNumbersBinding
+import com.neo.signLanguage.utils.DataSign.Companion.getOnlyNumbers
 
 class ViewNumbersFragment : Fragment() {
 
@@ -29,7 +29,6 @@ class ViewNumbersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         // Using the binding
         _binding = FragmentNumbersBinding.inflate(inflater, container, false)
         return binding.root
@@ -38,16 +37,16 @@ class ViewNumbersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val shared = Shared()
-        val lettersArray = shared.getOnlyNumbersArray()
+
+        val lettersArray = getOnlyNumbers()
 
         binding.gridListSingNumbers.setHasFixedSize(true)
 
-        layoutManager = GridLayoutManager(activity!!.applicationContext, 2)
+        layoutManager = GridLayoutManager(requireActivity().applicationContext, 2)
         binding.gridListSingNumbers.layoutManager = layoutManager
 
         adaptador =
-            AdapterLetters(activity!!.applicationContext, lettersArray, object : ClickListener {
+            AdapterLetters(requireActivity().applicationContext, lettersArray, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {
                     val myIntent =
                         Intent(activity!!.applicationContext, DetailsSignActivity::class.java)

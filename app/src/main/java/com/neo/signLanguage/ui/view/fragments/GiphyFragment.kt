@@ -10,19 +10,19 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.GiphyAdapter
 import com.neo.signLanguage.databinding.FragmentGiphyBinding
-import com.neo.signLanguage.data.models.Datum
+import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getLanguagePhone
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.networkState
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,9 +31,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
-    private var giphyImages = mutableListOf<Datum>()
+    private var giphyImages = mutableListOf<GiphyItem>()
     private val giphyViewModel: GiphyViewModel by viewModels()
 
     private var _binding: FragmentGiphyBinding? = null
@@ -56,12 +57,12 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.searchBreed.setOnQueryTextListener(this)
 
         initRecyclerView()
+
         searchGiphy("American Sign Language")
 
-        giphyViewModel.getGiphys("ASL")
         giphyViewModel.giphyModel.observe(viewLifecycleOwner,  {
             giphyImages.clear()
-            giphyImages.addAll(it.data)
+            giphyImages.addAll(it)
             adapter.notifyDataSetChanged()
             hideKeyboard()
         })
@@ -111,7 +112,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 activity?.runOnUiThread {
                     if (call.isSuccessful) {
                         getQuery = translated?.responseData?.translatedText!!
-                        Logger.d(getQuery)
                         fillRecyclerView(getQuery)
                     } else {
                         showError()

@@ -1,12 +1,12 @@
 package com.neo.signLanguage.data.models
 
 data class GiphyResponse (
-    val data: List<Datum>,
+    val data: List<GiphyItem>,
     val pagination: Pagination,
     val meta: Meta
 )
 
-data class Datum (
+data class GiphyItem (
     val type: String,
     val id: String,
     val url: String,

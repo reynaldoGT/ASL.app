@@ -1,35 +1,34 @@
 package com.neo.signLanguage.ui.viewModel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.neo.signLanguage.data.models.GiphyResponse
+import androidx.lifecycle.*
+import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.domain.GetGiphyUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GiphyViewModel : ViewModel() {
-    val giphyModel = MutableLiveData<GiphyResponse>()
+
+@HiltViewModel
+class GiphyViewModel @Inject constructor(
+    private val getGiphyUseCase: GetGiphyUseCase,
+) : ViewModel() {
+
+    val currentMessage = MutableLiveData<String>()
+    val giphyModel = MutableLiveData<List<GiphyItem>>()
     private val isLoading = MutableLiveData<Boolean>()
-    var getGiphyUseCase = GetGiphyUseCase()
+
+    fun setCurrentMessage(newCurrentMessage: String) {
+        currentMessage.postValue(newCurrentMessage)
+    }
 
     fun getGiphys(query: String) {
         viewModelScope.launch {
             isLoading.postValue(true)
             val result = getGiphyUseCase(query)
-            if (result != null) {
-                giphyModel.postValue((result))
-                isLoading.postValue(false)
-            }
+
+            giphyModel.postValue(result)
+            isLoading.postValue(false)
+
         }
     }
-
-    /*fun getGiphys(query: String) {
-        isLoading.postValue(true)
-        val giphys = getGiphyUseCase()
-        if (giphys != null) {
-            giphyModel.postValue(giphys!!)
-        }
-        isLoading.postValue(false)
-
-    }*/
 }

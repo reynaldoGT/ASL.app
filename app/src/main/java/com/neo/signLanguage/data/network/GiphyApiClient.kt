@@ -1,7 +1,7 @@
 package com.neo.signLanguage.data.network
 
+import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.data.models.GiphyResponse
-import com.neo.signLanguage.data.models.TranslateResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

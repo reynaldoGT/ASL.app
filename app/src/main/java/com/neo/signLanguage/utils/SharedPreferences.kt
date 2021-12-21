@@ -43,7 +43,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
 
     fun getColor(): Int {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
-        return settings.getInt(COLOR, Shared.getColorsList(activity.applicationContext)[0].colorValue)
+        return settings.getInt(COLOR, DataSign.getColorsList(activity.applicationContext)[0].colorValue)
     }
 
     fun setColor(state: Int) {

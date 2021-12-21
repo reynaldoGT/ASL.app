@@ -14,7 +14,7 @@ import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.SettingsActivityBinding
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 import android.widget.RadioButton
-import com.neo.signLanguage.utils.Shared
+import com.neo.signLanguage.utils.DataSign
 import com.orhanobut.logger.Logger
 
 class SettingsActivity : AppCompatActivity() {
@@ -59,7 +59,7 @@ class SettingsActivity : AppCompatActivity() {
         layoutManager = GridLayoutManager(this, 7)
         binding.rvColors.layoutManager = layoutManager
 
-        val colorList = Shared.getColorsList(this)
+        val colorList = DataSign.getColorsList(this)
         adaptador =
             ColorAdapter(this, colorList, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {

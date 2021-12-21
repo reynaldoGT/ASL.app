@@ -15,8 +15,10 @@ import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class TabNavigatorActivity : AppCompatActivity() {
 
     companion object {
@@ -29,7 +31,7 @@ class TabNavigatorActivity : AppCompatActivity() {
         }
 
         fun getLanguagePhone(): Boolean {
-            val language = Locale.getDefault().displayLanguage.toString().toLowerCase()
+            val language = Locale.getDefault().displayLanguage.toString().toLowerCase(Locale.ROOT)
             return language == "english"
         }
 

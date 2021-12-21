@@ -25,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.neo.signLanguage.*
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.utils.Shared
+import com.neo.signLanguage.utils.DataSign
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 import java.util.*
@@ -34,6 +34,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import com.neo.signLanguage.ui.viewModel.GiphyViewModel
+import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 
 
 class SendMessageFragment : Fragment() {
@@ -48,11 +51,12 @@ class SendMessageFragment : Fragment() {
     private var lettersArrays: ArrayList<Sign>? = null
     private var imageView: ImageView? = null
     private var stringCleaned: String? = null
-
+    private val giphyViewModel by viewModels<GiphyViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentSendMessageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,16 +69,20 @@ class SendMessageFragment : Fragment() {
         initAds()
         initListeners()
 
-        val shared = Shared()
-        lettersArrays = shared.getLetterArray()
+        lettersArrays = getLetterArray()
 
         if (sharedPrefs.getColor() != 0)
             imageView?.setColorFilter(
                 getColorShared(activity as AppCompatActivity)
             )
-        binding.seeCurrentMessage.text = if (sharedPrefs.getCurrentMessage()
-                .isNotEmpty()
-        ) sharedPrefs.getCurrentMessage() else getString(R.string.here_see_your_text)
+
+        giphyViewModel.currentMessage.observe(viewLifecycleOwner, {
+            Logger.d(it)
+            binding.seeCurrentMessage.text = if (it.isNotEmpty()) it
+            else getString(R.string.here_see_your_text)
+            binding.edSendMessage.editText?.setText(it)
+        })
+
         binding.seeCurrentMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
             binding.seeCurrentMessage.visibility = View.VISIBLE
@@ -96,7 +104,7 @@ class SendMessageFragment : Fragment() {
         /*binding.ivSing.setOnClickListener {
             changeImage()
         }*/
-        binding.edSendMessage.editText?.setText(sharedPrefs.getCurrentMessage())
+
         binding.btnSendMessage.setOnClickListener {
             sendMessage(binding.edSendMessage.editText?.text.toString())
         }
@@ -151,37 +159,20 @@ class SendMessageFragment : Fragment() {
         binding.imageSwitcher.inAnimation = `in`
     }
 
-/*private fun changeImage() {
-
-val randomLetter = (0 until lettersArrays!!.size).random()
-val type =
-    if (lettersArrays!![randomLetter].type == "letter") getString(R.string.letter) else getString(
-        R.string.number
-    )
-binding.currentLetter.text =
-    "$type ${lettersArrays!![randomLetter].letter.toUpperCase(Locale.ROOT)}"
-binding.ivSing.setImageDrawable(
-    ContextCompat.getDrawable(
-        activity!!.applicationContext, // Context
-        lettersArrays!![randomLetter].image
-    )
-)
-}*/
-
     private fun generateSingLanguageMessage(message: String) {
-        sharedPrefs.setCurrentMessage(message)
-        binding.seeCurrentMessage.visibility = view!!.visibility
+        giphyViewModel.setCurrentMessage(message)
+        binding.seeCurrentMessage.visibility = requireView().visibility
         binding.seeCurrentMessage.text = message
 
         binding.btnSendMessage.isEnabled = false
         binding.edSendMessage.isEnabled = false
-
 /*hideKeyboard()*/
         val cleanString = message.trim().toLowerCase(Locale.ROOT)
 
         val arraySentenceSing = ArrayList<Sign>()
-        stringCleaned = cleanString.replace(" ", "").replace(",","").replace(".","")
-        val stringArray = cleanString.replace(" ", "").replace(",","").replace(".","").toCharArray()
+        stringCleaned = cleanString.replace(" ", "").replace(",", "").replace(".", "")
+        val stringArray =
+            cleanString.replace(" ", "").replace(",", "").replace(".", "").toCharArray()
 
         for (i in stringArray) {
             for (letterPosition in lettersArrays!!) {
@@ -195,7 +186,7 @@ binding.ivSing.setImageDrawable(
     }
 
     private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Sign>) {
-        var counter = -1
+        val counter = -1
         job = GlobalScope.launch(context = Dispatchers.Main) {
             /*for (index in sentenceInArrayImage) {*/
             for ((index, item) in sentenceInArrayImage.withIndex()) {
@@ -207,17 +198,13 @@ binding.ivSing.setImageDrawable(
                 val type =
                     if (item.type == "letter") getString(R.string.letter) else getString(R.string.number)
                 binding.currentLetter.text = "$type ${item.letter.toUpperCase(Locale.ROOT)}"
-                /*  binding.ivSing.setImageDrawable(
-                      ContextCompat.getDrawable(
-                          activity!!.applicationContext, // Context
-                          index.image
-                      )
-                  )*/
+
+
                 val spannable = SpannableStringBuilder(stringCleaned?.capitalize(Locale.ROOT))
                 spannable.setSpan(
                     ForegroundColorSpan(
                         ContextCompat.getColor(
-                            activity!!.applicationContext,
+                            requireActivity().applicationContext,
                             sharedPrefs.getColor()
                         )
                     ),
@@ -242,7 +229,7 @@ binding.ivSing.setImageDrawable(
         } else {
             Logger.d("Empty message")
             Snackbar.make(
-                activity!!.findViewById(android.R.id.content),
+                requireActivity()!!.findViewById(android.R.id.content),
                 R.string.empty_message,
                 Snackbar.LENGTH_LONG,
             ).show()
@@ -254,9 +241,6 @@ binding.ivSing.setImageDrawable(
         binding.btnSendMessage.isEnabled = true
         binding.edSendMessage.isEnabled = true
         binding.btnSendMessage.isVisible = true
-        binding.seeCurrentMessage.text = sharedPrefs.getCurrentMessage()
-        checkCounter()
-
     }
 
     private fun initListeners() {
@@ -303,7 +287,7 @@ binding.ivSing.setImageDrawable(
     private fun showAds() {
         Logger.d("Show add")
         interstitial?.show(
-            activity!!
+            requireActivity()
         )
     }
 

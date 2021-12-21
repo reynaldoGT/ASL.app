@@ -1,10 +1,10 @@
 package com.neo.signLanguage.data
 
-import com.neo.signLanguage.data.models.GiphyResponse
+import com.neo.signLanguage.data.models.GiphyItem
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GiphyProvider {
-
-    companion object {
-        var giphys: GiphyResponse? = null
-    }
+@Singleton
+class GiphyProvider @Inject constructor() {
+    var giphys: List<GiphyItem> = emptyList()
 }

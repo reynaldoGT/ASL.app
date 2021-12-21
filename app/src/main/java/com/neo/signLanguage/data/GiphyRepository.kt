@@ -1,13 +1,18 @@
 package com.neo.signLanguage.data
 
-import com.neo.signLanguage.data.models.GiphyResponse
+import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.data.network.GiphyService
+import com.orhanobut.logger.Logger
+import javax.inject.Inject
 
-class GiphyRepository {
-    private val api = GiphyService()
-    suspend fun getGiphyByQuery(query: String): GiphyResponse{
+class GiphyRepository @Inject constructor(
+    private val api: GiphyService,
+    private val quoteProvider: GiphyProvider,
+
+    ) {
+    suspend fun getGiphyByQuery(query: String): List<GiphyItem> {
         val response = api.getGiphy(query)
-        GiphyProvider.giphys = response
-        return response?
+        quoteProvider.giphys = response
+        return response
     }
 }

@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
-import com.neo.signLanguage.data.models.Datum
+import com.neo.signLanguage.data.models.GiphyItem
 
 class GiphyAdapter(
     var context: Context,
-    private val images: List<Datum>,
+    private val images: List<GiphyItem>,
     var listener: ClickListener
 ) :
     RecyclerView.Adapter<GiphyViewHolder>() {
