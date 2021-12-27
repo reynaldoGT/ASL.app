@@ -15,10 +15,9 @@ import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-@AndroidEntryPoint
+
 class TabNavigatorActivity : AppCompatActivity() {
 
     companion object {
@@ -56,8 +55,12 @@ class TabNavigatorActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.send_message)))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.movement_signs)))
+        binding.tabLayout.addTab(
+            binding.tabLayout.newTab().setText(getString(R.string.send_message))
+        )
+        binding.tabLayout.addTab(
+            binding.tabLayout.newTab().setText(getString(R.string.movement_signs))
+        )
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

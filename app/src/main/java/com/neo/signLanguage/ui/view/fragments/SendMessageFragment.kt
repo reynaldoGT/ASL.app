@@ -48,15 +48,13 @@ class SendMessageFragment : Fragment() {
 
     private var job: Job? = null
 
-    private var lettersArrays: ArrayList<Sign>? = null
     private var imageView: ImageView? = null
-    private var stringCleaned: String? = null
+    private var stringCleaned: String = ""
     private val giphyViewModel by viewModels<GiphyViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentSendMessageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -68,8 +66,6 @@ class SendMessageFragment : Fragment() {
 
         initAds()
         initListeners()
-
-        lettersArrays = getLetterArray()
 
         if (sharedPrefs.getColor() != 0)
             imageView?.setColorFilter(
@@ -83,10 +79,9 @@ class SendMessageFragment : Fragment() {
             binding.edSendMessage.editText?.setText(it)
         })
 
-        binding.seeCurrentMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
+        binding.edSendMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
             binding.seeCurrentMessage.visibility = View.VISIBLE
-            binding.seeCurrentMessage.text = binding.edSendMessage.editText!!.text.toString()
 
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
@@ -159,39 +154,33 @@ class SendMessageFragment : Fragment() {
         binding.imageSwitcher.inAnimation = `in`
     }
 
-    private fun generateSingLanguageMessage(message: String) {
-        giphyViewModel.setCurrentMessage(message)
+    private fun generateSingLanguageMessage() {
+
         binding.seeCurrentMessage.visibility = requireView().visibility
-        binding.seeCurrentMessage.text = message
 
         binding.btnSendMessage.isEnabled = false
         binding.edSendMessage.isEnabled = false
-/*hideKeyboard()*/
-        val cleanString = message.trim().toLowerCase(Locale.ROOT)
 
         val arraySentenceSing = ArrayList<Sign>()
-        stringCleaned = cleanString.replace(" ", "").replace(",", "").replace(".", "")
-        val stringArray =
-            cleanString.replace(" ", "").replace(",", "").replace(".", "").toCharArray()
+        binding.edSendMessage.editText?.setText(stringCleaned)
+
+        val stringArray = stringCleaned.toCharArray()
 
         for (i in stringArray) {
-            for (letterPosition in lettersArrays!!) {
+            for (letterPosition in getLetterArray()) {
                 if (letterPosition.letter == i.toString()) {
                     arraySentenceSing.add(letterPosition)
                 }
             }
         }
-
         showMessageWithSing(arraySentenceSing)
     }
 
     private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Sign>) {
         val counter = -1
         job = GlobalScope.launch(context = Dispatchers.Main) {
-            /*for (index in sentenceInArrayImage) {*/
             for ((index, item) in sentenceInArrayImage.withIndex()) {
                 binding.btnSendMessageCancel.isVisible = true
-
                 binding.btnSendMessage.isVisible = false
 
                 delay(sharedPrefs.getDelay().toLong())
@@ -199,8 +188,7 @@ class SendMessageFragment : Fragment() {
                     if (item.type == "letter") getString(R.string.letter) else getString(R.string.number)
                 binding.currentLetter.text = "$type ${item.letter.toUpperCase(Locale.ROOT)}"
 
-
-                val spannable = SpannableStringBuilder(stringCleaned?.capitalize(Locale.ROOT))
+                val spannable = SpannableStringBuilder(stringCleaned.capitalize(Locale.ROOT))
                 spannable.setSpan(
                     ForegroundColorSpan(
                         ContextCompat.getColor(
@@ -212,6 +200,7 @@ class SendMessageFragment : Fragment() {
                     index + 1, // end
                     Spannable.SPAN_EXCLUSIVE_INCLUSIVE
                 )
+
                 binding.seeCurrentMessage.text = spannable
                 if (counter == sentenceInArrayImage.size) {
                     binding.imageSwitcher.setImageResource(item.image)
@@ -224,12 +213,18 @@ class SendMessageFragment : Fragment() {
     }
 
     private fun sendMessage(message: String) {
-        if (message.isNotEmpty()) {
-            generateSingLanguageMessage(message)
+        val re = Regex("[^A-Za-z0-9 ]")
+        stringCleaned = message.trim().toLowerCase(Locale.ROOT)
+        stringCleaned = re.replace(stringCleaned, "") // works
+        stringCleaned = stringCleaned.replace("\\s+".toRegex(), " ")
+        giphyViewModel.setCurrentMessage(stringCleaned)
+
+        if (stringCleaned.isNotEmpty()) {
+            generateSingLanguageMessage()
         } else {
             Logger.d("Empty message")
             Snackbar.make(
-                requireActivity()!!.findViewById(android.R.id.content),
+                requireActivity().findViewById(android.R.id.content),
                 R.string.empty_message,
                 Snackbar.LENGTH_LONG,
             ).show()
@@ -241,6 +236,7 @@ class SendMessageFragment : Fragment() {
         binding.btnSendMessage.isEnabled = true
         binding.edSendMessage.isEnabled = true
         binding.btnSendMessage.isVisible = true
+        checkCounter()
     }
 
     private fun initListeners() {
@@ -260,7 +256,7 @@ class SendMessageFragment : Fragment() {
     private fun initAds() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
-            activity!!.applicationContext, // Context,
+            requireActivity().applicationContext, // Context,
 
             getString(R.string.test_interstitial_id),
             adRequest,

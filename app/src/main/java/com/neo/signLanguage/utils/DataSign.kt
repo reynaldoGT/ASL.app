@@ -41,6 +41,7 @@ class DataSign {
             lettersArray.add(Sign("x", R.drawable.ic_x_only_sing, letter))
             lettersArray.add(Sign("y", R.drawable.ic_y_only_sing, letter))
             lettersArray.add(Sign("z", R.drawable.ic_z_only_sing, letter))
+            lettersArray.add(Sign(" ", R.drawable.ic_space, letter))
 
             //?  numbers
             lettersArray.add(Sign("1", R.drawable.ic_1_number, number))

@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.fragments
 
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,20 +19,21 @@ import com.neo.signLanguage.adapters.GiphyAdapter
 import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
+import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getLanguagePhone
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.networkState
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.orhanobut.logger.Logger
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-@AndroidEntryPoint
+
 class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var giphyImages = mutableListOf<GiphyItem>()
@@ -66,8 +68,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
             adapter.notifyDataSetChanged()
             hideKeyboard()
         })
-
-
     }
 
     private fun initRecyclerView() {
@@ -83,7 +83,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
                 startActivity(myIntent)*/
             }
-
         })
 
         binding.rvDogs.layoutManager = GridLayoutManager(activity?.applicationContext!!, 2)
@@ -154,19 +153,17 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
         var cleanString = getQuery
         val match: Matcher = Pattern.compile("\\((.*?)\\)").matcher(getQuery)
         while (match.find()) {
-            System.out.println(match.group(1))
             cleanString = match.group(1)
-            Logger.d(cleanString)
         }
-        giphyViewModel.getGiphys(cleanString)
+        giphyViewModel.getGiphys("American Sign Language $cleanString")
 
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
-            searchGiphy(query.toLowerCase())
+            searchGiphy(query.toLowerCase(Locale.ROOT))
         }
-        return true;
+        return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {

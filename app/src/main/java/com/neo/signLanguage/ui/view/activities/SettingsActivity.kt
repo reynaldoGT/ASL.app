@@ -103,14 +103,14 @@ class SettingsActivity : AppCompatActivity() {
                 binding.radioGroup.visibility = View.VISIBLE
                 sharedPrefs.setShowTransition(true)
                 (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
+                sharedPrefs.setSelectedTransition(0)
 
 
             } else {
                 binding.radioGroup.visibility = View.GONE
                 sharedPrefs.setShowTransition(false)
-
                 /*binding.radioGroup.clearCheck()*/
-                sharedPrefs.setSelectedTransition(0)
+                sharedPrefs.setSelectedTransition(-1)
 
             }
         }
@@ -122,6 +122,7 @@ class SettingsActivity : AppCompatActivity() {
             val index: Int = binding.radioGroup.indexOfChild(radioButton)
             Logger.d("index to animate: " + index)
             sharedPrefs.setSelectedTransition(index)
+
         }
 
     }
