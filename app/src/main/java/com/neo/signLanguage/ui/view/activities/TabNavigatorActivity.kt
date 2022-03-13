@@ -61,6 +61,9 @@ class TabNavigatorActivity : AppCompatActivity() {
         binding.tabLayout.addTab(
             binding.tabLayout.newTab().setText(getString(R.string.movement_signs))
         )
+        binding.tabLayout.addTab(
+            binding.tabLayout.newTab().setText(getString(R.string.history))
+        )
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

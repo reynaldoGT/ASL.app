@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutSendMessage"
     android:layout_width="match_parent"
-    android:paddingBottom="?android:attr/actionBarSize"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="?android:attr/actionBarSize">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -48,8 +48,8 @@
             android:id="@+id/edSendMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
-            android:hint="@string/write_your_text_here">
+            android:hint="@string/write_your_text_here"
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -87,6 +87,29 @@
             android:text="@string/cancel"
             android:visibility="gone"
             app:cornerRadius="40dp" />
+
+        <!-- <com.google.android.material.button.MaterialButton
+             android:id="@+id/btnSpeech"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             app:cornerRadius="40dp"
+             app:icon="@drawable/ic_mic"
+             app:iconGravity="textStart"
+             app:iconPadding="0dp" />-->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/speech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/simple_description"
+            app:backgroundTint="?attr/colorPrimary"
+            app:srcCompat="@drawable/ic_mic"
+            app:tint="@color/white" />
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

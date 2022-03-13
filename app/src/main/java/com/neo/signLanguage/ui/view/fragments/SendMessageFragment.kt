@@ -2,7 +2,11 @@ package com.neo.signLanguage.ui.view.fragments
 
 
 import android.app.ActionBar
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -25,13 +29,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.neo.signLanguage.*
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.utils.DataSign
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 import java.util.*
 
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -41,6 +45,7 @@ import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 
 class SendMessageFragment : Fragment() {
 
+    private val RECOGNIZE_SPEECH_ACTIVITY = 1
     private var _binding: FragmentSendMessageBinding? = null
     private val binding get() = _binding!!
 
@@ -73,7 +78,6 @@ class SendMessageFragment : Fragment() {
             )
 
         giphyViewModel.currentMessage.observe(viewLifecycleOwner, {
-            Logger.d(it)
             binding.seeCurrentMessage.text = if (it.isNotEmpty()) it
             else getString(R.string.here_see_your_text)
             binding.edSendMessage.editText?.setText(it)
@@ -99,14 +103,16 @@ class SendMessageFragment : Fragment() {
         /*binding.ivSing.setOnClickListener {
             changeImage()
         }*/
+        binding.speech.setOnClickListener {
+            startSpeech()
+        }
 
         binding.btnSendMessage.setOnClickListener {
             sendMessage(binding.edSendMessage.editText?.text.toString())
         }
 
         binding.btnSendMessageCancel.setOnClickListener {
-            job?.cancel()
-            resetStatus()
+            cancelMessage()
         }
 
         setHasOptionsMenu(true)
@@ -301,4 +307,42 @@ class SendMessageFragment : Fragment() {
             )
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        when (requestCode) {
+            RECOGNIZE_SPEECH_ACTIVITY -> {
+                if (resultCode == Activity.RESULT_OK && null != data) {
+                    val info = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    val text = info?.get(0)
+                    // asignar al text view
+                    /*textToShow?.text = text*/
+                    binding.edSendMessage.editText?.setText(text)
+                    cancelMessage()
+                    sendMessage(text!!)
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun startSpeech() {
+        //
+        val intentActionRecognize = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intentActionRecognize.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "es-MX")
+
+        try {
+            startActivityForResult(intentActionRecognize, RECOGNIZE_SPEECH_ACTIVITY)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(
+                requireActivity().applicationContext,
+                "Este dispostivo no cuenta con grabador de voz",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    fun cancelMessage() {
+        job?.cancel()
+        resetStatus()
+    }
 }
