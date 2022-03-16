@@ -50,4 +50,5 @@
     <string name="movement_signs">Señas con movimiento</string>
     <string name="simple_description">simple_description</string>
     <string name="history">Historial</string>
+    <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
 </resources>

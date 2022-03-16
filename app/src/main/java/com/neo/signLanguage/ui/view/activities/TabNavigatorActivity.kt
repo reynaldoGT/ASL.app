@@ -8,10 +8,12 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
+import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
@@ -35,6 +37,7 @@ class TabNavigatorActivity : AppCompatActivity() {
         }
 
         lateinit var networkState: NetworkState;
+        lateinit var database: SingDatabase
     }
 
     private lateinit var binding: FragmentTabnavigatorBinding
@@ -42,6 +45,8 @@ class TabNavigatorActivity : AppCompatActivity() {
     var fragmentAdapter: TabAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        database = Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries().build()
+
         networkState = NetworkState(this)
         sharedPrefs = SharedPreferences(this)
         binding = FragmentTabnavigatorBinding.inflate(layoutInflater)

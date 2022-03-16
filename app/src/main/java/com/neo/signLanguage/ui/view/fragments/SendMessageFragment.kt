@@ -39,6 +39,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.neo.signLanguage.data.database.entities.SignEntity
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 
@@ -215,6 +218,7 @@ class SendMessageFragment : Fragment() {
                 }
             }
             resetStatus()
+
         }
     }
 
@@ -227,8 +231,11 @@ class SendMessageFragment : Fragment() {
 
         if (stringCleaned.isNotEmpty()) {
             generateSingLanguageMessage()
+            lifecycleScope.launch {
+                TabNavigatorActivity.database.getSignDao().addSing(SignEntity(0, stringCleaned))
+            }
         } else {
-            Logger.d("Empty message")
+
             Snackbar.make(
                 requireActivity().findViewById(android.R.id.content),
                 R.string.empty_message,
@@ -328,21 +335,25 @@ class SendMessageFragment : Fragment() {
     private fun startSpeech() {
         //
         val intentActionRecognize = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intentActionRecognize.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "es-MX")
+        intentActionRecognize.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, getLoLanguageTag())
 
         try {
             startActivityForResult(intentActionRecognize, RECOGNIZE_SPEECH_ACTIVITY)
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(
-                requireActivity().applicationContext,
-                "Este dispostivo no cuenta con grabador de voz",
-                Toast.LENGTH_SHORT
+            Snackbar.make(
+                requireActivity().findViewById(android.R.id.content),
+                R.string.no_microphone,
+                Snackbar.LENGTH_LONG,
             ).show()
         }
     }
 
-    fun cancelMessage() {
+    private fun cancelMessage() {
         job?.cancel()
         resetStatus()
+    }
+
+    private fun getLoLanguageTag(): String {
+        return (Locale.getDefault().toLanguageTag())
     }
 }

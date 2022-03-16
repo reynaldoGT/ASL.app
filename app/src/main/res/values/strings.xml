@@ -53,5 +53,6 @@
     <string name="movement_signs">Movement ASL</string>
     <string name="simple_description">simple_description</string>
     <string name="history">history</string>
+    <string name="no_microphone">This device does not have a voice recorder</string>
 
 </resources>
