@@ -38,12 +38,14 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.neo.signLanguage.data.database.entities.SignEntity
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
+import com.neo.signLanguage.utils.Utils
 
 
 class SendMessageFragment : Fragment() {
@@ -58,7 +60,10 @@ class SendMessageFragment : Fragment() {
 
     private var imageView: ImageView? = null
     private var stringCleaned: String = ""
-    private val giphyViewModel by viewModels<GiphyViewModel>()
+
+    /*private val giphyViewModel by viewModels<GiphyViewModel>()*/
+    private val giphyViewModel: GiphyViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,7 +74,12 @@ class SendMessageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        giphyViewModel.currentMessage
+            .observe(viewLifecycleOwner) {
+                binding.seeCurrentMessage.text =
+                    it.ifEmpty { getString(R.string.here_see_your_text) }
+                binding.edSendMessage.editText?.setText(it)
+            }
         Logger.addLogAdapter(AndroidLogAdapter())
 
         initAds()
@@ -80,11 +90,7 @@ class SendMessageFragment : Fragment() {
                 getColorShared(activity as AppCompatActivity)
             )
 
-        giphyViewModel.currentMessage.observe(viewLifecycleOwner, {
-            binding.seeCurrentMessage.text = if (it.isNotEmpty()) it
-            else getString(R.string.here_see_your_text)
-            binding.edSendMessage.editText?.setText(it)
-        })
+
 
         binding.edSendMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
@@ -227,15 +233,24 @@ class SendMessageFragment : Fragment() {
         stringCleaned = message.trim().toLowerCase(Locale.ROOT)
         stringCleaned = re.replace(stringCleaned, "") // works
         stringCleaned = stringCleaned.replace("\\s+".toRegex(), " ")
-        giphyViewModel.setCurrentMessage(stringCleaned)
+        giphyViewModel.setCurrentMessage(stringCleaned, true)
 
         if (stringCleaned.isNotEmpty()) {
             generateSingLanguageMessage()
-            lifecycleScope.launch {
-                TabNavigatorActivity.database.getSignDao().addSing(SignEntity(0, stringCleaned))
-            }
-        } else {
+            /*giphyViewModel.saveInDatabase
+                .observe(viewLifecycleOwner) {
 
+                    if (it) {
+                        Logger.d("saving database")
+
+                    }
+                }*/
+            lifecycleScope.launch {
+                TabNavigatorActivity.database.getSignDao()
+                    .addSing(SignEntity(0, stringCleaned))
+            }
+
+        } else {
             Snackbar.make(
                 requireActivity().findViewById(android.R.id.content),
                 R.string.empty_message,
@@ -335,16 +350,15 @@ class SendMessageFragment : Fragment() {
     private fun startSpeech() {
         //
         val intentActionRecognize = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intentActionRecognize.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, getLoLanguageTag())
+        intentActionRecognize.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            Utils.getLoLanguageTag()
+        )
 
         try {
             startActivityForResult(intentActionRecognize, RECOGNIZE_SPEECH_ACTIVITY)
         } catch (e: ActivityNotFoundException) {
-            Snackbar.make(
-                requireActivity().findViewById(android.R.id.content),
-                R.string.no_microphone,
-                Snackbar.LENGTH_LONG,
-            ).show()
+            Utils.showSnackBar(requireActivity(), R.string.no_microphone)
         }
     }
 
@@ -353,7 +367,5 @@ class SendMessageFragment : Fragment() {
         resetStatus()
     }
 
-    private fun getLoLanguageTag(): String {
-        return (Locale.getDefault().toLanguageTag())
-    }
+
 }

@@ -54,5 +54,8 @@
     <string name="simple_description">simple_description</string>
     <string name="history">history</string>
     <string name="no_microphone">This device does not have a voice recorder</string>
+    <string name="delete_question">Clear browsing data</string>
+    <string name="clear_history_question">Do you want to clear the history?</string>
+    <string name="delete">Delete</string>
 
 </resources>

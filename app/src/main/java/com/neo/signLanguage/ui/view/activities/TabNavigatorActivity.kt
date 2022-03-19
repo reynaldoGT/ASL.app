@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -15,14 +17,21 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
+import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
+import com.orhanobut.logger.Logger
+import androidx.fragment.app.activityViewModels
 import java.util.*
 
 
 class TabNavigatorActivity : AppCompatActivity() {
+    var fragmentAdapter: TabAdapter? = null
+
 
     companion object {
+
+        lateinit var binding: FragmentTabnavigatorBinding
         lateinit var sharedPrefs: SharedPreferences
         fun getColorShared(context: Context): Int {
             return ContextCompat.getColor(
@@ -32,7 +41,7 @@ class TabNavigatorActivity : AppCompatActivity() {
         }
 
         fun getLanguagePhone(): Boolean {
-            val language = Locale.getDefault().displayLanguage.toString().toLowerCase(Locale.ROOT)
+            val language = Locale.getDefault().displayLanguage.toString().lowercase(Locale.ROOT)
             return language == "english"
         }
 
@@ -40,12 +49,13 @@ class TabNavigatorActivity : AppCompatActivity() {
         lateinit var database: SingDatabase
     }
 
-    private lateinit var binding: FragmentTabnavigatorBinding
 
-    var fragmentAdapter: TabAdapter? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
+    val model: GiphyViewModel by viewModels()
         super.onCreate(savedInstanceState)
-        database = Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries().build()
+        database =
+            Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
+                .build()
 
         networkState = NetworkState(this)
         sharedPrefs = SharedPreferences(this)
@@ -87,10 +97,15 @@ class TabNavigatorActivity : AppCompatActivity() {
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
+                if (position == 2) {
+                    Logger.d("tab 1 :D")
+                    model.getAllSingFromDatabase()
+                }
                 super.onPageSelected(position)
             }
         })
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -107,5 +122,6 @@ class TabNavigatorActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
 
 }

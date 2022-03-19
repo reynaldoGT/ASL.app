@@ -51,4 +51,7 @@
     <string name="simple_description">simple_description</string>
     <string name="history">Historial</string>
     <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
+    <string name="delete_question">¿Eliminar historial?</string>
+    <string name="clear_history_question">Desea limpiar todo el historial</string>
+    <string name="delete">Eliminar</string>
 </resources>
