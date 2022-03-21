@@ -11,10 +11,10 @@
     <string name="hello_blank_fragment">Hello</string>
     <string name="empty_message">Mensaje Vacio</string>
     <string name="letter_a">Letra: A</string>
-    <string name="number">Número: </string>
-    <string name="letter">Letra: </string>
+    <string name="number">Número: %1$s</string>
+    <string name="letter">Letra: %1$s </string>
     <string name="change_theme">Tema Oscuro</string>
-    <string name="current_delay_time">Tiempo de retraso actual</string>
+    <string name="current_delay_time">Tiempo de retraso actual : %1$s </string>
     <string name="delay_time">Tiempo de retraso</string>
     <string name="settings_title">Configuración</string>
 
@@ -41,7 +41,7 @@
 
     <string name="find_sing">Buscar seña</string>
     <string name="Error">Error</string>
-    <string name="transition">Transition</string>
+    <string name="transition">Transición</string>
     <string name="fade">Desvanecer</string>
     <string name="vertical_slide">Deslizamiento vertical</string>
     <string name="left_to_right">Izquierda a derecha</string>
@@ -51,7 +51,9 @@
     <string name="simple_description">simple_description</string>
     <string name="history">Historial</string>
     <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
-    <string name="delete_question">¿Eliminar historial?</string>
+    <string name="delete_question">¿Limpiar historial?</string>
     <string name="clear_history_question">Desea limpiar todo el historial</string>
     <string name="delete">Eliminar</string>
+    <string name="empty">VACIO</string>
+    <string name="your_history_is_empty">Tu historial esta vacío</string>
 </resources>

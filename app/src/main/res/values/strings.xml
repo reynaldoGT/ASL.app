@@ -12,8 +12,8 @@
     <string name="view_numbers">Numbers</string>
     <string name="empty_message">Empty Message!</string>
     <string name="letter_a">Letter: A</string>
-    <string name="number">Number: </string>
-    <string name="letter">Letter: </string>
+    <string name="number">Number: %1$s </string>
+    <string name="letter">Letter: %1$s </string>
 
     <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
@@ -57,5 +57,8 @@
     <string name="delete_question">Clear browsing data</string>
     <string name="clear_history_question">Do you want to clear the history?</string>
     <string name="delete">Delete</string>
+    <string name="empty">EMPTY</string>
+    <string name="your_history_is_empty">Your History is empty</string>
+
 
 </resources>

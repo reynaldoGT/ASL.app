@@ -1,7 +1,7 @@
 package com.neo.signLanguage.ui.view.fragments
 
 import android.app.AlertDialog
-import android.content.DialogInterface
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.HistoryAdapter
-import com.neo.signLanguage.data.database.entities.SignEntity
 import com.neo.signLanguage.databinding.FragmentHistoryBinding
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
@@ -24,7 +23,6 @@ class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: HistoryAdapter
-    private var responseDb: List<SignEntity>? = null
 
 
     private val model: GiphyViewModel by activityViewModels()
@@ -35,7 +33,7 @@ class HistoryFragment : Fragment() {
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         initRecyclerView()
-        binding.deleteAll.setOnClickListener {
+        binding.deleteAllActionButton.setOnClickListener {
             AlertDialog.Builder(requireActivity())
                 .setTitle(getString(R.string.delete_question))
                 .setMessage(getString(R.string.clear_history_question))
@@ -47,17 +45,19 @@ class HistoryFragment : Fragment() {
                 }
                 .setNegativeButton(
                     R.string.cancel
-                ) { dialog, which -> Log.d("AlertDialog", "Negative") }
+                ) { _, _ -> Log.d("AlertDialog", "Negative") }
+                .setIcon(R.drawable.ic_warning_24)
                 .show()
         }
 
-
+        binding.btnSendMessage.setOnClickListener {
+            TabNavigatorActivity.binding.viewPager2.currentItem = 0
+        }
 
         return binding.root
     }
 
     private fun initRecyclerView() {
-
 
         model.getAllSingFromDatabase
             .observe(viewLifecycleOwner) {
@@ -74,6 +74,13 @@ class HistoryFragment : Fragment() {
                 binding.rvHistory.layoutManager =
                     GridLayoutManager(activity?.applicationContext!!, 1)
                 binding.rvHistory.adapter = adapter
+                if (it.isEmpty()) {
+                    binding.emptyHistoryLayout.visibility = View.VISIBLE
+                    binding.deleteAllActionButton.visibility = View.GONE
+                } else {
+                    binding.emptyHistoryLayout.visibility = View.GONE
+                    binding.deleteAllActionButton.visibility = View.VISIBLE
+                }
             }
 
 

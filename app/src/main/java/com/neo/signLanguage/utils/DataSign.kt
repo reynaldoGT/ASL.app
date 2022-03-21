@@ -11,6 +11,7 @@ class DataSign {
     companion object {
         private const val letter = "letter"
         private const val number = "number"
+        private const val space = "space"
 
         fun getLetterArray(): ArrayList<Sign> {
             val lettersArray = ArrayList<Sign>()
@@ -41,7 +42,7 @@ class DataSign {
             lettersArray.add(Sign("x", R.drawable.ic_x_only_sing, letter))
             lettersArray.add(Sign("y", R.drawable.ic_y_only_sing, letter))
             lettersArray.add(Sign("z", R.drawable.ic_z_only_sing, letter))
-            lettersArray.add(Sign(" ", R.drawable.ic_space, letter))
+            lettersArray.add(Sign(" ", R.drawable.ic_space, space))
 
             //?  numbers
             lettersArray.add(Sign("1", R.drawable.ic_1_number, number))

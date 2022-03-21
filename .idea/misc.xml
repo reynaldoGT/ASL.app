@@ -118,7 +118,7 @@
         <entry key="app/src/main/res/layout/fragment_giphy.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/fragment_numbers.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_tabnavigator.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_view_numbers.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/fragment_view_sings.xml" value="0.33" />

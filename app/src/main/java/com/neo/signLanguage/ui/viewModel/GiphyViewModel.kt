@@ -22,8 +22,6 @@ class GiphyViewModel : ViewModel() {
     private val isLoading = MutableLiveData<Boolean>()
 
     fun setCurrentMessage(newCurrentMessage: String, saveDatabase: Boolean) {
-        Logger.d(newCurrentMessage)
-        currentMessage.postValue(newCurrentMessage)
         currentMessage.postValue(newCurrentMessage)
         saveInDatabase.postValue(saveDatabase)
     }

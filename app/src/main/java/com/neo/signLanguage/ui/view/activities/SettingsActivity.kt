@@ -35,7 +35,7 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.switchChangeTheme.isChecked = sharedPrefs.getTheme()
         binding.cbTransition.isChecked = sharedPrefs.getShowTransition()
-        binding.currentDelayValue.text = sharedPrefs.getDelay().toString() + " ms."
+        binding.currentDelayValue.text = sharedPrefs.getDelay().toString() + "ms."
 
         binding.switchChangeTheme.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {

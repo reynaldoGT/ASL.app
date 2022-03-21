@@ -199,11 +199,27 @@ class SendMessageFragment : Fragment() {
                 binding.btnSendMessage.isVisible = false
 
                 delay(sharedPrefs.getDelay().toLong())
-                val type =
-                    if (item.type == "letter") getString(R.string.letter) else getString(R.string.number)
-                binding.currentLetter.text = "$type ${item.letter.toUpperCase(Locale.ROOT)}"
 
-                val spannable = SpannableStringBuilder(stringCleaned.capitalize(Locale.ROOT))
+                when (item.type) {
+                    "space" -> {
+                        binding.currentLetter.text = ""
+                    }
+                    "letter" -> {
+                        binding.currentLetter.text =
+                            getString(R.string.letter, item.letter.uppercase())
+                    }
+                    else -> {
+                        binding.currentLetter.text =
+                            getString(R.string.number, item.letter.uppercase())
+                    }
+                }
+
+
+                val spannable = SpannableStringBuilder(stringCleaned.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(
+                        Locale.ROOT
+                    ) else it.toString()
+                })
                 spannable.setSpan(
                     ForegroundColorSpan(
                         ContextCompat.getColor(
@@ -230,24 +246,24 @@ class SendMessageFragment : Fragment() {
 
     private fun sendMessage(message: String) {
         val re = Regex("[^A-Za-z0-9 ]")
-        stringCleaned = message.trim().toLowerCase(Locale.ROOT)
+        stringCleaned = message.trim().lowercase()
         stringCleaned = re.replace(stringCleaned, "") // works
         stringCleaned = stringCleaned.replace("\\s+".toRegex(), " ")
         giphyViewModel.setCurrentMessage(stringCleaned, true)
 
         if (stringCleaned.isNotEmpty()) {
             generateSingLanguageMessage()
-            /*giphyViewModel.saveInDatabase
-                .observe(viewLifecycleOwner) {
 
-                    if (it) {
-                        Logger.d("saving database")
-
-                    }
-                }*/
             lifecycleScope.launch {
                 TabNavigatorActivity.database.getSignDao()
-                    .addSing(SignEntity(0, stringCleaned))
+                    .addSing(
+                        SignEntity(0,
+                            stringCleaned.replaceFirstChar {
+                                if (it.isLowerCase()) it.titlecase(
+                                    Locale.getDefault()
+                                ) else it.toString()
+                            })
+                    )
             }
 
         } else {
@@ -317,7 +333,7 @@ class SendMessageFragment : Fragment() {
 
     override fun onDestroy() {
         job?.cancel()
-/*resetStatus()*/
+        /*resetStatus()*/
         super.onDestroy()
     }
 
@@ -336,7 +352,6 @@ class SendMessageFragment : Fragment() {
                 if (resultCode == Activity.RESULT_OK && null != data) {
                     val info = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                     val text = info?.get(0)
-                    // asignar al text view
                     /*textToShow?.text = text*/
                     binding.edSendMessage.editText?.setText(text)
                     cancelMessage()
