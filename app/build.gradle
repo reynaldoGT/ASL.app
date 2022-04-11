@@ -2,8 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
     id 'dagger.hilt.android.plugin'
     id 'com.google.firebase.crashlytics'
+
 }
 
 android {
@@ -14,8 +16,8 @@ android {
         applicationId "com.neo.singlanguage"
         minSdkVersion 22
         targetSdkVersion 31
-        versionCode 13
-        versionName "2.0.1"
+        versionCode 16
+        versionName "2.5.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,11 +58,11 @@ dependencies {
     implementation 'com.orhanobut:logger:2.2.0'
 
     implementation 'com.google.android.gms:play-services-ads:20.4.0'
-    implementation platform('com.google.firebase:firebase-bom:28.4.1')
-
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
     // Declare the dependencies for the Remote Config and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-config-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
     /*to get gif */

@@ -114,6 +114,7 @@ class SendMessageFragment : Fragment() {
         }*/
         binding.speech.setOnClickListener {
             startSpeech()
+            /*throw RuntimeException("Test Crash") // Force a crash*/
         }
 
         binding.btnSendMessage.setOnClickListener {
