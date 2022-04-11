@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
@@ -14,8 +15,8 @@ android {
         applicationId "com.neo.singlanguage"
         minSdkVersion 22
         targetSdkVersion 31
-        versionCode 13
-        versionName "2.0.1"
+        versionCode 15
+        versionName "2.5.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,8 +57,8 @@ dependencies {
     implementation 'com.orhanobut:logger:2.2.0'
 
     implementation 'com.google.android.gms:play-services-ads:20.4.0'
-    implementation platform('com.google.firebase:firebase-bom:28.4.1')
-
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
+    implementation 'com.google.firebase:firebase-analytics'
     // Declare the dependencies for the Remote Config and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-config-ktx'
@@ -88,8 +89,8 @@ dependencies {
 
     // Declare the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-crashlytics'
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     //Room
     implementation "androidx.room:room-ktx:2.4.0"

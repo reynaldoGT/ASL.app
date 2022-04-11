@@ -15,9 +15,9 @@
     <string name="number">Number: %1$s </string>
     <string name="letter">Letter: %1$s </string>
 
-    <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
     <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="test_interstitial_id" translatable="false">	ca-app-pub-3940256099942544/1033173712</string>
 
     <string name="change_theme">Dark Theme</string>
     <string name="current_delay_time">Current delay time</string>
