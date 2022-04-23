@@ -33,7 +33,7 @@
 
     <string name="green_light">Verde Claro</string>
     <string name="deep_orange">Naranja oscuro</string>
-    <string name="teal">Teal</string>
+    <string name="teal">Turquesa</string>
 
     <string name="change_hand_color">Cambiar color de Mano</string>
     <string name="new_color_changed">El color de la mano fue cambiado a </string>
@@ -56,4 +56,7 @@
     <string name="delete">Eliminar</string>
     <string name="empty">VACIO</string>
     <string name="your_history_is_empty">Tu historial esta vacío</string>
+
+    <string name="current_hand_color">Color actual de la mano</string>
+    <string name="maximum_number_characters">El número de máximo de caracteres es de %1$d</string>
 </resources>

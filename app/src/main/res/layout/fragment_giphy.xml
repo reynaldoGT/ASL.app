@@ -11,6 +11,7 @@
         android:id="@+id/no_internet_layout"
         layout="@layout/no_internet_connection"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.SearchView

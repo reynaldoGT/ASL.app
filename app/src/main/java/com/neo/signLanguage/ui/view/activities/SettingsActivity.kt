@@ -14,6 +14,7 @@ import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.SettingsActivityBinding
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
 import android.widget.RadioButton
+import androidx.core.content.ContextCompat
 import com.neo.signLanguage.utils.DataSign
 import com.orhanobut.logger.Logger
 
@@ -37,6 +38,8 @@ class SettingsActivity : AppCompatActivity() {
         binding.cbTransition.isChecked = sharedPrefs.getShowTransition()
         binding.currentDelayValue.text = sharedPrefs.getDelay().toString() + "ms."
 
+        binding.currentColor.backgroundTintList =
+            ContextCompat.getColorStateList(this, sharedPrefs.getColor())
         binding.switchChangeTheme.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -65,6 +68,9 @@ class SettingsActivity : AppCompatActivity() {
                 override fun onClick(v: View?, position: Int) {
                     sharedPrefs.setColor(colorList[position].colorValue)
                     showSnackBar(colorList[position].colorName)
+                    binding.currentColor?.backgroundTintList =
+                        resources?.getColorStateList(colorList[position]?.colorValue!!)
+
                 }
             })
         binding.rvColors.adapter = adaptador
@@ -120,7 +126,6 @@ class SettingsActivity : AppCompatActivity() {
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             val radioButton: View = binding.radioGroup.findViewById(checkedId)
             val index: Int = binding.radioGroup.indexOfChild(radioButton)
-            Logger.d("index to animate: " + index)
             sharedPrefs.setSelectedTransition(index)
 
         }

@@ -58,7 +58,8 @@
     <string name="delete">Delete</string>
     <string name="empty">EMPTY</string>
     <string name="your_history_is_empty">Your History is empty</string>
-
+    <string name="current_hand_color">Current hand color</string>
+    <string name="maximum_number_characters">The maximum number of characters is %1$d</string>
 
 
 </resources>

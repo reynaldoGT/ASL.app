@@ -11,9 +11,16 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -21,31 +28,20 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
-import com.orhanobut.logger.AndroidLogAdapter
-import com.orhanobut.logger.Logger
-import kotlinx.coroutines.*
-import kotlin.collections.ArrayList
-import androidx.appcompat.app.AppCompatActivity
 import com.neo.signLanguage.*
-import com.neo.signLanguage.databinding.FragmentSendMessageBinding
+import com.neo.signLanguage.data.database.entities.SignEntity
 import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.databinding.FragmentSendMessageBinding
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
-import java.util.*
-
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.neo.signLanguage.data.database.entities.SignEntity
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import kotlinx.coroutines.*
+import java.util.*
 
 
 class SendMessageFragment : Fragment() {
@@ -93,7 +89,9 @@ class SendMessageFragment : Fragment() {
 
         binding.edSendMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
+
             binding.seeCurrentMessage.visibility = View.VISIBLE
+
 
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
@@ -106,6 +104,22 @@ class SendMessageFragment : Fragment() {
                 return@OnKeyListener true
             }
             false
+        })
+
+        binding.edSendMessage.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                // If the event is a key-down event on the "enter" button
+                if (event.action === KeyEvent.ACTION_DOWN &&
+                    keyCode == KeyEvent.KEYCODE_ENTER
+                ) {
+                    // Perform action on key press
+                    /*Toast.makeText(this@HelloFormStuff, edittext.text, Toast.LENGTH_SHORT).show()*/
+                    Logger.d("hi from here enter event")
+
+                    return true
+                }
+                return false
+            }
         })
 
         /*binding.ivSing.setOnClickListener {
@@ -142,6 +156,7 @@ class SendMessageFragment : Fragment() {
             imageView
         }
         setHandAnimation()
+
     }
 
     private fun setHandAnimation() {
@@ -250,8 +265,16 @@ class SendMessageFragment : Fragment() {
         stringCleaned = re.replace(stringCleaned, "") // works
         stringCleaned = stringCleaned.replace("\\s+".toRegex(), " ")
         giphyViewModel.setCurrentMessage(stringCleaned, true)
-
+        val maxCharacters: Int = 75
         if (stringCleaned.isNotEmpty()) {
+            if (stringCleaned.length >= maxCharacters) {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    String.format(getString(R.string.maximum_number_characters, maxCharacters)),
+                    Snackbar.LENGTH_LONG,
+                ).show()
+                return
+            }
             generateSingLanguageMessage()
 
             lifecycleScope.launch {

@@ -4,12 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.TemplateColorBinding
 import com.neo.signLanguage.data.models.Color
 import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
 import java.lang.ref.WeakReference
 
 
@@ -40,8 +42,10 @@ class ColorAdapter(
         val item = itemsColor?.get(position)
         /*holder.buttonColor?.background(item?.colorValue!!)*/
         /*holder.buttonColor.setSupportButtonTintList(ContextCompat.getColorStateList(this, R.color.colorPrimary));*/
+        /*holder.buttonColor?.backgroundTintList =
+            context?.getResources()?.getColorStateList(item?.colorValue!!)*/
         holder.buttonColor?.backgroundTintList =
-            context?.getResources()?.getColorStateList(item?.colorValue!!)
+            ContextCompat.getColorStateList(this.context!!, item?.colorValue!!)
 
     }
 
