@@ -11,25 +11,26 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.GiphyAdapter
-import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.data.models.GiphyItem
+import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getLanguagePhone
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.networkState
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
+import com.neo.signLanguage.ui.viewModel.NetworkViewModel
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -38,6 +39,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var giphyImages = mutableListOf<GiphyItem>()
     private val giphyViewModel: GiphyViewModel by viewModels()
+    private val ViewModelProvider: NetworkViewModel by viewModels()
 
     private var _binding: FragmentGiphyBinding? = null
     private val binding get() = _binding!!
@@ -56,24 +58,44 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.searchBreed.setOnQueryTextListener(this)
 
-        initRecyclerView()
+        ViewModelProvider.connected.observe(viewLifecycleOwner) { connected: Boolean ->
 
-        searchGiphy("American Sign Language")
+            if (connected) {
+                binding.searchBreed.setOnQueryTextListener(this)
+                binding.searchBreed.visibility = View.VISIBLE
+                initRecyclerView()
+                searchGiphy("American Sign Language")
+                binding.noInternetLayout.layoutNoConnection.visibility = View.GONE
+                binding.rvDogs.visibility = View.VISIBLE
+            } else {
+                binding.searchBreed.visibility = View.GONE
+                binding.rvDogs.visibility = View.GONE
+                binding.noInternetLayout.layoutNoConnection.visibility = View.VISIBLE
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.no_connection),
+                    Snackbar.LENGTH_LONG,
 
-        giphyViewModel.giphyModel.observe(viewLifecycleOwner,  {
+                    ).setAction("OK") {
+                }
+                    .show()
+            }
+        }
+
+
+        giphyViewModel.giphyModel.observe(viewLifecycleOwner) {
             giphyImages.clear()
             giphyImages.addAll(it)
             adapter.notifyDataSetChanged()
             hideKeyboard()
-        })
+        }
     }
 
     private fun initRecyclerView() {
         adapter = GiphyAdapter(activity?.applicationContext!!, giphyImages, object : ClickListener {
             override fun onClick(v: View?, position: Int) {
-                /*val myIntent =
+                val myIntent =
                     Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
 
                 myIntent.putExtra("imageUrl", giphyImages[position].images.original.url)
@@ -81,7 +103,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 myIntent.putExtra("letter", giphyImages[position].title)
                 myIntent.putExtra("type", giphyImages[position].source)
 
-                startActivity(myIntent)*/
+                startActivity(myIntent)
             }
         })
 
@@ -90,6 +112,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun getRetrofitTranslate(): Retrofit {
+
         return Retrofit.Builder()
             .baseUrl("https://mymemory.translated.net/api/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -110,7 +133,10 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 val translated = call.body()
                 activity?.runOnUiThread {
                     if (call.isSuccessful) {
+                        Logger.d(translated?.responseData)
                         getQuery = translated?.responseData?.translatedText!!
+
+                        //TODO corregir esto
                         fillRecyclerView(getQuery)
                     } else {
                         showError()
@@ -119,18 +145,8 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
         }
-        if (networkState.isOnline()) {
-            fillRecyclerView(getQuery)
-        } else {
-            Snackbar.make(
-                requireActivity().findViewById(android.R.id.content),
-                getString(R.string.no_connection),
-                Snackbar.LENGTH_LONG,
 
-                ).setAction("OK") {
-            }
-                .show()
-        }
+        fillRecyclerView(getQuery)
     }
 
     private fun hideKeyboard() {
@@ -161,7 +177,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()) {
-            searchGiphy(query.toLowerCase(Locale.ROOT))
+            searchGiphy(query.lowercase())
         }
         return true
     }

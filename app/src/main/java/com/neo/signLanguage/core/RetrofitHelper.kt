@@ -3,6 +3,7 @@ package com.neo.signLanguage.core
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class RetrofitHelper {
     companion object {
         fun getRetrofit(): Retrofit {

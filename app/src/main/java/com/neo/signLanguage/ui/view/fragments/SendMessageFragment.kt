@@ -91,7 +91,6 @@ class SendMessageFragment : Fragment() {
             )
 
 
-
         binding.edSendMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
 
             binding.seeCurrentMessage.visibility = View.VISIBLE

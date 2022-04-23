@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.room.Room
@@ -27,7 +28,6 @@ import java.util.*
 
 class TabNavigatorActivity : AppCompatActivity() {
     var fragmentAdapter: TabAdapter? = null
-
 
     companion object {
 
@@ -50,8 +50,9 @@ class TabNavigatorActivity : AppCompatActivity() {
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?){
-    val model: GiphyViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        val model: GiphyViewModel by viewModels()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         database =
             Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
@@ -98,7 +99,6 @@ class TabNavigatorActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
                 if (position == 2) {
-                    Logger.d("tab 1 :D")
                     model.getAllSingFromDatabase()
                 }
                 super.onPageSelected(position)

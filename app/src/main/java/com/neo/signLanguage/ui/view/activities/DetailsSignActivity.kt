@@ -10,6 +10,7 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.orhanobut.logger.Logger
 import java.util.*
 
 
@@ -35,18 +36,22 @@ class DetailsSignActivity : AppCompatActivity() {
 
 
         binding.imageTitle.text = letter
-        if (netWorkImage ) {
-            Glide.with(applicationContext)
-                .asGif()
-                .load(imageURL)
-                .placeholder(circularProgressDrawable)
-                .error(R.drawable.ic_x_letter)
-                .into(binding.image)
+        try {
+            if (netWorkImage) {
+                Glide.with(this)
+                    /*.asGif()*/
+                    .load(imageURL)
+                    /*.placeholder(circularProgressDrawable)
+                    .error(R.drawable.ic_x_letter)*/
+                    .into(binding.image)
 
-            binding.detailToolbar.title = letter
-            binding.imageTitle.visibility = View.GONE
-        } else {
-            binding.image.setImageResource(intent.getIntExtra("image", R.drawable.circle_shape))
+                binding.detailToolbar.title = letter
+                binding.imageTitle.visibility = View.GONE
+            } else {
+                binding.image.setImageResource(intent.getIntExtra("image", R.drawable.circle_shape))
+            }
+        } catch (error: Error) {
+            Logger.d(error)
         }
 
         if (sharedPrefs.getColor() != 0)
