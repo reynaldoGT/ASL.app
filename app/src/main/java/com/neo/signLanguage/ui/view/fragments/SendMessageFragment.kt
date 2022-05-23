@@ -41,6 +41,7 @@ import com.neo.signLanguage.utils.Utils
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.*
+import java.text.Normalizer
 import java.util.*
 
 
@@ -112,10 +113,6 @@ class SendMessageFragment : Fragment() {
                 if (event.action === KeyEvent.ACTION_DOWN &&
                     keyCode == KeyEvent.KEYCODE_ENTER
                 ) {
-                    // Perform action on key press
-                    /*Toast.makeText(this@HelloFormStuff, edittext.text, Toast.LENGTH_SHORT).show()*/
-                    Logger.d("hi from here enter event")
-
                     return true
                 }
                 return false
@@ -193,7 +190,6 @@ class SendMessageFragment : Fragment() {
 
         val arraySentenceSing = ArrayList<Sign>()
         binding.edSendMessage.editText?.setText(stringCleaned)
-
         val stringArray = stringCleaned.toCharArray()
 
         for (i in stringArray) {
@@ -229,7 +225,6 @@ class SendMessageFragment : Fragment() {
                     }
                 }
 
-
                 val spannable = SpannableStringBuilder(stringCleaned.replaceFirstChar {
                     if (it.isLowerCase()) it.titlecase(
                         Locale.ROOT
@@ -260,12 +255,17 @@ class SendMessageFragment : Fragment() {
     }
 
     private fun sendMessage(message: String) {
-        val re = Regex("[^A-Za-z0-9 ]")
+        val re = Regex("[^[A-Za-z0-9 ,ñÀ-ú]+\$]")
         stringCleaned = message.trim().lowercase()
         stringCleaned = re.replace(stringCleaned, "") // works
         stringCleaned = stringCleaned.replace("\\s+".toRegex(), " ")
+
+        stringCleaned = Normalizer.normalize(stringCleaned, Normalizer.Form.NFD)
+
+
         giphyViewModel.setCurrentMessage(stringCleaned, true)
-        val maxCharacters: Int = 75
+
+        val maxCharacters = 75
         if (stringCleaned.isNotEmpty()) {
             if (stringCleaned.length >= maxCharacters) {
                 Snackbar.make(
@@ -324,7 +324,6 @@ class SendMessageFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             requireActivity().applicationContext, // Context,
-
             getString(R.string.test_interstitial_id),
             adRequest,
             object : InterstitialAdLoadCallback() {

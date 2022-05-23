@@ -62,7 +62,6 @@ class GamesFragment : Fragment() {
                     it.data,
                     object : ClickListener {
                         override fun onClick(v: View?, position: Int) {
-
                             adaptador?.selectItem(position)
                         }
                     })

@@ -24,8 +24,8 @@ class DataSign {
 
         fun getLetterArray(): ArrayList<Sign> {
             val lettersArray = ArrayList<Sign>()
-            lettersArray.add(Sign("b", R.drawable.ic_b_only_sing, letter))
             lettersArray.add(Sign("a", R.drawable.ic_a_only_sing, letter))
+            lettersArray.add(Sign("b", R.drawable.ic_b_only_sing, letter))
             lettersArray.add(Sign("c", R.drawable.ic_c_only_sing, letter))
             lettersArray.add(Sign("d", R.drawable.ic_d_only_sing, letter))
             lettersArray.add(Sign("e", R.drawable.ic_e_only_sing, letter))
@@ -63,8 +63,6 @@ class DataSign {
             lettersArray.add(Sign("7", R.drawable.ic_7_number, number))
             lettersArray.add(Sign("8", R.drawable.ic_8_number, number))
             lettersArray.add(Sign("9", R.drawable.ic_9_number, number))
-            lettersArray.add(Sign("9", R.drawable.ic_9_number, number))
-            lettersArray.add(Sign("10", R.drawable.ic_10_number, number))
             lettersArray.add(Sign("10", R.drawable.ic_10_number, number))
             lettersArray.add(Sign("0", R.drawable.ic_0_number, number))
             return lettersArray

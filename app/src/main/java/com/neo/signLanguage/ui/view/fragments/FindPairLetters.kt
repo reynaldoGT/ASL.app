@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.AdapterGame
+import com.neo.signLanguage.AdapterPairGame
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.FragmentFindPairLettersBinding
@@ -24,7 +25,7 @@ class FindPairLetters : Fragment() {
     private var _binding: FragmentFindPairLettersBinding? = null
     private val binding get() = _binding!!
 
-    private var adaptador: AdapterGame? = null
+    private var adaptador: AdapterPairGame? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
     private val gameViewModel: GameViewModel by viewModels()
     override fun onCreateView(
@@ -51,20 +52,13 @@ class FindPairLetters : Fragment() {
             binding.currentAnswer.text = it.correctAnswer
             binding.gridListSing.setHasFixedSize(true)
             adaptador =
-                AdapterGame(
+                AdapterPairGame(
                     requireActivity().applicationContext,
                     it.data,
                     object : ClickListener {
                         override fun onClick(v: View?, position: Int) {
 
-                            if (it.data[position].letter == it.correctAnswer) {
-                                Logger.d("Correcta")
-                                gameViewModel.setCurrentMessage(3)
-
-                            } else {
-                                gameViewModel.setIntents(-1)
-                                Logger.d(getRandom(3))
-                            }
+                            adaptador?.selectItem(position)
                         }
                     })
             layoutManager = GridLayoutManager(requireActivity().applicationContext, 2)

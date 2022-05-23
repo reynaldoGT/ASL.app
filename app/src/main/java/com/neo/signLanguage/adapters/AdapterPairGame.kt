@@ -25,6 +25,8 @@ class AdapterPairGame(
     var viewHolder: ViewHolderGame? = null
     var context: Context? = null
     var itemsSelected: ArrayList<Int> = arrayListOf()
+    var firstElement: Sign? = null
+    var secondElement: Sign? = null
 
     init {
         this.items = items
@@ -48,7 +50,7 @@ class AdapterPairGame(
 
         if (itemsSelected.contains(position)) {
             holder.vista.setBackgroundColor(Color.LTGRAY)
-            if (itemsSelected.size == 2) {
+            /*if (itemsSelected.size == 2) {
                 if (items?.get(itemsSelected[0])?.letter == items?.get(itemsSelected[1])?.letter) {
                     Logger.d("Iguales")
 
@@ -59,7 +61,7 @@ class AdapterPairGame(
                     Logger.d("No iguales")
                     itemsSelected.clear()
                 }
-            }
+            }*/
         } else {
             holder.vista.setBackgroundColor(Color.WHITE)
         }
@@ -71,10 +73,26 @@ class AdapterPairGame(
     }
 
     fun selectItem(index: Int) {
-        if (itemsSelected?.contains(index)!!) {
-            itemsSelected?.remove(index)
+        if (itemsSelected.contains(index)) {
+            itemsSelected.remove(index)
+            Logger.d("ya hay un elemento igual")
+
         } else {
-            itemsSelected?.add(index)
+            itemsSelected.add(index)
+            this.firstElement = items?.get(itemsSelected[0])
+
+            if (itemsSelected.size == 2) {
+                this.secondElement = items?.get(itemsSelected[1])
+                if (this.firstElement?.letter!! == this.secondElement?.letter!!) {
+                    // eliminar los iguales y resetear los comparadores
+                    this.items?.remove(this.firstElement)
+                    this.items?.remove(this.secondElement)
+                    this.firstElement = null
+                    this.secondElement = null
+                    this.itemsSelected.clear()
+                }
+            }
+
         }
         notifyDataSetChanged()
     }
