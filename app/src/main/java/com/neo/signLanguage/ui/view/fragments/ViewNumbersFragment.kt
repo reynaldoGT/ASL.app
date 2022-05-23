@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
+import com.neo.signLanguage.AdapterGame
 import com.neo.signLanguage.AdapterLetters
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity

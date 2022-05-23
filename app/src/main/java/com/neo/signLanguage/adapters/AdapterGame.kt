@@ -6,25 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+
 import androidx.recyclerview.widget.RecyclerView
+import com.neo.signLanguage.adapters.GiphyViewHolder
 import com.neo.signLanguage.databinding.TemplateLetterBinding
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.databinding.TemplateGameBinding
 
 
-interface ClickListener {
-    fun onClick(v: View?, position: Int)
-}
-
-class AdapterLetters(
+class AdapterGame(
     context: Context,
     items: ArrayList<Sign>,
     var listener: ClickListener
-) : RecyclerView.Adapter<AdapterLetters.ViewHolder>() {
+) : RecyclerView.Adapter<AdapterGame.ViewHolderGame>() {
 
     var items: ArrayList<Sign>? = null
-    var viewHolder: ViewHolder? = null
+    var viewHolder: ViewHolderGame? = null
     var context: Context? = null
 
     init {
@@ -32,19 +29,19 @@ class AdapterLetters(
         this.context = context
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderGame {
         val vista =
-            LayoutInflater.from(parent.context).inflate(R.layout.template_letter, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.template_game, parent, false)
 
-        viewHolder = ViewHolder(vista, listener, this.context)
+        viewHolder = ViewHolderGame(vista, listener)
 
         return viewHolder!!
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderGame, position: Int) {
 
         val item = items?.get(position)
-        holder.foto?.setImageResource(item?.image!!)
+        holder.singImage?.setImageResource(item?.image!!)
         holder.nombre?.text = item?.letter
 
     }
@@ -53,26 +50,19 @@ class AdapterLetters(
         return items?.count()!!
     }
 
-    class ViewHolder(vista: View, listener: ClickListener, context: Context?) :
+    class ViewHolderGame(vista: View, listener: ClickListener) :
         RecyclerView.ViewHolder(vista),
         View.OnClickListener {
         // Using the binding
-        private val binding = TemplateLetterBinding.bind(vista)
+        private val binding = TemplateGameBinding.bind(vista)
 
-        var foto: ImageView? = null
+        var singImage: ImageView? = null
         var nombre: TextView? = null
         var listener: ClickListener? = null
 
         init {
-            foto = binding.imageTemplateView
-            if (sharedPrefs.getColor() != 0)
-                binding.imageTemplateView.setColorFilter(
-                    ContextCompat.getColor(
-                        context!!,
-                        sharedPrefs.getColor()
-                    )
-                )
-            nombre = binding.textViewTemplateView
+            singImage = binding.imageTemplateView
+
             this.listener = listener
             vista.setOnClickListener(this)
         }
@@ -81,6 +71,4 @@ class AdapterLetters(
             this.listener?.onClick(v!!, adapterPosition)
         }
     }
-
-
 }

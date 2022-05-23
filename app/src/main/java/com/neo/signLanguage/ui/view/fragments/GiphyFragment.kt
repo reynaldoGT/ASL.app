@@ -133,10 +133,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 val translated = call.body()
                 activity?.runOnUiThread {
                     if (call.isSuccessful) {
-                        Logger.d(translated?.responseData)
                         getQuery = translated?.responseData?.translatedText!!
-
-                        //TODO corregir esto
                         fillRecyclerView(getQuery)
                     } else {
                         showError()

@@ -16,5 +16,10 @@
         android:enabled="true"
         android:icon="@drawable/ic_numbers"
         android:title="@string/view_numbers" />
+    <item
+        android:id="@+id/page_4"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_airplay_24"
+        android:title="@string/view_numbers" />
 
 </menu>

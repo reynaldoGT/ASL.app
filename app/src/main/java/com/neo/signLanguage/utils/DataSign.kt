@@ -2,13 +2,22 @@ package com.neo.signLanguage.utils
 
 import android.content.Context
 import com.neo.signLanguage.R
-import com.neo.signLanguage.data.models.Color
-import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.data.models.*
+import com.orhanobut.logger.Logger
+
+import kotlin.collections.ArrayList
+import kotlin.random.Random
+import kotlin.random.nextInt
+
+data class Game(
+    val data: ArrayList<Sign>,
+    val correctAnswer: String,
+)
 
 class DataSign {
 
-
     companion object {
+
         private const val letter = "letter"
         private const val number = "number"
         private const val space = "space"
@@ -61,6 +70,56 @@ class DataSign {
             return lettersArray
         }
 
+        fun getRandomLetters(amount: Int): Game {
+            val randomLetters = ArrayList<Sign>()
+            val randomInts = generateSequence {
+                // this lambda is the source of the sequence's values
+                Random.nextInt(0 until this.getLetterArray().size)
+            }
+                .distinct()
+                .take(amount)
+                .toSet()
+
+            for (i in randomInts) {
+                randomLetters.add(this.getLetterArray()[i])
+            }
+
+            return Game(
+                randomLetters,
+                randomLetters[(0 until randomLetters.size - 1).random()].letter
+            )
+        }
+
+        fun getRandomToFindEquals(amount: Int): Game {
+            val randomLetters = ArrayList<Sign>()
+            val resortList = ArrayList<Sign>()
+            val randomInts = generateSequence {
+                // this lambda is the source of the sequence's values
+                Random.nextInt(0 until this.getLetterArray().size)
+            }
+                .distinct()
+                .take(amount)
+                .toSet()
+            val randomPosition = generateSequence {
+                // this lambda is the source of the sequence's values
+                Random.nextInt(0 until amount * 2)
+            }
+                .distinct()
+                .take(amount * 2)
+                .toSet()
+
+            for (i in randomInts) {
+                randomLetters.add(this.getLetterArray()[i])
+                randomLetters.add(this.getLetterArray()[i])
+            }
+            for (i in randomPosition) {
+                resortList.add(randomLetters[i])
+            }
+            return Game(
+                resortList,
+                resortList[(0 until randomLetters.size - 1).random()].letter
+            )
+        }
 
         fun getOnlyLetterArray(): ArrayList<Sign> {
             val lettersArray = ArrayList<Sign>()
