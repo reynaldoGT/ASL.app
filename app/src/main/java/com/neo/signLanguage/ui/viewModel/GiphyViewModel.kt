@@ -40,4 +40,12 @@ class GiphyViewModel : ViewModel() {
         getAllSingFromDatabase.postValue(
             TabNavigatorActivity.database.getSignDao().getAllSing().map { it.toDomain() })
     }
+
+    fun deleteAllHistory() {
+        TabNavigatorActivity.database.getSignDao().deleteAllRaw()
+        getAllSingFromDatabase.postValue(
+            TabNavigatorActivity.database.getSignDao().getAllSing().map { it.toDomain() })
+
+
+    }
 }

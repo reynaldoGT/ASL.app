@@ -107,8 +107,21 @@ class DataSign {
                 .toSet()
 
             for (i in randomInts) {
-                randomLetters.add(this.getLetterArray()[i])
-                randomLetters.add(this.getLetterArray()[i])
+                randomLetters.add(
+                    Sign(
+                        this.getLetterArray()[i].letter,
+                        this.getLetterArray()[i].image,
+                        "letter",
+                    ),
+                )
+                randomLetters.add(
+                    Sign(
+                        this.getLetterArray()[i].letter,
+                        this.getLetterArray()[i].image,
+                        "image",
+                    )
+                )
+
             }
             for (i in randomPosition) {
                 resortList.add(randomLetters[i])

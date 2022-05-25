@@ -45,10 +45,10 @@ class BottomNavigationFragment : Fragment() {
                     showSelectedFragment(ViewSignsFragment())
                     true
                 }
-                R.id.page_3 -> {
+                /*R.id.page_3 -> {
                     showSelectedFragment(ViewNumbersFragment())
                     true
-                }
+                }*/
                 R.id.page_4 -> {
                     /*showSelectedFragment(FindPairLetters())*/
                     showSelectedFragment(GamesFragment())

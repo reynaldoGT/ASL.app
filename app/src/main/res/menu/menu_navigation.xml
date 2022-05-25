@@ -11,11 +11,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_a_letter"
         android:title="@string/view_sing" />
-    <item
-        android:id="@+id/page_3"
-        android:enabled="true"
-        android:icon="@drawable/ic_numbers"
-        android:title="@string/view_numbers" />
+
     <item
         android:id="@+id/page_4"
         android:enabled="true"

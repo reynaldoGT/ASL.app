@@ -9,19 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.neo.signLanguage.AdapterGame
-import com.neo.signLanguage.AdapterPairGame
+import com.neo.signLanguage.adapters.AdapterPairGame
 import com.neo.signLanguage.ClickListener
-import com.neo.signLanguage.data.models.Sign
 
 import com.neo.signLanguage.databinding.FragmentGamesBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
-import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 
-import com.neo.signLanguage.utils.DataSign
-import com.orhanobut.logger.Logger
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 
 class GamesFragment : Fragment() {
@@ -40,17 +34,16 @@ class GamesFragment : Fragment() {
 
         // Using the binding
         _binding = FragmentGamesBinding.inflate(inflater, container, false)
-        gameViewModel.setCurrentMessage(6)
+        gameViewModel.setCurrentMessage(3)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        gameViewModel.setCurrentMessage(3)
         gameViewModel.amount.observe(viewLifecycleOwner) {
             binding.intents.text = it.toString()
         }
-
 
         gameViewModel.randomGameLetters.observe(viewLifecycleOwner) {
             binding.gridListSing.layoutManager = layoutManager
@@ -72,21 +65,6 @@ class GamesFragment : Fragment() {
         binding.changeletters.setOnClickListener {
             gameViewModel.setCurrentMessage(3)
         }
-
-
     }
-
-    fun getRandom(to: Int): Set<Int> {
-
-        val randomInts = generateSequence {
-            // this lambda is the source of the sequence's values
-            Random.nextInt(0, to * 2)
-        }
-            .distinct()
-            .take(to * 2)
-            .toSet()
-        return randomInts
-    }
-
 
 }

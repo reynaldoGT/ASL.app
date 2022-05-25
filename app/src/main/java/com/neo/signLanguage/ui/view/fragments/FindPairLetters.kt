@@ -8,14 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.AdapterGame
-import com.neo.signLanguage.AdapterPairGame
+import com.neo.signLanguage.adapters.AdapterPairGame
 import com.neo.signLanguage.ClickListener
-import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.FragmentFindPairLettersBinding
-import com.neo.signLanguage.databinding.FragmentGamesBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
-import com.orhanobut.logger.Logger
 import kotlin.random.Random
 
 
@@ -32,16 +28,15 @@ class FindPairLetters : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         // Using the binding
         _binding = FragmentFindPairLettersBinding.inflate(inflater, container, false)
-        gameViewModel.setCurrentMessage(6)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        gameViewModel.setCurrentMessage(6)
         gameViewModel.amount.observe(viewLifecycleOwner) {
             binding.intents.text = it.toString()
         }

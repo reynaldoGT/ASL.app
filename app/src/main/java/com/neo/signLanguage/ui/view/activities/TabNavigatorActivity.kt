@@ -10,7 +10,6 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
 import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -21,8 +20,6 @@ import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
-import com.orhanobut.logger.Logger
-import androidx.fragment.app.activityViewModels
 import java.util.*
 
 
@@ -77,9 +74,6 @@ class TabNavigatorActivity : AppCompatActivity() {
         binding.tabLayout.addTab(
             binding.tabLayout.newTab().setText(getString(R.string.movement_signs))
         )
-        binding.tabLayout.addTab(
-            binding.tabLayout.newTab().setText(getString(R.string.history))
-        )
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -111,6 +105,11 @@ class TabNavigatorActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.settings -> {
                 val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.history -> {
+                val intent = Intent(this, HistoryActivity::class.java)
                 startActivity(intent)
                 true
             }

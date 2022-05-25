@@ -1,4 +1,4 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.adapters
 
 import android.content.Context
 import android.graphics.Color
@@ -9,9 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.R
 
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.TemplateGameBinding
+import com.neo.signLanguage.databinding.TemplateGamePairBinding
 import com.orhanobut.logger.Logger
 
 
@@ -45,23 +48,24 @@ class AdapterPairGame(
     override fun onBindViewHolder(holder: ViewHolderGame, position: Int) {
 
         val item = items?.get(position)
-        holder.singImage?.setImageResource(item?.image!!)
-        holder.nombre?.text = item?.letter
+        /*holder.nombre?.text = item?.letter
+        holder.singImage?.setImageResource(item?.image!!)*/
+
+        if (item?.type == "letter") {
+            holder.nombre?.text = item.letter
+            holder.singImage?.visibility = View.GONE
+            holder.singImage?.setImageResource(item?.image!!)
+
+        } else {
+            holder.nombre?.text = item?.letter
+            holder.singImage?.setImageResource(item?.image!!)
+            holder.nombre?.visibility = View.GONE
+        }
+
 
         if (itemsSelected.contains(position)) {
             holder.vista.setBackgroundColor(Color.LTGRAY)
-            /*if (itemsSelected.size == 2) {
-                if (items?.get(itemsSelected[0])?.letter == items?.get(itemsSelected[1])?.letter) {
-                    Logger.d("Iguales")
 
-                    itemsSelected.clear()
-                    holder.vista.visibility = View.GONE
-
-                } else {
-                    Logger.d("No iguales")
-                    itemsSelected.clear()
-                }
-            }*/
         } else {
             holder.vista.setBackgroundColor(Color.WHITE)
         }
@@ -73,25 +77,26 @@ class AdapterPairGame(
     }
 
     fun selectItem(index: Int) {
+        Logger.d(index)
         if (itemsSelected.contains(index)) {
             itemsSelected.remove(index)
-            Logger.d("ya hay un elemento igual")
-
         } else {
             itemsSelected.add(index)
-            this.firstElement = items?.get(itemsSelected[0])
+            /*this.firstElement = items?.get(itemsSelected[0])
 
             if (itemsSelected.size == 2) {
+                Logger.d("ya hay mas de 2 elementos")
+
                 this.secondElement = items?.get(itemsSelected[1])
                 if (this.firstElement?.letter!! == this.secondElement?.letter!!) {
-                    // eliminar los iguales y resetear los comparadores
                     this.items?.remove(this.firstElement)
                     this.items?.remove(this.secondElement)
                     this.firstElement = null
                     this.secondElement = null
                     this.itemsSelected.clear()
-                }
-            }
+                    notifyDataSetChanged()
+                }*//*
+            }*/
 
         }
         notifyDataSetChanged()
@@ -101,7 +106,7 @@ class AdapterPairGame(
         RecyclerView.ViewHolder(vista),
         View.OnClickListener {
         // Using the binding
-        private val binding = TemplateGameBinding.bind(vista)
+        private val binding = TemplateGamePairBinding.bind(vista)
         var vista = vista
         var singImage: ImageView? = null
         var nombre: TextView? = null
@@ -111,8 +116,10 @@ class AdapterPairGame(
         init {
             singImage = binding.imageTemplateView
             constraintLayout = binding.constraintlayoutContainer
+            nombre = binding.letter
             this.listener = listener
             vista.setOnClickListener(this)
+
 
         }
 
