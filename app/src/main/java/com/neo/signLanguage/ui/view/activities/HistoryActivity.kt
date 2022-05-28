@@ -8,11 +8,14 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.HistoryAdapter
 import com.neo.signLanguage.databinding.ActivityHistoryBinding
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
+import com.neo.signLanguage.utils.SwipeToDeleteCallback
 
 
 class HistoryActivity : AppCompatActivity() {
@@ -56,14 +59,16 @@ class HistoryActivity : AppCompatActivity() {
         actionbar?.setDisplayHomeAsUpEnabled(true)
     }
 
+
     private fun initRecyclerView() {
 
         model.getAllSingFromDatabase
             .observe(this) {
+                val arrayList = ArrayList(it)
                 adapter =
                     HistoryAdapter(
                         this,
-                        it,
+                        arrayList,
                         object : ClickListener {
                             override fun onClick(v: View?, position: Int) {
                                 TabNavigatorActivity.binding.viewPager2.currentItem = 0
@@ -72,7 +77,7 @@ class HistoryActivity : AppCompatActivity() {
                         })
                 binding.rvHistory.layoutManager =
                     GridLayoutManager(this, 1)
-                binding.rvHistory.adapter = adapter
+
                 if (it.isEmpty()) {
                     binding.emptyHistoryLayout.visibility = View.VISIBLE
                     binding.deleteAllActionButton.visibility = View.GONE
@@ -80,7 +85,17 @@ class HistoryActivity : AppCompatActivity() {
                     binding.emptyHistoryLayout.visibility = View.GONE
                     binding.deleteAllActionButton.visibility = View.VISIBLE
                 }
-            }
+                val swipeDeleteCallBack = object : SwipeToDeleteCallback() {
+                    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                        model.deleteById(it!![viewHolder.adapterPosition].id.toLong())
+                        adapter.removeItem(viewHolder)
 
+                    }
+                }
+                val itemTouchHelper = ItemTouchHelper(swipeDeleteCallBack)
+                itemTouchHelper.attachToRecyclerView(binding.rvHistory)
+
+                binding.rvHistory.adapter = adapter
+            }
     }
 }

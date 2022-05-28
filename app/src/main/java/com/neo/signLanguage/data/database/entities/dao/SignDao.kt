@@ -1,6 +1,5 @@
 package com.neo.signLanguage.data.database.entities.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -23,4 +22,7 @@ interface SignDao {
 
     @Query("DELETE FROM sign_table")
     fun deleteAllRaw()
+
+    @Query("DELETE FROM sign_table WHERE id = :userId")
+    fun deleteSingById(userId: Long)
 }

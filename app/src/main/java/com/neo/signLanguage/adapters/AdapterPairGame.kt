@@ -47,21 +47,6 @@ class AdapterPairGame(
 
     override fun onBindViewHolder(holder: ViewHolderGame, position: Int) {
 
-        val item = items?.get(position)
-        /*holder.nombre?.text = item?.letter
-        holder.singImage?.setImageResource(item?.image!!)*/
-
-        if (item?.type == "letter") {
-            holder.nombre?.text = item.letter
-            holder.singImage?.visibility = View.GONE
-            holder.singImage?.setImageResource(item?.image!!)
-
-        } else {
-            holder.nombre?.text = item?.letter
-            holder.singImage?.setImageResource(item?.image!!)
-            holder.nombre?.visibility = View.GONE
-        }
-
 
         if (itemsSelected.contains(position)) {
             holder.vista.setBackgroundColor(Color.LTGRAY)
@@ -69,7 +54,18 @@ class AdapterPairGame(
         } else {
             holder.vista.setBackgroundColor(Color.WHITE)
         }
+        val item = items?.get(position)
+        /*holder.nombre?.text = item?.letter
+        holder.singImage?.setImageResource(item?.image!!)*/
 
+        if (item?.type == "letter") {
+            holder.nombre?.text = item?.letter
+            holder.nombre?.visibility = View.VISIBLE
+        } else {
+            holder.singImage?.setImageResource(item?.image!!)
+            holder.singImage?.visibility = View.VISIBLE
+        }
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -119,8 +115,6 @@ class AdapterPairGame(
             nombre = binding.letter
             this.listener = listener
             vista.setOnClickListener(this)
-
-
         }
 
         override fun onClick(v: View?) {

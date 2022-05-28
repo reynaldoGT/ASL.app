@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.R
 import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.data.models.SingDbModel
@@ -15,11 +16,12 @@ import java.lang.ref.WeakReference
 
 class HistoryAdapter(
     context: Context,
-    itemsHistory: List<SingDbModel>,
+    itemsHistory: ArrayList<SingDbModel>,
     var clickListener: ClickListener
 ) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
-    var itemsHistory: List<SingDbModel>? = null
+    var itemsHistory: ArrayList<SingDbModel>? = null
     var viewHolder: ViewHolder? = null
+
 
     var context: Context? = null
 
@@ -28,6 +30,11 @@ class HistoryAdapter(
         this.context = context
     }
 
+    fun removeItem(viewHolder: RecyclerView.ViewHolder) {
+        itemsHistory?.removeAt(viewHolder.adapterPosition)
+        Snackbar.make(viewHolder.itemView, "Elemento eliminado", Snackbar.LENGTH_LONG).show()
+        notifyItemRemoved(viewHolder.adapterPosition)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -58,7 +65,7 @@ class HistoryAdapter(
         init {
             tvHistory = binding.tvHistory
             listenerRef = WeakReference(listener)
-            tvHistory!!.setOnClickListener (this)
+            tvHistory!!.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
