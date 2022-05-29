@@ -311,7 +311,7 @@ class SendMessageFragment : Fragment() {
             override fun onAdDismissedFullScreenContent() {
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
             }
 
             override fun onAdShowedFullScreenContent() {

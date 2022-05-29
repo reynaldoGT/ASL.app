@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.fragments.GamesFragment">
+    tools:context=".ui.view.fragments.GamesMenuFragment">
 
 
     <LinearLayout
@@ -13,45 +13,11 @@
         android:orientation="vertical"
         tools:context=".GridAllLetters">
 
-        <TextView
-            android:id="@+id/currentAnswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Letra actual"
-            android:textSize="30sp"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/containerGrid" />
-
-        <Button
-            android:id="@+id/changeletters"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Cambiar"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/currentAnswer" />
-
-        <TextView
-            android:id="@+id/intents"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Numero de intentos: "
-            android:textSize="20sp"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/containerGrid" />
-
-
         <LinearLayout
             android:id="@+id/containerGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/gridListSing"

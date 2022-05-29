@@ -11,7 +11,7 @@ import kotlin.random.nextInt
 
 data class Game(
     val data: ArrayList<Sign>,
-    val correctAnswer: String,
+    val correctAnswer: Sign,
 )
 
 class DataSign {
@@ -84,7 +84,7 @@ class DataSign {
 
             return Game(
                 randomLetters,
-                randomLetters[(0 until randomLetters.size - 1).random()].letter
+                randomLetters[(0 until randomLetters.size - 1).random()]
             )
         }
 
@@ -128,7 +128,7 @@ class DataSign {
             }
             return Game(
                 resortList,
-                resortList[(0 until randomLetters.size - 1).random()].letter
+                resortList[(0 until randomLetters.size - 1).random()]
             )
         }
 

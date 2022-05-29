@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
         <activity
+            android:name=".ui.view.activities.SendMessageWithImagesActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.view.activities.TabNavigatorActivity" />
+        <activity
+            android:name=".ui.view.activities.FindPairGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.activities.FindTheLetterGameActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.activities.SettingsActivity"
             android:exported="false"
             android:parentActivityName=".ui.view.activities.TabNavigatorActivity" />
@@ -26,10 +36,10 @@
         <activity
             android:name=".ui.view.activities.TabNavigatorActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.Starting"
-            >
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,7 +47,6 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/test_id_application_admob" />
-
     </application>
 
 </manifest>

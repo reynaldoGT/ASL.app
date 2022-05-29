@@ -36,15 +36,15 @@ class FindPairLetters : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gameViewModel.setCurrentMessage(6)
-        gameViewModel.amount.observe(viewLifecycleOwner) {
+        val intents = 3
+        gameViewModel.setCurrentMessage(intents)
+        gameViewModel.intents.observe(viewLifecycleOwner) {
             binding.intents.text = it.toString()
         }
 
-
         gameViewModel.randomGameLetters.observe(viewLifecycleOwner) {
             binding.gridListSing.layoutManager = layoutManager
-            binding.currentAnswer.text = it.correctAnswer
+            binding.currentAnswer.text = it.correctAnswer.letter
             binding.gridListSing.setHasFixedSize(true)
             adaptador =
                 AdapterPairGame(
@@ -61,23 +61,10 @@ class FindPairLetters : Fragment() {
         }
 
         binding.changeletters.setOnClickListener {
-            gameViewModel.setCurrentMessage(3)
+            gameViewModel.setCurrentMessage(intents)
         }
 
 
     }
-
-    fun getRandom(to: Int): Set<Int> {
-
-        val randomInts = generateSequence {
-            // this lambda is the source of the sequence's values
-            Random.nextInt(0, to * 2)
-        }
-            .distinct()
-            .take(to * 2)
-            .toSet()
-        return randomInts
-    }
-
 
 }

@@ -51,7 +51,7 @@ class BottomNavigationFragment : Fragment() {
                 }*/
                 R.id.page_4 -> {
                     /*showSelectedFragment(FindPairLetters())*/
-                    showSelectedFragment(GamesFragment())
+                    showSelectedFragment(GamesMenuFragment())
                     true
                 }
                 else -> false

@@ -59,4 +59,9 @@
 
     <string name="current_hand_color">Color actual de la mano</string>
     <string name="maximum_number_characters">El número de máximo de caracteres es de %1$d</string>
+
+    <string name="intents">Numero de intentos %1$d </string>
+
+    <string name="game_find_game_title_letter">cual es el signo de la letra  %1$s </string>
+    <string name="game_find_game_title_number">cual es el signo del numero  %1$s </string>
 </resources>

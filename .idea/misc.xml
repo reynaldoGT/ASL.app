@@ -95,6 +95,8 @@
         <entry key="app/src/main/res/drawable/ic_a_only_sing.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/drawable/ic_b_only_sing.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_d_letter.xml" value="0.3343589743589744" />
+        <entry key="app/src/main/res/drawable/ic_h_letter.xml" value="0.212" />
+        <entry key="app/src/main/res/drawable/ic_h_only_sing.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_history.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/ic_n_only_sing.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_no_internet.xml" value="0.178" />
@@ -104,6 +106,8 @@
         <entry key="app/src/main/res/drawable/ic_r_only_sing.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/drawable/ic_s_only_sing.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/drawable/ic_space.xml" value="0.17708333333333334" />
+        <entry key="app/src/main/res/drawable/ic_w_letter.xml" value="0.212" />
+        <entry key="app/src/main/res/drawable/ic_w_only_sing.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_x_letter.xml" value="0.12395833333333334" />
         <entry key="app/src/main/res/drawable/ic_y_letter.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/drawable/ic_y_only_sing.xml" value="0.17708333333333334" />
@@ -113,10 +117,14 @@
         <entry key="app/src/main/res/drawable/layout_border_game.xml" value="0.2045" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.3234375" />
+        <entry key="app/src/main/res/layout/activity_find_letter_game.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_find_pair_game.xml" value="0.2659256092347157" />
         <entry key="app/src/main/res/layout/activity_giphy.xml" value="0.175" />
         <entry key="app/src/main/res/layout/activity_grid_all_letters.xml" value="0.13229166666666667" />
+        <entry key="app/src/main/res/layout/activity_history.xml" value="0.16802052159042324" />
         <entry key="app/src/main/res/layout/activity_intersitial.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_send_message_with_images.xml" value="0.2659256092347157" />
         <entry key="app/src/main/res/layout/activity_tabnavigator.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_bottom_navigation.xml" value="0.17572463768115942" />
         <entry key="app/src/main/res/layout/fragment_bottom_navigation_container.xml" value="0.13229166666666667" />
@@ -128,7 +136,7 @@
         <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_tabnavigator.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_view_numbers.xml" value="0.3234375" />
-        <entry key="app/src/main/res/layout/fragment_view_signs.xml" value="0.12" />
+        <entry key="app/src/main/res/layout/fragment_view_signs.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_view_sings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/no_internet_connection.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.33" />
@@ -138,7 +146,8 @@
         <entry key="app/src/main/res/layout/template_giphy.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/template_history.xml" value="0.22" />
         <entry key="app/src/main/res/layout/template_letter.xml" value="0.3223958333333333" />
-        <entry key="app/src/main/res/layout/template_menu_game.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/template_letter_send_message.xml" value="0.2659256092347157" />
+        <entry key="app/src/main/res/layout/template_menu_game.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.33" />
         <entry key="app/src/main/res/menu/menu_toolbar.xml" value="0.22" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.15" />

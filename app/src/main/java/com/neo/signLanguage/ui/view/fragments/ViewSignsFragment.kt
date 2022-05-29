@@ -44,7 +44,7 @@ class ViewSignsFragment : Fragment() {
 
         binding.gridListSing.setHasFixedSize(true)
 
-        layoutManager = GridLayoutManager(requireActivity().applicationContext, 2)
+        layoutManager = GridLayoutManager(requireContext(), 2)
         binding.gridListSing.layoutManager = layoutManager
 
         adaptador =
