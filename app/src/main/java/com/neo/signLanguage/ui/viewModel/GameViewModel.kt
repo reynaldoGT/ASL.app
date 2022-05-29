@@ -13,6 +13,9 @@ class GameViewModel : ViewModel() {
     val intents = MutableLiveData<Int>().apply {
         value = 3
     }
+    val gridNumbersMessage = MutableLiveData<Int>().apply {
+        value = 7
+    }
 
     fun setCurrentMessage(amount: Int) {
         randomGameLetters.postValue(DataSign.getRandomLetters(amount))
@@ -26,6 +29,10 @@ class GameViewModel : ViewModel() {
         intents.value?.let { a ->
             intents.value = a + intentNumber
         }
+    }
+    fun setGridNumbersMessage(intentNumber: Int) {
+        gridNumbersMessage.postValue(intentNumber)
+
     }
 
 

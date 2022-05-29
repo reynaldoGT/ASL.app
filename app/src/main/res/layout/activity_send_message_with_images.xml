@@ -17,14 +17,26 @@
 
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <LinearLayout
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
+        android:padding="16dp"
 
         tools:context=".GridAllLetters">
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="1"
+            android:valueTo="20"
+            app:labelBehavior="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeChange" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edSendMessage"

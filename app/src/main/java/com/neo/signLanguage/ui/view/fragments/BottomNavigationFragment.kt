@@ -25,15 +25,13 @@ class BottomNavigationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showSelectedFragment(SendMessageFragment())
+        showSelectedFragment(GamesMenuFragment())
 
         if (sharedPrefs.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-
-
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -63,13 +61,11 @@ class BottomNavigationFragment : Fragment() {
         childFragmentManager.beginTransaction().replace(R.id.container, fragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
 
 }

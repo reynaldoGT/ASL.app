@@ -1,6 +1,10 @@
 package com.neo.signLanguage.utils
 
 import android.app.Activity
+import android.content.Context
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
@@ -13,7 +17,6 @@ class Utils {
     companion object {
         fun getLoLanguageTag(): String {
             return (Locale.getDefault().toLanguageTag())
-
         }
 
         fun showSnackBar(activity: Activity, resourcesMessage: Int) {
@@ -48,5 +51,18 @@ class Utils {
             return stringCleaned
         }
 
+        fun vibratePhone(context: Context, timer: Long = 200) {
+            val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= 26) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        timer,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                )
+            } else {
+                vibrator.vibrate(timer)
+            }
+        }
     }
 }

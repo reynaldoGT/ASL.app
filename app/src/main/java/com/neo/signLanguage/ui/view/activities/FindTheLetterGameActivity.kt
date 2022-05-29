@@ -10,6 +10,7 @@ import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
+import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 
 class FindTheLetterGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindLetterGameBinding
@@ -56,6 +57,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                                     model.setCurrentMessage(intentsNumber)
 
                                 } else {
+                                    vibratePhone(applicationContext,200)
                                     model.setIntents(-1)
                                 }
                             }

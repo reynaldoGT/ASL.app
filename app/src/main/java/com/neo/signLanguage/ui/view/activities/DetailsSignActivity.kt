@@ -34,7 +34,6 @@ class DetailsSignActivity : AppCompatActivity() {
         circularProgressDrawable.centerRadius = 30f
         circularProgressDrawable.start()
 
-
         binding.imageTitle.text = letter
         try {
             if (netWorkImage) {
@@ -62,8 +61,5 @@ class DetailsSignActivity : AppCompatActivity() {
         this.setSupportActionBar(binding.detailToolbar)
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
-
     }
-
-
 }

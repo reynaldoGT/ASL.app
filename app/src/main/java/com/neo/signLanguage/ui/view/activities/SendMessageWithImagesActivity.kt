@@ -1,27 +1,21 @@
 package com.neo.signLanguage.ui.view.activities
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.AdapterLetters
+
+import com.google.android.material.slider.Slider.OnChangeListener
 import com.neo.signLanguage.ClickListener
-import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.AdapterLettersSendMessage
-import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
 import com.neo.signLanguage.databinding.ActivitySendMessageWithImagesBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
-import com.neo.signLanguage.ui.viewModel.GiphyViewModel
-import com.neo.signLanguage.utils.DataSign
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
-import com.orhanobut.logger.Logger
+
 
 class SendMessageWithImagesActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySendMessageWithImagesBinding
@@ -35,10 +29,11 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
         binding = ActivitySendMessageWithImagesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var lettersArray = ArrayList<Sign>()
+        model.gridNumbersMessage.observe(this) {
 
-        layoutManager = GridLayoutManager(this, 7)
-        binding.gridListSing.layoutManager = layoutManager
+            layoutManager = GridLayoutManager(this, it)
+            binding.gridListSing.layoutManager = layoutManager
+        }
 
         model.sendMessageImages.observe(this) {
             adaptador =
@@ -72,9 +67,13 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
         })
         initActionBar()
 
+
+        binding.slider.addOnChangeListener(OnChangeListener { slider, value, fromUser ->
+            model.setGridNumbersMessage(slider.value.toInt())
+        })
     }
 
-    private fun initActionBar(){
+    private fun initActionBar() {
         binding.detailToolbar.title = "Enviar mensaje con imagenes"
         this.setSupportActionBar(binding.detailToolbar)
         val actionbar = supportActionBar
