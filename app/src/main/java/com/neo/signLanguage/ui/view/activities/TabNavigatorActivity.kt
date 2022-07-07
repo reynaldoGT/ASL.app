@@ -9,14 +9,17 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.room.Room
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
+import com.neo.signLanguage.ui.view.fragments.GamesMenuFragment
+import com.neo.signLanguage.ui.view.fragments.SendMessageFragment
+import com.neo.signLanguage.ui.view.fragments.DictionaryFragment
+import com.neo.signLanguage.ui.view.fragments.TranslateFragment
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
@@ -61,21 +64,21 @@ class TabNavigatorActivity : AppCompatActivity() {
         setContentView(binding.root)
         val fm: FragmentManager = supportFragmentManager
         fragmentAdapter = TabAdapter(fm, lifecycle)
-        binding.viewPager2.adapter = fragmentAdapter
+        /*binding.viewPager2.adapter = fragmentAdapter*/
 
         //toolbar
-        binding.toolbar.setTitle(R.string.app_name)
-        setSupportActionBar(binding.toolbar)
+        /*binding.toolbar.setTitle(R.string.app_name)
+        setSupportActionBar(binding.toolbar)*/
 
 
-        binding.tabLayout.addTab(
+        /*binding.tabLayout.addTab(
             binding.tabLayout.newTab().setText(getString(R.string.send_message))
         )
         binding.tabLayout.addTab(
             binding.tabLayout.newTab().setText(getString(R.string.movement_signs))
-        )
+        )*/
 
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        /*binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 binding.viewPager2.currentItem = tab!!.position
             }
@@ -97,7 +100,32 @@ class TabNavigatorActivity : AppCompatActivity() {
                 }
                 super.onPageSelected(position)
             }
-        })
+        })*/
+
+        showSelectedFragment(TranslateFragment())
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.page_1 -> {
+                    showSelectedFragment(TranslateFragment())
+                    true
+                }
+                R.id.page_2 -> {
+                    showSelectedFragment(DictionaryFragment())
+                    true
+                }
+                /*R.id.page_3 -> {
+                    showSelectedFragment(ViewNumbersFragment())
+                    true
+                }*/
+                R.id.page_4 -> {
+                    /*showSelectedFragment(FindPairLetters())*/
+                    showSelectedFragment(GamesMenuFragment())
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
 
@@ -122,5 +150,20 @@ class TabNavigatorActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    private fun showSelectedFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+    /* private fun showSelectedFragment(fragment: Fragment) {
+         childFragmentManager.beginTransaction().replace(R.id.container, fragment)
+             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+             .commit()
+     }*/
 
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }*/
 }

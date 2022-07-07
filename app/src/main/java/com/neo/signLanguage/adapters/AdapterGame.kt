@@ -8,8 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.adapters.GiphyViewHolder
-import com.neo.signLanguage.databinding.TemplateLetterBinding
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.TemplateGameBinding
 
@@ -62,7 +61,6 @@ class AdapterGame(
 
         init {
             singImage = binding.imageTemplateView
-
             this.listener = listener
             vista.setOnClickListener(this)
         }

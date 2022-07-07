@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.GiphyItem
 
@@ -29,6 +28,5 @@ class GiphyAdapter(
     override fun onBindViewHolder(holder: GiphyViewHolder, position: Int) {
         holder.bind(images[position].images.original.url, images[position].title)
     }
-
 
 }

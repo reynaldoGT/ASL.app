@@ -1,4 +1,4 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.TemplateLetterBinding
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
@@ -65,14 +66,23 @@ class AdapterLetters(
 
         init {
             foto = binding.imageTemplateView
-            if (sharedPrefs.getColor() != 0)
+            nombre = binding.textViewTemplateView
+            if (sharedPrefs.getColor() != 0) {
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(
                         context!!,
                         sharedPrefs.getColor()
                     )
                 )
-            nombre = binding.textViewTemplateView
+
+                binding.textViewTemplateView.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        sharedPrefs.getColor()
+                    )
+                )
+
+            }
             this.listener = listener
             vista.setOnClickListener(this)
         }

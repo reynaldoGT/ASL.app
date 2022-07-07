@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
-import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.SettingsActivityBinding
@@ -16,7 +16,6 @@ import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sh
 import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import com.neo.signLanguage.utils.DataSign
-import com.orhanobut.logger.Logger
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -35,6 +34,7 @@ class SettingsActivity : AppCompatActivity() {
         actionbar?.setDisplayHomeAsUpEnabled(true)
 
         binding.switchChangeTheme.isChecked = sharedPrefs.getTheme()
+        binding.switchChangeVibration.isChecked = sharedPrefs.getVibration()
         binding.cbTransition.isChecked = sharedPrefs.getShowTransition()
         binding.currentDelayValue.text = sharedPrefs.getDelay().toString() + "ms."
 
@@ -49,6 +49,10 @@ class SettingsActivity : AppCompatActivity() {
                 sharedPrefs.setTheme(isChecked)
             }
         }
+        binding.switchChangeVibration.setOnCheckedChangeListener { _, isChecked ->
+            sharedPrefs.setVibration(isChecked)
+        }
+
         binding.slider.value = sharedPrefs.getDelay().toFloat()
         binding.slider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) {

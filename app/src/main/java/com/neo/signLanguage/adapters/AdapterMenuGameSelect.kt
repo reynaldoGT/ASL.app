@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.R
-import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.TemplateMenuGameBinding
 import java.lang.ref.WeakReference

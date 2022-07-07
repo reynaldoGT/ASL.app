@@ -9,11 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.databinding.TemplateGameBinding
 import com.neo.signLanguage.databinding.TemplateGamePairBinding
 import com.orhanobut.logger.Logger
 
@@ -47,10 +45,8 @@ class AdapterPairGame(
 
     override fun onBindViewHolder(holder: ViewHolderGame, position: Int) {
 
-
         if (itemsSelected.contains(position)) {
             holder.vista.setBackgroundColor(Color.LTGRAY)
-
         } else {
             holder.vista.setBackgroundColor(Color.WHITE)
         }

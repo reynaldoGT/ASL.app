@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.HistoryAdapter
 import com.neo.signLanguage.databinding.ActivityHistoryBinding
@@ -71,7 +71,6 @@ class HistoryActivity : AppCompatActivity() {
                         arrayList,
                         object : ClickListener {
                             override fun onClick(v: View?, position: Int) {
-                                TabNavigatorActivity.binding.viewPager2.currentItem = 0
                                 model.setCurrentMessage(it!![position].sing, false)
                             }
                         })
@@ -89,7 +88,6 @@ class HistoryActivity : AppCompatActivity() {
                     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                         model.deleteById(it!![viewHolder.adapterPosition].id.toLong())
                         adapter.removeItem(viewHolder)
-
                     }
                 }
                 val itemTouchHelper = ItemTouchHelper(swipeDeleteCallBack)

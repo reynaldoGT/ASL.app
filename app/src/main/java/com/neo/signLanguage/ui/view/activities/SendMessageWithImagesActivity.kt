@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.google.android.material.slider.Slider.OnChangeListener
-import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.R
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.adapters.AdapterLettersSendMessage
 import com.neo.signLanguage.databinding.ActivitySendMessageWithImagesBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
@@ -28,6 +29,8 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySendMessageWithImagesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        model.setMessageWithImages(messageToImages(resources.getString(R.string.hello_from_here)))
 
         model.gridNumbersMessage.observe(this) {
 
@@ -48,7 +51,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
 
             binding.gridListSing.adapter = adaptador
         }
-
+        binding.edSendMessage.editText?.setText(resources.getString(R.string.hello_from_here))
         binding.edSendMessage.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -56,8 +59,6 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 model.setMessageWithImages(messageToImages(s.toString()))
-
-                /*adaptador!!.notifyDataSetChanged()*/
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -67,7 +68,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
         })
         initActionBar()
 
-
+        binding.slider.value = 7F
         binding.slider.addOnChangeListener(OnChangeListener { slider, value, fromUser ->
             model.setGridNumbersMessage(slider.value.toInt())
         })

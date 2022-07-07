@@ -51,6 +51,8 @@
     <string name="right_to_left">Right to left</string>
     <string name="theme">Theme</string>
     <string name="movement_signs">Movement ASL</string>
+    <string name="search_words">Search words</string>
+    <string name="letter_and_numbers">Letter and numbers</string>
     <string name="simple_description">simple_description</string>
     <string name="history">history</string>
     <string name="no_microphone">This device does not have a voice recorder</string>
@@ -65,6 +67,12 @@
     <string name="intents">Numero de intentos %1$d </string>
     <string name="game_find_game_title_letter">cual es el signo de la letra  %1$s </string>
     <string name="game_find_game_title_number">cual es el signo del numero  %1$s</string>
+
+
+    <string name="hello_from_here">Hello from here</string>
+    <string name="translate">Translate</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="games">Games</string>
 
 
 </resources>

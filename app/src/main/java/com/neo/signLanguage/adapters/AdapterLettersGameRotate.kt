@@ -1,8 +1,10 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.adapters
 
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.databinding.TemplateLetterBinding
+import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.TemplateGameRotatePairBinding
 import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
@@ -25,6 +27,7 @@ class AdapterLettersGameRotate(
     var items: ArrayList<Sign>? = null
     var viewHolder: ViewHolder? = null
     var context: Context? = null
+    var itemsSelected: ArrayList<Int> = ArrayList()
 
     init {
         this.items = items
@@ -42,48 +45,69 @@ class AdapterLettersGameRotate(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val item = items?.get(position)
         holder.foto?.setImageResource(item?.image!!)
         holder.nombre?.text = item?.letter
+        /*holder.rotate()*/
 
+        /*holder.vista.isClickable = false*/
+        if (this.itemsSelected.contains(position)) {
+            holder.vista.setBackgroundColor(Color.LTGRAY)
+        } else {
+            holder.vista.setBackgroundColor(Color.WHITE)
+        }
     }
 
     override fun getItemCount(): Int {
         return items?.count()!!
     }
 
-    class ViewHolder(vista: View, listener: ClickListener, context: Context?) :
+    fun selectItem(index: Int) {
+
+        if (itemsSelected.contains(index)) {
+            itemsSelected.remove(index)
+        } else {
+            itemsSelected.add(index)
+        }
+        notifyDataSetChanged()
+    }
+
+    class ViewHolder(
+        vista: View,
+        listener: ClickListener,
+        context: Context?
+    ) :
         RecyclerView.ViewHolder(vista),
         View.OnClickListener {
         //animation
 
-        lateinit var frontAnim: AnimatorSet
-        lateinit var backAnim: AnimatorSet
+        private var frontAnim: AnimatorSet
+        private var backAnim: AnimatorSet
         var isFront = true
 
         // Using the binding
         private val binding = TemplateGameRotatePairBinding.bind(vista)
+        var vista = vista
         var foto: ImageView? = null
         var nombre: TextView? = null
         var listener: ClickListener? = null
 
         init {
             foto = binding.imageCardBack
-            /*if (sharedPrefs.getColor() != 0)
-                binding.imageTemplateView.setColorFilter(
+            if (sharedPrefs.getColor() != 0)
+                binding.imageCardBack.setColorFilter(
                     ContextCompat.getColor(
                         context!!,
                         sharedPrefs.getColor()
                     )
-                )*/
-            nombre = binding.imageCardFront
+                )
+            /*nombre = binding.imageCardFront*/
             this.listener = listener
             vista.setOnClickListener(this)
 
             val scale = context?.resources?.displayMetrics?.density
-            binding.imageCardBack.cameraDistance = 8000 * scale!!
-            binding.imageCardFront.cameraDistance = 8000 * scale
+            binding.imageCardFront.cameraDistance = 8000 * scale!!
+            binding.imageCardBack.cameraDistance = 8000 * scale
 
             frontAnim = AnimatorInflater.loadAnimator(
                 context,
@@ -112,10 +136,9 @@ class AdapterLettersGameRotate(
         }
 
         override fun onClick(v: View?) {
-            rotate()
+
             this.listener?.onClick(v!!, adapterPosition)
+            rotate()
         }
     }
-
-
 }

@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.TemplateLetterSendMessageBinding
@@ -42,7 +41,7 @@ class AdapterLettersSendMessage(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items?.get(position)
-        holder.foto?.setImageResource(item?.image!!)
+        holder.image?.setImageResource(item?.image!!)
         holder.nombre?.text = item?.letter
     }
 
@@ -57,20 +56,28 @@ class AdapterLettersSendMessage(
         // Using the binding
         private val binding = TemplateLetterSendMessageBinding.bind(vista)
 
-        var foto: ImageView? = null
+        var image: ImageView? = null
         var nombre: TextView? = null
         var listener: ClickListener? = null
 
         init {
-            foto = binding.imageTemplateView
-            if (sharedPrefs.getColor() != 0)
+            image = binding.imageTemplateView
+            nombre = binding.textViewTemplateView
+            if (sharedPrefs.getColor() != 0) {
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(
                         context!!,
                         sharedPrefs.getColor()
                     )
                 )
-            nombre = binding.textViewTemplateView
+                binding.textViewTemplateView.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        sharedPrefs.getColor()
+                    )
+                )
+            }
+
             this.listener = listener
             vista.setOnClickListener(this)
         }

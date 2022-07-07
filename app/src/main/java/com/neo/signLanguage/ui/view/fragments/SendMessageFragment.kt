@@ -1,6 +1,5 @@
 package com.neo.signLanguage.ui.view.fragments
 
-
 import android.app.ActionBar
 import android.app.Activity
 import android.content.ActivityNotFoundException

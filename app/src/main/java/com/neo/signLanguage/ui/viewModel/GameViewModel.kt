@@ -14,11 +14,14 @@ class GameViewModel : ViewModel() {
         value = 3
     }
     val gridNumbersMessage = MutableLiveData<Int>().apply {
-        value = 7
+        value = 5
     }
 
-    fun setCurrentMessage(amount: Int) {
-        randomGameLetters.postValue(DataSign.getRandomLetters(amount))
+    fun getRandomToFindLetter(amount: Int) {
+        randomGameLetters.postValue(DataSign.getRandomToFindCorrectLetter(amount))
+    }
+    fun getRandomToFindEquals(amount: Int) {
+        randomGameLetters.postValue(DataSign.getRandomToFindEquals(amount))
     }
 
     fun setMessageWithImages(singList: ArrayList<Sign>) {

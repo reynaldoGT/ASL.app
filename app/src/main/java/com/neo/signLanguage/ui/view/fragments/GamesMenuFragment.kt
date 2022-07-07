@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 
-import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.AdapterMenuGameSelect
 import com.neo.signLanguage.data.models.MenuTitle
@@ -35,7 +35,7 @@ class GamesMenuFragment : Fragment() {
 
         // Using the binding
         _binding = FragmentGamesBinding.inflate(inflater, container, false)
-        gameViewModel.setCurrentMessage(3)
+        gameViewModel.getRandomToFindLetter(3)
         return binding.root
     }
 

@@ -68,7 +68,7 @@ class DataSign {
             return lettersArray
         }
 
-        fun getRandomLetters(amount: Int): Game {
+        fun getRandomToFindCorrectLetter(amount: Int): Game {
             val randomLetters = ArrayList<Sign>()
             val randomInts = generateSequence {
                 // this lambda is the source of the sequence's values

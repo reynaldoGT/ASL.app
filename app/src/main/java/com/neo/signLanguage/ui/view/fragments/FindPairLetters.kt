@@ -9,10 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.adapters.AdapterPairGame
-import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.databinding.FragmentFindPairLettersBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
-import kotlin.random.Random
 
 
 class FindPairLetters : Fragment() {
@@ -37,7 +36,7 @@ class FindPairLetters : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val intents = 3
-        gameViewModel.setCurrentMessage(intents)
+        gameViewModel.getRandomToFindLetter(intents)
         gameViewModel.intents.observe(viewLifecycleOwner) {
             binding.intents.text = it.toString()
         }
@@ -61,7 +60,7 @@ class FindPairLetters : Fragment() {
         }
 
         binding.changeletters.setOnClickListener {
-            gameViewModel.setCurrentMessage(intents)
+            gameViewModel.getRandomToFindLetter(intents)
         }
 
 

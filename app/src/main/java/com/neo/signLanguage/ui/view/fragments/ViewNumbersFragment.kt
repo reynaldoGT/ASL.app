@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
-import com.neo.signLanguage.AdapterGame
-import com.neo.signLanguage.AdapterLetters
-import com.neo.signLanguage.ClickListener
+import com.neo.signLanguage.adapters.AdapterLetters
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.databinding.FragmentNumbersBinding
 import com.neo.signLanguage.utils.DataSign.Companion.getOnlyNumbers

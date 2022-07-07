@@ -1,56 +1,51 @@
 package com.neo.signLanguage.ui.view.activities
 
-import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.ActivityDetailsBinding
+import android.util.Log
+import android.view.View
+import androidx.activity.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.neo.signLanguage.adapters.AdapterLettersGameRotate
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.databinding.ActivityFindPairGameBinding
+
+import com.neo.signLanguage.ui.viewModel.GameViewModel
+import com.orhanobut.logger.Logger
 
 class FindPairGameActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFindPairGameBinding
-    lateinit var frontAnim: AnimatorSet
-    lateinit var backAnim: AnimatorSet
-    var isFront = true
+
+    lateinit var adapter: AdapterLettersGameRotate
+    private val model: GameViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFindPairGameBinding.inflate(layoutInflater)
+        model.getRandomToFindEquals(4)
+        initRecyclerView()
         setContentView(binding.root)
-
-        val scale = applicationContext.resources.displayMetrics.density
-        binding.cardFront.cameraDistance = 8000 * scale
-        binding.cardBack.cameraDistance = 8000 * scale
-
-        frontAnim = AnimatorInflater.loadAnimator(
-            applicationContext,
-            R.animator.front_animation
-        ) as AnimatorSet
-        backAnim = AnimatorInflater.loadAnimator(
-            applicationContext,
-            R.animator.back_animation
-        ) as AnimatorSet
-
-        binding.cardContainer.setOnClickListener {
-            rotate()
-        }
-
     }
 
-    fun rotate() {
-        isFront = if (isFront) {
-            frontAnim.setTarget(binding.cardFront)
-            backAnim.setTarget(binding.cardBack)
-            frontAnim.start()
-            backAnim.start()
-            false
-        } else {
-            frontAnim.setTarget(binding.cardBack)
-            backAnim.setTarget(binding.cardFront)
-            backAnim.start()
-            frontAnim.start()
-            true
-        }
+    private fun initRecyclerView() {
+
+        model.randomGameLetters
+            .observe(this) {
+                adapter =
+                    AdapterLettersGameRotate(
+                        this,
+                        it.data,
+                        object : ClickListener {
+                            override fun onClick(v: View?, position: Int) {
+                                /*it.data[position]*/
+                                /*Log.d("value", position.toString())
+                                */
+                                adapter.selectItem(position)
+
+                            }
+                        })
+                binding.rvHistory.layoutManager = GridLayoutManager(this, 4)
+                binding.rvHistory.adapter = adapter
+            }
     }
 }

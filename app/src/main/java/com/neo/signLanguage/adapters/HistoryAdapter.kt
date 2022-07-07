@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.R
-import com.neo.signLanguage.ClickListener
 import com.neo.signLanguage.data.models.SingDbModel
 import com.neo.signLanguage.databinding.TemplateHistoryBinding
 import java.lang.ref.WeakReference

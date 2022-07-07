@@ -48,6 +48,8 @@
     <string name="right_to_left">Derecha a izquierda</string>
     <string name="theme">Tema</string>
     <string name="movement_signs">Señas con movimiento</string>
+    <string name="letter_and_numbers">Letras y números</string>
+    <string name="search_words">Buscar Palabras</string>
     <string name="simple_description">simple_description</string>
     <string name="history">Historial</string>
     <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
@@ -64,4 +66,5 @@
 
     <string name="game_find_game_title_letter">cual es el signo de la letra  %1$s </string>
     <string name="game_find_game_title_number">cual es el signo del numero  %1$s </string>
+    <string name="hello_from_here">Hola desde aquí</string>
 </resources>

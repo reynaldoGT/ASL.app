@@ -10,8 +10,6 @@ import com.google.android.material.button.MaterialButton
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.TemplateColorBinding
 import com.neo.signLanguage.data.models.Color
-import com.neo.signLanguage.ClickListener
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
 import java.lang.ref.WeakReference
 
 
