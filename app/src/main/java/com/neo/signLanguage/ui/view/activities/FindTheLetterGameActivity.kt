@@ -61,7 +61,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                                     model.getRandomToFindLetter(intentsNumber)
                                 } else {
                                     Logger.d("Show add")
-                                    if (TabNavigatorActivity.sharedPrefs.getVibration()) {
+                                    if (MainActivity.sharedPrefs.getVibration()) {
                                         vibratePhone(applicationContext, 200)
                                     }
                                     model.setIntents(-1)

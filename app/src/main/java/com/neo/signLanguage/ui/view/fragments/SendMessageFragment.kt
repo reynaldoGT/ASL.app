@@ -31,9 +31,9 @@ import com.neo.signLanguage.*
 import com.neo.signLanguage.data.database.entities.SignEntity
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.MainActivity
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.getColorShared
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils
@@ -277,7 +277,7 @@ class SendMessageFragment : Fragment() {
             generateSingLanguageMessage()
 
             lifecycleScope.launch {
-                TabNavigatorActivity.database.getSignDao()
+                MainActivity.database.getSignDao()
                     .addSing(
                         SignEntity(0,
                             stringCleaned.replaceFirstChar {

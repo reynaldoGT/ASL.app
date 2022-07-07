@@ -26,7 +26,7 @@ import com.neo.signLanguage.utils.SharedPreferences
 import java.util.*
 
 
-class TabNavigatorActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     var fragmentAdapter: TabAdapter? = null
 
     companion object {
@@ -102,7 +102,7 @@ class TabNavigatorActivity : AppCompatActivity() {
             }
         })*/
 
-        showSelectedFragment(TranslateFragment())
+        showSelectedFragment(GamesMenuFragment())
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

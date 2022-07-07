@@ -20,7 +20,7 @@ import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getLanguagePhone
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.getLanguagePhone
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.ui.viewModel.NetworkViewModel
 import kotlinx.coroutines.CoroutineScope

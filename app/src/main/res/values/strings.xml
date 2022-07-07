@@ -73,6 +73,7 @@
     <string name="translate">Translate</string>
     <string name="dictionary">Dictionary</string>
     <string name="games">Games</string>
+    <string name="placeholder">Enter your message</string>
 
 
 </resources>

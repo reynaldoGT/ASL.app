@@ -1,14 +1,11 @@
 package com.neo.signLanguage.ui.viewModel
 
 import androidx.lifecycle.*
-import com.neo.signLanguage.data.database.entities.SignEntity
-import com.neo.signLanguage.data.database.entities.dao.SignDao
 import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.data.models.SingDbModel
 import com.neo.signLanguage.data.models.toDomain
 import com.neo.signLanguage.domain.GetGiphyUseCase
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity
-import com.orhanobut.logger.Logger
+import com.neo.signLanguage.ui.view.activities.MainActivity
 import kotlinx.coroutines.launch
 
 
@@ -38,18 +35,18 @@ class GiphyViewModel : ViewModel() {
 
     fun getAllSingFromDatabase() {
         getAllSingFromDatabase.postValue(
-            TabNavigatorActivity.database.getSignDao().getAllSing().map { it.toDomain() })
+            MainActivity.database.getSignDao().getAllSing().map { it.toDomain() })
     }
 
     fun deleteAllHistory() {
-        TabNavigatorActivity.database.getSignDao().deleteAllRaw()
+        MainActivity.database.getSignDao().deleteAllRaw()
         getAllSingFromDatabase.postValue(
-            TabNavigatorActivity.database.getSignDao().getAllSing().map { it.toDomain() })
+            MainActivity.database.getSignDao().getAllSing().map { it.toDomain() })
     }
 
     fun deleteById(id: Long) {
-        TabNavigatorActivity.database.getSignDao().deleteSingById(id)
+        MainActivity.database.getSignDao().deleteSingById(id)
         getAllSingFromDatabase.postValue(
-            TabNavigatorActivity.database.getSignDao().getAllSing().map { it.toDomain() })
+            MainActivity.database.getSignDao().getAllSing().map { it.toDomain() })
     }
 }

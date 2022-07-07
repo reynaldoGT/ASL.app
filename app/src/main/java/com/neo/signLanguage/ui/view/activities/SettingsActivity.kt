@@ -12,7 +12,7 @@ import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.SettingsActivityBinding
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import com.neo.signLanguage.utils.DataSign

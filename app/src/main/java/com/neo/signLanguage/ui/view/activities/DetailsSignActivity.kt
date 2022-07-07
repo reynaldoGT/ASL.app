@@ -8,8 +8,8 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.getColorShared
-import com.neo.signLanguage.ui.view.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.getColorShared
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.orhanobut.logger.Logger
 import java.util.*
 
