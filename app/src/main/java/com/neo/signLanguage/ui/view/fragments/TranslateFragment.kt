@@ -34,6 +34,7 @@ const val ENTRADA_DE_VOZ = 2
 class TranslateFragment : Fragment() {
 
     private var _binding: FragmentTranslateBinding? = null
+    private val binding get() = _binding!!
     private var cliente: SessionsClient? = null
     private var sesion: SessionName? = null
     private val uuid: String = UUID.randomUUID().toString()
@@ -50,16 +51,16 @@ class TranslateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       /* _binding?.scrollChat!!.post {
-            _binding!!.scrollChat.fullScroll(ScrollView.FOCUS_DOWN)
-        }*/
+        binding.scrollChat.post {
+            binding.scrollChat.fullScroll(ScrollView.FOCUS_DOWN)
+        }
 
 
-        /*_binding!!.cajaMensajes.setOnKeyListener { view, keyCode, event ->
+        binding.cajaMensajes.setOnKeyListener { view, keyCode, event ->
             if (event.action === KeyEvent.ACTION_DOWN) {
                 when (keyCode) {
                     KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                        enviarMensaje(_binding!!.enviar)
+                        enviarMensaje(binding!!.enviar)
                     }
                     else -> {
                     }
@@ -68,23 +69,23 @@ class TranslateFragment : Fragment() {
             false
         }
 
-        _binding!!.enviar.setOnClickListener(this::enviarMensaje)
+        binding.enviar.setOnClickListener(this::enviarMensaje)
 
         // Al botón del microfono también le pasamos un setOnClickListener, este envia mensajes de audio con el
         // método enviarMensajeMicrofono() el cual crearemos más adelante
-        _binding!!.microfono.setOnClickListener(this::enviarMensajeMicrofono)
+        binding.microfono.setOnClickListener(this::enviarMensajeMicrofono)
 
         // Llamamos al método iniciarAsistente() el cual crearemos más adelante
         iniciarAsistente()
 
         // Llamamos al método iniciarAsistenteVoz() el cual crearemos más adelante
-        iniciarAsistenteVoz()*/
+        iniciarAsistenteVoz()
     }
 
     private fun enviarMensaje(view: View) {
 
         // Obtenemos el mensaje de la caja de texto y lo pasamos a String
-        val mensaje = _binding!!.cajaMensajes.text.toString()
+        val mensaje = binding.cajaMensajes.text.toString()
 
         // Si el usuario no ha escrito un mensaje en la caja de texto y presiona el botón enviar, le mostramos
         // un Toast con un mensaje 'Ingresa tu mensaje ...'
@@ -96,13 +97,13 @@ class TranslateFragment : Fragment() {
         // Si el usuario agrego un mensaje a la caja de texto, llamamos al método agregarTexto()
         else {
             agregarTexto(mensaje, USUARIO)
-            _binding!!.cajaMensajes.setText("")
+            binding.cajaMensajes.setText("")
 
             // Enviamos la consulta del usuario al Bot
             val ingresarConsulta =
                 QueryInput.newBuilder()
                     .setText(TextInput.newBuilder().setText(mensaje).setLanguageCode("es")).build()
-            SolicitarTarea(requireActivity(), sesion!!, cliente!!, ingresarConsulta).execute()
+            SolicitarTarea(this, sesion!!, cliente!!, ingresarConsulta).execute()
         }
     }
 
@@ -134,6 +135,7 @@ class TranslateFragment : Fragment() {
 
         } catch (e: Exception) {
             e.printStackTrace()
+
         }
 
     }
@@ -168,7 +170,7 @@ class TranslateFragment : Fragment() {
         layoutFrm.isFocusableInTouchMode = true
 
         // Pasamos un LinearLayout
-        _binding!!.linearChat.addView(layoutFrm)
+        binding.linearChat.addView(layoutFrm)
 
         // Mostramos los textos de los mensajes en un TextView
         val textview = layoutFrm.findViewById<TextView>(R.id.msg_chat)
@@ -183,7 +185,7 @@ class TranslateFragment : Fragment() {
         layoutFrm.requestFocus()
 
         // Volvemos a cambiar el enfoque para editar el texto y continuar escribiendo
-        _binding!!.cajaMensajes.requestFocus()
+        binding.cajaMensajes.requestFocus()
 
         // Si es un cliente el que envía un mensaje al Bot, cargamos el método 'TexToSpeech'
         // 'TexToSpeech' junto a otras métodos procesa los mensajes de voz que seran enviados al Bot
@@ -246,11 +248,11 @@ class TranslateFragment : Fragment() {
                     val resultado = datos.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
 
                     // El usuario puede agregar otro mensaje
-                    _binding!!.cajaMensajes.text =
+                    binding.cajaMensajes.text =
                         Editable.Factory.getInstance().newEditable(resultado?.get(0))
 
                     // El usuario puede hacer uso del micrófono
-                    enviarMensaje(_binding!!.microfono)
+                    enviarMensaje(binding.microfono)
                 }
             }
         }

@@ -16,10 +16,7 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
-import com.neo.signLanguage.ui.view.fragments.GamesMenuFragment
-import com.neo.signLanguage.ui.view.fragments.SendMessageFragment
-import com.neo.signLanguage.ui.view.fragments.DictionaryFragment
-import com.neo.signLanguage.ui.view.fragments.TranslateFragment
+import com.neo.signLanguage.ui.view.fragments.*
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
@@ -102,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             }
         })*/
 
-        showSelectedFragment(GamesMenuFragment())
+        showSelectedFragment(TranslateFragment())
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

@@ -1,72 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.view.fragments.TranslateFragment">
+
 
     <RelativeLayout
-        android:id="@+id/contenedor"
+
+        android:paddingBottom="50dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:gravity="bottom"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="9dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/enviar"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:paddingTop="4dp"
-            android:paddingRight="4dp"
-            android:paddingBottom="4dp"
-            android:scaleType="centerInside" />
-
-        <ImageView
-            android:id="@+id/microfono"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_toLeftOf="@+id/enviar"
-            android:padding="4dp"
-            android:scaleType="centerInside" />
-
-        <EditText
-            android:id="@+id/cajadetexto"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/microfono"
-            android:background="@drawable/cajatxt"
-            android:hint="@string/placeholder"
-            android:imeOptions="actionSend"
-            android:inputType="text"
-            android:padding="10dp"
-            android:selectAllOnFocus="true"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-    <ScrollView
-        android:id="@+id/scroll_chat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/contenedor">
-
-        <LinearLayout
-            android:id="@+id/linear_chat"
+        <RelativeLayout
+            android:id="@+id/contenedor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:gravity="bottom"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="9dp">
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/enviar"
 
-    </ScrollView>
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:paddingTop="4dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="4dp"
+                android:scaleType="centerInside" />
 
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/microfono"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_toLeftOf="@+id/enviar"
+                android:padding="4dp"
+                android:scaleType="centerInside" />
+
+            <EditText
+                android:id="@+id/cajaMensajes"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/microfono"
+                android:background="@drawable/cajatxt"
+                android:hint="@string/placeholder"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:padding="10dp"
+                android:selectAllOnFocus="true"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/contenedor">
+
+            <LinearLayout
+                android:id="@+id/linear_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+</FrameLayout>
