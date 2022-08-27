@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity() {
         val fm: FragmentManager = supportFragmentManager
         fragmentAdapter = TabAdapter(fm, lifecycle)
         /*binding.viewPager2.adapter = fragmentAdapter*/
-
         //toolbar
         /*binding.toolbar.setTitle(R.string.app_name)
         setSupportActionBar(binding.toolbar)*/
+
 
 
         /*binding.tabLayout.addTab(
@@ -99,14 +99,11 @@ class MainActivity : AppCompatActivity() {
             }
         })*/
 
-        showSelectedFragment(TranslateFragment())
+        showSelectedFragment(DictionaryFragment())
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.page_1 -> {
-                    showSelectedFragment(TranslateFragment())
-                    true
-                }
+
                 R.id.page_2 -> {
                     showSelectedFragment(DictionaryFragment())
                     true

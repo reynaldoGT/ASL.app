@@ -121,4 +121,7 @@ dependencies {
 
     // Implementación de Java gRPC
     implementation 'io.grpc:grpc-okhttp:1.38.0'
+
+    //color picker
+    implementation "com.github.skydoves:colorpickerview:2.2.4"
 }

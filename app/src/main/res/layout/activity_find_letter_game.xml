@@ -16,33 +16,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-
         android:orientation="vertical"
+
+        android:padding="8dp"
         tools:context=".GridAllLetters">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/lifesContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"></Space>
+
+            <TextView
+                android:id="@+id/currentRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginVertical="8dp"
+                android:text="Record: "
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/currentAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginVertical="8dp"
             android:text="Letra actual"
-            android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/intents"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Numero de intentos: "
-            android:textSize="20sp" />
+            android:textSize="25sp" />
 
 
         <LinearLayout
-            android:id="@+id/containerGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

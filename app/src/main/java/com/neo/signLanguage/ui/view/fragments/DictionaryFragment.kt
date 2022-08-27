@@ -1,25 +1,17 @@
 package com.neo.signLanguage.ui.view.fragments
 
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdRequest
-import com.neo.signLanguage.adapters.ClickListener
-
-import android.content.Intent
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.AdapterLetters
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentDictionarySignsBinding
-import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
-import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 
 
 class DictionaryFragment : Fragment() {
@@ -42,6 +34,7 @@ class DictionaryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         /*val lettersArray = getLetterArray()
 
@@ -74,6 +67,11 @@ class DictionaryFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.banner.loadAd(adRequest)
     }*/
+
+        //toolbar
+        binding.toolbar.setTitle(R.string.app_name)
+
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
         val fm: FragmentManager = parentFragmentManager
         fragmentAdapter = TabAdapter(fm, lifecycle)
         binding.viewPager2.adapter = fragmentAdapter
@@ -86,6 +84,7 @@ class DictionaryFragment : Fragment() {
         binding.tabLayout.addTab(
             binding.tabLayout.newTab().setText(getString(R.string.search_words))
         )
+
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -110,5 +109,9 @@ class DictionaryFragment : Fragment() {
                 super.onPageSelected(position)
             }
         })
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

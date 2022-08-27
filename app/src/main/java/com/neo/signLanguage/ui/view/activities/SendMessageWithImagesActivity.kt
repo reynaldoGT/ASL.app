@@ -1,6 +1,9 @@
 package com.neo.signLanguage.ui.view.activities
 
+import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
 import android.os.Bundle
+import android.os.Environment
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -8,14 +11,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.google.android.material.slider.Slider.OnChangeListener
 import com.neo.signLanguage.R
-import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.adapters.AdapterLettersSendMessage
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.databinding.ActivitySendMessageWithImagesBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
+import com.skydoves.colorpickerview.ColorPickerDialog
+import java.io.FileOutputStream
+import java.util.*
 
 
 class SendMessageWithImagesActivity : AppCompatActivity() {
@@ -38,6 +43,9 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
             binding.gridListSing.layoutManager = layoutManager
         }
 
+        /*val colorPickerDialog: ColorPickerDialog =
+            ColorPickerDialog.createColorPickerDialog(this, ColorPickerDialog.)*/
+        
         model.sendMessageImages.observe(this) {
             adaptador =
                 AdapterLettersSendMessage(
@@ -72,6 +80,17 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
         binding.slider.addOnChangeListener(OnChangeListener { slider, value, fromUser ->
             model.setGridNumbersMessage(slider.value.toInt())
         })
+        binding.iconDownload.setOnClickListener {
+            binding.cardViewContainer.setDrawingCacheEnabled(true)
+            val b: Bitmap = binding.cardViewContainer.getDrawingCache()
+
+            var nameFile = UUID.randomUUID().toString()
+            b.compress(
+                CompressFormat.JPEG,
+                95,
+                FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/$nameFile.jpg")
+            )
+        }
     }
 
     private fun initActionBar() {

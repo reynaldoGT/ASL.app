@@ -13,6 +13,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
     private val SHOW_TRANSITIONS = "SHOW_TRANSITIONS"
     private val SELECTED_TRANSITION = "SELECTED_TRANSITION"
     private val VIBRATION = "VIBRATION"
+    private val MEMORY_GAME_RECORD = "MEMORY_GAME_RECORD"
     private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
     private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
     private val vibration = true
@@ -115,6 +116,16 @@ class SharedPreferences(var activity: AppCompatActivity) {
         val settings = activity.getSharedPreferences(SETTINGS, 0)
         val editor = settings.edit()
         editor.putInt(SELECTED_TRANSITION, newState).apply()
+    }
+    fun getMemoryRecord(): Int {
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        return settings.getInt(MEMORY_GAME_RECORD, 0)
+    }
+
+    fun setMemoryRecord(newState: Int) {
+        val settings = activity.getSharedPreferences(SETTINGS, 0)
+        val editor = settings.edit()
+        editor.putInt(MEMORY_GAME_RECORD, newState).apply()
     }
 
 }

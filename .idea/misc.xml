@@ -90,15 +90,15 @@
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_navigation.xml" value="0.33" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_toolbar.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/toolbar_menu.xml" value="0.33" />
-        <entry key="app/src/main/res/drawable-v24/bg_msgusuario.xml" value="0.1715" />
-        <entry key="app/src/main/res/drawable-v24/cajatxt.xml" value="0.1715" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.3343589743589744" />
+        <entry key="app/src/main/res/drawable/empty_tall_divider.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/ic_0_number.xml" value="0.12395833333333334" />
         <entry key="app/src/main/res/drawable/ic_a_only_sing.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/drawable/ic_b_only_sing.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_d_letter.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_h_letter.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_h_only_sing.xml" value="0.212" />
+        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1735" />
         <entry key="app/src/main/res/drawable/ic_history.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/ic_n_only_sing.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_no_internet.xml" value="0.178" />
@@ -119,7 +119,7 @@
         <entry key="app/src/main/res/drawable/layout_border_game.xml" value="0.2045" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.3234375" />
-        <entry key="app/src/main/res/layout/activity_find_letter_game.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_find_letter_game.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_find_pair_game.xml" value="0.2659256092347157" />
         <entry key="app/src/main/res/layout/activity_giphy.xml" value="0.175" />
         <entry key="app/src/main/res/layout/activity_grid_all_letters.xml" value="0.13229166666666667" />
@@ -130,20 +130,18 @@
         <entry key="app/src/main/res/layout/activity_tabnavigator.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_bottom_navigation.xml" value="0.17572463768115942" />
         <entry key="app/src/main/res/layout/fragment_bottom_navigation_container.xml" value="0.13229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_dictionary_signs.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_find_pair_letters.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/fragment_games.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/fragment_giphy.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/fragment_numbers.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_tabnavigator.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_translate.xml" value="0.1333903377511757" />
+        <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_tabnavigator.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_translate.xml" value="0.13809320222317228" />
         <entry key="app/src/main/res/layout/fragment_view_numbers.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/fragment_view_signs.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_view_sings.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragmet_letters_and_number_sing.xml" value="0.1333903377511757" />
-        <entry key="app/src/main/res/layout/mensaje_bot.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/mensaje_usuario.xml" value="0.1" />
         <entry key="app/src/main/res/layout/no_internet_connection.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.33" />
         <entry key="app/src/main/res/layout/template_color.xml" value="0.175" />

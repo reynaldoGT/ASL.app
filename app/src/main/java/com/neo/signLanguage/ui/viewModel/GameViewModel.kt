@@ -11,7 +11,7 @@ class GameViewModel : ViewModel() {
     val randomGameLetters = MutableLiveData<Game>()
     val sendMessageImages = MutableLiveData<ArrayList<Sign>>()
     val intents = MutableLiveData<Int>().apply {
-        value = 3
+        value = 5
     }
     val gridNumbersMessage = MutableLiveData<Int>().apply {
         value = 5

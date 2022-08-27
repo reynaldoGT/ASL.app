@@ -50,14 +50,14 @@ class GamesMenuFragment : Fragment() {
                 FindTheLetterGameActivity()
             )
         )
-        titlesMenu.add(
+        /*titlesMenu.add(
             MenuTitle(
                 "Encuentra los pares",
                 "Busca los la letra y el signo correcto",
                 R.drawable.ic_0_number,
                 FindPairGameActivity()
             )
-        )
+        )*/
         titlesMenu.add(
             MenuTitle(
                 "Escribir un mensaje",
@@ -81,40 +81,7 @@ class GamesMenuFragment : Fragment() {
             GridLayoutManager(requireContext(), 2)
         binding.gridListSing.adapter = adapterCustomGrid
 
-        /*grid.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
 
-            when (position) {
-                0 -> {
-                    val intent = Intent(this, Factorial::class.java)
-                    startActivity(intent)
-                }
-                1 -> {
-                    val intent = Intent(this, RaizCuadrada::class.java)
-                    startActivity(intent)
-                }
-                2 -> {
-                    val intent = Intent(this, Clima::class.java)
-                    startActivity(intent)
-                }
-                3 -> {
-                    val intent = Intent(this, Porcentaje::class.java)
-                    startActivity(intent)
-                }
-
-                4 -> {
-                    val intent = Intent(this, Circulo::class.java)
-                    startActivity(intent)
-                }
-                else -> {
-                    Snackbar.make(
-                        view, // Parent view
-                        "Hi from position $position", // Message to show
-
-                        Snackbar.LENGTH_SHORT // How long to display the message.
-                    ).setBackgroundTint(Color.parseColor("#FF108714")).show()
-                }
-            }
-        }*/
     }
 
 }

@@ -22,7 +22,7 @@ class DataSign {
         private const val number = "number"
         private const val space = "space"
 
-        fun getLetterArray(): ArrayList<Sign> {
+        fun getLetterArray(addSpace: Boolean = true): ArrayList<Sign> {
             val lettersArray = ArrayList<Sign>()
             lettersArray.add(Sign("a", R.drawable.ic_a_only_sing, letter))
             lettersArray.add(Sign("b", R.drawable.ic_b_only_sing, letter))
@@ -51,7 +51,9 @@ class DataSign {
             lettersArray.add(Sign("x", R.drawable.ic_x_only_sing, letter))
             lettersArray.add(Sign("y", R.drawable.ic_y_only_sing, letter))
             lettersArray.add(Sign("z", R.drawable.ic_z_only_sing, letter))
-            lettersArray.add(Sign(" ", R.drawable.ic_space, space))
+            if (addSpace) {
+                lettersArray.add(Sign(" ", R.drawable.ic_space, space))
+            }
 
             //?  numbers
             lettersArray.add(Sign("1", R.drawable.ic_1_number, number))
@@ -72,14 +74,14 @@ class DataSign {
             val randomLetters = ArrayList<Sign>()
             val randomInts = generateSequence {
                 // this lambda is the source of the sequence's values
-                Random.nextInt(0 until this.getLetterArray().size)
+                Random.nextInt(0 until this.getLetterArray(false).size)
             }
                 .distinct()
                 .take(amount)
                 .toSet()
 
             for (i in randomInts) {
-                randomLetters.add(this.getLetterArray()[i])
+                randomLetters.add(this.getLetterArray(false)[i])
             }
 
             return Game(

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.databinding.FragmentTestBinding
-import com.neo.signLanguage.databinding.FragmentTranslateBinding
 import com.neo.signLanguage.ui.view.activities.MainActivity
 
 

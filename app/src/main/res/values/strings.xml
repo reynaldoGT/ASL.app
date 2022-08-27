@@ -64,9 +64,10 @@
     <string name="current_hand_color">Current hand color</string>
     <string name="maximum_number_characters">The maximum number of characters is %1$d</string>
 
-    <string name="intents">Numero de intentos %1$d </string>
-    <string name="game_find_game_title_letter">cual es el signo de la letra  %1$s </string>
-    <string name="game_find_game_title_number">cual es el signo del numero  %1$s</string>
+    <string name="intents">Intentos %1$d </string>
+    <string name="game_find_game_title_letter">Cual es el signo de la letra  %1$s </string>
+    <string name="game_find_game_title_number">Cual es el signo del numero  %1$s</string>
+    <string name="current_record">Tu record es de: %1$s</string>
 
 
     <string name="hello_from_here">Hello from here</string>

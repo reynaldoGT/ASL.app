@@ -25,7 +25,7 @@ class BottomNavigationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showSelectedFragment(GamesMenuFragment())
+        showSelectedFragment(DictionaryFragment())
 
         if (sharedPrefs.getTheme()) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -35,10 +35,7 @@ class BottomNavigationFragment : Fragment() {
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.page_1 -> {
-                    showSelectedFragment(SendMessageFragment())
-                    true
-                }
+
                 R.id.page_2 -> {
                     showSelectedFragment(DictionaryFragment())
                     true

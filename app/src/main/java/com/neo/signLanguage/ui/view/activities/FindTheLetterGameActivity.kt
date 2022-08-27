@@ -1,18 +1,24 @@
 package com.neo.signLanguage.ui.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.neo.signLanguage.AdapterGame
+
 import com.neo.signLanguage.adapters.ClickListener
-import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.orhanobut.logger.Logger
+import android.widget.LinearLayout.LayoutParams;
+import com.neo.signLanguage.R
 
 class FindTheLetterGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindLetterGameBinding
@@ -20,19 +26,54 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     private var intentsNumber: Int = 0
 
     private val model: GameViewModel by viewModels()
+    var record: Int = 0;
     override fun onCreate(savedInstanceState: Bundle?) {
+        // declare int var
+
         super.onCreate(savedInstanceState)
         binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         intentsNumber = 3
         model.getRandomToFindLetter(intentsNumber)
+        binding.currentRecord.text = getString(
+            R.string.current_record,
+            MainActivity.sharedPrefs.getMemoryRecord().toString()
+        )
+
+
         initRecyclerView()
+        livesIcon()
         model.intents.observe(this) {
             if (it == 0) {
                 super.onBackPressed()
+                if (MainActivity.sharedPrefs.getMemoryRecord() < record) {
+                    MainActivity.sharedPrefs.setMemoryRecord(record)
+                }
             }
-            binding.intents.text = getString(R.string.intents, it)
         }
+    }
+
+    private fun livesIcon() {
+        binding.lifesContainer.removeAllViews();
+        for (i in 0 until model.intents.value!!) {
+            val imageView = ImageView(this)
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_heart
+                )
+            )
+            val params = RelativeLayout.LayoutParams(
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT
+            )
+
+            params.setMargins(10, 0, 0, 0)
+            imageView.layoutParams = params
+            binding.lifesContainer.addView(imageView)
+        }
+
     }
 
     private fun initRecyclerView() {
@@ -56,8 +97,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                             override fun onClick(v: View?, position: Int) {
                                 /*model.setCurrentMessage(it!![position].sing, false)*/
                                 if ((it.data[position].letter) == it.correctAnswer.letter) {
-                                    Logger.d("Show add")
-                                    Log.d("vakue", position.toString())
+                                    record++
                                     model.getRandomToFindLetter(intentsNumber)
                                 } else {
                                     Logger.d("Show add")
@@ -65,6 +105,8 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                                         vibratePhone(applicationContext, 200)
                                     }
                                     model.setIntents(-1)
+                                    livesIcon()
+
                                 }
                             }
                         })
