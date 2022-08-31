@@ -30,7 +30,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     var record: Int = 0;
     override fun onCreate(savedInstanceState: Bundle?) {
         // declare int var
-
         super.onCreate(savedInstanceState)
         binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,12 +40,15 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         when (letter) {
             "easy" -> {
                 intentsNumber = 3
+                model.setIntents(7)
             }
             "medium" -> {
                 intentsNumber = 5
+                model.setIntents(5)
             }
             "hard" -> {
                 intentsNumber = 8
+                model.setIntents(3)
             }
         }
         /*model.setIntents(intentsNumber)*/
@@ -99,10 +101,13 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                         getString(
                             R.string.game_find_game_title_letter,
                             it.correctAnswer.letter.uppercase(Locale.getDefault())
-                        ) else getString(
+                        )
+                    else getString(
                         R.string.game_find_game_title_number,
                         it.correctAnswer.letter.uppercase(Locale.getDefault())
                     )
+                binding.currentLetterAnswer.text =
+                    it.correctAnswer.letter.uppercase(Locale.getDefault())
                 adapter =
                     AdapterGame(
                         this,

@@ -3,10 +3,7 @@ package com.neo.signLanguage.ui.view.activities
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Bitmap.CompressFormat
 import android.os.Bundle
-import android.os.Environment
 import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,9 +20,6 @@ import com.neo.signLanguage.databinding.ActivitySendMessageWithImagesBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
-import com.skydoves.colorpickerview.ColorPickerDialog
-import java.io.FileOutputStream
-import java.util.*
 
 
 class SendMessageWithImagesActivity : AppCompatActivity() {
@@ -137,5 +131,9 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
         this.setSupportActionBar(binding.detailToolbar)
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

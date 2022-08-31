@@ -1,9 +1,9 @@
 package com.neo.signLanguage.ui.view.activities
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.neo.signLanguage.R
@@ -61,5 +61,9 @@ class DetailsSignActivity : AppCompatActivity() {
         this.setSupportActionBar(binding.detailToolbar)
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

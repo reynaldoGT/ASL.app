@@ -44,7 +44,7 @@ class LetterAndNumbersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lettersArray = getLetterArray()
+        val lettersArray = getLetterArray(false)
 
         binding.gridListSing.setHasFixedSize(true)
 

@@ -84,7 +84,9 @@ class DictionaryFragment : Fragment() {
         binding.tabLayout.addTab(
             binding.tabLayout.newTab().setText(getString(R.string.search_words))
         )
-
+        /*binding.tabLayout.setse*//*
+        // select tab*/
+        /*binding.tabLayout.selectTab(binding.tabLayout.getTabAt(2))*/
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -110,6 +112,7 @@ class DictionaryFragment : Fragment() {
             }
         })
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
         super.onCreateOptionsMenu(menu, inflater)

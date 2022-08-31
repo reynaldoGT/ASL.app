@@ -18,8 +18,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.view.activities.SendMessageWithImagesActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.view.activities.MainActivity" />
+            android:exported="false" />
         <activity
             android:name=".ui.view.activities.FindPairGameActivity"
             android:exported="false" />
@@ -36,8 +35,7 @@
             android:parentActivityName=".ui.view.activities.MainActivity" />
         <activity
             android:name=".ui.view.activities.DetailsSignActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.view.activities.MainActivity" />
+            android:exported="false" />
         <activity
             android:name=".ui.view.activities.MainActivity"
             android:exported="true"

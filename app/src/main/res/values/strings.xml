@@ -65,8 +65,8 @@
     <string name="maximum_number_characters">The maximum number of characters is %1$d</string>
 
     <string name="intents">Intentos %1$d </string>
-    <string name="game_find_game_title_letter">Cual es el signo de la letra:  <b><i>%1$s</i></b> </string>
-    <string name="game_find_game_title_number">Cual es el signo del numero: <b><i>%1$s</i></b> </string>
+    <string name="game_find_game_title_letter">Cual es el signo de la letra </string>
+    <string name="game_find_game_title_number">Cual es el signo del numero </string>
     <string name="current_record">Tu record es de: %1$s</string>
 
 
