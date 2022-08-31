@@ -3,6 +3,16 @@ package com.neo.signLanguage.ui.view.fragments
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
@@ -16,6 +26,10 @@ class SelectLevelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent {
+
+            culumnxd()
+            /* }
         binding = ActivitySelectLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -27,11 +41,44 @@ class SelectLevelActivity : AppCompatActivity() {
         }
         binding.btnLevel3.setOnClickListener {
             goToGame("hard")
+        }*/
         }
+
+
     }
+
     fun goToGame(difficulty: String) {
         val intent = Intent(this, FindTheLetterGameActivity::class.java)
         intent.putExtra("difficulty", difficulty);
         startActivity(intent)
     }
+
 }
+
+@Composable
+fun MyText(text: String) {
+    Text(text = text)
+}
+
+@Composable
+fun culumnxd() {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+
+    ) {
+        MyText(text = "quw fue")
+        MyText(text = "quw fue")
+        MyText(text = "quw fue")
+        MyText(text = "quw fue")
+        MyText(text = "quw fue")
+    }
+}
+
+
+@Preview
+@Composable
+fun previewText() {
+    culumnxd()
+}
+
