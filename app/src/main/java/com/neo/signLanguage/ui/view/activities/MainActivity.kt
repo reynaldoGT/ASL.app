@@ -22,10 +22,8 @@ import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
 import java.util.*
 
-
 class MainActivity : AppCompatActivity() {
   var fragmentAdapter: TabAdapter? = null
-
   companion object {
 
     lateinit var binding: FragmentTabnavigatorBinding
