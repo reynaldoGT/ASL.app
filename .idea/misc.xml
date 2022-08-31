@@ -155,6 +155,7 @@
         <entry key="app/src/main/res/layout/template_history.xml" value="0.22" />
         <entry key="app/src/main/res/layout/template_letter.xml" value="0.3223958333333333" />
         <entry key="app/src/main/res/layout/template_letter_send_message.xml" value="0.2659256092347157" />
+        <entry key="app/src/main/res/layout/template_linear_letter.xml" value="0.2" />
         <entry key="app/src/main/res/layout/template_menu_game.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.33" />
         <entry key="app/src/main/res/menu/menu_toolbar.xml" value="0.22" />

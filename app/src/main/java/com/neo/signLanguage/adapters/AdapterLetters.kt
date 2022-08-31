@@ -36,9 +36,7 @@ class AdapterLetters(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vista =
             LayoutInflater.from(parent.context).inflate(R.layout.template_letter, parent, false)
-
         viewHolder = ViewHolder(vista, listener, this.context)
-
         return viewHolder!!
     }
 
@@ -81,16 +79,12 @@ class AdapterLetters(
                         sharedPrefs.getColor()
                     )
                 )
-
             }
             this.listener = listener
             vista.setOnClickListener(this)
         }
-
         override fun onClick(v: View?) {
             this.listener?.onClick(v!!, adapterPosition)
         }
     }
-
-
 }

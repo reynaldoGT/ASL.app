@@ -121,7 +121,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                   }
                   model.setIntents(-1)
                   livesIcon()
-
                 }
               }
             })

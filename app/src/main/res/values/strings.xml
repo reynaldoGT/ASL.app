@@ -20,6 +20,7 @@
     <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173</string>
 
     <string name="change_theme">Dark Theme</string>
+    <string name="change_layout">Change layout</string>
     <string name="current_delay_time">Current delay time</string>
     <string name="delay_time">Delay time</string>
     <string name="settings_title">Settings</string>
