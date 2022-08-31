@@ -46,7 +46,7 @@ class GamesMenuFragment : Fragment() {
             MenuTitle(
                 "Ejercita tu memoria",
                 "Adivina la letra o numero correcto ",
-                R.drawable.ic_0_number,
+                R.drawable.ic_brain ,
                 SelectLevelActivity()
             )
         )
@@ -62,7 +62,7 @@ class GamesMenuFragment : Fragment() {
             MenuTitle(
                 "Escribir un mensaje",
                 "Mostrar mensaje con signos",
-                R.drawable.ic_0_number,
+                R.drawable.ic_keyboard,
                 SendMessageWithImagesActivity()
             )
         )

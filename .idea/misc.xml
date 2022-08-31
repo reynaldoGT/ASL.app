@@ -100,6 +100,7 @@
         <entry key="app/src/main/res/drawable/ic_h_only_sing.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1735" />
         <entry key="app/src/main/res/drawable/ic_history.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/ic_history_grey.xml" value="0.2455" />
         <entry key="app/src/main/res/drawable/ic_n_only_sing.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_no_internet.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_oo_letter.xml" value="0.17708333333333334" />
@@ -123,7 +124,7 @@
         <entry key="app/src/main/res/layout/activity_find_pair_game.xml" value="0.2659256092347157" />
         <entry key="app/src/main/res/layout/activity_giphy.xml" value="0.175" />
         <entry key="app/src/main/res/layout/activity_grid_all_letters.xml" value="0.13229166666666667" />
-        <entry key="app/src/main/res/layout/activity_history.xml" value="0.16802052159042324" />
+        <entry key="app/src/main/res/layout/activity_history.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_intersitial.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_select_level.xml" value="0.25" />

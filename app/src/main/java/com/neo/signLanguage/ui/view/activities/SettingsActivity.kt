@@ -44,8 +44,11 @@ class SettingsActivity : AppCompatActivity() {
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPrefs.setTheme(isChecked)
+                sharedPrefs.setColor(R.color.gray300)
+
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                sharedPrefs.setColor(R.color.primaryColor)
                 sharedPrefs.setTheme(isChecked)
             }
         }
@@ -72,9 +75,8 @@ class SettingsActivity : AppCompatActivity() {
                 override fun onClick(v: View?, position: Int) {
                     sharedPrefs.setColor(colorList[position].colorValue)
                     showSnackBar(colorList[position].colorName)
-                    binding.currentColor?.backgroundTintList =
-                        resources?.getColorStateList(colorList[position]?.colorValue!!)
-
+                    binding.currentColor.backgroundTintList =
+                        resources.getColorStateList(colorList[position].colorValue)
                 }
             })
         binding.rvColors.adapter = adaptador

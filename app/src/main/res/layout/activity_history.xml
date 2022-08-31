@@ -49,7 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
+            android:padding="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -59,7 +60,7 @@
                 android:layout_height="320dp"
                 android:layout_gravity="center"
                 android:contentDescription="TODO"
-                android:src="@drawable/ic_x_letter" />
+                android:src="@drawable/ic_history" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,14 +74,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/your_history_is_empty"
                 android:textAlignment="center"
+                android:paddingVertical="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSendMessage"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:paddingVertical="14dp"
                 android:text="@string/send_message"
                 app:cornerRadius="40dp" />
         </LinearLayout>
