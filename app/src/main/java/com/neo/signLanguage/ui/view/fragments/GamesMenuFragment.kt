@@ -47,7 +47,7 @@ class GamesMenuFragment : Fragment() {
                 "Ejercita tu memoria",
                 "Adivina la letra o numero correcto ",
                 R.drawable.ic_0_number,
-                FindTheLetterGameActivity()
+                SelectLevelActivity()
             )
         )
         /*titlesMenu.add(

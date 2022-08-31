@@ -3,8 +3,8 @@
     package="com.neo.signLanguage">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_rounded"
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
+        <activity
+            android:name=".ui.view.fragments.SelectLevelActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.view.activities.SendMessageWithImagesActivity"
             android:exported="false"

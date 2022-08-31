@@ -19,6 +19,7 @@ import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.orhanobut.logger.Logger
 import android.widget.LinearLayout.LayoutParams;
 import com.neo.signLanguage.R
+import java.util.*
 
 class FindTheLetterGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindLetterGameBinding
@@ -32,15 +33,28 @@ class FindTheLetterGameActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
-        intentsNumber = 3
+
+        val myIntent = intent
+        val letter = myIntent.getStringExtra("difficulty")
+
+        when (letter) {
+            "easy" -> {
+                intentsNumber = 3
+            }
+            "medium" -> {
+                intentsNumber = 5
+            }
+            "hard" -> {
+                intentsNumber = 8
+            }
+        }
+        /*model.setIntents(intentsNumber)*/
         model.getRandomToFindLetter(intentsNumber)
         binding.currentRecord.text = getString(
             R.string.current_record,
             MainActivity.sharedPrefs.getMemoryRecord().toString()
         )
-
 
         initRecyclerView()
         livesIcon()
@@ -84,10 +98,10 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                     if (it.correctAnswer.type == "letter")
                         getString(
                             R.string.game_find_game_title_letter,
-                            it.correctAnswer.letter
+                            it.correctAnswer.letter.uppercase(Locale.getDefault())
                         ) else getString(
                         R.string.game_find_game_title_number,
-                        it.correctAnswer.letter
+                        it.correctAnswer.letter.uppercase(Locale.getDefault())
                     )
                 adapter =
                     AdapterGame(

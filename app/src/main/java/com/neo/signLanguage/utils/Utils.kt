@@ -1,20 +1,26 @@
 package com.neo.signLanguage.utils
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.speech.RecognizerIntent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
-import com.orhanobut.logger.Logger
 import java.text.Normalizer
 import java.util.*
 
 
 class Utils {
     companion object {
+        private val RECOGNIZE_SPEECH_ACTIVITY = 1
         fun getLoLanguageTag(): String {
             return (Locale.getDefault().toLanguageTag())
         }
@@ -64,5 +70,17 @@ class Utils {
                 vibrator.vibrate(timer)
             }
         }
+
+        fun hideKeyboard(activity: Activity) {
+            val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            //Find the currently focused view, so we can grab the correct window token from it.
+            var view = activity.currentFocus
+            //If no view currently has focus, create a new one, just so we can grab a window token from it
+            if (view == null) {
+                view = View(activity)
+            }
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
+
 }

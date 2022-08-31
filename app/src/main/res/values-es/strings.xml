@@ -64,7 +64,7 @@
 
     <string name="intents">Intentos %1$d </string>
 
-    <string name="game_find_game_title_letter">Cual signo de la letra  %1$s </string>
-    <string name="game_find_game_title_number">Cual es el signo del numero  %1$s </string>
+    <string name="game_find_game_title_letter">Cual es el signo de la letra:  <b><i>%1$s</i></b> </string>
+    <string name="game_find_game_title_number">Cual es el signo del numero: <b><i>%1$s</i></b> </string>
     <string name="hello_from_here">Hola desde aquí</string>
 </resources>
