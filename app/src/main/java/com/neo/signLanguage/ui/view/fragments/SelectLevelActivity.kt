@@ -23,7 +23,7 @@ class SelectLevelActivity : AppCompatActivity() {
             goToGame("easy")
         }
         binding.btnLevel2.setOnClickListener {
-            goToGame("medium")
+                goToGame("medium")
         }
         binding.btnLevel3.setOnClickListener {
             goToGame("hard")

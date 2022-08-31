@@ -24,140 +24,139 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    var fragmentAdapter: TabAdapter? = null
+  var fragmentAdapter: TabAdapter? = null
 
-    companion object {
+  companion object {
 
-        lateinit var binding: FragmentTabnavigatorBinding
-        lateinit var sharedPrefs: SharedPreferences
-        fun getColorShared(context: Context): Int {
-            return ContextCompat.getColor(
-                context,
-                sharedPrefs.getColor()
-            )
+    lateinit var binding: FragmentTabnavigatorBinding
+    lateinit var sharedPrefs: SharedPreferences
+    fun getColorShared(context: Context): Int {
+      return ContextCompat.getColor(
+        context,
+        sharedPrefs.getColor()
+      )
+    }
+
+    fun getLanguagePhone(): Boolean {
+      val language = Locale.getDefault().displayLanguage.toString().lowercase(Locale.ROOT)
+      return language == "english"
+    }
+
+    lateinit var networkState: NetworkState;
+    lateinit var database: SingDatabase
+  }
+
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    val model: GiphyViewModel by viewModels()
+    installSplashScreen()
+    super.onCreate(savedInstanceState)
+    database =
+      Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
+        .build()
+
+    networkState = NetworkState(this)
+    sharedPrefs = SharedPreferences(this)
+    binding = FragmentTabnavigatorBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    val fm: FragmentManager = supportFragmentManager
+    fragmentAdapter = TabAdapter(fm, lifecycle)
+    /*binding.viewPager2.adapter = fragmentAdapter*/
+    //toolbar
+    /*binding.toolbar.setTitle(R.string.app_name)
+    setSupportActionBar(binding.toolbar)*/
+
+
+    /*binding.tabLayout.addTab(
+        binding.tabLayout.newTab().setText(getString(R.string.send_message))
+    )
+    binding.tabLayout.addTab(
+        binding.tabLayout.newTab().setText(getString(R.string.movement_signs))
+    )*/
+
+    /*binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        override fun onTabSelected(tab: TabLayout.Tab?) {
+            binding.viewPager2.currentItem = tab!!.position
         }
 
-        fun getLanguagePhone(): Boolean {
-            val language = Locale.getDefault().displayLanguage.toString().lowercase(Locale.ROOT)
-            return language == "english"
+        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
         }
 
-        lateinit var networkState: NetworkState;
-        lateinit var database: SingDatabase
-    }
+        override fun onTabReselected(tab: TabLayout.Tab?) {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val model: GiphyViewModel by viewModels()
-        installSplashScreen()
-        super.onCreate(savedInstanceState)
-        database =
-            Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
-                .build()
-
-        networkState = NetworkState(this)
-        sharedPrefs = SharedPreferences(this)
-        binding = FragmentTabnavigatorBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val fm: FragmentManager = supportFragmentManager
-        fragmentAdapter = TabAdapter(fm, lifecycle)
-        /*binding.viewPager2.adapter = fragmentAdapter*/
-        //toolbar
-        /*binding.toolbar.setTitle(R.string.app_name)
-        setSupportActionBar(binding.toolbar)*/
-
-
-
-        /*binding.tabLayout.addTab(
-            binding.tabLayout.newTab().setText(getString(R.string.send_message))
-        )
-        binding.tabLayout.addTab(
-            binding.tabLayout.newTab().setText(getString(R.string.movement_signs))
-        )*/
-
-        /*binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                binding.viewPager2.currentItem = tab!!.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
-        })
-        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
-                if (position == 2) {
-                    model.getAllSingFromDatabase()
-                }
-                super.onPageSelected(position)
-            }
-        })*/
-
-        showSelectedFragment(DictionaryFragment())
-
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-
-                R.id.page_2 -> {
-                    showSelectedFragment(DictionaryFragment())
-                    true
-                }
-                /*R.id.page_3 -> {
-                    showSelectedFragment(ViewNumbersFragment())
-                    true
-                }*/
-                R.id.page_4 -> {
-                    /*showSelectedFragment(FindPairLetters())*/
-                    showSelectedFragment(GamesMenuFragment())
-                    true
-                }
-                else -> false
-            }
         }
-    }
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.settings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                true
+    })
+    binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
+            if (position == 2) {
+                model.getAllSingFromDatabase()
             }
-            R.id.history -> {
-                val intent = Intent(this, HistoryActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+            super.onPageSelected(position)
         }
-    }
+    })*/
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+    showSelectedFragment(DictionaryFragment())
 
-    private fun showSelectedFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-    /* private fun showSelectedFragment(fragment: Fragment) {
-         childFragmentManager.beginTransaction().replace(R.id.container, fragment)
-             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-             .commit()
-     }*/
+    binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+      when (menuItem.itemId) {
 
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }*/
+        R.id.page_2 -> {
+          showSelectedFragment(DictionaryFragment())
+          true
+        }
+        /*R.id.page_3 -> {
+            showSelectedFragment(ViewNumbersFragment())
+            true
+        }*/
+        R.id.page_4 -> {
+          /*showSelectedFragment(FindPairLetters())*/
+          showSelectedFragment(GamesMenuFragment())
+          true
+        }
+        else -> false
+      }
+    }
+  }
+
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return when (item.itemId) {
+      R.id.settings -> {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+        true
+      }
+      R.id.history -> {
+        val intent = Intent(this, HistoryActivity::class.java)
+        startActivity(intent)
+        true
+      }
+      else -> super.onOptionsItemSelected(item)
+    }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.menu_toolbar, menu)
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  private fun showSelectedFragment(fragment: Fragment) {
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.replace(R.id.container, fragment)
+    transaction.addToBackStack(null)
+    transaction.commit()
+  }
+  /* private fun showSelectedFragment(fragment: Fragment) {
+       childFragmentManager.beginTransaction().replace(R.id.container, fragment)
+           .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+           .commit()
+   }*/
+
+  /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+      activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
+      super.onCreateOptionsMenu(menu, inflater)
+  }*/
 }
