@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../layout/compose-model-1661951409590.xml" value="0.28125" />
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="../../Android/Sdk/platforms/android-30/data/res/layout/auto_complete_list.xml" value="0.3234375" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_0_number.xml" value="0.21875" />
@@ -43,7 +42,6 @@
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_l_only_sing.xml" value="0.21875" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_m_letter.xml" value="0.21875" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_m_only_sing.xml" value="0.21875" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_mic.xml" value="0.34074074074074073" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_n_letter.xml" value="0.21875" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_n_only_sing.xml" value="0.21875" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_nn_letter.xml" value="0.21927083333333333" />
@@ -79,86 +77,46 @@
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/activity_main.xml" value="0.25407608695652173" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/activity_tabnavigator.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/color_template.xml" value="0.5" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_history.xml" value="0.2857789855072464" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_numbers.xml" value="0.25" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_send_message.xml" value="0.33" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_tabnavigator.xml" value="0.2857789855072464" />
+        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_send_message.xml" value="0.25" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_v_iew_sings.xml" value="0.18" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/fragment_view_sings.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/settings_activity.xml" value="0.25" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/template_giphy.xml" value="0.33" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/template_letter.xml" value="0.22" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_navigation.xml" value="0.33" />
-        <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_toolbar.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/toolbar_menu.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.3343589743589744" />
-        <entry key="app/src/main/res/drawable/empty_tall_divider.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/ic_0_number.xml" value="0.12395833333333334" />
         <entry key="app/src/main/res/drawable/ic_a_only_sing.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/drawable/ic_b_only_sing.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_d_letter.xml" value="0.3343589743589744" />
-        <entry key="app/src/main/res/drawable/ic_h_letter.xml" value="0.212" />
-        <entry key="app/src/main/res/drawable/ic_h_only_sing.xml" value="0.212" />
-        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1735" />
-        <entry key="app/src/main/res/drawable/ic_history.xml" value="0.136" />
-        <entry key="app/src/main/res/drawable/ic_history_grey.xml" value="0.2455" />
         <entry key="app/src/main/res/drawable/ic_n_only_sing.xml" value="0.3343589743589744" />
-        <entry key="app/src/main/res/drawable/ic_no_internet.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_oo_letter.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/drawable/ic_p_only_sing.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/drawable/ic_r_letter.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/drawable/ic_r_only_sing.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/drawable/ic_s_only_sing.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/drawable/ic_space.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/drawable/ic_w_letter.xml" value="0.212" />
-        <entry key="app/src/main/res/drawable/ic_w_only_sing.xml" value="0.212" />
         <entry key="app/src/main/res/drawable/ic_x_letter.xml" value="0.12395833333333334" />
-        <entry key="app/src/main/res/drawable/ic_y_letter.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/drawable/ic_y_only_sing.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/drawable/ic_z_letter.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/drawable/ic_z_only_sing.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/drawable/layout_border.xml" value="0.2045" />
-        <entry key="app/src/main/res/drawable/layout_border_game.xml" value="0.2045" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.3234375" />
-        <entry key="app/src/main/res/layout/activity_find_letter_game.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_find_pair_game.xml" value="0.2659256092347157" />
         <entry key="app/src/main/res/layout/activity_giphy.xml" value="0.175" />
         <entry key="app/src/main/res/layout/activity_grid_all_letters.xml" value="0.13229166666666667" />
-        <entry key="app/src/main/res/layout/activity_history.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_intersitial.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_select_level.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_send_message_with_images.xml" value="0.2659256092347157" />
+        <entry key="app/src/main/res/layout/activity_select_level.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_tabnavigator.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_bottom_navigation.xml" value="0.17572463768115942" />
         <entry key="app/src/main/res/layout/fragment_bottom_navigation_container.xml" value="0.13229166666666667" />
-        <entry key="app/src/main/res/layout/fragment_dictionary_signs.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_find_pair_letters.xml" value="0.32395833333333335" />
-        <entry key="app/src/main/res/layout/fragment_games.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/fragment_giphy.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.32395833333333335" />
-        <entry key="app/src/main/res/layout/fragment_letters_and_number_sing.xml" value="0.2612227447627191" />
         <entry key="app/src/main/res/layout/fragment_numbers.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_tabnavigator.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_translate.xml" value="0.13809320222317228" />
+        <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_tabnavigator.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_view_numbers.xml" value="0.3234375" />
-        <entry key="app/src/main/res/layout/fragment_view_signs.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_view_sings.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/no_internet_connection.xml" value="0.16927083333333334" />
-        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/template_color.xml" value="0.175" />
-        <entry key="app/src/main/res/layout/template_game.xml" value="0.3223958333333333" />
-        <entry key="app/src/main/res/layout/template_game_pair.xml" value="0.32395833333333335" />
-        <entry key="app/src/main/res/layout/template_game_rotate_pair.xml" value="0.2659256092347157" />
         <entry key="app/src/main/res/layout/template_giphy.xml" value="0.3234375" />
-        <entry key="app/src/main/res/layout/template_history.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/template_letter.xml" value="0.3223958333333333" />
-        <entry key="app/src/main/res/layout/template_letter_send_message.xml" value="0.2659256092347157" />
-        <entry key="app/src/main/res/layout/template_menu_game.xml" value="0.25" />
-        <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.33" />
-        <entry key="app/src/main/res/menu/menu_toolbar.xml" value="0.22" />
+        <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.1078125" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.15" />
       </map>
     </option>
@@ -168,8 +126,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="SuppressKotlinCodeStyleNotification">
-    <option name="disableForAll" value="true" />
   </component>
 </project>

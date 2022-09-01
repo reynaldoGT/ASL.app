@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,23 +27,26 @@ class SelectLevelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-
-            culumnxd()
-            /* }
         binding = ActivitySelectLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnLevel1.setOnClickListener {
-            goToGame("easy")
+        binding.greeting.setContent {
+            culumnxd()
         }
-        binding.btnLevel2.setOnClickListener {
-            goToGame("medium")
-        }
-        binding.btnLevel3.setOnClickListener {
-            goToGame("hard")
-        }*/
-        }
+
+        /* }
+    binding = ActivitySelectLevelBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+
+    binding.btnLevel1.setOnClickListener {
+        goToGame("easy")
+    }
+    binding.btnLevel2.setOnClickListener {
+        goToGame("medium")
+    }
+    binding.btnLevel3.setOnClickListener {
+        goToGame("hard")
+    }*/
 
 
     }
@@ -65,13 +69,23 @@ fun culumnxd() {
     Column(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
-
     ) {
         MyText(text = "quw fue")
-        MyText(text = "quw fue")
-        MyText(text = "quw fue")
-        MyText(text = "quw fue")
-        MyText(text = "quw fue")
+        Button(onClick = {
+            //your onclick code here
+        }) {
+            Text(text = "This is single butotn")
+        }
+        Button(onClick = {
+            //your onclick code here
+        }) {
+            Text(text = "This is a other")
+        }
+        Button(onClick = {
+            //your onclick code here
+        }) {
+            Text(text = "this is a third")
+        }
     }
 }
 
