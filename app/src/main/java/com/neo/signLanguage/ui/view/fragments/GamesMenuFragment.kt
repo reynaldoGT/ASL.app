@@ -44,27 +44,26 @@ class GamesMenuFragment : Fragment() {
     val titlesMenu = ArrayList<MenuTitle>()
     titlesMenu.add(
       MenuTitle(
-        "Ejercita tu memoria",
-        "Adivina la letra o numero correcto ",
+        getString(R.string.test_your_memory),
+        getString(R.string.guess_letter_number),
         R.drawable.ic_brain,
         SelectLevelActivity()
       )
     )
-
     titlesMenu.add(
       MenuTitle(
-        "Escribir un mensaje",
-        "Mostrar mensaje con signos",
-        R.drawable.ic_keyboard,
-        SendMessageWithImagesActivity()
+        getString(R.string.find_the_even_signs),
+        getString(R.string.find_correct_letter_or_sign),
+        R.drawable.ic_0_number,
+        FindPairGameActivity()
       )
     )
     titlesMenu.add(
       MenuTitle(
-        "Encuentra los pares",
-        "Busca los la letra y el signo correcto",
-        R.drawable.ic_0_number,
-        FindPairGameActivity()
+        getString(R.string.write_your_message),
+        getString(R.string.send_message_with_signs),
+        R.drawable.ic_keyboard,
+        SendMessageWithImagesActivity()
       )
     )
 

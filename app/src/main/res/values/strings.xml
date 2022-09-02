@@ -19,7 +19,8 @@
     <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173</string>
 
-    <string name="change_theme">Dark theme</string>
+    <string name="change_theme">Dark Theme</string>
+    <string name="change_layout">Change layout</string>
     <string name="current_delay_time">Current delay time</string>
     <string name="delay_time">Delay time</string>
     <string name="settings_title">Settings</string>
@@ -64,10 +65,10 @@
     <string name="current_hand_color">Current hand color</string>
     <string name="maximum_number_characters">The maximum number of characters is %1$d</string>
 
-    <string name="intents">Intentos %1$d </string>
-    <string name="game_find_game_title_letter">Cual es el signo de la letra </string>
-    <string name="game_find_game_title_number">Cual es el signo del numero </string>
-    <string name="current_record">Tu record es de: %1$s</string>
+    <string name="intents">Attempts %1$d </string>
+    <string name="game_find_game_title_letter">What is the sign of the letter </string>
+    <string name="game_find_game_title_number">What is the sign of the number</string>
+    <string name="current_record">Your record is: %1$s</string>
 
 
     <string name="hello_from_here">Hello from here</string>
@@ -75,6 +76,11 @@
     <string name="dictionary">Dictionary</string>
     <string name="games">Games</string>
     <string name="placeholder">Enter your message</string>
-
+    <string name="test_your_memory">Test your memory</string>
+    <string name="guess_letter_number">Guess the correct letter or number</string>
+    <string name="write_your_message">Write your message</string>
+    <string name="send_message_with_signs">Show message with signs</string>
+    <string name="find_the_even_signs">Find the even signs</string>
+    <string name="find_correct_letter_or_sign">Find the correct letter or sign</string>
 
 </resources>

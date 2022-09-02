@@ -28,58 +28,70 @@ import com.neo.signLanguage.ui.view.activities.FindTheLetterGameActivity
 
 class SelectLevelActivity : AppCompatActivity() {
 
-  private lateinit var binding: ActivitySelectLevelBinding
+    private lateinit var binding: ActivitySelectLevelBinding
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    binding = ActivitySelectLevelBinding.inflate(layoutInflater)
-    setContentView(binding.root)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySelectLevelBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    binding.greeting.setContent {
-      CustomButtonSelectLevel()
+
+        binding.greeting.setContent {
+            CustomButtonSelectLevel()
+
+            /*binding.btnLevel1.setOnClickListener {
+                goToGame("easy")
+            }
+            binding.btnLevel2.setOnClickListener {
+                goToGame("medium")
+            }
+            binding.btnLevel3.setOnClickListener {
+                goToGame("hard")
+            }*/
+
+        }
     }
-  }
 }
 
 @Composable
 fun CustomButton(buttonTitle: String, difficulty: String) {
-  val context = LocalContext.current
-  Button(
+    val context = LocalContext.current
+    Button(
 
-    modifier = Modifier
-      .height(100.dp)
-      .fillMaxWidth()
-      .padding(10.dp),
+            modifier = Modifier
+                    .height(100.dp)
+                    .fillMaxWidth()
+                    .padding(10.dp),
 
-    onClick = {
-      val intent = Intent(context, FindTheLetterGameActivity::class.java)
-      intent.putExtra("difficulty", difficulty);
-      context.startActivity(intent)
-    }, shape = RoundedCornerShape(100.dp)
-  ) {
-    Text(text = buttonTitle)
-  }
+            onClick = {
+                val intent = Intent(context, FindTheLetterGameActivity::class.java)
+                intent.putExtra("difficulty", difficulty);
+                context.startActivity(intent)
+            }, shape = RoundedCornerShape(100.dp)
+    ) {
+        Text(text = buttonTitle)
+    }
 }
 
 @Composable
 fun CustomButtonSelectLevel() {
-  Column(
-    modifier = Modifier
-      .padding(16.dp)
-      .fillMaxWidth(),
-    verticalArrangement = Arrangement.spacedBy(16.dp),
-    horizontalAlignment = Alignment.CenterHorizontally
-  ) {
-    CustomButton(buttonTitle = "Level 1", difficulty = "easy")
-    CustomButton(buttonTitle = "Level 2", difficulty = "medium")
-    CustomButton(buttonTitle = "Level 3", difficulty = "hard")
-  }
+    Column(
+            modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CustomButton(buttonTitle = "Level 1", difficulty = "easy")
+        CustomButton(buttonTitle = "Level 2", difficulty = "medium")
+        CustomButton(buttonTitle = "Level 3", difficulty = "hard")
+    }
 }
 
 
 @Preview
 @Composable
 fun previewText() {
-  CustomButtonSelectLevel()
+    CustomButtonSelectLevel()
 }
 

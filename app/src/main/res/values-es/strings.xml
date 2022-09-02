@@ -53,6 +53,7 @@
     <string name="simple_description">simple_description</string>
     <string name="history">Historial</string>
     <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
+    <string name="change_layout">Cambiar vista</string>
     <string name="delete_question">¿Limpiar historial?</string>
     <string name="clear_history_question">Desea limpiar todo el historial</string>
     <string name="delete">Eliminar</string>
@@ -66,5 +67,20 @@
 
     <string name="game_find_game_title_letter">Cual es el signo de la letra:  <b><i>%1$s</i></b> </string>
     <string name="game_find_game_title_number">Cual es el signo del numero: <b><i>%1$s</i></b> </string>
-    <string name="hello_from_here">Hola desde aquí</string>
+
+    <string name="current_record">Tu record es de: %1$s</string>
+
+    <string name="hello_from_here">Hola desdes aquí</string>
+    <string name="translate">Translate</string>
+    <string name="dictionary">Diccionario</string>
+    <string name="games">Juegos</string>
+    <string name="placeholder">Ingrese su mensaje</string>
+
+    <string name="test_your_memory">Ejercita tu memoria</string>
+    <string name="guess_letter_number">Adivina la letra o número correcto</string>
+    <string name="write_your_message">Escribe tu mensaje</string>
+    <string name="send_message_with_signs">Enviar mensajes con imágenes</string>
+    <string name="find_the_even_signs">Encuentra las señas iguales</string>
+    <string name="find_correct_letter_or_sign">Encuentra la letra o número correcto</string>
+
 </resources>

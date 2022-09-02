@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
-import com.neo.signLanguage.adapters.AdapterLetters
+import com.neo.signLanguage.adapters.AdapterLinearLetters
 import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.databinding.FragmentNumbersBinding
@@ -21,7 +21,7 @@ class ViewNumbersFragment : Fragment() {
     private var _binding: FragmentNumbersBinding? = null
     private val binding get() = _binding!!
 
-    var adaptador: AdapterLetters? = null
+    var adaptador: AdapterLinearLetters? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
 
@@ -46,7 +46,7 @@ class ViewNumbersFragment : Fragment() {
         binding.gridListSingNumbers.layoutManager = layoutManager
 
         adaptador =
-            AdapterLetters(requireActivity().applicationContext, lettersArray, object : ClickListener {
+            AdapterLinearLetters(requireActivity().applicationContext, lettersArray, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {
                     val myIntent =
                         Intent(activity!!.applicationContext, DetailsSignActivity::class.java)

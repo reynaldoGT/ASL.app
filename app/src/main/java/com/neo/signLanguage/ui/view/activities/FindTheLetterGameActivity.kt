@@ -4,20 +4,19 @@ package com.neo.signLanguage.ui.view.activities
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout.LayoutParams
 import android.widget.RelativeLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.neo.signLanguage.AdapterGame
-
+import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.orhanobut.logger.Logger
-import android.widget.LinearLayout.LayoutParams;
-import com.neo.signLanguage.R
 import java.util.*
 
 class FindTheLetterGameActivity : AppCompatActivity() {
@@ -26,9 +25,12 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   private var intentsNumber: Int = 0
 
   private val model: GameViewModel by viewModels()
-  var record: Int = 0
-  var difficulty = ""
+
+  var record: Int = 0;
+  var difficulty: String = ""
   override fun onCreate(savedInstanceState: Bundle?) {
+    // declare int var
+
     super.onCreate(savedInstanceState)
     binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
     setContentView(binding.root)
@@ -53,7 +55,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     model.getRandomToFindLetter(intentsNumber)
     binding.currentRecord.text = getString(
       R.string.current_record,
-      MainActivity.sharedPrefs.getMemoryRecord().toString()
+      MainActivity.sharedPrefs.getMemoryRecord(difficulty!!).toString()
     )
 
     initRecyclerView()
@@ -61,9 +63,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     model.intents.observe(this) {
       if (it == 0) {
         super.onBackPressed()
-        if (MainActivity.sharedPrefs.getMemoryRecord() < record) {
-          MainActivity.sharedPrefs.setMemoryRecord(record)
-        }
+        saveRecord()
       }
     }
   }
@@ -91,6 +91,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   private fun initRecyclerView() {
+
     model.randomGameLetters
       .observe(this) {
         binding.currentAnswer.text =
@@ -111,10 +112,14 @@ class FindTheLetterGameActivity : AppCompatActivity() {
             it.data,
             object : ClickListener {
               override fun onClick(v: View?, position: Int) {
+                /*model.setCurrentMessage(it!![position].sing, false)*/
                 if ((it.data[position].letter) == it.correctAnswer.letter) {
                   record++
                   model.getRandomToFindLetter(intentsNumber)
                 } else {
+
+                  Logger.d("Show add")
+
                   if (MainActivity.sharedPrefs.getVibration()) {
                     vibratePhone(applicationContext, 200)
                   }
@@ -123,9 +128,26 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                 }
               }
             })
+
         binding.gridListSing.layoutManager =
           GridLayoutManager(this, if (difficulty == "hard") 3 else 2)
         binding.gridListSing.adapter = adapter
       }
   }
+
+  private fun saveRecord() {
+
+    if (MainActivity.sharedPrefs.getMemoryRecord(difficulty) < record) {
+      MainActivity.sharedPrefs.setMemoryRecord(difficulty, record)
+    }
+  }
+
+  override fun onSupportNavigateUp(): Boolean {
+    saveRecord()
+    finish()
+    return true
+  }
+
+
 }
+

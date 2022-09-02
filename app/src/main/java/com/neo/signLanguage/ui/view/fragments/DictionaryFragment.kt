@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
-import com.neo.signLanguage.adapters.AdapterLetters
+import com.neo.signLanguage.adapters.AdapterLinearLetters
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentDictionarySignsBinding
 
@@ -19,7 +19,7 @@ class DictionaryFragment : Fragment() {
     private var _binding: FragmentDictionarySignsBinding? = null
     private val binding get() = _binding!!
     var fragmentAdapter: TabAdapter? = null
-    private var adaptador: AdapterLetters? = null
+    private var adaptador: AdapterLinearLetters? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
