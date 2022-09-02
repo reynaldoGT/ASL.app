@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.activities
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -8,8 +9,10 @@ import android.widget.LinearLayout.LayoutParams
 import android.widget.RelativeLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.AdapterGame
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ClickListener
@@ -29,7 +32,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   var record: Int = 0;
   var difficulty: String = ""
   override fun onCreate(savedInstanceState: Bundle?) {
-    // declare int var
 
     super.onCreate(savedInstanceState)
     binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
@@ -54,14 +56,19 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     }
     model.getRandomToFindLetter(intentsNumber)
     binding.currentRecord.text = getString(
-      R.string.current_record,
-      MainActivity.sharedPrefs.getMemoryRecord(difficulty!!).toString()
+            R.string.current_record,
+            MainActivity.sharedPrefs.getMemoryRecord(difficulty!!).toString()
     )
 
-    initRecyclerView()
+    initRecyclerView(this)
     livesIcon()
     model.intents.observe(this) {
       if (it == 0) {
+        Snackbar.make(
+                this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+                "CORRECTO",
+                Snackbar.LENGTH_SHORT,
+        ).setBackgroundTint(ContextCompat.getColor(this, R.color.red_dark)).show()
         super.onBackPressed()
         saveRecord()
       }
@@ -73,14 +80,14 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     for (i in 0 until model.intents.value!!) {
       val imageView = ImageView(this)
       imageView.setImageDrawable(
-        ContextCompat.getDrawable(
-          this,
-          R.drawable.ic_heart
-        )
+              ContextCompat.getDrawable(
+                      this,
+                      R.drawable.ic_heart
+              )
       )
       val params = RelativeLayout.LayoutParams(
-        LayoutParams.WRAP_CONTENT,
-        LayoutParams.WRAP_CONTENT
+              LayoutParams.WRAP_CONTENT,
+              LayoutParams.WRAP_CONTENT
       )
 
       params.setMargins(10, 0, 0, 0)
@@ -90,49 +97,54 @@ class FindTheLetterGameActivity : AppCompatActivity() {
 
   }
 
-  private fun initRecyclerView() {
+  private fun initRecyclerView(context: Context) {
 
     model.randomGameLetters
-      .observe(this) {
-        binding.currentAnswer.text =
-          if (it.correctAnswer.type == "letter")
-            getString(
-              R.string.game_find_game_title_letter,
-              it.correctAnswer.letter.uppercase(Locale.getDefault())
-            )
-          else getString(
-            R.string.game_find_game_title_number,
-            it.correctAnswer.letter.uppercase(Locale.getDefault())
-          )
-        binding.currentLetterAnswer.text =
-          it.correctAnswer.letter.uppercase(Locale.getDefault())
-        adapter =
-          AdapterGame(
-            this,
-            it.data,
-            object : ClickListener {
-              override fun onClick(v: View?, position: Int) {
-                /*model.setCurrentMessage(it!![position].sing, false)*/
-                if ((it.data[position].letter) == it.correctAnswer.letter) {
-                  record++
-                  model.getRandomToFindLetter(intentsNumber)
-                } else {
+            .observe(this) {
+              binding.currentAnswer.text =
+                      if (it.correctAnswer.type == "letter")
+                        getString(
+                                R.string.game_find_game_title_letter,
+                                it.correctAnswer.letter.uppercase(Locale.getDefault())
+                        )
+                      else getString(
+                              R.string.game_find_game_title_number,
+                              it.correctAnswer.letter.uppercase(Locale.getDefault())
+                      )
+              binding.currentLetterAnswer.text =
+                      it.correctAnswer.letter.uppercase(Locale.getDefault())
+              adapter =
+                      AdapterGame(
+                              this,
+                              it.data,
+                              object : ClickListener {
+                                override fun onClick(v: View?, position: Int) {
+                                  /*model.setCurrentMessage(it!![position].sing, false)*/
+                                  if ((it.data[position].letter) == it.correctAnswer.letter) {
+                                    record++
+                                    Snackbar.make(
+                                            this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+                                            "corecto :D",
+                                            Snackbar.LENGTH_SHORT,
+                                    ).setBackgroundTint(ContextCompat.getColor(context, R.color.green_dark)).show()
+                                    model.getRandomToFindLetter(intentsNumber)
+                                  } else {
 
-                  Logger.d("Show add")
+                                    Logger.d("Show add")
 
-                  if (MainActivity.sharedPrefs.getVibration()) {
-                    vibratePhone(applicationContext, 200)
-                  }
-                  model.setIntents(-1)
-                  livesIcon()
-                }
-              }
-            })
+                                    if (MainActivity.sharedPrefs.getVibration()) {
+                                      vibratePhone(applicationContext, 200)
+                                    }
+                                    model.setIntents(-1)
+                                    livesIcon()
+                                  }
+                                }
+                              })
 
-        binding.gridListSing.layoutManager =
-          GridLayoutManager(this, if (difficulty == "hard") 3 else 2)
-        binding.gridListSing.adapter = adapter
-      }
+              binding.gridListSing.layoutManager =
+                      GridLayoutManager(this, if (difficulty == "hard") 3 else 2)
+              binding.gridListSing.adapter = adapter
+            }
   }
 
   private fun saveRecord() {
