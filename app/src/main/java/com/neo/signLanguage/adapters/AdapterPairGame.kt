@@ -26,8 +26,7 @@ class AdapterPairGame(
     var viewHolder: ViewHolderGame? = null
     var context: Context? = null
     var itemsSelected: ArrayList<Int> = arrayListOf()
-    var firstElement: Sign? = null
-    var secondElement: Sign? = null
+
 
     init {
         this.items = items
@@ -39,7 +38,6 @@ class AdapterPairGame(
             LayoutInflater.from(parent.context).inflate(R.layout.template_game_pair, parent, false)
 
         viewHolder = ViewHolderGame(vista, listener)
-
         return viewHolder!!
     }
 

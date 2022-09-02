@@ -2,8 +2,6 @@ package com.neo.signLanguage.ui.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -20,31 +18,22 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.recyclerview.widget.GridLayoutManager
-import com.neo.signLanguage.adapters.AdapterLettersGameRotate
-import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.ActivityFindPairGameBinding
-import com.neo.signLanguage.ui.view.fragments.CustomButton
-import com.neo.signLanguage.ui.view.fragments.CustomButtonSelectLevel
 
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.Game
-import com.orhanobut.logger.Logger
-import kotlin.math.sign
 
 class FindPairGameActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityFindPairGameBinding
 
-  lateinit var adapter: AdapterLettersGameRotate
   private val model: GameViewModel by viewModels()
 
   @OptIn(ExperimentalMaterialApi::class)

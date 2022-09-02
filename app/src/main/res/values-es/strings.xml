@@ -82,5 +82,6 @@
     <string name="send_message_with_signs">Enviar mensajes con imágenes</string>
     <string name="find_the_even_signs">Encuentra las señas iguales</string>
     <string name="find_correct_letter_or_sign">Encuentra la letra o número correcto</string>
+    <string name="correct">CORRECT</string>
 
 </resources>

@@ -104,7 +104,7 @@
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/activity_find_letter_game.xml" value="0.2612227447627191" />
-        <entry key="app/src/main/res/layout/activity_find_pair_game.xml" value="0.2612227447627191" />
+        <entry key="app/src/main/res/layout/activity_find_pair_game.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_giphy.xml" value="0.175" />
         <entry key="app/src/main/res/layout/activity_grid_all_letters.xml" value="0.13229166666666667" />
         <entry key="app/src/main/res/layout/activity_intersitial.xml" value="0.33" />
@@ -124,6 +124,8 @@
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/template_color.xml" value="0.175" />
         <entry key="app/src/main/res/layout/template_giphy.xml" value="0.3234375" />
+        <entry key="app/src/main/res/layout/template_letter_send_message.xml" value="0.1278324070115434" />
+        <entry key="app/src/main/res/layout/template_linear_letter.xml" value="0.1278324070115434" />
         <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.33" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.15" />
       </map>

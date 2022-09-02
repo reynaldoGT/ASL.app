@@ -82,5 +82,8 @@
     <string name="send_message_with_signs">Show message with signs</string>
     <string name="find_the_even_signs">Find the even signs</string>
     <string name="find_correct_letter_or_sign">Find the correct letter or sign</string>
+    <string name="correct">CORRECT</string>
+    <string name="xd">corecto :D</string>
+    <string name="current_letter">Current Letter</string>
 
 </resources>

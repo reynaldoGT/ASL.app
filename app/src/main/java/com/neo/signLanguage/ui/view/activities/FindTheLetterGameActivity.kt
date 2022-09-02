@@ -57,7 +57,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     model.getRandomToFindLetter(intentsNumber)
     binding.currentRecord.text = getString(
             R.string.current_record,
-            MainActivity.sharedPrefs.getMemoryRecord(difficulty!!).toString()
+            MainActivity.sharedPrefs.getMemoryRecord(difficulty).toString()
     )
 
     initRecyclerView(this)
@@ -66,7 +66,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
       if (it == 0) {
         Snackbar.make(
                 this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-                "CORRECTO",
+                getString(R.string.correct),
                 Snackbar.LENGTH_SHORT,
         ).setBackgroundTint(ContextCompat.getColor(this, R.color.red_dark)).show()
         super.onBackPressed()
@@ -124,14 +124,11 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                                     record++
                                     Snackbar.make(
                                             this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-                                            "corecto :D",
+                                            getString(R.string.correct),
                                             Snackbar.LENGTH_SHORT,
                                     ).setBackgroundTint(ContextCompat.getColor(context, R.color.green_dark)).show()
                                     model.getRandomToFindLetter(intentsNumber)
                                   } else {
-
-                                    Logger.d("Show add")
-
                                     if (MainActivity.sharedPrefs.getVibration()) {
                                       vibratePhone(applicationContext, 200)
                                     }
@@ -140,7 +137,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                                   }
                                 }
                               })
-
               binding.gridListSing.layoutManager =
                       GridLayoutManager(this, if (difficulty == "hard") 3 else 2)
               binding.gridListSing.adapter = adapter
@@ -148,7 +144,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   private fun saveRecord() {
-
     if (MainActivity.sharedPrefs.getMemoryRecord(difficulty) < record) {
       MainActivity.sharedPrefs.setMemoryRecord(difficulty, record)
     }
@@ -159,7 +154,5 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     finish()
     return true
   }
-
-
 }
 
