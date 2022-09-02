@@ -24,64 +24,64 @@ import com.neo.signLanguage.ui.viewModel.GameViewModel
 class GamesMenuFragment : Fragment() {
 
 
-    private var _binding: FragmentGamesBinding? = null
-    private val binding get() = _binding!!
+  private var _binding: FragmentGamesBinding? = null
+  private val binding get() = _binding!!
 
-    private val gameViewModel: GameViewModel by viewModels()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+  private val gameViewModel: GameViewModel by viewModels()
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
 
-        // Using the binding
-        _binding = FragmentGamesBinding.inflate(inflater, container, false)
-        gameViewModel.getRandomToFindLetter(3)
-        return binding.root
-    }
+    // Using the binding
+    _binding = FragmentGamesBinding.inflate(inflater, container, false)
+    gameViewModel.getRandomToFindLetter(3)
+    return binding.root
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val titlesMenu = ArrayList<MenuTitle>()
-        titlesMenu.add(
-            MenuTitle(
-                "Ejercita tu memoria",
-                "Adivina la letra o numero correcto ",
-                R.drawable.ic_brain ,
-                SelectLevelActivity()
-            )
-        )
-        /*titlesMenu.add(
-            MenuTitle(
-                "Encuentra los pares",
-                "Busca los la letra y el signo correcto",
-                R.drawable.ic_0_number,
-                FindPairGameActivity()
-            )
-        )*/
-        titlesMenu.add(
-            MenuTitle(
-                "Escribir un mensaje",
-                "Mostrar mensaje con signos",
-                R.drawable.ic_keyboard,
-                SendMessageWithImagesActivity()
-            )
-        )
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val titlesMenu = ArrayList<MenuTitle>()
+    titlesMenu.add(
+      MenuTitle(
+        "Ejercita tu memoria",
+        "Adivina la letra o numero correcto ",
+        R.drawable.ic_brain,
+        SelectLevelActivity()
+      )
+    )
+
+    titlesMenu.add(
+      MenuTitle(
+        "Escribir un mensaje",
+        "Mostrar mensaje con signos",
+        R.drawable.ic_keyboard,
+        SendMessageWithImagesActivity()
+      )
+    )
+    titlesMenu.add(
+      MenuTitle(
+        "Encuentra los pares",
+        "Busca los la letra y el signo correcto",
+        R.drawable.ic_0_number,
+        FindPairGameActivity()
+      )
+    )
+
+    val adapterCustomGrid =
+      AdapterMenuGameSelect(requireContext(), titlesMenu, object : ClickListener {
+        override fun onClick(v: View?, position: Int) {
+
+          val intent =
+            Intent(requireContext(), titlesMenu[position].activity!!::class.java)
+          startActivity(intent)
+        }
+      })
+    binding.gridListSing.layoutManager =
+      GridLayoutManager(requireContext(), 2)
+    binding.gridListSing.adapter = adapterCustomGrid
 
 
-        val adapterCustomGrid =
-            AdapterMenuGameSelect(requireContext(), titlesMenu, object : ClickListener {
-                override fun onClick(v: View?, position: Int) {
-
-                    val intent =
-                        Intent(requireContext(), titlesMenu[position].activity!!::class.java)
-                    startActivity(intent)
-                }
-            })
-        binding.gridListSing.layoutManager =
-            GridLayoutManager(requireContext(), 2)
-        binding.gridListSing.adapter = adapterCustomGrid
-
-
-    }
+  }
 
 }

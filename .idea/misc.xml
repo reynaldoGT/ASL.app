@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1662081978141.xml" value="0.9" />
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="../../Android/Sdk/platforms/android-30/data/res/layout/auto_complete_list.xml" value="0.3234375" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_0_number.xml" value="0.21875" />
@@ -86,6 +87,7 @@
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/layout/template_letter.xml" value="0.22" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/menu_navigation.xml" value="0.33" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/menu/toolbar_menu.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable-v24/cajatxt.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.3343589743589744" />
         <entry key="app/src/main/res/drawable/ic_0_number.xml" value="0.12395833333333334" />
         <entry key="app/src/main/res/drawable/ic_a_only_sing.xml" value="0.20729166666666668" />
@@ -100,6 +102,7 @@
         <entry key="app/src/main/res/drawable/ic_x_letter.xml" value="0.12395833333333334" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.3234375" />
+        <entry key="app/src/main/res/layout/activity_find_pair_game.xml" value="0.2612227447627191" />
         <entry key="app/src/main/res/layout/activity_giphy.xml" value="0.175" />
         <entry key="app/src/main/res/layout/activity_grid_all_letters.xml" value="0.13229166666666667" />
         <entry key="app/src/main/res/layout/activity_intersitial.xml" value="0.33" />
@@ -108,15 +111,18 @@
         <entry key="app/src/main/res/layout/activity_tabnavigator.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_bottom_navigation_container.xml" value="0.13229166666666667" />
         <entry key="app/src/main/res/layout/fragment_giphy.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_letters_and_number_sing.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_numbers.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_send_message.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_tabnavigator.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_test.xml" value="0.1278324070115434" />
+        <entry key="app/src/main/res/layout/fragment_translate.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_view_numbers.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/fragment_view_sings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/template_color.xml" value="0.175" />
         <entry key="app/src/main/res/layout/template_giphy.xml" value="0.3234375" />
-        <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.1078125" />
+        <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.33" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.15" />
       </map>
     </option>

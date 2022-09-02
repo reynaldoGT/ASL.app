@@ -95,7 +95,7 @@ class DataSign {
             val resortList = ArrayList<Sign>()
             val randomInts = generateSequence {
                 // this lambda is the source of the sequence's values
-                Random.nextInt(0 until this.getLetterArray().size)
+                Random.nextInt(0 until this.getLetterArray(false).size)
             }
                 .distinct()
                 .take(amount)

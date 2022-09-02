@@ -35,7 +35,6 @@ class GameViewModel : ViewModel() {
     }
     fun setGridNumbersMessage(intentNumber: Int) {
         gridNumbersMessage.postValue(intentNumber)
-
     }
 
 
