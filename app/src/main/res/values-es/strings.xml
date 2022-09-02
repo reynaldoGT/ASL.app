@@ -13,7 +13,7 @@
     <string name="letter_a">Letra: A</string>
     <string name="number">Número: %1$s</string>
     <string name="letter">Letra: %1$s </string>
-    <string name="change_theme">Tema Oscuro</string>
+    <string name="change_theme">Tema oscuro</string>
     <string name="current_delay_time">Tiempo de retraso actual : </string>
     <string name="delay_time">Tiempo de retraso</string>
     <string name="settings_title">Configuración</string>
