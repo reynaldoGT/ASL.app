@@ -140,5 +140,8 @@ dependencies {
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.2.1'
 
+    implementation "androidx.compose.runtime:runtime-livedata:1.2.0"
 
 }
+
+

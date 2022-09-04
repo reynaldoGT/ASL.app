@@ -85,5 +85,6 @@
     <string name="correct">CORRECT</string>
     <string name="xd">corecto :D</string>
     <string name="current_letter">Current Letter</string>
+    <string name="send_message_with_images">Send message with images</string>
 
 </resources>

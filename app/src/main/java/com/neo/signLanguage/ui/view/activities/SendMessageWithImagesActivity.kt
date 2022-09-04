@@ -127,7 +127,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
     }
 
     private fun initActionBar() {
-        binding.detailToolbar.title = "Enviar mensaje con imagenes"
+        binding.detailToolbar.title = getString(R.string.send_message_with_images)
         this.setSupportActionBar(binding.detailToolbar)
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
