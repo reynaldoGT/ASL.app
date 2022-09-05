@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.fragments.GamesMenuFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingVertical="48dp"
         tools:context=".GridAllLetters">
 
         <LinearLayout
@@ -27,9 +27,14 @@
                 android:overScrollMode="never"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp" />
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/test_banner_id" />
         </LinearLayout>
-
-
     </LinearLayout>
 
 </FrameLayout>

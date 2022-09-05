@@ -29,7 +29,7 @@ import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
 
 import com.neo.signLanguage.ui.view.activities.FindTheLetterGameActivity
-import com.neo.signLanguage.utils.Utils
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
 class SelectLevelActivity : AppCompatActivity() {
@@ -86,14 +86,14 @@ fun CustomButtonSelectLevel() {
 
   ) {
     Text(
-      text = Utils.getStringByIdName(context, "select_level"),
+      text = getStringByIdName(context, "select_level"),
       modifier = Modifier.padding(10.dp),
       style = MaterialTheme.typography.h3
 
     )
 
-    CustomButton(buttonTitle = Utils.getStringByIdName(context, "easy"), difficulty = "easy")
-    CustomButton(buttonTitle = Utils.getStringByIdName(context, "medium"), difficulty = "medium")
+    CustomButton(buttonTitle = getStringByIdName(context, "easy"), difficulty = "easy")
+    CustomButton(buttonTitle = getStringByIdName(context, "medium"), difficulty = "medium")
     CustomButton(buttonTitle = "Hard", difficulty = "hard")
   }
 }

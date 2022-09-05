@@ -75,7 +75,5 @@ class GamesMenuFragment : Fragment() {
       GridLayoutManager(requireContext(), 2)
     binding.gridListSing.adapter = adapterCustomGrid
 
-
   }
-
 }

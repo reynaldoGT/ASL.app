@@ -1,7 +1,6 @@
 package com.neo.signLanguage.ui.view.fragments
 
 import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,6 @@ import com.neo.signLanguage.adapters.GiphyAdapter
 import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
-import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.getLanguagePhone
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.ui.viewModel.NetworkViewModel
@@ -36,7 +34,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var giphyImages = mutableListOf<GiphyItem>()
     private val giphyViewModel: GiphyViewModel by viewModels()
-    private val ViewModelProvider: NetworkViewModel by viewModels()
+    private val viewModelProvider: NetworkViewModel by viewModels()
 
     private var _binding: FragmentGiphyBinding? = null
     private val binding get() = _binding!!
@@ -56,7 +54,7 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
         super.onViewCreated(view, savedInstanceState)
 
 
-        ViewModelProvider.connected.observe(viewLifecycleOwner) { connected: Boolean ->
+        viewModelProvider.connected.observe(viewLifecycleOwner) { connected: Boolean ->
 
             if (connected) {
                 binding.searchBreed.setOnQueryTextListener(this)
@@ -92,15 +90,14 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun initRecyclerView() {
         adapter = GiphyAdapter(activity?.applicationContext!!, giphyImages, object : ClickListener {
             override fun onClick(v: View?, position: Int) {
-                val myIntent =
+                /*val myIntent =
                     Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
 
                 myIntent.putExtra("imageUrl", giphyImages[position].images.original.url)
                 myIntent.putExtra("networkImage", true)
                 myIntent.putExtra("letter", giphyImages[position].title)
                 myIntent.putExtra("type", giphyImages[position].source)
-
-                startActivity(myIntent)
+                startActivity(myIntent)*/
             }
         })
 

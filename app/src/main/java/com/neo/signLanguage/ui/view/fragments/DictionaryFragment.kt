@@ -19,8 +19,6 @@ class DictionaryFragment : Fragment() {
   private var _binding: FragmentDictionarySignsBinding? = null
   private val binding get() = _binding!!
   var fragmentAdapter: TabAdapter? = null
-  private var adaptador: AdapterLinearLetters? = null
-  private var layoutManager: RecyclerView.LayoutManager? = null
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

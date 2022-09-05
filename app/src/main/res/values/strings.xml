@@ -17,7 +17,8 @@
 
     <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173</string>
+    <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="test_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
 
     <string name="change_theme">Dark Theme</string>
     <string name="change_layout">Change layout</string>
@@ -56,6 +57,7 @@
     <string name="letter_and_numbers">Letter and numbers</string>
     <string name="simple_description">simple_description</string>
     <string name="history">History</string>
+    <string name="help_us">Help us</string>
     <string name="no_microphone">This device does not have a voice recorder</string>
     <string name="delete_question">Clear browsing data</string>
     <string name="clear_history_question">Do you want to clear the history?</string>
@@ -86,7 +88,6 @@
     <string name="xd">corecto :D</string>
     <string name="current_letter">Current Letter</string>
     <string name="send_message_with_images">Send message with images</string>
-
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="Hard">Hard</string>

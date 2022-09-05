@@ -82,6 +82,15 @@
     <string name="send_message_with_signs">Enviar mensajes con imágenes</string>
     <string name="find_the_even_signs">Encuentra las señas iguales</string>
     <string name="find_correct_letter_or_sign">Encuentra la letra o número correcto</string>
-    <string name="correct">CORRECT</string>
+    <string name="correct">CORRECTO</string>
+    <string name="help_us">Ayudanos</string>
+
+    <string name="xd">corecto :D</string>
+    <string name="current_letter">Letra actual</string>
+    <string name="send_message_with_images">Enviar mensaje con imágenes</string>
+    <string name="easy">Fácil</string>
+    <string name="medium">Medio</string>
+    <string name="Hard">Difícil</string>
+    <string name="select_level">Seleccionar nivel</string>
 
 </resources>

@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,6 +59,7 @@
             android:elevation="0dp"
             android:padding="8dp"
             app:cardCornerRadius="5dp">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/gridListSing"
                 android:layout_width="match_parent"
@@ -71,8 +72,8 @@
         android:id="@+id/icon_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="Descargar imagen"
         app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"

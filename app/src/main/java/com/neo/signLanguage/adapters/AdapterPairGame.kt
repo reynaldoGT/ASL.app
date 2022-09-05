@@ -53,7 +53,7 @@ class AdapterPairGame(
         holder.singImage?.setImageResource(item?.image!!)*/
 
         if (item?.type == "letter") {
-            holder.nombre?.text = item?.letter
+            holder.nombre?.text = item.letter
             holder.nombre?.visibility = View.VISIBLE
         } else {
             holder.singImage?.setImageResource(item?.image!!)

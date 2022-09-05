@@ -1,4 +1,4 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
-import com.neo.signLanguage.adapters.ClickListener
+import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.TemplateGameBinding
 

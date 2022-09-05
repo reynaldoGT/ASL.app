@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
@@ -17,13 +17,13 @@ import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
 import com.neo.signLanguage.ui.view.fragments.*
-import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
   var fragmentAdapter: TabAdapter? = null
+
   companion object {
 
     lateinit var binding: FragmentTabnavigatorBinding
@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    val model: GiphyViewModel by viewModels()
     installSplashScreen()
     super.onCreate(savedInstanceState)
     database =
@@ -61,6 +60,11 @@ class MainActivity : AppCompatActivity() {
     fragmentAdapter = TabAdapter(fm, lifecycle)
 
     showSelectedFragment(DictionaryFragment())
+    if (sharedPrefs.getTheme()) {
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    } else {
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    }
 
     binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
       when (menuItem.itemId) {
@@ -92,6 +96,11 @@ class MainActivity : AppCompatActivity() {
       }
       R.id.history -> {
         val intent = Intent(this, HistoryActivity::class.java)
+        startActivity(intent)
+        true
+      }
+      R.id.videoReward -> {
+        val intent = Intent(this, VideReward::class.java)
         startActivity(intent)
         true
       }

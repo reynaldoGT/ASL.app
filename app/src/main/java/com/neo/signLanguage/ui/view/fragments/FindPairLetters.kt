@@ -20,7 +20,7 @@ class FindPairLetters : Fragment() {
     private var _binding: FragmentFindPairLettersBinding? = null
     private val binding get() = _binding!!
 
-    private var adaptador: AdapterPairGame? = null
+    private var adapter: AdapterPairGame? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
     private val gameViewModel: GameViewModel by viewModels()
     override fun onCreateView(
@@ -45,18 +45,18 @@ class FindPairLetters : Fragment() {
             binding.gridListSing.layoutManager = layoutManager
             binding.currentAnswer.text = it.correctAnswer.letter
             binding.gridListSing.setHasFixedSize(true)
-            adaptador =
+            adapter =
                 AdapterPairGame(
                     requireActivity().applicationContext,
                     it.data,
                     object : ClickListener {
                         override fun onClick(v: View?, position: Int) {
 
-                            adaptador?.selectItem(position)
+                            adapter?.selectItem(position)
                         }
                     })
             layoutManager = GridLayoutManager(requireActivity().applicationContext, 2)
-            binding.gridListSing.adapter = adaptador
+            binding.gridListSing.adapter = adapter
         }
 
         binding.changeletters.setOnClickListener {
