@@ -11,10 +11,10 @@
     <string name="hello_blank_fragment">Hello</string>
     <string name="empty_message">Mensaje Vacio</string>
     <string name="letter_a">Letra: A</string>
-    <string name="number">Número: </string>
-    <string name="letter">Letra: </string>
-    <string name="change_theme">Tema Oscuro</string>
-    <string name="current_delay_time">Tiempo de retraso actual</string>
+    <string name="number">Número: %1$s</string>
+    <string name="letter">Letra: %1$s </string>
+    <string name="change_theme">Tema oscuro</string>
+    <string name="current_delay_time">Tiempo de retraso actual : </string>
     <string name="delay_time">Tiempo de retraso</string>
     <string name="settings_title">Configuración</string>
 
@@ -33,7 +33,7 @@
 
     <string name="green_light">Verde Claro</string>
     <string name="deep_orange">Naranja oscuro</string>
-    <string name="teal">Teal</string>
+    <string name="teal">Turquesa</string>
 
     <string name="change_hand_color">Cambiar color de Mano</string>
     <string name="new_color_changed">El color de la mano fue cambiado a </string>
@@ -41,12 +41,56 @@
 
     <string name="find_sing">Buscar seña</string>
     <string name="Error">Error</string>
-    <string name="transition">Transition</string>
+    <string name="transition">Transición</string>
     <string name="fade">Desvanecer</string>
     <string name="vertical_slide">Deslizamiento vertical</string>
     <string name="left_to_right">Izquierda a derecha</string>
     <string name="right_to_left">Derecha a izquierda</string>
     <string name="theme">Tema</string>
     <string name="movement_signs">Señas con movimiento</string>
+    <string name="letter_and_numbers">Letras y números</string>
+    <string name="search_words">Buscar Palabras</string>
     <string name="simple_description">simple_description</string>
+    <string name="history">Historial</string>
+    <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
+    <string name="change_layout">Cambiar vista</string>
+    <string name="delete_question">¿Limpiar historial?</string>
+    <string name="clear_history_question">Desea limpiar todo el historial</string>
+    <string name="delete">Eliminar</string>
+    <string name="empty">VACIO</string>
+    <string name="your_history_is_empty">Tu historial esta vacío</string>
+
+    <string name="current_hand_color">Color actual de la mano</string>
+    <string name="maximum_number_characters">El número de máximo de caracteres es de %1$d</string>
+
+    <string name="intents">Intentos %1$d </string>
+
+    <string name="game_find_game_title_letter">Cual es el signo de la letra:  <b><i>%1$s</i></b> </string>
+    <string name="game_find_game_title_number">Cual es el signo del numero: <b><i>%1$s</i></b> </string>
+
+    <string name="current_record">Tu record es de: %1$s</string>
+
+    <string name="hello_from_here">Hola desdes aquí</string>
+    <string name="translate">Traducir</string>
+    <string name="dictionary">Diccionario</string>
+    <string name="games">Juegos</string>
+    <string name="placeholder">Ingrese su mensaje</string>
+
+    <string name="test_your_memory">Ejercita tu memoria</string>
+    <string name="guess_letter_number">Adivina la letra o número correcto</string>
+    <string name="write_your_message">Escribe tu mensaje</string>
+    <string name="send_message_with_signs">Enviar mensajes con imágenes</string>
+    <string name="find_the_even_signs">Encuentra las señas iguales</string>
+    <string name="find_correct_letter_or_sign">Encuentra la letra o número correcto</string>
+    <string name="correct">CORRECTO</string>
+    <string name="help_us">Ayudanos</string>
+
+    <string name="xd">corecto :D</string>
+    <string name="current_letter">Letra actual</string>
+    <string name="send_message_with_images">Enviar mensaje con imágenes</string>
+    <string name="easy">Fácil</string>
+    <string name="medium">Medio</string>
+    <string name="Hard">Difícil</string>
+    <string name="select_level">Seleccionar nivel</string>
+
 </resources>

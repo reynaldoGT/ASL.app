@@ -1,4 +1,4 @@
-package com.neo.signLanguage
+package com.neo.signLanguage.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.TemplateLetterBinding
-import com.neo.signLanguage.models.Sign
-import com.neo.signLanguage.views.activities.TabNavigatorActivity.Companion.sharedPrefs
+import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 
 
 interface ClickListener {
@@ -35,17 +36,15 @@ class AdapterLetters(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vista =
             LayoutInflater.from(parent.context).inflate(R.layout.template_letter, parent, false)
-
         viewHolder = ViewHolder(vista, listener, this.context)
-
         return viewHolder!!
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val item = items?.get(position)
-        holder.foto?.setImageResource(item?.image!!)
-        holder.nombre?.text = item?.letter
+        holder.image?.setImageResource(item?.image!!)
+        holder.name?.text = item?.letter
 
     }
 
@@ -59,24 +58,31 @@ class AdapterLetters(
         // Using the binding
         private val binding = TemplateLetterBinding.bind(vista)
 
-        var foto: ImageView? = null
-        var nombre: TextView? = null
+        var image: ImageView? = null
+        var name: TextView? = null
         var listener: ClickListener? = null
 
         init {
-            foto = binding.imageTemplateView
-            if (sharedPrefs.getColor() != 0)
+            image = binding.imageTemplateView
+            name = binding.textViewTemplateView
+            if (sharedPrefs.getColor() != 0) {
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(
                         context!!,
                         sharedPrefs.getColor()
                     )
                 )
-            nombre = binding.textViewTemplateView
+
+                binding.textViewTemplateView.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        sharedPrefs.getColor()
+                    )
+                )
+            }
             this.listener = listener
             vista.setOnClickListener(this)
         }
-
         override fun onClick(v: View?) {
             this.listener?.onClick(v!!, adapterPosition)
         }

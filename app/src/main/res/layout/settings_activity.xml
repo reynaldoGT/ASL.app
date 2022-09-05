@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".views.activities.SettingsActivity">
+        tools:context=".ui.view.activities.SettingsActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/detail_toolbar"
@@ -31,11 +31,11 @@
                 android:id="@+id/themeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/theme"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchChangeTheme"
@@ -50,13 +50,34 @@
                 app:thumbTint="?attr/colorPrimary" />
 
             <TextView
+                android:id="@+id/tvVibrationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vibracion"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/themeTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchChangeVibration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vibracion"
+                android:textStyle=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintTop_toBottomOf="@+id/tvVibrationTitle"
+                app:thumbTint="?attr/colorPrimary" />
+
+            <TextView
                 android:id="@+id/timeChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/delay_time"
                 app:layout_constraintStart_toStartOf="parent"
 
-                app:layout_constraintTop_toBottomOf="@id/switchChangeTheme" />
+                app:layout_constraintTop_toBottomOf="@id/switchChangeVibration" />
 
             <com.google.android.material.slider.Slider
                 android:id="@+id/slider"
@@ -100,13 +121,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/currentDelayValue" />
 
+            <LinearLayout
+                android:id="@+id/currentColorRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvColors"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvChangeHandColor">
+
+                <TextView
+                    android:id="@+id/tvChangeHandColorx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/current_hand_color"
+                    android:textSize="16sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/currentColor"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+
+                    android:backgroundTint="@color/red_dark"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvCurrentColor"
+                    app:layout_constraintTop_toBottomOf="@+id/tvChangeHandColor"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded" />
+            </LinearLayout>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvColors"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
+                android:layout_marginVertical="16dp"
                 android:overScrollMode="never"
-                app:layout_constraintTop_toBottomOf="@+id/tvChangeHandColor" />
+                app:layout_constraintTop_toBottomOf="@+id/currentColorRow" />
 
 
             <TextView
@@ -161,23 +219,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/right_to_left" />
-
-                <!--<RadioButton
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Deslazamiento horizontal" android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Arriba" />
-
-                                <RadioButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Abajo " />-->
-
             </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

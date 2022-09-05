@@ -3,6 +3,7 @@
     package="com.neo.signLanguage">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,28 +13,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
         <activity
-            android:name=".views.activities.TabNavigatorActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-
+            android:name=".ui.view.activities.VideReward"
+            android:exported="false" />
         <activity
-            android:name=".views.activities.SettingsActivity"
-            android:exported="false"
-            android:parentActivityName=".views.activities.TabNavigatorActivity" />
+            android:name=".ui.view.fragments.SelectLevelActivity"
+            android:exported="false" />
         <activity
-            android:name=".views.activities.DetailsSignActivity"
-            android:exported="false"
-            android:parentActivityName=".views.activities.TabNavigatorActivity" />
+            android:name=".ui.view.activities.SendMessageWithImagesActivity"
+            android:exported="false" />
         <activity
-            android:name=".views.activities.SplashActivity"
+            android:name=".ui.view.activities.FindTheLetterGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.activities.SettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.view.activities.MainActivity" />
+        <activity
+            android:name=".ui.view.activities.HistoryActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.view.activities.MainActivity" />
+        <activity
+            android:name=".ui.view.activities.DetailsSignActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.activities.MainActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GridAllLetters" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
