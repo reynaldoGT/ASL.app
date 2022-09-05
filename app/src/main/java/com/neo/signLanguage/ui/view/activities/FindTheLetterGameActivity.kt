@@ -76,7 +76,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   private fun livesIcon() {
-    binding.lifesContainer.removeAllViews();
+    binding.livesContainer.removeAllViews()
     for (i in 0 until model.intents.value!!) {
       val imageView = ImageView(this)
       imageView.setImageDrawable(
@@ -92,7 +92,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
 
       params.setMargins(10, 0, 0, 0)
       imageView.layoutParams = params
-      binding.lifesContainer.addView(imageView)
+      binding.livesContainer.addView(imageView)
     }
 
   }

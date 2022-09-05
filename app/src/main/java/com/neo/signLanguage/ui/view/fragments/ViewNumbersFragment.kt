@@ -21,7 +21,7 @@ class ViewNumbersFragment : Fragment() {
     private var _binding: FragmentNumbersBinding? = null
     private val binding get() = _binding!!
 
-    var adaptador: AdapterLinearLetters? = null
+    var adapter: AdapterLinearLetters? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
 
@@ -45,7 +45,7 @@ class ViewNumbersFragment : Fragment() {
         layoutManager = GridLayoutManager(requireActivity().applicationContext, 2)
         binding.gridListSingNumbers.layoutManager = layoutManager
 
-        adaptador =
+        adapter =
             AdapterLinearLetters(requireActivity().applicationContext, lettersArray, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {
                     val myIntent =
@@ -58,7 +58,7 @@ class ViewNumbersFragment : Fragment() {
                 }
             })
 
-        binding.gridListSingNumbers.adapter = adaptador
+        binding.gridListSingNumbers.adapter = adapter
         initLoad()
 
     }

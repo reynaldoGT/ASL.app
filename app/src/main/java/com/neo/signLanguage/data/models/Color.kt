@@ -5,7 +5,7 @@ class Color(colorName: String, colorValue: Int) {
     var colorValue = 0
 
     init {
-        this.colorName = colorName;
+        this.colorName = colorName
         this.colorValue = colorValue
     }
 }

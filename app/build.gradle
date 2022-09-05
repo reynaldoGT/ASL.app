@@ -121,7 +121,7 @@ dependencies {
     // Google Cloud Dialogflow API
     implementation 'com.google.cloud:google-cloud-dialogflow:3.1.0'
 
-    // Implementación de Java gRPC
+    // Java gRPC implementation
     implementation 'io.grpc:grpc-okhttp:1.38.0'
 
     //color picker

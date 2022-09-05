@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
       return language == "english"
     }
 
-    lateinit var networkState: NetworkState;
+    lateinit var networkState: NetworkState
     lateinit var database: SingDatabase
   }
 

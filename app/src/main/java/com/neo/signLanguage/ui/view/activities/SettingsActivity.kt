@@ -20,7 +20,7 @@ import com.neo.signLanguage.utils.DataSign
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: SettingsActivityBinding
-    private var adaptador: ColorAdapter? = null
+    private var adapter: ColorAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +70,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.rvColors.layoutManager = layoutManager
 
         val colorList = DataSign.getColorsList(this)
-        adaptador =
+        adapter =
             ColorAdapter(this, colorList, object : ClickListener {
                 override fun onClick(v: View?, position: Int) {
                     sharedPrefs.setColor(colorList[position].colorValue)
@@ -79,7 +79,7 @@ class SettingsActivity : AppCompatActivity() {
                         resources.getColorStateList(colorList[position].colorValue)
                 }
             })
-        binding.rvColors.adapter = adaptador
+        binding.rvColors.adapter = adapter
         showOptionsTransition()
         if (sharedPrefs.getShowTransition()) {
             setupRadioGroup()

@@ -27,7 +27,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
   private lateinit var binding: ActivitySendMessageWithImagesBinding
   private val RECOGNIZE_SPEECH_ACTIVITY = 1
   private var layoutManager: RecyclerView.LayoutManager? = null
-  private var adaptador: AdapterLettersSendMessage? = null
+  private var adapter: AdapterLettersSendMessage? = null
 
   private val model: GameViewModel by viewModels()
 
@@ -47,7 +47,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
         ColorPickerDialog.createColorPickerDialog(this, ColorPickerDialog.)*/
 
     model.sendMessageImages.observe(this) {
-      adaptador =
+      adapter =
         AdapterLettersSendMessage(
           this,
           it,
@@ -57,7 +57,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
             }
           })
 
-      binding.gridListSing.adapter = adaptador
+      binding.gridListSing.adapter = adapter
     }
     binding.edSendMessage.editText?.setText(resources.getString(R.string.hello_from_here))
     binding.edSendMessage.editText?.addTextChangedListener(object : TextWatcher {

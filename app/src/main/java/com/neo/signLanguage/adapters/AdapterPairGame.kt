@@ -49,9 +49,6 @@ class AdapterPairGame(
             holder.vista.setBackgroundColor(Color.WHITE)
         }
         val item = items?.get(position)
-        /*holder.nombre?.text = item?.letter
-        holder.singImage?.setImageResource(item?.image!!)*/
-
         if (item?.type == "letter") {
             holder.nombre?.text = item.letter
             holder.nombre?.visibility = View.VISIBLE
@@ -105,7 +102,7 @@ class AdapterPairGame(
 
         init {
             singImage = binding.imageTemplateView
-            constraintLayout = binding.constraintlayoutContainer
+            constraintLayout = binding.constraintLayoutContainer
             nombre = binding.letter
             this.listener = listener
             vista.setOnClickListener(this)

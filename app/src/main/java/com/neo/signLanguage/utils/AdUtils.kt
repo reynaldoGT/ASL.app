@@ -1,7 +1,6 @@
 package com.neo.signLanguage.utils
 
 import android.content.Context
-import android.provider.Settings.Global.getString
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest

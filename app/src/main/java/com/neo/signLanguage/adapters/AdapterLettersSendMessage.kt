@@ -42,7 +42,7 @@ class AdapterLettersSendMessage(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items?.get(position)
         holder.image?.setImageResource(item?.image!!)
-        holder.nombre?.text = item?.letter
+        holder.name?.text = item?.letter
     }
 
 
@@ -57,12 +57,12 @@ class AdapterLettersSendMessage(
         private val binding = TemplateLetterSendMessageBinding.bind(vista)
 
         var image: ImageView? = null
-        var nombre: TextView? = null
+        var name: TextView? = null
         var listener: ClickListener? = null
 
         init {
             image = binding.imageTemplateView
-            nombre = binding.textViewTemplateView
+            name = binding.textViewTemplateView
             if (sharedPrefs.getColor() != 0) {
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(

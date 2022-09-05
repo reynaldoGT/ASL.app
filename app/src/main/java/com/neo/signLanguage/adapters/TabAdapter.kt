@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.neo.signLanguage.ui.view.fragments.GiphyFragment
-import com.neo.signLanguage.ui.view.fragments.BottomNavigationFragment
 import com.neo.signLanguage.ui.view.fragments.LetterAndNumbersFragment
 import com.neo.signLanguage.ui.view.fragments.SendMessageFragment
 

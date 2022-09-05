@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.FragmentSendMessageBinding
+
 import com.neo.signLanguage.databinding.FragmentTestBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity
 
 
 class TestFragment : Fragment() {

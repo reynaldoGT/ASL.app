@@ -40,8 +40,8 @@ class AdapterLinearLetters(
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
     val item = items?.get(position)
-    holder.foto?.setImageResource(item?.image!!)
-    holder.nombre?.text = item?.letter
+    holder.image?.setImageResource(item?.image!!)
+    holder.name?.text = item?.letter
 
   }
 
@@ -55,13 +55,13 @@ class AdapterLinearLetters(
     // Using the binding
     private val binding = TemplateLinearLetterBinding.bind(vista)
 
-    var foto: ImageView? = null
-    var nombre: TextView? = null
+    var image: ImageView? = null
+    var name: TextView? = null
     var listener: ClickListener? = null
 
     init {
-      foto = binding.imageTemplateView
-      nombre = binding.textViewTemplateView
+      image = binding.imageTemplateView
+      name = binding.textViewTemplateView
       if (sharedPrefs.getColor() != 0) {
         binding.imageTemplateView.setColorFilter(
           ContextCompat.getColor(

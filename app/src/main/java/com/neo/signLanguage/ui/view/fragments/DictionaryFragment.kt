@@ -51,10 +51,6 @@ class DictionaryFragment : Fragment() {
     binding.tabLayout.addTab(
       binding.tabLayout.newTab().setText(getString(R.string.search_words))
     )
-    /*binding.tabLayout.setse*//*
-        // select tab*/
-    /*binding.tabLayout.selectTab(binding.tabLayout.getTabAt(2))*/
-
     binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
       override fun onTabSelected(tab: TabLayout.Tab?) {
         binding.viewPager2.currentItem = tab!!.position

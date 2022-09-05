@@ -41,7 +41,7 @@ class AdapterGame(
 
         val item = items?.get(position)
         holder.singImage?.setImageResource(item?.image!!)
-        holder.nombre?.text = item?.letter
+        holder.name?.text = item?.letter
 
     }
 
@@ -56,7 +56,7 @@ class AdapterGame(
         private val binding = TemplateGameBinding.bind(vista)
 
         var singImage: ImageView? = null
-        var nombre: TextView? = null
+        var name: TextView? = null
         var listener: ClickListener? = null
 
         init {

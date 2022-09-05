@@ -54,7 +54,7 @@ class HistoryActivity : AppCompatActivity() {
     binding.btnSendMessage.setOnClickListener {
       onBackPressed()
     }
-    binding.detailToolbar.title = "Historial"
+    binding.detailToolbar.title = getStringByIdName(this, "history")
     this.setSupportActionBar(binding.detailToolbar)
     val actionbar = supportActionBar
     actionbar?.setDisplayHomeAsUpEnabled(true)

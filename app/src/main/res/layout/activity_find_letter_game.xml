@@ -18,7 +18,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/lifesContainer"
+                android:id="@+id/livesContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" />
