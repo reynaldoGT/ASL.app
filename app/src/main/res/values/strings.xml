@@ -20,6 +20,7 @@
     <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="test_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
 
+
     <string name="change_theme">Dark Theme</string>
     <string name="change_layout">Change layout</string>
     <string name="current_delay_time">Current delay time</string>
@@ -85,7 +86,7 @@
     <string name="find_the_even_signs">Find the even signs</string>
     <string name="find_correct_letter_or_sign">Find the correct letter or sign</string>
     <string name="correct">CORRECT</string>
-    <string name="xd">corecto :D</string>
+    <string name="xd">Correcto</string>
     <string name="current_letter">Current Letter</string>
     <string name="send_message_with_images">Send message with images</string>
     <string name="easy">Easy</string>

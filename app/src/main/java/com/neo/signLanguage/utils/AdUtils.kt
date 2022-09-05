@@ -37,8 +37,10 @@ class AdUtils {
       interstitial?.fullScreenContentCallback = object : FullScreenContentCallback() {
         override fun onAdDismissedFullScreenContent() {
         }
+
         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
         }
+
         override fun onAdShowedFullScreenContent() {
           interstitial = null
         }
@@ -58,6 +60,7 @@ class AdUtils {
       this.showAds(activity)
       initAds(activity)
     }
+
     private fun showAds(activity: AppCompatActivity) {
       Logger.d("Show add")
       interstitial?.show(
