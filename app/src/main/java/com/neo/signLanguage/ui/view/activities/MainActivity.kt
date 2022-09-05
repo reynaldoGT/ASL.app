@@ -59,42 +59,6 @@ class MainActivity : AppCompatActivity() {
     setContentView(binding.root)
     val fm: FragmentManager = supportFragmentManager
     fragmentAdapter = TabAdapter(fm, lifecycle)
-    /*binding.viewPager2.adapter = fragmentAdapter*/
-    //toolbar
-    /*binding.toolbar.setTitle(R.string.app_name)
-    setSupportActionBar(binding.toolbar)*/
-
-
-    /*binding.tabLayout.addTab(
-        binding.tabLayout.newTab().setText(getString(R.string.send_message))
-    )
-    binding.tabLayout.addTab(
-        binding.tabLayout.newTab().setText(getString(R.string.movement_signs))
-    )*/
-
-    /*binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-        override fun onTabSelected(tab: TabLayout.Tab?) {
-            binding.viewPager2.currentItem = tab!!.position
-        }
-
-        override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-        }
-
-        override fun onTabReselected(tab: TabLayout.Tab?) {
-
-        }
-
-    })
-    binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
-            if (position == 2) {
-                model.getAllSingFromDatabase()
-            }
-            super.onPageSelected(position)
-        }
-    })*/
 
     showSelectedFragment(DictionaryFragment())
 
@@ -119,7 +83,6 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.settings -> {
@@ -132,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         true
       }
+
       else -> super.onOptionsItemSelected(item)
     }
   }
@@ -147,14 +111,4 @@ class MainActivity : AppCompatActivity() {
     transaction.addToBackStack(null)
     transaction.commit()
   }
-  /* private fun showSelectedFragment(fragment: Fragment) {
-       childFragmentManager.beginTransaction().replace(R.id.container, fragment)
-           .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-           .commit()
-   }*/
-
-  /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-      activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
-      super.onCreateOptionsMenu(menu, inflater)
-  }*/
 }

@@ -1,18 +1,14 @@
 package com.neo.signLanguage.utils
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.speech.RecognizerIntent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.android.material.snackbar.Snackbar
-import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
 import java.text.Normalizer
 import java.util.*
@@ -21,6 +17,11 @@ import java.util.*
 class Utils {
     companion object {
         private val RECOGNIZE_SPEECH_ACTIVITY = 1
+
+        fun getStringByIdName(context: Context, idName: String): String {
+            val res: Resources = context.resources
+            return res.getString(res.getIdentifier(idName, "string", context.packageName))
+        }
         fun getLoLanguageTag(): String {
             return (Locale.getDefault().toLanguageTag())
         }

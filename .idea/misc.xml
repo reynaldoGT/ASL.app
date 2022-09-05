@@ -5,6 +5,12 @@
       <map>
         <entry key="../../../../layout/compose-model-1662081978141.xml" value="0.9" />
         <entry key="../../../../layout/compose-model-1662123697049.xml" value="0.3768518518518518" />
+        <entry key="../../../../layout/compose-model-1662340209244.xml" value="0.5" />
+        <entry key="../../../../layout/compose-model-1662340472289.xml" value="0.14864864864864866" />
+        <entry key="../../../../layout/compose-model-1662342489977.xml" value="0.14864864864864866" />
+        <entry key="../../../../layout/compose-model-1662342527517.xml" value="1.0" />
+        <entry key="../../../../layout/compose-model-1662342599894.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1662342714669.xml" value="0.14864864864864866" />
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="../../Android/Sdk/platforms/android-30/data/res/layout/auto_complete_list.xml" value="0.3234375" />
         <entry key="..\:/Users/rey_g/AndroidStudioProjects/SingLanguage/app/src/main/res/drawable/ic_0_number.xml" value="0.21875" />
@@ -109,9 +115,13 @@
         <entry key="app/src/main/res/layout/activity_grid_all_letters.xml" value="0.13229166666666667" />
         <entry key="app/src/main/res/layout/activity_intersitial.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_select_level.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_select_level.xml" value="0.18664850136239783" />
+        <entry key="app/src/main/res/layout/activity_send_message_with_images.xml" value="0.1278324070115434" />
         <entry key="app/src/main/res/layout/activity_tabnavigator.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_video_reward.xml" value="0.1278324070115434" />
+        <entry key="app/src/main/res/layout/fragment_bottom_navigation.xml" value="0.1278324070115434" />
         <entry key="app/src/main/res/layout/fragment_bottom_navigation_container.xml" value="0.13229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_dictionary_signs.xml" value="0.1278324070115434" />
         <entry key="app/src/main/res/layout/fragment_giphy.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_letters_and_number_sing.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_numbers.xml" value="0.1" />
@@ -127,6 +137,7 @@
         <entry key="app/src/main/res/layout/template_letter_send_message.xml" value="0.1278324070115434" />
         <entry key="app/src/main/res/layout/template_linear_letter.xml" value="0.1278324070115434" />
         <entry key="app/src/main/res/menu/menu_navigation.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/menu_toolbar.xml" value="0.1278324070115434" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.15" />
       </map>
     </option>

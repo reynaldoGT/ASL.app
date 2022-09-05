@@ -13,16 +13,12 @@ import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.AdapterMenuGameSelect
 import com.neo.signLanguage.data.models.MenuTitle
-
 import com.neo.signLanguage.databinding.FragmentGamesBinding
-import com.neo.signLanguage.ui.view.activities.FindPairGameActivity
-import com.neo.signLanguage.ui.view.activities.FindTheLetterGameActivity
 import com.neo.signLanguage.ui.view.activities.SendMessageWithImagesActivity
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 
 
 class GamesMenuFragment : Fragment() {
-
 
   private var _binding: FragmentGamesBinding? = null
   private val binding get() = _binding!!
@@ -50,14 +46,14 @@ class GamesMenuFragment : Fragment() {
         SelectLevelActivity()
       )
     )
-    titlesMenu.add(
+    /*titlesMenu.add(
       MenuTitle(
         getString(R.string.find_the_even_signs),
         getString(R.string.find_correct_letter_or_sign),
         R.drawable.ic_0_number,
         FindPairGameActivity()
       )
-    )
+    )*/
     titlesMenu.add(
       MenuTitle(
         getString(R.string.write_your_message),
@@ -70,7 +66,6 @@ class GamesMenuFragment : Fragment() {
     val adapterCustomGrid =
       AdapterMenuGameSelect(requireContext(), titlesMenu, object : ClickListener {
         override fun onClick(v: View?, position: Int) {
-
           val intent =
             Intent(requireContext(), titlesMenu[position].activity!!::class.java)
           startActivity(intent)

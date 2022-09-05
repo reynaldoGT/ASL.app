@@ -55,7 +55,7 @@
     <string name="search_words">Search words</string>
     <string name="letter_and_numbers">Letter and numbers</string>
     <string name="simple_description">simple_description</string>
-    <string name="history">history</string>
+    <string name="history">History</string>
     <string name="no_microphone">This device does not have a voice recorder</string>
     <string name="delete_question">Clear browsing data</string>
     <string name="clear_history_question">Do you want to clear the history?</string>
@@ -86,5 +86,10 @@
     <string name="xd">corecto :D</string>
     <string name="current_letter">Current Letter</string>
     <string name="send_message_with_images">Send message with images</string>
+
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="Hard">Hard</string>
+    <string name="select_level">Select level</string>
 
 </resources>
