@@ -38,9 +38,8 @@ class PairGameViewModel : ViewModel() {
     } else {
       card1.value = null
       card2.value = null
-      toggleFlip.value = !toggleFlip
+      toggleFlip.value = !toggleFlip.value!!
 
     }
   };
-}
 }
