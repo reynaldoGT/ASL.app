@@ -5,7 +5,8 @@
     android:id="@+id/cardContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.activities.FindPairGameActivity">
+    >
+    <!--tools:context=".ui.view.activities.FindPairGameActivity"-->
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/composeView"
