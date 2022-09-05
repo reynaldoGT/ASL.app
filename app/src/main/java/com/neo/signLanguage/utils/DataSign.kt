@@ -54,7 +54,6 @@ class DataSign {
             if (addSpace) {
                 lettersArray.add(Sign(" ", R.drawable.ic_space, space))
             }
-
             //?  numbers
             lettersArray.add(Sign("1", R.drawable.ic_1_number, number))
             lettersArray.add(Sign("2", R.drawable.ic_2_number, number))
@@ -134,7 +133,7 @@ class DataSign {
             )
         }
 
-        fun getOnlyLetterArray(): ArrayList<Sign> {
+        fun getLetterAndSignArray(): ArrayList<Sign> {
             val lettersArray = ArrayList<Sign>()
             lettersArray.add(Sign("A", R.drawable.ic_a_letter, letter))
             lettersArray.add(Sign("B", R.drawable.ic_b_letter, letter))
@@ -163,34 +162,17 @@ class DataSign {
             lettersArray.add(Sign("Y", R.drawable.ic_y_letter, letter))
             lettersArray.add(Sign("Z", R.drawable.ic_z_letter, letter))
 
-            lettersArray.add(Sign("a", R.drawable.ic_a_only_sing, letter))
-            lettersArray.add(Sign("b", R.drawable.ic_b_only_sing, letter))
-            lettersArray.add(Sign("c", R.drawable.ic_c_only_sing, letter))
-            lettersArray.add(Sign("d", R.drawable.ic_d_only_sing, letter))
-            lettersArray.add(Sign("e", R.drawable.ic_e_only_sing, letter))
-            lettersArray.add(Sign("f", R.drawable.ic_f_only_sing, letter))
-            lettersArray.add(Sign("g", R.drawable.ic_g_only_sing, letter))
-            lettersArray.add(Sign("h", R.drawable.ic_h_only_sing, letter))
-            lettersArray.add(Sign("i", R.drawable.ic_i_only_sing, letter))
-            lettersArray.add(Sign("j", R.drawable.ic_j_only_sing, letter))
-            lettersArray.add(Sign("k", R.drawable.ic_k_only_sing, letter))
-            lettersArray.add(Sign("l", R.drawable.ic_l_only_sing, letter))
-            lettersArray.add(Sign("m", R.drawable.ic_m_only_sing, letter))
-            lettersArray.add(Sign("n", R.drawable.ic_n_only_sing, letter))
-            lettersArray.add(Sign("ñ", R.drawable.ic_nn_letter, letter))
-            lettersArray.add(Sign("o", R.drawable.ic_o_only_sing, letter))
-            lettersArray.add(Sign("p", R.drawable.ic_p_only_sing, letter))
-            lettersArray.add(Sign("q", R.drawable.ic_q_only_sing, letter))
-            lettersArray.add(Sign("r", R.drawable.ic_r_only_sing, letter))
-            lettersArray.add(Sign("s", R.drawable.ic_s_only_sing, letter))
-            lettersArray.add(Sign("t", R.drawable.ic_t_only_sing, letter))
-            lettersArray.add(Sign("u", R.drawable.ic_u_only_sing, letter))
-            lettersArray.add(Sign("v", R.drawable.ic_v_only_sing, letter))
-            lettersArray.add(Sign("w", R.drawable.ic_w_only_sing, letter))
-            lettersArray.add(Sign("x", R.drawable.ic_x_only_sing, letter))
-            lettersArray.add(Sign("y", R.drawable.ic_y_only_sing, letter))
-            lettersArray.add(Sign("z", R.drawable.ic_z_only_sing, letter))
-
+            lettersArray.add(Sign("1", R.drawable.ic_1_number, number))
+            lettersArray.add(Sign("2", R.drawable.ic_2_number, number))
+            lettersArray.add(Sign("3", R.drawable.ic_3_number, number))
+            lettersArray.add(Sign("4", R.drawable.ic_4_number, number))
+            lettersArray.add(Sign("5", R.drawable.ic_5_number, number))
+            lettersArray.add(Sign("6", R.drawable.ic_6_number, number))
+            lettersArray.add(Sign("7", R.drawable.ic_7_number, number))
+            lettersArray.add(Sign("8", R.drawable.ic_8_number, number))
+            lettersArray.add(Sign("9", R.drawable.ic_9_number, number))
+            lettersArray.add(Sign("10", R.drawable.ic_10_number, number))
+            lettersArray.add(Sign("0", R.drawable.ic_0_number, number))
             return lettersArray
         }
 

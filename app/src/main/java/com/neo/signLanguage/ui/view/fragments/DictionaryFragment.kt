@@ -12,6 +12,8 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.AdapterLinearLetters
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentDictionarySignsBinding
+import com.neo.signLanguage.utils.Utils
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
 class DictionaryFragment : Fragment() {
@@ -43,13 +45,30 @@ class DictionaryFragment : Fragment() {
     fragmentAdapter = TabAdapter(fm, lifecycle)
     binding.viewPager2.adapter = fragmentAdapter
     binding.tabLayout.addTab(
-      binding.tabLayout.newTab().setText(getString(R.string.send_message))
+      binding.tabLayout.newTab().setText(
+        getStringByIdName(
+          requireContext(),
+          "send_message"
+        )
+      )
+      /*binding.tabLayout.newTab().setText(*/
+
     )
     binding.tabLayout.addTab(
-      binding.tabLayout.newTab().setText(getString(R.string.letter_and_numbers))
+      binding.tabLayout.newTab().setText(
+        getStringByIdName(
+          requireContext(),
+          "letter_and_numbers"
+        )
+      )
     )
     binding.tabLayout.addTab(
-      binding.tabLayout.newTab().setText(getString(R.string.search_words))
+      binding.tabLayout.newTab().setText(
+        getStringByIdName(
+          requireContext(),
+          "search_words"
+        )
+      )
     )
     binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
       override fun onTabSelected(tab: TabLayout.Tab?) {

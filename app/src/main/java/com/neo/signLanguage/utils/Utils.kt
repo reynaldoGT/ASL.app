@@ -16,7 +16,6 @@ import java.util.*
 
 class Utils {
   companion object {
-    private val RECOGNIZE_SPEECH_ACTIVITY = 1
 
       fun getStringByIdName(context: Context, idName: String): String {
       val res: Resources = context.resources
@@ -59,7 +58,7 @@ class Utils {
       return stringCleaned
     }
 
-    fun vibratePhone(context: Context, timer: Long = 200) {
+      fun vibratePhone(context: Context, timer: Long = 200) {
       val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
       if (Build.VERSION.SDK_INT >= 26) {
         vibrator.vibrate(

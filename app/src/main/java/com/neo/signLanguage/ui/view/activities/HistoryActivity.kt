@@ -39,7 +39,7 @@ class HistoryActivity : AppCompatActivity() {
         .setTitle(getStringByIdName(this, "delete_question"))
         .setMessage(getStringByIdName(this, "delete_question"))
         .setPositiveButton(
-          getString(R.string.delete)
+          getStringByIdName(this, "delete"),
         ) { _, _ ->
           model.deleteAllHistory()
 

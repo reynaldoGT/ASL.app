@@ -13,9 +13,10 @@ import com.neo.signLanguage.adapters.ClickListener
 import android.content.Intent
 import com.neo.signLanguage.adapters.AdapterLetters
 import com.neo.signLanguage.adapters.AdapterLinearLetters
-import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentLettersAndNumberSingBinding
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
+import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
+import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 
 
@@ -23,7 +24,6 @@ class LetterAndNumbersFragment : Fragment() {
 
   private var _binding: FragmentLettersAndNumberSingBinding? = null
   private val binding get() = _binding!!
-  var fragmentAdapter: TabAdapter? = null
   private var adapterGrid: AdapterLetters? = null
   private var adapterLinear: AdapterLinearLetters? = null
   private var layoutManager: RecyclerView.LayoutManager? = null
@@ -39,8 +39,8 @@ class LetterAndNumbersFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val lettersArray = getLetterArray(false)
-
+    val lettersArrayToLinear = getLetterArray(false)
+    val lettersToGrid = getLetterAndSignArray()
     binding.gridListSing.setHasFixedSize(true)
 
     layoutManager = GridLayoutManager(requireContext(), 2)
@@ -49,14 +49,14 @@ class LetterAndNumbersFragment : Fragment() {
     adapterLinear =
       AdapterLinearLetters(
         requireActivity().applicationContext,
-        lettersArray,
+        lettersArrayToLinear,
         object : ClickListener {
           override fun onClick(v: View?, position: Int) {
             val myIntent =
               Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
-            myIntent.putExtra("image", lettersArray[position].image)
-            myIntent.putExtra("letter", lettersArray[position].letter)
-            myIntent.putExtra("type", lettersArray[position].type)
+            myIntent.putExtra("image", lettersArrayToLinear[position].image)
+            myIntent.putExtra("letter", lettersArrayToLinear[position].letter)
+            myIntent.putExtra("type", lettersArrayToLinear[position].type)
             startActivity(myIntent)
           }
         })
@@ -64,14 +64,14 @@ class LetterAndNumbersFragment : Fragment() {
     adapterGrid =
       AdapterLetters(
         requireActivity().applicationContext,
-        lettersArray,
+        lettersToGrid,
         object : ClickListener {
           override fun onClick(v: View?, position: Int) {
             val myIntent =
               Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
-            myIntent.putExtra("image", lettersArray[position].image)
-            myIntent.putExtra("letter", lettersArray[position].letter)
-            myIntent.putExtra("type", lettersArray[position].type)
+            myIntent.putExtra("image", lettersToGrid[position].image)
+            myIntent.putExtra("letter", lettersToGrid[position].letter)
+            myIntent.putExtra("type", lettersToGrid[position].type)
             startActivity(myIntent)
           }
         })
@@ -89,13 +89,6 @@ class LetterAndNumbersFragment : Fragment() {
         binding.gridListSing.adapter = adapterGrid
       }
     }
-    initLoad()
+    initLoad(binding.banner)
   }
-
-  private fun initLoad() {
-    val adRequest = AdRequest.Builder().build()
-    binding.banner.loadAd(adRequest)
-  }
-
-
 }

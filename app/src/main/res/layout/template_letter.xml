@@ -25,6 +25,8 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:srcCompat="@drawable/ic_0_number"
                 app:tint="?attr/colorPrimary" />

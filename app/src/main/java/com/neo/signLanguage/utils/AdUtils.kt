@@ -2,10 +2,7 @@ package com.neo.signLanguage.utils
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
@@ -65,6 +62,12 @@ class AdUtils {
       interstitial?.show(
         activity
       )
+    }
+
+    fun initLoad(adView: AdView) {
+      /*AdView*/
+      val adRequest = AdRequest.Builder().build()
+      adView.loadAd(adRequest)
     }
   }
 }

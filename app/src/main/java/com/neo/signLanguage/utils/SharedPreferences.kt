@@ -18,8 +18,8 @@ class SharedPreferences(var activity: AppCompatActivity) {
   private val MEMORY_GAME_RECORD_HARD = "MEMORY_GAME_RECORD_HARD"
   private val GRID_LAYOUT = "GRID_LAYOUT"
   private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
-  private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
   private val vibration = true
+  private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
 
   fun getTheme(): Boolean {
     val settings = activity.getSharedPreferences(SETTINGS, 0)

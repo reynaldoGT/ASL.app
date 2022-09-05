@@ -59,7 +59,13 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
 
       binding.gridListSing.adapter = adapter
     }
-    binding.edSendMessage.editText?.setText(resources.getString(R.string.hello_from_here))
+
+    binding.edSendMessage.editText?.setText(
+      Utils.getStringByIdName(
+        this,
+        "guess_letter_number"
+      )
+    )
     binding.edSendMessage.editText?.addTextChangedListener(object : TextWatcher {
       override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 

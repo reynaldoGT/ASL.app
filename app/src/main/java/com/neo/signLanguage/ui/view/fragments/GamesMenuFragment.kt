@@ -16,6 +16,8 @@ import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.FragmentGamesBinding
 import com.neo.signLanguage.ui.view.activities.SendMessageWithImagesActivity
 import com.neo.signLanguage.ui.viewModel.GameViewModel
+import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
 class GamesMenuFragment : Fragment() {
@@ -28,7 +30,6 @@ class GamesMenuFragment : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-
     // Using the binding
     _binding = FragmentGamesBinding.inflate(inflater, container, false)
     gameViewModel.getRandomToFindLetter(3)
@@ -40,8 +41,9 @@ class GamesMenuFragment : Fragment() {
     val titlesMenu = ArrayList<MenuTitle>()
     titlesMenu.add(
       MenuTitle(
-        getString(R.string.test_your_memory),
-        getString(R.string.guess_letter_number),
+        getStringByIdName(requireContext(), "test_your_memory"),
+        getStringByIdName(requireContext(), "guess_letter_number"),
+
         R.drawable.ic_brain,
         SelectLevelActivity()
       )
@@ -56,8 +58,8 @@ class GamesMenuFragment : Fragment() {
     )*/
     titlesMenu.add(
       MenuTitle(
-        getString(R.string.write_your_message),
-        getString(R.string.send_message_with_signs),
+        getStringByIdName(requireContext(), "write_your_message"),
+        getStringByIdName(requireContext(),"send_message_with_signs"),
         R.drawable.ic_keyboard,
         SendMessageWithImagesActivity()
       )
@@ -74,6 +76,6 @@ class GamesMenuFragment : Fragment() {
     binding.gridListSing.layoutManager =
       GridLayoutManager(requireContext(), 2)
     binding.gridListSing.adapter = adapterCustomGrid
-
+    initLoad(binding.banner)
   }
 }
