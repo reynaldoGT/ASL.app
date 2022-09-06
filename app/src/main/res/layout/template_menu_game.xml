@@ -24,24 +24,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
-                android:text="Hola gente"
-
-                app:srcCompat="@drawable/ic_baseline_airplay_24" />
+                android:text="@string/hello_from_here"
+                app:srcCompat="@drawable/ic_baseline_airplay_24"
+                android:contentDescription="@string/simple_description" />
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="titulo"
+                android:text="@string/menu_title"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <TextView
-                android:id="@+id/tvDescripction"
+                android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="description"
+                android:text="@string/simple_description"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
         </LinearLayout>

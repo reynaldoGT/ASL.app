@@ -6,35 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.fragments.GamesMenuFragment">
 
+
     <LinearLayout
+        android:id="@+id/containerGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingVertical="48dp"
-        tools:context=".GridAllLetters">
+        android:paddingTop="40dp"
+        tools:ignore="UselessParent">
 
-        <LinearLayout
-            android:id="@+id/containerGrid"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gridListSing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:overScrollMode="never"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2" />
+        <!--remember initialize from code-->
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="64dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/test_banner_id" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gridListSing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:overScrollMode="never"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/test_banner_id" />
-        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

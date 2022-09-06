@@ -31,7 +31,7 @@ class HistoryAdapter(
 
     fun removeItem(viewHolder: RecyclerView.ViewHolder) {
         itemsHistory?.removeAt(viewHolder.adapterPosition)
-        Snackbar.make(viewHolder.itemView, "Elemento eliminado", Snackbar.LENGTH_LONG).show()
+        Snackbar.make(viewHolder.itemView, context!!.getString(R.string.element_deleted), Snackbar.LENGTH_LONG).show()
         notifyItemRemoved(viewHolder.adapterPosition)
     }
 

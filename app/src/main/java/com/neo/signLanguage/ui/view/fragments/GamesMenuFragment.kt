@@ -42,7 +42,7 @@ class GamesMenuFragment : Fragment() {
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "test_your_memory"),
-        getStringByIdName(requireContext(), "guess_letter_number"),
+        getStringByIdName(requireContext(), "hello_from_here"),
 
         R.drawable.ic_brain,
         SelectLevelActivity()

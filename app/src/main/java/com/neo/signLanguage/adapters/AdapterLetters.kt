@@ -15,76 +15,70 @@ import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPref
 
 
 interface ClickListener {
-    fun onClick(v: View?, position: Int)
+  fun onClick(v: View?, position: Int)
 }
 
 class AdapterLetters(
-    context: Context,
-    items: ArrayList<Sign>,
-    var listener: ClickListener
+  context: Context,
+  items: ArrayList<Sign>,
+  var listener: ClickListener
 ) : RecyclerView.Adapter<AdapterLetters.ViewHolder>() {
 
-    var items: ArrayList<Sign>? = null
-    var viewHolder: ViewHolder? = null
-    var context: Context? = null
+  var items: ArrayList<Sign>? = null
+  var viewHolder: ViewHolder? = null
+  var context: Context? = null
+
+  init {
+    this.items = items
+    this.context = context
+  }
+
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    val vista =
+      LayoutInflater.from(parent.context).inflate(R.layout.template_letter, parent, false)
+    viewHolder = ViewHolder(vista, listener, this.context)
+    return viewHolder!!
+  }
+
+  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+    val item = items?.get(position)
+    holder.image?.setImageResource(item?.image!!)
+    holder.name?.text = item?.letter
+
+  }
+
+  override fun getItemCount(): Int {
+    return items?.count()!!
+  }
+
+  class ViewHolder(vista: View, listener: ClickListener, context: Context?) :
+    RecyclerView.ViewHolder(vista),
+    View.OnClickListener {
+    // Using the binding
+    private val binding = TemplateLetterBinding.bind(vista)
+
+    var image: ImageView? = null
+    var name: TextView? = null
+    var listener: ClickListener? = null
 
     init {
-        this.items = items
-        this.context = context
+      image = binding.imageTemplateView
+
+      if (sharedPrefs.getColor() != 0) {
+        binding.imageTemplateView.setColorFilter(
+          ContextCompat.getColor(
+            context!!,
+            sharedPrefs.getColor()
+          )
+        )
+      }
+      this.listener = listener
+      vista.setOnClickListener(this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val vista =
-            LayoutInflater.from(parent.context).inflate(R.layout.template_letter, parent, false)
-        viewHolder = ViewHolder(vista, listener, this.context)
-        return viewHolder!!
+    override fun onClick(v: View?) {
+      this.listener?.onClick(v!!, adapterPosition)
     }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val item = items?.get(position)
-        holder.image?.setImageResource(item?.image!!)
-        holder.name?.text = item?.letter
-
-    }
-
-    override fun getItemCount(): Int {
-        return items?.count()!!
-    }
-
-    class ViewHolder(vista: View, listener: ClickListener, context: Context?) :
-        RecyclerView.ViewHolder(vista),
-        View.OnClickListener {
-        // Using the binding
-        private val binding = TemplateLetterBinding.bind(vista)
-
-        var image: ImageView? = null
-        var name: TextView? = null
-        var listener: ClickListener? = null
-
-        init {
-            image = binding.imageTemplateView
-            name = binding.textViewTemplateView
-            if (sharedPrefs.getColor() != 0) {
-                binding.imageTemplateView.setColorFilter(
-                    ContextCompat.getColor(
-                        context!!,
-                        sharedPrefs.getColor()
-                    )
-                )
-
-                binding.textViewTemplateView.setTextColor(
-                    ContextCompat.getColor(
-                        context,
-                        sharedPrefs.getColor()
-                    )
-                )
-            }
-            this.listener = listener
-            vista.setOnClickListener(this)
-        }
-        override fun onClick(v: View?) {
-            this.listener?.onClick(v!!, adapterPosition)
-        }
-    }
+  }
 }

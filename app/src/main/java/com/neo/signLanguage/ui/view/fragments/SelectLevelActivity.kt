@@ -37,17 +37,6 @@ class SelectLevelActivity : AppCompatActivity() {
 
     binding.greeting.setContent {
       CustomButtonSelectLevel()
-
-      /*binding.btnLevel1.setOnClickListener {
-          goToGame("easy")
-      }
-      binding.btnLevel2.setOnClickListener {
-          goToGame("medium")
-      }
-      binding.btnLevel3.setOnClickListener {
-          goToGame("hard")
-      }*/
-
     }
   }
 }
@@ -88,10 +77,9 @@ fun CustomButtonSelectLevel() {
 
     CustomButton(buttonTitle = getStringByIdName(context, "easy"), difficulty = "easy")
     CustomButton(buttonTitle = getStringByIdName(context, "medium"), difficulty = "medium")
-    CustomButton(buttonTitle = "Hard", difficulty = "hard")
+    CustomButton(buttonTitle = getStringByIdName(context, "hard"), difficulty = "hard")
   }
 }
-
 
 @Preview
 @Composable

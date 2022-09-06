@@ -61,7 +61,7 @@ class AdapterMenuGameSelect(
 
         init {
             tvTitle = binding.tvTitle
-            tvDescription = binding.tvDescripction
+            tvDescription = binding.tvDescription
             listenerRef = WeakReference(listener)
             menuImage = binding.tvImage
             this.listener = listener
@@ -72,7 +72,6 @@ class AdapterMenuGameSelect(
         override fun onClick(v: View?) {
             this.listenerRef?.get()?.onClick(v, adapterPosition)
         }
-
     }
 
 }

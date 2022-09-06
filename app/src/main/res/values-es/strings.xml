@@ -3,7 +3,7 @@
     <string name="app_name">Lenguaje de Señas</string>
     <string name="send_message">Enviar Mensaje</string>
     <string name="cancel">Cancelar</string>
-    <string name="write_your_text_here">Escriba su mensaje</string>
+    <string name="write_your_text_here">Escribe tu mensaje</string>
     <string name="here_see_your_text">Aquí verás tu texto</string>
     <string name="create_message">Crear Mensaje</string>
     <string name="view_sing">Señas</string>
@@ -57,7 +57,7 @@
     <string name="delete_question">¿Limpiar historial?</string>
     <string name="clear_history_question">Desea limpiar todo el historial</string>
     <string name="delete">Eliminar</string>
-    <string name="empty">VACIO</string>
+    <string name="empty">VACÍO</string>
     <string name="your_history_is_empty">Tu historial esta vacío</string>
 
     <string name="current_hand_color">Color actual de la mano</string>
@@ -85,12 +85,11 @@
     <string name="correct">CORRECTO</string>
     <string name="help_us">Ayudanos</string>
 
-    <string name="xd">corecto :D</string>
     <string name="current_letter">Letra actual</string>
     <string name="send_message_with_images">Enviar mensaje con imágenes</string>
     <string name="easy">Fácil</string>
     <string name="medium">Medio</string>
-    <string name="Hard">Difícil</string>
+    <string name="hard">Difícil</string>
     <string name="select_level">Seleccionar nivel</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.neo.signLanguage.ui.view.activities
 
-
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -130,7 +129,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                   model.getRandomToFindLetter(intentsNumber)
                 } else {
                   if (MainActivity.sharedPrefs.getVibration()) {
-                    vibratePhone(applicationContext, 200)
+                    vibratePhone(applicationContext, 50)
                   }
                   model.setIntents(-1)
                   livesIcon()

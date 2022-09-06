@@ -44,14 +44,14 @@ class AdapterPairGame(
     override fun onBindViewHolder(holder: ViewHolderGame, position: Int) {
 
         if (itemsSelected.contains(position)) {
-            holder.vista.setBackgroundColor(Color.LTGRAY)
+            holder.view.setBackgroundColor(Color.LTGRAY)
         } else {
-            holder.vista.setBackgroundColor(Color.WHITE)
+            holder.view.setBackgroundColor(Color.WHITE)
         }
         val item = items?.get(position)
         if (item?.type == "letter") {
-            holder.nombre?.text = item.letter
-            holder.nombre?.visibility = View.VISIBLE
+            holder.name?.text = item.letter
+            holder.name?.visibility = View.VISIBLE
         } else {
             holder.singImage?.setImageResource(item?.image!!)
             holder.singImage?.visibility = View.VISIBLE
@@ -94,16 +94,16 @@ class AdapterPairGame(
         View.OnClickListener {
         // Using the binding
         private val binding = TemplateGamePairBinding.bind(vista)
-        var vista = vista
+        var view = vista
         var singImage: ImageView? = null
-        var nombre: TextView? = null
+        var name: TextView? = null
         var listener: ClickListener? = null
         var constraintLayout: ConstraintLayout? = null
 
         init {
             singImage = binding.imageTemplateView
             constraintLayout = binding.constraintLayoutContainer
-            nombre = binding.letter
+            name = binding.letter
             this.listener = listener
             vista.setOnClickListener(this)
         }

@@ -30,17 +30,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:srcCompat="@drawable/ic_0_number"
                 app:tint="?attr/colorPrimary" />
-
-            <TextView
-                android:id="@+id/textViewTemplateView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="This is a letter"
-                android:textSize="30sp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
