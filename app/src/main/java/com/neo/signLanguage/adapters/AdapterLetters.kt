@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.TemplateLetterBinding
+import com.neo.signLanguage.databinding.TemplateLetterGridBinding
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 
@@ -35,7 +35,7 @@ class AdapterLetters(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val vista =
-      LayoutInflater.from(parent.context).inflate(R.layout.template_letter, parent, false)
+      LayoutInflater.from(parent.context).inflate(R.layout.template_letter_grid, parent, false)
     viewHolder = ViewHolder(vista, listener, this.context)
     return viewHolder!!
   }
@@ -56,7 +56,7 @@ class AdapterLetters(
     RecyclerView.ViewHolder(vista),
     View.OnClickListener {
     // Using the binding
-    private val binding = TemplateLetterBinding.bind(vista)
+    private val binding = TemplateLetterGridBinding.bind(vista)
 
     var image: ImageView? = null
     var name: TextView? = null

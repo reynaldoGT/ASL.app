@@ -63,12 +63,11 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
     binding.edSendMessage.editText?.setText(
       Utils.getStringByIdName(
         this,
-        "guess_letter_number"
+        "hello_from_here"
       )
     )
     binding.edSendMessage.editText?.addTextChangedListener(object : TextWatcher {
       override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
       }
 
       override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {

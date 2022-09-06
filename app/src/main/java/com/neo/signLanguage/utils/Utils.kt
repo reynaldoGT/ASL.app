@@ -17,7 +17,7 @@ import java.util.*
 class Utils {
   companion object {
 
-      fun getStringByIdName(context: Context, idName: String): String {
+    fun getStringByIdName(context: Context, idName: String): String {
       val res: Resources = context.resources
       return res.getString(res.getIdentifier(idName, "string", context.packageName))
     }

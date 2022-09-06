@@ -14,12 +14,14 @@
     <string name="letter_a">Letter: A</string>
     <string name="number">Number: %1$s </string>
     <string name="letter">Letter: %1$s </string>
+    <string name="letter_title">Letter</string>
+    <string name="number_title">Number</string>
+
 
     <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="test_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
-
 
     <string name="change_theme">Dark Theme</string>
     <string name="change_layout">Change layout</string>
@@ -73,7 +75,6 @@
     <string name="game_find_game_title_number">What is the sign of the number</string>
     <string name="current_record">Your record is: %1$s</string>
 
-
     <string name="hello_from_here">Hello from here</string>
     <string name="translate">Translate</string>
     <string name="dictionary">Dictionary</string>
@@ -93,7 +94,7 @@
     <string name="hard">Hard</string>
     <string name="select_level">Select level</string>
     <string name="download_image">Download image</string>
-    <string name="element_deleted">Elemento eliminado</string>
+    <string name="element_deleted">Element deleted</string>
     <string name="vibration">Vibration</string>
     <string name="menu_title">Title</string>
 

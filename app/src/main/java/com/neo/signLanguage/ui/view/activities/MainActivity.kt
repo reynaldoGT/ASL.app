@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var database: SingDatabase
   }
 
-
+  var contextHasLoaded = false
   override fun onCreate(savedInstanceState: Bundle?) {
-    installSplashScreen()
+    val splashScreen = installSplashScreen()
     super.onCreate(savedInstanceState)
     database =
       Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
