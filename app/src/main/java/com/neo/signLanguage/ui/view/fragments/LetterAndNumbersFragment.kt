@@ -89,6 +89,6 @@ class LetterAndNumbersFragment : Fragment() {
         binding.gridListSing.adapter = adapterGrid
       }
     }
-    /*initLoad(binding.banner)*/
+    initLoad(binding.banner)
   }
 }
