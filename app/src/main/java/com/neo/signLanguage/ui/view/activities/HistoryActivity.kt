@@ -31,7 +31,11 @@ class HistoryActivity : AppCompatActivity() {
     model.getAllSingFromDatabase()
     binding = ActivityHistoryBinding.inflate(layoutInflater)
     setContentView(binding.root)
+    binding.emptyHistoryImageView.setColorFilter(
+      getColor(if (MainActivity.sharedPrefs.getTheme()) R.color.white else R.color.black)
 
+
+    )
     initRecyclerView()
 
     binding.deleteAllActionButton.setOnClickListener {

@@ -14,8 +14,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
 
 import com.neo.signLanguage.ui.view.activities.FindTheLetterGameActivity
+import com.neo.signLanguage.ui.view.activities.MainActivity
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -63,16 +66,15 @@ fun CustomButton(buttonTitle: String, difficulty: String) {
 fun CustomButtonSelectLevel() {
   val context = LocalContext.current
   Column(
-    modifier = Modifier.fillMaxSize(),
+    modifier = Modifier.fillMaxWidth(),
     verticalArrangement = Arrangement.SpaceEvenly,
     horizontalAlignment = Alignment.CenterHorizontally,
-
-  ) {
+    ) {
     Text(
       text = getStringByIdName(context, "select_level"),
       modifier = Modifier.padding(10.dp),
-      style = MaterialTheme.typography.h3
-
+      style = MaterialTheme.typography.h3,
+      color = if (MainActivity.sharedPrefs.getTheme()) Color.White else Color.Black
     )
 
     CustomButton(buttonTitle = getStringByIdName(context, "easy"), difficulty = "easy")

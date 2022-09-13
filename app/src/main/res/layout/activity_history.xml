@@ -56,6 +56,7 @@
 
 
             <ImageView
+                android:id="@+id/emptyHistoryImageView"
                 android:layout_width="320dp"
                 android:layout_height="320dp"
                 android:layout_gravity="center"
