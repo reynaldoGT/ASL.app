@@ -22,10 +22,9 @@ import com.neo.signLanguage.utils.SharedPreferences
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-  var fragmentAdapter: TabAdapter? = null
+  private var fragmentAdapter: TabAdapter? = null
 
   companion object {
-
     lateinit var binding: FragmentTabnavigatorBinding
     lateinit var sharedPrefs: SharedPreferences
     fun getColorShared(context: Context): Int {
@@ -46,14 +45,14 @@ class MainActivity : AppCompatActivity() {
 
   var contextHasLoaded = false
   override fun onCreate(savedInstanceState: Bundle?) {
-    val splashScreen = installSplashScreen()
     super.onCreate(savedInstanceState)
+    sharedPrefs = SharedPreferences(this)
+    installSplashScreen()
     database =
       Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
         .build()
 
     networkState = NetworkState(this)
-    sharedPrefs = SharedPreferences(this)
     binding = FragmentTabnavigatorBinding.inflate(layoutInflater)
     setContentView(binding.root)
     val fm: FragmentManager = supportFragmentManager

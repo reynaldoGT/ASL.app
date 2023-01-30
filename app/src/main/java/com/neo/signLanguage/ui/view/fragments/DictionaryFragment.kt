@@ -5,14 +5,11 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.neo.signLanguage.R
-import com.neo.signLanguage.adapters.AdapterLinearLetters
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentDictionarySignsBinding
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -34,7 +31,6 @@ class DictionaryFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     //toolbar
     binding.toolbar.setTitle(R.string.app_name)
 /*change text color*/
@@ -43,7 +39,9 @@ class DictionaryFragment : Fragment() {
 
     val fm: FragmentManager = parentFragmentManager
     fragmentAdapter = TabAdapter(fm, lifecycle)
+    /*fragmentAdapter = new ScreenSlidePagerAdapter(getChildFragmentManager());*/
     binding.viewPager2.adapter = fragmentAdapter
+    binding.viewPager2.isSaveEnabled = false
     binding.tabLayout.addTab(
       binding.tabLayout.newTab().setText(
         getStringByIdName(

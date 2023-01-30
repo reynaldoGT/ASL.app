@@ -1,5 +1,6 @@
 package com.neo.signLanguage.utils
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.neo.signLanguage.R
 
@@ -21,18 +22,18 @@ class SharedPreferences(var activity: AppCompatActivity) {
   private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
 
   fun getTheme(): Boolean {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getBoolean(DARK_THEME, false)
   }
 
   fun setTheme(state: Boolean) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putBoolean(DARK_THEME, state).apply()
   }
 
   fun getDelay(): Int {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getInt(DELAY, maxDelayTime / 2)
   }
 
@@ -40,13 +41,13 @@ class SharedPreferences(var activity: AppCompatActivity) {
     if (state > maxDelayTime) {
       return
     }
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putInt(DELAY, state).apply()
   }
 
   fun getColor(): Int {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getInt(
       COLOR,
       DataSign.getColorsList(activity.applicationContext)[0].colorValue
@@ -54,86 +55,86 @@ class SharedPreferences(var activity: AppCompatActivity) {
   }
 
   fun setColor(state: Int) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putInt(COLOR, state).apply()
   }
 
   fun getCurrentMessage(): String {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getString(CURRENT_MESSAGE, "").toString()
   }
 
   fun setCurrentMessage(newState: String) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putString(CURRENT_MESSAGE, newState).apply()
   }
 
   fun getAdCount(): Int {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getInt(COUNT_AD_INTERTITIAL, 0)
   }
 
   fun resetAdCount() {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putInt(COUNT_AD_INTERTITIAL, 1).apply()
   }
 
   fun addInOneCounterAd() {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     val add = getAdCount() + 1
     editor.putInt(COUNT_AD_INTERTITIAL, add).apply()
   }
 
   fun getShowTransition(): Boolean {
-    val settings = activity.getSharedPreferences(SETTINGS, -1)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getBoolean(SHOW_TRANSITIONS, false)
   }
 
   fun setShowTransition(newState: Boolean) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putBoolean(SHOW_TRANSITIONS, newState).apply()
   }
 
   fun getVibration(): Boolean {
-    val settings = activity.getSharedPreferences(SETTINGS, -1)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getBoolean(VIBRATION, false)
   }
 
   fun setVibration(newState: Boolean) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putBoolean(VIBRATION, newState).apply()
   }
 
   fun getSelectedTransition(): Int {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getInt(SELECTED_TRANSITION, 0)
   }
 
   fun setSelectedTransition(newState: Int) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putInt(SELECTED_TRANSITION, newState).apply()
   }
 
   fun getIsGridLayout(): Boolean {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getBoolean(GRID_LAYOUT, false)
   }
 
   fun setIsGridLayout(newState: Boolean) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putBoolean(GRID_LAYOUT, newState).apply()
   }
 
   fun getMemoryRecord(type: String): Int {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     when (type) {
       "easy" -> {
         return settings.getInt(MEMORY_GAME_RECORD_EASY, 0)
@@ -149,7 +150,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
   }
 
   fun setMemoryRecord(type: String, newState: Int) {
-    val settings = activity.getSharedPreferences(SETTINGS, 0)
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
 
     when (type) {

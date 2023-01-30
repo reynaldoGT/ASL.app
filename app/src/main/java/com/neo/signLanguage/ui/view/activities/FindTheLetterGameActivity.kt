@@ -30,7 +30,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   var record: Int = 0
   var difficulty: String = ""
   override fun onCreate(savedInstanceState: Bundle?) {
-
     super.onCreate(savedInstanceState)
     binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
     setContentView(binding.root)
@@ -93,7 +92,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
       imageView.layoutParams = params
       binding.livesContainer.addView(imageView)
     }
-
   }
 
   private fun initRecyclerView(context: Context) {
