@@ -75,6 +75,7 @@
     <string name="dictionary">Diccionario</string>
     <string name="games">Juegos</string>
     <string name="placeholder">Ingrese su mensaje</string>
+    <string name="game_and_message" translatable="false">Juegos y mensajes en imágenes</string>
 
     <string name="test_your_memory">Ejercita tu memoria</string>
     <string name="guess_letter_number">Adivina la letra o número correcto</string>

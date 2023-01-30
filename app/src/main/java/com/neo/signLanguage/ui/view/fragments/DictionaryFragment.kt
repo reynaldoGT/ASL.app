@@ -72,15 +72,10 @@ class DictionaryFragment : Fragment() {
       override fun onTabSelected(tab: TabLayout.Tab?) {
         binding.viewPager2.currentItem = tab!!.position
       }
-
       override fun onTabUnselected(tab: TabLayout.Tab?) {
-
       }
-
       override fun onTabReselected(tab: TabLayout.Tab?) {
-
       }
-
     })
     binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
       override fun onPageSelected(position: Int) {

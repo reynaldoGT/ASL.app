@@ -12,8 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="40dp"
         tools:ignore="UselessParent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/games_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gridListSing"
@@ -22,6 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:overScrollMode="never"
             android:paddingLeft="16dp"
+            android:paddingTop="40dp"
             android:paddingRight="16dp" />
 
         <Space

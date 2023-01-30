@@ -2,16 +2,16 @@ package com.neo.signLanguage.ui.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-
-import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.AdapterMenuGameSelect
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.FragmentGamesBinding
 import com.neo.signLanguage.ui.view.activities.SendMessageWithImagesActivity
@@ -39,6 +39,13 @@ class GamesMenuFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val titlesMenu = ArrayList<MenuTitle>()
+    (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
+    binding.gamesToolbar.setTitle(R.string.game_and_message)
+    /*
+    this.setSupportActionBar(binding.detailToolbar)
+    val actionbar = supportActionBar
+    actionbar?.setDisplayHomeAsUpEnabled(true)*/
+
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "test_your_memory"),
@@ -78,4 +85,5 @@ class GamesMenuFragment : Fragment() {
     binding.gridListSing.adapter = adapterCustomGrid
     initLoad(binding.banner)
   }
+
 }
