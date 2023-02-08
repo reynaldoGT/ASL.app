@@ -17,7 +17,6 @@
     <string name="letter_title">Letter</string>
     <string name="number_title">Number</string>
 
-
     <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
