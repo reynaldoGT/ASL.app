@@ -1,13 +1,11 @@
 package com.neo.signLanguage.ui.view.activities
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -15,46 +13,30 @@ import androidx.room.Room
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.data.database.entities.SingDatabase
-import com.neo.signLanguage.databinding.FragmentTabnavigatorBinding
+import com.neo.signLanguage.databinding.AcitivityMainBinding
 import com.neo.signLanguage.ui.view.fragments.*
-import com.neo.signLanguage.utils.NetworkState
 import com.neo.signLanguage.utils.SharedPreferences
-import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
   private var fragmentAdapter: TabAdapter? = null
+  private lateinit var binding: AcitivityMainBinding
 
   companion object {
-    lateinit var binding: FragmentTabnavigatorBinding
     lateinit var sharedPrefs: SharedPreferences
-    fun getColorShared(context: Context): Int {
-      return ContextCompat.getColor(
-        context,
-        sharedPrefs.getColor()
-      )
-    }
-
-    fun getLanguagePhone(): Boolean {
-      val language = Locale.getDefault().displayLanguage.toString().lowercase(Locale.ROOT)
-      return language == "english"
-    }
-
-    lateinit var networkState: NetworkState
     lateinit var database: SingDatabase
   }
 
-  var contextHasLoaded = false
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    sharedPrefs = SharedPreferences(this)
     installSplashScreen()
+    binding = AcitivityMainBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    sharedPrefs = SharedPreferences(this)
     database =
       Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
         .build()
 
-    networkState = NetworkState(this)
-    binding = FragmentTabnavigatorBinding.inflate(layoutInflater)
-    setContentView(binding.root)
     val fm: FragmentManager = supportFragmentManager
     fragmentAdapter = TabAdapter(fm, lifecycle)
 
@@ -103,7 +85,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         true
       }
-
       else -> super.onOptionsItemSelected(item)
     }
   }
@@ -112,11 +93,18 @@ class MainActivity : AppCompatActivity() {
     menuInflater.inflate(R.menu.menu_toolbar, menu)
     return super.onCreateOptionsMenu(menu)
   }
+  private var isFragmentTransactionInProgress = false
 
   private fun showSelectedFragment(fragment: Fragment) {
-    val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(R.id.container, fragment)
-    transaction.addToBackStack(null)
-    transaction.commit()
+    if (!isFragmentTransactionInProgress) {
+      isFragmentTransactionInProgress = true
+      val transaction = supportFragmentManager.beginTransaction()
+      transaction.replace(R.id.container, fragment)
+      transaction.addToBackStack(null)
+      transaction.commit()
+      supportFragmentManager.addOnBackStackChangedListener {
+        isFragmentTransactionInProgress = false
+      }
+    }
   }
 }

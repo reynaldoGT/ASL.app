@@ -2,7 +2,9 @@ package com.neo.signLanguage.utils
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.neo.signLanguage.R
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 
 class SharedPreferences(var activity: AppCompatActivity) {
   private val SETTINGS = "SHARED_PREFERENCES"
@@ -166,4 +168,10 @@ class SharedPreferences(var activity: AppCompatActivity) {
     }
   }
 
+  fun getColorShared(context: Context): Int {
+    return ContextCompat.getColor(
+      context,
+      sharedPrefs.getColor()
+    )
+  }
 }

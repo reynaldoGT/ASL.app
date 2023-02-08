@@ -25,8 +25,7 @@ import com.neo.signLanguage.*
 import com.neo.signLanguage.data.database.entities.SignEntity
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.getColorShared
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.database
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.AdUtils
@@ -73,9 +72,10 @@ class SendMessageFragment : Fragment() {
     AdUtils.initAds(requireContext())
     AdUtils.initListeners()
 
+    val getColorShared = sharedPrefs.getColorShared(activity as AppCompatActivity)
     if (sharedPrefs.getColor() != 0)
       imageView?.setColorFilter(
-        getColorShared(activity as AppCompatActivity)
+        getColorShared
       )
 
 
@@ -137,7 +137,7 @@ class SendMessageFragment : Fragment() {
       imageView!!.setImageResource(R.drawable.ic_a_only_sing)
       if (sharedPrefs.getColor() != 0)
         imageView!!.setColorFilter(
-          getColorShared(activity as AppCompatActivity)
+          getColorShared
         )
       imageView
     }
@@ -266,7 +266,7 @@ class SendMessageFragment : Fragment() {
       generateSingLanguageMessage()
 
       lifecycleScope.launch {
-        MainActivity.database.getSignDao()
+        database.getSignDao()
           .addSing(
             SignEntity(0,
               stringCleaned.replaceFirstChar {
@@ -305,7 +305,7 @@ class SendMessageFragment : Fragment() {
     super.onResume()
     if (sharedPrefs.getColor() != 0)
       imageView?.setColorFilter(
-        getColorShared(activity as AppCompatActivity)
+        sharedPrefs.getColorShared(activity as AppCompatActivity)
       )
   }
 

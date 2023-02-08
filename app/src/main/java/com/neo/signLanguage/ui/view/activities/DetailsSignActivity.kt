@@ -8,7 +8,6 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.getColorShared
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.orhanobut.logger.Logger
@@ -31,7 +30,6 @@ class DetailsSignActivity : AppCompatActivity() {
       this,
       "number_title"
     )
-    val netWorkImage = myIntent.getBooleanExtra("networkImage", false)
     val imageURL = intent.getStringExtra("imageUrl")
 
     val circularProgressDrawable = CircularProgressDrawable(this)
@@ -41,12 +39,13 @@ class DetailsSignActivity : AppCompatActivity() {
 
     binding.imageTitle.text = letter
     try {
-      if (netWorkImage) {
+      if (imageURL?.contains("http") == true){
         Glide.with(this)
-          /*.asGif()*/
+          .asGif()
           .load(imageURL)
-          /*.placeholder(circularProgressDrawable)
-          .error(R.drawable.ic_x_letter)*/
+          .placeholder(R.drawable.ic_2_number)
+          .error(R.drawable.ic_x_letter)
+          .fitCenter()
           .into(binding.image)
 
         binding.detailToolbar.title = letter
@@ -60,7 +59,7 @@ class DetailsSignActivity : AppCompatActivity() {
 
     if (sharedPrefs.getColor() != 0)
       binding.image.setColorFilter(
-        getColorShared(this)
+        sharedPrefs.getColorShared(this)
       )
     binding.detailToolbar.title = "$type $letter"
     this.setSupportActionBar(binding.detailToolbar)

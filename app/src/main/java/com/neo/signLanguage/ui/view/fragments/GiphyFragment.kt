@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.fragments
 
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +19,10 @@ import com.neo.signLanguage.adapters.GiphyAdapter
 import com.neo.signLanguage.data.models.GiphyItem
 import com.neo.signLanguage.databinding.FragmentGiphyBinding
 import com.neo.signLanguage.provider.ApiInterfaceTranslate
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.getLanguagePhone
+import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.ui.viewModel.NetworkViewModel
+import com.neo.signLanguage.utils.AdUtils.Companion.getLanguagePhone
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -93,10 +95,9 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
                 /*val myIntent =
                     Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
 
-                myIntent.putExtra("imageUrl", giphyImages[position].images.original.url)
-                myIntent.putExtra("networkImage", true)
                 myIntent.putExtra("letter", giphyImages[position].title)
                 myIntent.putExtra("type", giphyImages[position].source)
+                myIntent.putExtra("imageUrl", giphyImages[position].images.original.url)
                 startActivity(myIntent)*/
             }
         })

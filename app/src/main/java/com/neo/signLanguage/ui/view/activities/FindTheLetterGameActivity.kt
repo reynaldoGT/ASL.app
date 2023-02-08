@@ -15,6 +15,7 @@ import com.neo.signLanguage.adapters.AdapterGame
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
@@ -54,7 +55,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     model.getRandomToFindLetter(intentsNumber)
     binding.currentRecord.text = getString(
       R.string.current_record,
-      MainActivity.sharedPrefs.getMemoryRecord(difficulty).toString()
+      sharedPrefs.getMemoryRecord(difficulty).toString()
     )
 
     initRecyclerView(this)
@@ -126,7 +127,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                   ).setBackgroundTint(ContextCompat.getColor(context, R.color.green_dark)).show()
                   model.getRandomToFindLetter(intentsNumber)
                 } else {
-                  if (MainActivity.sharedPrefs.getVibration()) {
+                  if (sharedPrefs.getVibration()) {
                     vibratePhone(applicationContext, 50)
                   }
                   model.setIntents(-1)
@@ -141,8 +142,8 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   private fun saveRecord() {
-    if (MainActivity.sharedPrefs.getMemoryRecord(difficulty) < record) {
-      MainActivity.sharedPrefs.setMemoryRecord(difficulty, record)
+    if (sharedPrefs.getMemoryRecord(difficulty) < record) {
+      sharedPrefs.setMemoryRecord(difficulty, record)
     }
   }
 

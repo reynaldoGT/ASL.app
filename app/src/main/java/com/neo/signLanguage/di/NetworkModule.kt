@@ -12,18 +12,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    @Singleton
-    @Provides
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.giphy.com/v1/gifs/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+  @Singleton
+  @Provides
+  fun provideRetrofit(): Retrofit {
+    return Retrofit.Builder()
+      .baseUrl("https://api.giphy.com/v1/gifs/")
+      .addConverterFactory(GsonConverterFactory.create())
+      .build()
+  }
 
-    @Singleton
-    @Provides
-    fun provideGiphyApiClient(retrofit: Retrofit): GiphyApiClient {
-        return retrofit.create(GiphyApiClient::class.java)
-    }
+  @Singleton
+  @Provides
+  fun provideGiphyApiClient(retrofit: Retrofit): GiphyApiClient {
+    return retrofit.create(GiphyApiClient::class.java)
+  }
 }

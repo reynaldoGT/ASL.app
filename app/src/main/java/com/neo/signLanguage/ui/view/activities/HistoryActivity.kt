@@ -14,6 +14,7 @@ import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.HistoryAdapter
 import com.neo.signLanguage.databinding.ActivityHistoryBinding
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.SwipeToDeleteCallback
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -32,7 +33,7 @@ class HistoryActivity : AppCompatActivity() {
     binding = ActivityHistoryBinding.inflate(layoutInflater)
     setContentView(binding.root)
     binding.emptyHistoryImageView.setColorFilter(
-      getColor(if (MainActivity.sharedPrefs.getTheme()) R.color.white else R.color.black)
+      getColor(if (sharedPrefs.getTheme()) R.color.white else R.color.black)
 
 
     )

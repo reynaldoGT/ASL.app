@@ -5,7 +5,7 @@ import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 
 
-class NetworkState (var activity: AppCompatActivity) {
+class NetworkStateReceiver (var activity: AppCompatActivity) {
     fun isOnline(): Boolean {
         // Checking internet connectivity
         val connectivityMgr =

@@ -8,6 +8,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.orhanobut.logger.Logger
+import java.util.*
 
 class AdUtils {
   companion object {
@@ -68,6 +69,10 @@ class AdUtils {
       /*AdView*/
       val adRequest = AdRequest.Builder().build()
       adView.loadAd(adRequest)
+    }
+    fun getLanguagePhone(): Boolean {
+      val language = Locale.getDefault().displayLanguage.toString().lowercase(Locale.ROOT)
+      return language == "english"
     }
   }
 }
