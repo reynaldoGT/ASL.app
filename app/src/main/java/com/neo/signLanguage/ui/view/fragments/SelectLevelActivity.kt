@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.background
 
 import androidx.compose.foundation.layout.*
 
@@ -38,7 +39,6 @@ class SelectLevelActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivitySelectLevelBinding.inflate(layoutInflater)
     setContentView(binding.root)
-
     binding.greeting.setContent {
       CustomButtonSelectLevel()
     }
@@ -52,7 +52,8 @@ fun CustomButton(buttonTitle: String, difficulty: String) {
     modifier = Modifier
       .height(100.dp)
       .fillMaxWidth()
-      .padding(10.dp),
+      .padding(10.dp)
+    ,
     onClick = {
       val intent = Intent(context, FindTheLetterGameActivity::class.java)
       intent.putExtra("difficulty", difficulty)

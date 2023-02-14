@@ -23,7 +23,6 @@ class DictionaryFragment : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-
     // Using the binding
     _binding = FragmentDictionarySignsBinding.inflate(inflater, container, false)
     return binding.root
@@ -33,7 +32,7 @@ class DictionaryFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     //toolbar
     binding.toolbar.setTitle(R.string.app_name)
-/*change text color*/
+    /*change text color*/
     binding.toolbar.setTitleTextColor(resources.getColor(R.color.white))
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
 
