@@ -5,28 +5,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.AdRequest
-import com.neo.signLanguage.adapters.ClickListener
-
 import android.content.Intent
-import com.neo.signLanguage.adapters.AdapterLetters
-import com.neo.signLanguage.adapters.AdapterLinearLetters
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Switch
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+
 import com.neo.signLanguage.databinding.FragmentLettersAndNumberSingBinding
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
-
+import androidx.compose.material.darkColors as DarkColors
+import androidx.compose.material.lightColors as LightColors
 
 class LetterAndNumbersFragment : Fragment() {
 
   private var _binding: FragmentLettersAndNumberSingBinding? = null
   private val binding get() = _binding!!
-  private var adapterGrid: AdapterLetters? = null
-  private var adapterLinear: AdapterLinearLetters? = null
-  private var layoutManager: RecyclerView.LayoutManager? = null
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -38,57 +52,161 @@ class LetterAndNumbersFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    initLoad(binding.banner)
 
-    val lettersArrayToLinear = getLetterArray(false)
+    binding.greeting.setContent {
+      MaterialTheme(
+        colors = if (sharedPrefs.getTheme()) DarkColors() else LightColors(),
+        /*colors = if sharedPrefs.getTheme() DarkColors else LightColors,*/
+
+        content = {
+          ContainerLayout()
+          // Contenido del ComposeView
+        }
+      )
+    }
+  }
+
+  @Composable
+  fun ContainerLayout() {
+    var switchState by remember { mutableStateOf(false) }
+    Box() {
+      Column() {
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+          horizontalArrangement = Arrangement.End,
+        ) {
+          Text(text = "Opción 1")
+          Spacer(modifier = Modifier.width(16.dp))
+          Switch(
+            checked = switchState,
+            onCheckedChange = { switchState = it },
+            modifier = Modifier.align(Alignment.CenterVertically)
+          )
+        }
+        if (switchState) {
+          LazyVerticalGridDemo()
+        } else {
+          LazyVerticalHorizontalDemo()
+        }
+        /*LazyVerticalGridDemo()
+        LazyVerticalHorizontalDemo()*/
+      }
+
+    }
+  }
+
+  @Composable
+  fun LazyVerticalGridDemo() {
     val lettersToGrid = getLetterAndSignArray()
-    binding.gridListSing.setHasFixedSize(true)
-
-    layoutManager = GridLayoutManager(requireContext(), 2)
-    binding.gridListSing.layoutManager = layoutManager
-
-    adapterLinear =
-      AdapterLinearLetters(
-        requireActivity().applicationContext,
-        lettersArrayToLinear,
-        object : ClickListener {
-          override fun onClick(v: View?, position: Int) {
-            val myIntent =
-              Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
-            myIntent.putExtra("image", lettersArrayToLinear[position].image)
-            myIntent.putExtra("letter", lettersArrayToLinear[position].letter)
-            myIntent.putExtra("type", lettersArrayToLinear[position].type)
-            startActivity(myIntent)
+    LazyVerticalGrid(
+      columns = GridCells.Adaptive(128.dp),
+      // content padding
+      contentPadding = PaddingValues(
+        start = 12.dp,
+        top = 16.dp,
+        end = 12.dp,
+        bottom = 16.dp
+      ),
+      content = {
+        items(lettersToGrid.size) { index ->
+          Card(
+            elevation = 8.dp,
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier
+              .fillMaxSize()
+              .padding(8.dp)
+              .clickable {
+                val myIntent =
+                  Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
+                myIntent.putExtra("image", lettersToGrid[index].image)
+                myIntent.putExtra("letter", lettersToGrid[index].letter)
+                myIntent.putExtra("type", lettersToGrid[index].type)
+                startActivity(myIntent)
+              }
+          ) {
+            Image(
+              painter = painterResource(id = lettersToGrid[index].image),
+              contentDescription = null,
+              colorFilter = ColorFilter.tint(
+                Color(
+                  ContextCompat.getColor(
+                    requireContext(),
+                    sharedPrefs.getColor()
+                  )
+                )
+              ),
+              modifier = Modifier
+                .fillMaxSize()
+                .aspectRatio(1f)
+                .padding(8.dp)
+            )
           }
-        })
-    binding.gridListSing.adapter = adapterGrid
-    adapterGrid =
-      AdapterLetters(
-        requireActivity().applicationContext,
-        lettersToGrid,
-        object : ClickListener {
-          override fun onClick(v: View?, position: Int) {
-            val myIntent =
-              Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
-            myIntent.putExtra("image", lettersToGrid[position].image)
-            myIntent.putExtra("letter", lettersToGrid[position].letter)
-            myIntent.putExtra("type", lettersToGrid[position].type)
-            startActivity(myIntent)
-          }
-        })
-    binding.gridListSing.adapter = adapterGrid
+        }
+      }
+    )
+  }
 
-    binding.switchChangeLayout.setOnCheckedChangeListener { _, isChecked ->
-      /*MainActivity.sharedPrefs.setVibration(isChecked)*/
-      if (isChecked) {
-        layoutManager = GridLayoutManager(requireContext(), 1)
-        binding.gridListSing.layoutManager = layoutManager
-        binding.gridListSing.adapter = adapterLinear
-      } else {
-        layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.gridListSing.layoutManager = layoutManager
-        binding.gridListSing.adapter = adapterGrid
+  @Composable
+  fun LazyVerticalHorizontalDemo() {
+    val lettersArrayToHorizontal = getLetterArray(false)
+    LazyColumn(
+      modifier = Modifier.wrapContentHeight(),
+    ) {
+      items(lettersArrayToHorizontal.size) { index ->
+        Card(
+          modifier = Modifier
+            .padding(8.dp)
+            .clickable {
+              val myIntent =
+                Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
+              myIntent.putExtra("image", lettersArrayToHorizontal[index].image)
+              myIntent.putExtra("letter", lettersArrayToHorizontal[index].letter)
+              myIntent.putExtra("type", lettersArrayToHorizontal[index].type)
+              startActivity(myIntent)
+            },
+          elevation = 8.dp,
+          shape = RoundedCornerShape(16.dp)
+        ) {
+          Row(
+            modifier = Modifier,
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+
+          ) {
+            Image(
+              painter = painterResource(id = lettersArrayToHorizontal[index].image),
+              contentDescription = null,
+              colorFilter = ColorFilter.tint(
+                Color(
+                  ContextCompat.getColor(
+                    requireContext(),
+                    sharedPrefs.getColor()
+                  )
+                )
+              ),
+              modifier = Modifier
+                .height(100.dp)
+                .aspectRatio(1f)
+            )
+            Text(
+              text = lettersArrayToHorizontal[index].letter,
+              color = Color(
+                ContextCompat.getColor(
+                  requireContext(),
+                  sharedPrefs.getColor()
+                )
+              ),
+              modifier = Modifier
+                .fillMaxSize(),
+              style = MaterialTheme.typography.h2,
+              textAlign = TextAlign.Center,
+              fontWeight = FontWeight.W400,
+            )
+          }
+        }
       }
     }
-    initLoad(binding.banner)
   }
+
 }
