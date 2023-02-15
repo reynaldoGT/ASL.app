@@ -92,13 +92,13 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
   private fun initRecyclerView() {
     adapter = GiphyAdapter(activity?.applicationContext!!, giphyImages, object : ClickListener {
       override fun onClick(v: View?, position: Int) {
-        /*val myIntent =
+        val myIntent =
             Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
 
         myIntent.putExtra("letter", giphyImages[position].title)
         myIntent.putExtra("type", giphyImages[position].source)
         myIntent.putExtra("imageUrl", giphyImages[position].images.original.url)
-        startActivity(myIntent)*/
+        startActivity(myIntent)
       }
     })
 

@@ -143,6 +143,10 @@ dependencies {
 
     implementation "androidx.compose.runtime:runtime-livedata:1.2.0"
 
-    
+
+    implementation "io.coil-kt:coil-compose:2.2.2"
+    implementation "io.coil-kt:coil-gif:2.2.2"
+
+
 
 }

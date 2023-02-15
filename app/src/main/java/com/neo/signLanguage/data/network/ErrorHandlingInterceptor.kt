@@ -14,8 +14,7 @@ class ErrorHandlingInterceptor : Interceptor {
       throw e
     }
     if (!response.isSuccessful) {
-      val code = response.code()
-      when (code) {
+      when (response.code) {
         504 -> {
           // handle the timeout error
           throw SocketTimeoutException("Read timed out")

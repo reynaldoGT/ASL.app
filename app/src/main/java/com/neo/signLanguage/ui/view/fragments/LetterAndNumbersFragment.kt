@@ -57,11 +57,8 @@ class LetterAndNumbersFragment : Fragment() {
     binding.greeting.setContent {
       MaterialTheme(
         colors = if (sharedPrefs.getTheme()) DarkColors() else LightColors(),
-        /*colors = if sharedPrefs.getTheme() DarkColors else LightColors,*/
-
         content = {
           ContainerLayout()
-          // Contenido del ComposeView
         }
       )
     }
@@ -76,6 +73,7 @@ class LetterAndNumbersFragment : Fragment() {
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.End,
         ) {
+          /*TODO change this*/
           Text(text = "Opción 1")
           Spacer(modifier = Modifier.width(16.dp))
           Switch(
@@ -89,10 +87,7 @@ class LetterAndNumbersFragment : Fragment() {
         } else {
           LazyVerticalHorizontalDemo()
         }
-        /*LazyVerticalGridDemo()
-        LazyVerticalHorizontalDemo()*/
       }
-
     }
   }
 
@@ -101,13 +96,6 @@ class LetterAndNumbersFragment : Fragment() {
     val lettersToGrid = getLetterAndSignArray()
     LazyVerticalGrid(
       columns = GridCells.Adaptive(128.dp),
-      // content padding
-      contentPadding = PaddingValues(
-        start = 12.dp,
-        top = 16.dp,
-        end = 12.dp,
-        bottom = 16.dp
-      ),
       content = {
         items(lettersToGrid.size) { index ->
           Card(
@@ -117,12 +105,12 @@ class LetterAndNumbersFragment : Fragment() {
               .fillMaxSize()
               .padding(8.dp)
               .clickable {
-                val myIntent =
-                  Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
-                myIntent.putExtra("image", lettersToGrid[index].image)
-                myIntent.putExtra("letter", lettersToGrid[index].letter)
-                myIntent.putExtra("type", lettersToGrid[index].type)
-                startActivity(myIntent)
+
+                goDetails(
+                  lettersToGrid[index].image,
+                  lettersToGrid[index].letter,
+                  lettersToGrid[index].type
+                )
               }
           ) {
             Image(
@@ -158,12 +146,11 @@ class LetterAndNumbersFragment : Fragment() {
           modifier = Modifier
             .padding(8.dp)
             .clickable {
-              val myIntent =
-                Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
-              myIntent.putExtra("image", lettersArrayToHorizontal[index].image)
-              myIntent.putExtra("letter", lettersArrayToHorizontal[index].letter)
-              myIntent.putExtra("type", lettersArrayToHorizontal[index].type)
-              startActivity(myIntent)
+              goDetails(
+                lettersArrayToHorizontal[index].image,
+                lettersArrayToHorizontal[index].letter,
+                lettersArrayToHorizontal[index].type
+              )
             },
           elevation = 8.dp,
           shape = RoundedCornerShape(16.dp)
@@ -209,4 +196,12 @@ class LetterAndNumbersFragment : Fragment() {
     }
   }
 
+  private fun goDetails(image: Int, letter: String, type: String) {
+    val myIntent =
+      Intent(activity!!.applicationContext, DetailsSignActivity::class.java)
+    myIntent.putExtra("image", image)
+    myIntent.putExtra("letter", letter)
+    myIntent.putExtra("type", type)
+    startActivity(myIntent)
+  }
 }
