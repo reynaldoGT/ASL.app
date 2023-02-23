@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     fragmentAdapter = TabAdapter(fm, lifecycle)
 
     showSelectedFragment(DictionaryFragment())
-    if (sharedPrefs.getTheme()) {
+    if (sharedPrefs.isDarkTheme()) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     } else {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

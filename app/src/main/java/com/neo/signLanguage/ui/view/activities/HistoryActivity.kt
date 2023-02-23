@@ -33,7 +33,7 @@ class HistoryActivity : AppCompatActivity() {
     binding = ActivityHistoryBinding.inflate(layoutInflater)
     setContentView(binding.root)
     binding.emptyHistoryImageView.setColorFilter(
-      getColor(if (sharedPrefs.getTheme()) R.color.white else R.color.black)
+      getColor(if (sharedPrefs.isDarkTheme()) R.color.white else R.color.black)
 
 
     )

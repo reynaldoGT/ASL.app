@@ -56,7 +56,7 @@ class LetterAndNumbersFragment : Fragment() {
 
     binding.greeting.setContent {
       MaterialTheme(
-        colors = if (sharedPrefs.getTheme()) DarkColors() else LightColors(),
+        colors = if (sharedPrefs.isDarkTheme()) DarkColors() else LightColors(),
         content = {
           ContainerLayout()
         }
@@ -105,7 +105,6 @@ class LetterAndNumbersFragment : Fragment() {
               .fillMaxSize()
               .padding(8.dp)
               .clickable {
-
                 goDetails(
                   lettersToGrid[index].image,
                   lettersToGrid[index].letter,

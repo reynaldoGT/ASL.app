@@ -14,6 +14,7 @@ import com.neo.signLanguage.adapters.AdapterMenuGameSelect
 import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.FragmentGamesBinding
+import com.neo.signLanguage.ui.view.activities.GuessTheWordActivity
 import com.neo.signLanguage.ui.view.activities.SendMessageWithImagesActivity
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
@@ -50,7 +51,6 @@ class GamesMenuFragment : Fragment() {
       MenuTitle(
         getStringByIdName(requireContext(), "test_your_memory"),
         getStringByIdName(requireContext(), "guess_letter_number"),
-
         R.drawable.ic_brain,
         SelectLevelActivity()
       )
@@ -69,6 +69,22 @@ class GamesMenuFragment : Fragment() {
         getStringByIdName(requireContext(),"send_message_with_signs"),
         R.drawable.ic_keyboard,
         SendMessageWithImagesActivity()
+      )
+    )
+    titlesMenu.add(
+      MenuTitle(
+        getStringByIdName(requireContext(), "write_your_message"),
+        getStringByIdName(requireContext(),"send_message_with_signs"),
+        R.drawable.ic_10_number,
+        GuessFlipCardGameActivity()
+      )
+    )
+    titlesMenu.add(
+      MenuTitle(
+        getStringByIdName(requireContext(), "write_your_message"),
+        getStringByIdName(requireContext(),"send_message_with_signs"),
+        R.drawable.ic_10_number,
+        GuessTheWordActivity()
       )
     )
 

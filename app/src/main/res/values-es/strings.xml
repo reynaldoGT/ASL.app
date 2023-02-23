@@ -83,7 +83,8 @@
     <string name="send_message_with_signs">Enviar mensajes con imágenes</string>
     <string name="find_the_even_signs">Encuentra las señas iguales</string>
     <string name="find_correct_letter_or_sign">Encuentra la letra o número correcto</string>
-    <string name="correct">CORRECTO</string>
+    <string name="correct">congratulations is correct</string>
+    <string name="incorrect">Lo siento, fallaste. Inténtalo de nuevo</string>
     <string name="help_us">Ayúdanos</string>
 
     <string name="current_letter">Letra actual</string>
@@ -99,6 +100,6 @@
     <string name="menu_title">Título</string>
 
     <string name="letter_title">Letra</string>
-        <string name="number_title">Número</string>
+    <string name="number_title">Número</string>
 
 </resources>

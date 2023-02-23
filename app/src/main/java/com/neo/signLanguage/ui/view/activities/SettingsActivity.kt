@@ -33,7 +33,7 @@ class SettingsActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         actionbar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.switchChangeTheme.isChecked = sharedPrefs.getTheme()
+        binding.switchChangeTheme.isChecked = sharedPrefs.isDarkTheme()
         binding.switchChangeVibration.isChecked = sharedPrefs.getVibration()
         binding.cbTransition.isChecked = sharedPrefs.getShowTransition()
         binding.currentDelayValue.text = sharedPrefs.getDelay().toString() + "ms."

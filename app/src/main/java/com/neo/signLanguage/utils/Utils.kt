@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
 import java.text.Normalizer
 import java.util.*
+import kotlin.random.Random
 
 
 class Utils {
@@ -58,7 +59,7 @@ class Utils {
       return stringCleaned
     }
 
-      fun vibratePhone(context: Context, timer: Long = 200) {
+    fun vibratePhone(context: Context, timer: Long = 200) {
       val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
       if (Build.VERSION.SDK_INT >= 26) {
         vibrator.vibrate(
@@ -82,6 +83,82 @@ class Utils {
       }
       imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-  }
 
+    fun getRandomWord(): String {
+      val palabrasIngles = listOf(
+        "time",
+        "people",
+        "way",
+        "day",
+        "man",
+        "woman",
+        "year",
+        "good",
+        "new",
+        "first",
+        "last",
+        "long",
+        "great",
+        "little",
+        "own",
+        "other",
+        "old",
+        "right",
+        "big",
+        "high",
+        "different",
+        "small",
+        "large",
+        "next",
+        "early",
+        "young",
+        "important",
+        "few",
+        "public",
+        "bad",
+        "same",
+        "able"
+      )
+      val palabrasEspanol = listOf(
+        "tiempo",
+        "gente",
+        "camino",
+        "día",
+        "hombre",
+        "mujer",
+        "año",
+        "bueno",
+        "nuevo",
+        "primero",
+        "último",
+        "largo",
+        "genial",
+        "pequeño",
+        "propio",
+        "otro",
+        "viejo",
+        "derecho",
+        "grande",
+        "alto",
+        "diferente",
+        "pequeño",
+        "grande",
+        "próximo",
+        "temprano",
+        "joven",
+        "importante",
+        "pocos",
+        "público",
+        "malo",
+        "mismo",
+        "capaz"
+      )
+      val index = Random.nextInt(palabrasIngles.size)
+
+      return if (Locale.getDefault().language == "es")
+        palabrasEspanol[index]
+      else
+        palabrasIngles[index]
+    }
+  }
 }

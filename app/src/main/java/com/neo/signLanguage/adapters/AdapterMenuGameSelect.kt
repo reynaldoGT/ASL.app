@@ -71,7 +71,7 @@ class AdapterMenuGameSelect(
 
         ContextCompat.getColor(
           context,
-          if (sharedPrefs.getTheme()) R.color.white else R.color.black
+          if (sharedPrefs.isDarkTheme()) R.color.white else R.color.black
         )
       )
       this.listener = listener

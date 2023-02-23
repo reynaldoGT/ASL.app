@@ -23,7 +23,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
   private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
   private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
 
-  fun getTheme(): Boolean {
+  fun isDarkTheme(): Boolean {
     val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getBoolean(DARK_THEME, false)
   }

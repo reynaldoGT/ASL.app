@@ -4,22 +4,17 @@ package com.neo.signLanguage.ui.view.fragments
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.background
 
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -76,12 +71,13 @@ fun CustomButtonSelectLevel() {
       text = getStringByIdName(context, "select_level"),
       modifier = Modifier.padding(10.dp),
       style = MaterialTheme.typography.h3,
-      color = if (sharedPrefs.getTheme()) Color.White else Color.Black
+      color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
     )
 
     CustomButton(buttonTitle = getStringByIdName(context, "easy"), difficulty = "easy")
     CustomButton(buttonTitle = getStringByIdName(context, "medium"), difficulty = "medium")
     CustomButton(buttonTitle = getStringByIdName(context, "hard"), difficulty = "hard")
+    CustomButton(buttonTitle = getStringByIdName(context, "hard"), difficulty = "veryHard")
   }
 }
 

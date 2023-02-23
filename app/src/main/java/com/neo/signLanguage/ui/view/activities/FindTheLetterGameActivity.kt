@@ -1,31 +1,45 @@
 package com.neo.signLanguage.ui.view.activities
 
-import android.content.Context
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout.LayoutParams
-import android.widget.RelativeLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.neo.signLanguage.adapters.AdapterGame
 import com.neo.signLanguage.R
-import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import java.util.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.utils.Game
+import kotlin.collections.ArrayList
+import android.graphics.Color as AndroidColor
+
 
 class FindTheLetterGameActivity : AppCompatActivity() {
   private lateinit var binding: ActivityFindLetterGameBinding
-  private lateinit var adapter: AdapterGame
-  private var intentsNumber: Int = 0
-
+  private var numberElements: Int = 0
   private val model: GameViewModel by viewModels()
 
   var record: Int = 0
@@ -40,105 +54,168 @@ class FindTheLetterGameActivity : AppCompatActivity() {
 
     when (difficulty) {
       "easy" -> {
-        intentsNumber = 3
+        numberElements = 4
         model.setIntents(7)
       }
       "medium" -> {
-        intentsNumber = 5
+        numberElements = 6
         model.setIntents(5)
       }
       "hard" -> {
-        intentsNumber = 8
+        numberElements = 9
+        model.setIntents(3)
+      }
+      "veryHard" -> {
+        numberElements = 12
         model.setIntents(3)
       }
     }
-    model.getRandomToFindLetter(intentsNumber)
-    binding.currentRecord.text = getString(
-      R.string.current_record,
-      sharedPrefs.getMemoryRecord(difficulty).toString()
-    )
-
-    initRecyclerView(this)
-    livesIcon()
-    model.intents.observe(this) {
-      if (it == 0) {
-        Snackbar.make(
-          this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-          getString(R.string.correct),
-          Snackbar.LENGTH_SHORT,
-        ).setBackgroundTint(ContextCompat.getColor(this, R.color.red_dark)).show()
-        AdUtils.checkCounter(this)
-        saveRecord()
-        super.onBackPressed()
-      }
+    model.getRandomToFindLetter(numberElements)
+    binding.findLetterGameComposeView.setContent {
+      MyMaterialTheme(
+        content = {
+          ContainerLayout()
+        }
+      )
     }
+
   }
 
-  private fun livesIcon() {
-    binding.livesContainer.removeAllViews()
-    for (i in 0 until model.intents.value!!) {
-      val imageView = ImageView(this)
-      imageView.setImageDrawable(
-        ContextCompat.getDrawable(
-          this,
-          R.drawable.ic_heart
+  private fun showSnackBar(message: String, color: Int) {
+    Snackbar
+      .make(
+        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+        message,
+        Snackbar.LENGTH_SHORT,
+      )
+      .setBackgroundTint(
+        ContextCompat.getColor(
+          this@FindTheLetterGameActivity,
+          color
         )
       )
-      val params = RelativeLayout.LayoutParams(
-        LayoutParams.WRAP_CONTENT,
-        LayoutParams.WRAP_CONTENT
-      )
-
-      params.setMargins(10, 0, 0, 0)
-      imageView.layoutParams = params
-      binding.livesContainer.addView(imageView)
-    }
+      .setTextColor(AndroidColor.WHITE)
+      .show()
   }
 
-  private fun initRecyclerView(context: Context) {
+  @Composable
+  fun ContainerLayout(gameViewModel: GameViewModel = viewModel()) {
+    val randomletters by gameViewModel.randomGameLetters.observeAsState(
+      Game(
+        ArrayList(), Sign(
+          "", 0, "",
+        )
+      )
+    )
+    val intents by gameViewModel.intents.observeAsState(1)
+    if (intents == 0) {
+      Snackbar.make(
+        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+        getString(R.string.incorrect),
+        Snackbar.LENGTH_SHORT,
+      ).setBackgroundTint(ContextCompat.getColor(this, R.color.red_dark)).show()
+      AdUtils.checkCounter(this)
+      saveRecord()
+      super.onBackPressed()
+    }
 
-    model.randomGameLetters
-      .observe(this) {
-        binding.currentAnswer.text =
-          if (it.correctAnswer.type == "letter")
+    Box() {
+      Column(
+        modifier = Modifier
+          .fillMaxSize()
+          .padding(16.dp),
+        /*verticalArrangement = Arrangement.SpaceBetween,*/
+        horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
+
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+          horizontalArrangement = Arrangement.End,
+        ) {
+          Box() {
+            Row() {
+              LazyRow() {
+                items(intents) {
+                  Box() {
+                    Column() {
+                      Image(
+                        painter = painterResource(id = R.drawable.ic_heart),
+                        contentDescription = "Heart",
+                        modifier = Modifier
+                          .padding(5.dp)
+                          .size(30.dp)
+                      )
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        Text(
+          text = if (randomletters.correctAnswer.type == "letter")
             getString(
               R.string.game_find_game_title_letter,
-              it.correctAnswer.letter.uppercase(Locale.getDefault())
+              randomletters.correctAnswer.letter.uppercase(Locale.getDefault())
             )
           else getString(
             R.string.game_find_game_title_number,
-            it.correctAnswer.letter.uppercase(Locale.getDefault())
+            randomletters.correctAnswer.letter.uppercase(Locale.getDefault())
           )
-        binding.currentLetterAnswer.text =
-          it.correctAnswer.letter.uppercase(Locale.getDefault())
-        adapter =
-          AdapterGame(
-            this,
-            it.data,
-            object : ClickListener {
-              override fun onClick(v: View?, position: Int) {
-                /*model.setCurrentMessage(it!![position].sing, false)*/
-                if ((it.data[position].letter) == it.correctAnswer.letter) {
-                  record++
-                  Snackbar.make(
-                    this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-                    getString(R.string.correct),
-                    Snackbar.LENGTH_SHORT,
-                  ).setBackgroundTint(ContextCompat.getColor(context, R.color.green_dark)).show()
-                  model.getRandomToFindLetter(intentsNumber)
-                } else {
-                  if (sharedPrefs.getVibration()) {
-                    vibratePhone(applicationContext, 50)
+
+        )
+        Text(
+          randomletters.correctAnswer.letter.uppercase(Locale.getDefault())
+        )
+        LazyVerticalGrid(
+/*          columns = GridCells.Adaptive(128.dp),*/
+          columns = GridCells.Fixed(if (difficulty == "easy") 2 else 3),
+          content = {
+            items(randomletters.data.size) { index ->
+              Card(
+                elevation = 8.dp,
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier
+                  .fillMaxSize()
+                  .padding(8.dp)
+                  .clickable {
+                    if ((randomletters.data[index].letter) == randomletters.correctAnswer.letter) {
+                      record++
+                      showSnackBar(getString(R.string.correct), R.color.green_dark)
+                      model.getRandomToFindLetter(numberElements)
+                    } else {
+                      if (sharedPrefs.getVibration()) {
+                        vibratePhone(applicationContext, 50)
+                      }
+                      showSnackBar(getString(R.string.incorrect), R.color.red_dark)
+                      model.setIntents(-1)
+                    }
                   }
-                  model.setIntents(-1)
-                  livesIcon()
-                }
+              ) {
+                Image(
+                  painter = painterResource(id = randomletters.data[index].image),
+                  contentDescription = null,
+                  colorFilter = ColorFilter.tint(
+                    Color(
+                      ContextCompat.getColor(
+                        this@FindTheLetterGameActivity,
+                        sharedPrefs.getColor()
+                      )
+                    )
+                  ),
+                  modifier = Modifier
+                    .fillMaxSize()
+                    .aspectRatio(1f)
+                    .padding(8.dp)
+                )
               }
-            })
-        binding.gridListSing.layoutManager =
-          GridLayoutManager(this, if (difficulty == "hard") 3 else 2)
-        binding.gridListSing.adapter = adapter
+            }
+          }
+        )
       }
+    }
+
   }
 
   private fun saveRecord() {

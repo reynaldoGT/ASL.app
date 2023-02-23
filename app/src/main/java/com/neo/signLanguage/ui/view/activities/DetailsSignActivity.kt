@@ -46,6 +46,7 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.request.onAnimationStart
 import com.bumptech.glide.request.target.DrawableImageViewTarget
+import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.utils.AdUtils
 
 
@@ -68,12 +69,12 @@ class DetailsSignActivity : AppCompatActivity() {
     val imageURL = intent.getStringExtra("imageUrl")
 
     binding.composeView.setContent {
-      MaterialTheme(
-        colors = if (sharedPrefs.getTheme()) darkColors() else lightColors(),
+      MyMaterialTheme(
         content = {
           ContainerLayout(imageInt, letter!!, imageURL)
         }
       )
+
 
     }
 
@@ -131,13 +132,10 @@ class DetailsSignActivity : AppCompatActivity() {
       .build()
     val painter = rememberAsyncImagePainter(
       ImageRequest.Builder(context).data(url).apply(block = {
-        /*size(Size.ORIGINAL)*/
       }).build(), imageLoader = imageLoader
     )
-
-
     Box(
-      Modifier.background(Color.Cyan)
+
     ) {
       Column(
         modifier = Modifier

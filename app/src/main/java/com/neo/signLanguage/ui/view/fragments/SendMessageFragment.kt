@@ -29,7 +29,9 @@ import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.database
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.AdUtils
+import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
+import com.neo.signLanguage.utils.SendMessageDC
 import com.neo.signLanguage.utils.Utils
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -47,7 +49,6 @@ class SendMessageFragment : Fragment() {
   private var job: Job? = null
 
   private var imageView: ImageView? = null
-  private var stringCleaned: String = ""
 
   private val giphyViewModel: GiphyViewModel by activityViewModels()
 
@@ -78,10 +79,7 @@ class SendMessageFragment : Fragment() {
         getColorShared
       )
 
-
     binding.edSendMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
-
-
       binding.seeCurrentMessage.visibility = View.VISIBLE
 
       if (keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -169,31 +167,21 @@ class SendMessageFragment : Fragment() {
     binding.imageSwitcher.inAnimation = `in`
   }
 
-  private fun generateSingLanguageMessage() {
+  private fun generateSingLanguageMessage(sendMessageDC: SendMessageDC) {
 
     binding.seeCurrentMessage.visibility = requireView().visibility
 
     binding.btnSendMessage.isEnabled = false
     binding.edSendMessage.isEnabled = false
+    binding.edSendMessage.editText?.setText(sendMessageDC.stringCleaned)
 
-    val arraySentenceSing = ArrayList<Sign>()
-    binding.edSendMessage.editText?.setText(stringCleaned)
-    val stringArray = stringCleaned.toCharArray()
-
-    for (i in stringArray) {
-      for (letterPosition in getLetterArray()) {
-        if (letterPosition.letter == i.toString()) {
-          arraySentenceSing.add(letterPosition)
-        }
-      }
-    }
-    showMessageWithSing(arraySentenceSing)
+    showMessageWithSing(sendMessageDC)
   }
 
-  private fun showMessageWithSing(sentenceInArrayImage: ArrayList<Sign>) {
+  private fun showMessageWithSing(sendMessageDC: SendMessageDC) {
     val counter = -1
     job = GlobalScope.launch(context = Dispatchers.Main) {
-      for ((index, item) in sentenceInArrayImage.withIndex()) {
+      for ((index, item) in sendMessageDC.data.withIndex()) {
         binding.btnSendMessageCancel.isVisible = true
         binding.btnSendMessage.isVisible = false
 
@@ -213,7 +201,7 @@ class SendMessageFragment : Fragment() {
           }
         }
 
-        val spannable = SpannableStringBuilder(stringCleaned.replaceFirstChar {
+        val spannable = SpannableStringBuilder(sendMessageDC.stringCleaned.replaceFirstChar {
           if (it.isLowerCase()) it.titlecase(
             Locale.ROOT
           ) else it.toString()
@@ -231,31 +219,23 @@ class SendMessageFragment : Fragment() {
         )
 
         binding.seeCurrentMessage.text = spannable
-        if (counter == sentenceInArrayImage.size) {
+        if (counter == sendMessageDC.data.size) {
           binding.imageSwitcher.setImageResource(item.image)
         } else {
           binding.imageSwitcher.setImageResource(item.image)
         }
       }
       resetStatus()
-
     }
   }
 
   private fun sendMessage(message: String) {
-    val re = Regex("[^[A-Za-z0-9 ,ñÀ-ú]+\$]")
-    stringCleaned = message.trim().lowercase()
-    stringCleaned = re.replace(stringCleaned, "") // works
-    stringCleaned = stringCleaned.replace("\\s+".toRegex(), " ")
-
-    stringCleaned = Normalizer.normalize(stringCleaned, Normalizer.Form.NFD)
-
-
-    giphyViewModel.setCurrentMessage(stringCleaned, true)
+    val generateListImageSign = generateListImageSign(message)
+    giphyViewModel.setCurrentMessage(generateListImageSign.stringCleaned, true)
 
     val maxCharacters = 75
-    if (stringCleaned.isNotEmpty()) {
-      if (stringCleaned.length >= maxCharacters) {
+    if (generateListImageSign.stringCleaned.isNotEmpty()) {
+      if (generateListImageSign.stringCleaned.length >= maxCharacters) {
         Snackbar.make(
           requireActivity().findViewById(android.R.id.content),
           String.format(getString(R.string.maximum_number_characters, maxCharacters)),
@@ -263,20 +243,18 @@ class SendMessageFragment : Fragment() {
         ).show()
         return
       }
-      generateSingLanguageMessage()
-
+      generateSingLanguageMessage(generateListImageSign)
       lifecycleScope.launch {
         database.getSignDao()
           .addSing(
             SignEntity(0,
-              stringCleaned.replaceFirstChar {
+              generateListImageSign.stringCleaned.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(
                   Locale.getDefault()
                 ) else it.toString()
               })
           )
       }
-
     } else {
       Snackbar.make(
         requireActivity().findViewById(android.R.id.content),
