@@ -6,16 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import com.neo.signLanguage.R
-import com.neo.signLanguage.adapters.AdapterMenuGameSelect
-import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.FragmentGamesBinding
 import com.neo.signLanguage.ui.view.activities.GuessTheWordActivity
 import com.neo.signLanguage.ui.view.activities.SendMessageWithImagesActivity
+import com.neo.signLanguage.ui.view.activities.composables.CardWithImage
+import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -31,7 +38,6 @@ class GamesMenuFragment : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    // Using the binding
     _binding = FragmentGamesBinding.inflate(inflater, container, false)
     gameViewModel.getRandomToFindLetter(3)
     return binding.root
@@ -39,14 +45,27 @@ class GamesMenuFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val titlesMenu = ArrayList<MenuTitle>()
+
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
     binding.gamesToolbar.setTitle(R.string.game_and_message)
+    initLoad(binding.banner)
+    binding.fragmentGamesComposeView.setContent {
+      MyMaterialTheme(
+        content = {
+          GamesMenuContent()
+        }
+      )
+    }
+  }
 
+  @Composable
+  fun GamesMenuContent() {
+    val titlesMenu = ArrayList<MenuTitle>()
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "test_your_memory"),
         getStringByIdName(requireContext(), "guess_letter_number"),
+
         R.drawable.ic_brain,
         SelectLevelActivity()
       )
@@ -54,7 +73,7 @@ class GamesMenuFragment : Fragment() {
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),
-        getStringByIdName(requireContext(),"send_message_with_signs"),
+        getStringByIdName(requireContext(), "send_message_with_signs"),
         R.drawable.ic_keyboard,
         SendMessageWithImagesActivity()
       )
@@ -62,32 +81,36 @@ class GamesMenuFragment : Fragment() {
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),
-        getStringByIdName(requireContext(),"send_message_with_signs"),
-        R.drawable.ic_10_number,
+        getStringByIdName(requireContext(), "send_message_with_signs"),
+        R.drawable.ic_keyboard,
         GuessFlipCardGameActivity()
       )
     )
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),
-        getStringByIdName(requireContext(),"send_message_with_signs"),
-        R.drawable.ic_10_number,
+        getStringByIdName(requireContext(), "send_message_with_signs"),
+        R.drawable.speaker,
         GuessTheWordActivity()
       )
     )
-
-    val adapterCustomGrid =
-      AdapterMenuGameSelect(requireContext(), titlesMenu, object : ClickListener {
-        override fun onClick(v: View?, position: Int) {
-          val intent =
-            Intent(requireContext(), titlesMenu[position].activity!!::class.java)
-          startActivity(intent)
+    Box() {
+      LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(16.dp),
+        modifier = Modifier.fillMaxSize()
+      ) {
+        items(titlesMenu.size) { index ->
+          CardWithImage(
+            title = titlesMenu[index].title,
+            subtitle = titlesMenu[index].description,
+            image = titlesMenu[index].img,
+            onClick = {
+              startActivity(Intent(requireContext(), titlesMenu[index].activity!!::class.java))
+            }
+          )
         }
-      })
-    binding.gridListSing.layoutManager =
-      GridLayoutManager(requireContext(), 2)
-    binding.gridListSing.adapter = adapterCustomGrid
-    initLoad(binding.banner)
+      }
+    }
   }
-
 }

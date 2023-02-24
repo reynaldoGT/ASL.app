@@ -80,25 +80,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         }
       )
     }
-
   }
-
-  /*private fun showSnackBar(message: String, color: Int) {
-    Snackbar
-      .make(
-        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-        message,
-        Snackbar.LENGTH_SHORT,
-      )
-      .setBackgroundTint(
-        ContextCompat.getColor(
-          this@FindTheLetterGameActivity,
-          color
-        )
-      )
-      .setTextColor(AndroidColor.WHITE)
-      .show()
-  }*/
 
   @Composable
   fun ContainerLayout(gameViewModel: GameViewModel = viewModel()) {
@@ -138,16 +120,14 @@ class FindTheLetterGameActivity : AppCompatActivity() {
             Row() {
               LazyRow() {
                 items(intents) {
-                  Box() {
-                    Column() {
-                      Image(
-                        painter = painterResource(id = R.drawable.ic_heart),
-                        contentDescription = "Heart",
-                        modifier = Modifier
-                          .padding(5.dp)
-                          .size(30.dp)
-                      )
-                    }
+                  Column() {
+                    Image(
+                      painter = painterResource(id = R.drawable.ic_heart),
+                      contentDescription = "Heart",
+                      modifier = Modifier
+                        .padding(5.dp)
+                        .size(30.dp)
+                    )
                   }
                 }
               }
