@@ -20,6 +20,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
   private val MEMORY_GAME_RECORD_MEDIUM = "MEMORY_GAME_RECORD_MEDIUM"
   private val MEMORY_GAME_RECORD_HARD = "MEMORY_GAME_RECORD_HARD"
   private val GRID_LAYOUT = "GRID_LAYOUT"
+  private val GUESS_GAME_THE_WORD_RECORD = "GUESS_GAME_THE_WORD_RECORD"
   private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
   private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
 
@@ -38,7 +39,6 @@ class SharedPreferences(var activity: AppCompatActivity) {
     val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getInt(DELAY, maxDelayTime / 2)
   }
-
   fun setDelay(state: Int) {
     if (state > maxDelayTime) {
       return
@@ -173,5 +173,16 @@ class SharedPreferences(var activity: AppCompatActivity) {
       context,
       sharedPrefs.getColor()
     )
+  }
+
+  fun getGuessGameTheWordRecord(): Int {
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    return settings.getInt(GUESS_GAME_THE_WORD_RECORD, 0)
+  }
+
+  fun setGetGuessGameTheWordRecord(newState: Int) {
+    val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    val editor = settings.edit()
+    editor.putInt(GUESS_GAME_THE_WORD_RECORD, newState).apply()
   }
 }

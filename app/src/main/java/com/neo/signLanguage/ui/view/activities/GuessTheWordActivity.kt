@@ -23,12 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGuessTheWordBinding
-
-import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
-
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.Utils.Companion.getRandomWord
+import com.neo.signLanguage.utils.Utils.Companion.hideKeyboard
+import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
 
 
 import java.util.*
@@ -42,20 +42,12 @@ class GuessTheWordActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     binding.ActivityGuessTheWordBindingComposeView.setContent {
-
       MyMaterialTheme(content = {
         RotatingImages()
       })
     }
   }
 
-  /*private fun resetGenerateListImageSign() {
-    val randomXd = getRandomWord()
-    val generated = generateListImageSign(randomXd)
-    binding.ActivityGuessTheWordBindingComposeView.setContent {
-      RotatingImages(images = generated.data, correctWord = randomXd)
-    }
-  }*/
 
   @Composable
   fun RotatingImages() {
@@ -65,6 +57,7 @@ class GuessTheWordActivity : AppCompatActivity() {
     var lifes by remember { mutableStateOf(3) }
     var isButtonEnabled by remember { mutableStateOf(true) }
     var text by remember { mutableStateOf(TextFieldValue("")) }
+    var currentRecord by remember { mutableStateOf(0) }
     var timer = remember { Timer() }
 
     val task = object : TimerTask() {
@@ -87,7 +80,7 @@ class GuessTheWordActivity : AppCompatActivity() {
 
       timer.cancel()
       timer = Timer()
-      timer.schedule(task, 1000, 1500)
+      timer.schedule(task, 2000, 1500)
     }
 
     DisposableEffect(Unit) {
@@ -122,7 +115,7 @@ class GuessTheWordActivity : AppCompatActivity() {
       Card(
         modifier = Modifier
           .fillMaxWidth()
-          .weight(0.7f)
+          .weight(0.65f)
       ) {
         Image(
           painter = painter,
@@ -131,38 +124,55 @@ class GuessTheWordActivity : AppCompatActivity() {
             Color(
               ContextCompat.getColor(
                 this@GuessTheWordActivity,
-                MainActivity.sharedPrefs.getColor()
+                sharedPrefs.getColor()
               )
             )
           ),
-          /*modifier = Modifier.f()*/
         )
       }
       Button(enabled = isButtonEnabled, onClick = {
         timer.cancel()
         timer = Timer()
         timer.schedule(task, 1000, 1500)
-        Log.d("TAG", correctWord)
       }) {
         Row() {
           Icon(Icons.Default.Refresh, contentDescription = "content description")
-
           Text("Repetir")
         }
       }
       Row() {
-        TextField(value = text, onValueChange = { newText ->
+        TextField(
+          label = { Text(text = "Adivina la palabra") },
+          placeholder = { Text(text = "¿Cual es la palabra?") },
+          colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.Transparent
+          ),
+          value = text, onValueChange = { newText ->
           text = newText
         })
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(4.dp))
         FloatingActionButton(
           onClick = {
+            hideKeyboard(this@GuessTheWordActivity)
             if (text.text == correctWord) {
+              currentRecord++
               correctWord = getRandomWord()
-              Log.d("TAG", "Correcto")
+              showSnackBarToGames(
+                getString(R.string.correct),
+                R.color.green_dark,
+                this@GuessTheWordActivity.findViewById(android.R.id.content),
+                this@GuessTheWordActivity,
+              )
             } else {
+              showSnackBarToGames(
+                getString(R.string.incorrect),
+                R.color.red_dark,
+                this@GuessTheWordActivity.findViewById(android.R.id.content),
+                this@GuessTheWordActivity,
+              )
               lifes--
               if (lifes == 0) {
+                sharedPrefs.setGetGuessGameTheWordRecord(currentRecord)
                 super.onBackPressed()
               }
             }

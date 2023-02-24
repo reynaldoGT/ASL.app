@@ -19,6 +19,7 @@ import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPref
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
+import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
 import java.util.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -33,6 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.utils.Game
+import com.neo.signLanguage.utils.Utils.Companion.showSnackBar
 import kotlin.collections.ArrayList
 import android.graphics.Color as AndroidColor
 
@@ -81,7 +83,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
 
   }
 
-  private fun showSnackBar(message: String, color: Int) {
+  /*private fun showSnackBar(message: String, color: Int) {
     Snackbar
       .make(
         this@FindTheLetterGameActivity.findViewById(android.R.id.content),
@@ -96,7 +98,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
       )
       .setTextColor(AndroidColor.WHITE)
       .show()
-  }
+  }*/
 
   @Composable
   fun ContainerLayout(gameViewModel: GameViewModel = viewModel()) {
@@ -182,13 +184,24 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                   .clickable {
                     if ((randomletters.data[index].letter) == randomletters.correctAnswer.letter) {
                       record++
-                      showSnackBar(getString(R.string.correct), R.color.green_dark)
+                      showSnackBarToGames(
+                        getString(R.string.correct),
+                        R.color.green_dark,
+                        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+                        this@FindTheLetterGameActivity,
+                      )
                       model.getRandomToFindLetter(numberElements)
                     } else {
                       if (sharedPrefs.getVibration()) {
                         vibratePhone(applicationContext, 50)
                       }
-                      showSnackBar(getString(R.string.incorrect), R.color.red_dark)
+                      showSnackBarToGames(
+                        getString(R.string.incorrect),
+                        R.color.red_dark,
+                        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+                        this@FindTheLetterGameActivity,
+                      )
+                      /*showSnackBar(getString(R.string.incorrect), R.color.red_dark)*/
                       model.setIntents(-1)
                     }
                   }

@@ -42,10 +42,6 @@ class GamesMenuFragment : Fragment() {
     val titlesMenu = ArrayList<MenuTitle>()
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
     binding.gamesToolbar.setTitle(R.string.game_and_message)
-    /*
-    this.setSupportActionBar(binding.detailToolbar)
-    val actionbar = supportActionBar
-    actionbar?.setDisplayHomeAsUpEnabled(true)*/
 
     titlesMenu.add(
       MenuTitle(
@@ -55,14 +51,6 @@ class GamesMenuFragment : Fragment() {
         SelectLevelActivity()
       )
     )
-    /*titlesMenu.add(
-      MenuTitle(
-        getString(R.string.find_the_even_signs),
-        getString(R.string.find_correct_letter_or_sign),
-        R.drawable.ic_0_number,
-        FindPairGameActivity()
-      )
-    )*/
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),

@@ -48,7 +48,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityGamesFlipCardBinding.inflate(layoutInflater)
     setContentView(binding.root)
-    model.getRandomToFindEquals(5)
+    model.getRandomToFindEquals(3)
     binding.greeting.setContent {
       Content()
     }
@@ -68,7 +68,7 @@ fun Content(gameViewModel: GameViewModel = viewModel()) {
   )
   LazyVerticalGrid(
 /*          columns = GridCells.Adaptive(128.dp),*/
-    columns = GridCells.Fixed(2),
+    columns = GridCells.Fixed(3),
     content = {
       items(randomletters.data.size) { index ->
         if(index == 0){

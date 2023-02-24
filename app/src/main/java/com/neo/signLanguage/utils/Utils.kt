@@ -3,11 +3,13 @@ package com.neo.signLanguage.utils
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
 import java.text.Normalizer
@@ -160,5 +162,23 @@ class Utils {
       else
         palabrasIngles[index]
     }
+
+    fun showSnackBarToGames(message: String, color: Int, view: View, context: Context) {
+      Snackbar
+        .make(
+          view,
+          message,
+          Snackbar.LENGTH_SHORT,
+        )
+        .setBackgroundTint(
+          ContextCompat.getColor(
+            context,
+            color
+          )
+        )
+        .setTextColor(Color.WHITE)
+        .show()
+    }
   }
+
 }
