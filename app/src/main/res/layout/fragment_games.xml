@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view.fragments.GamesMenuFragment">
-
 
     <LinearLayout
         android:id="@+id/containerGrid"
@@ -19,13 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            app:layout_scrollFlags="scroll|enterAlways" />
 
         <androidx.compose.ui.platform.ComposeView
             android:id="@+id/fragmentGamesComposeView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize" />
+
         <com.google.android.gms.ads.AdView
             android:id="@+id/banner"
             android:layout_width="match_parent"

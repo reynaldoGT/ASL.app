@@ -31,6 +31,7 @@ import androidx.core.content.ContextCompat
 import com.neo.signLanguage.databinding.FragmentLettersAndNumberSingBinding
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
@@ -52,11 +53,10 @@ class LetterAndNumbersFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    initLoad(binding.banner)
+    /*initLoad(binding.banner)*/
 
     binding.greeting.setContent {
-      MaterialTheme(
-        colors = if (sharedPrefs.isDarkTheme()) DarkColors() else LightColors(),
+      MyMaterialTheme(
         content = {
           ContainerLayout()
         }

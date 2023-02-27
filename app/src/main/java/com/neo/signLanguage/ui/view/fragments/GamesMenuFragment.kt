@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.neo.signLanguage.R
@@ -47,6 +48,7 @@ class GamesMenuFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
+    binding.gamesToolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     binding.gamesToolbar.setTitle(R.string.game_and_message)
     initLoad(binding.banner)
     binding.fragmentGamesComposeView.setContent {

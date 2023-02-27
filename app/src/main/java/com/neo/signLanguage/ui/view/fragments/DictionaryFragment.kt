@@ -3,6 +3,7 @@ package com.neo.signLanguage.ui.view.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
@@ -33,7 +34,7 @@ class DictionaryFragment : Fragment() {
     //toolbar
     binding.toolbar.setTitle(R.string.app_name)
     /*change text color*/
-    binding.toolbar.setTitleTextColor(resources.getColor(R.color.white))
+    binding.toolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
 
     val fm: FragmentManager = parentFragmentManager

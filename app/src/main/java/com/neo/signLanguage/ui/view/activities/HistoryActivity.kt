@@ -34,8 +34,6 @@ class HistoryActivity : AppCompatActivity() {
     setContentView(binding.root)
     binding.emptyHistoryImageView.setColorFilter(
       getColor(if (sharedPrefs.isDarkTheme()) R.color.white else R.color.black)
-
-
     )
     initRecyclerView()
 

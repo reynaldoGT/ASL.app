@@ -131,6 +131,7 @@ class GuessTheWordActivity : AppCompatActivity() {
         )
       }
       Button(enabled = isButtonEnabled, onClick = {
+        hideKeyboard(this@GuessTheWordActivity)
         timer.cancel()
         timer = Timer()
         timer.schedule(task, 1000, 1500)
