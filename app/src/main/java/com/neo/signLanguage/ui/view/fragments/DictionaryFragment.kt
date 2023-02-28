@@ -49,8 +49,6 @@ class DictionaryFragment : Fragment() {
           "send_message"
         )
       )
-      /*binding.tabLayout.newTab().setText(*/
-
     )
     binding.tabLayout.addTab(
       binding.tabLayout.newTab().setText(
@@ -80,9 +78,6 @@ class DictionaryFragment : Fragment() {
     binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
       override fun onPageSelected(position: Int) {
         binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
-        /*if (position == 2) {
-            model.getAllSingFromDatabase()
-        }*/
         super.onPageSelected(position)
       }
     })

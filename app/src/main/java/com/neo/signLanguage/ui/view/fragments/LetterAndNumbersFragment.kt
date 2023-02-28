@@ -66,7 +66,8 @@ class LetterAndNumbersFragment : Fragment() {
 
   @Composable
   fun ContainerLayout() {
-    var switchState by remember { mutableStateOf(false) }
+
+    var switchState by remember { mutableStateOf(sharedPrefs.getIsGridLayout()) }
     Box() {
       Column() {
         Row(
@@ -78,7 +79,10 @@ class LetterAndNumbersFragment : Fragment() {
           Spacer(modifier = Modifier.width(16.dp))
           Switch(
             checked = switchState,
-            onCheckedChange = { switchState = it },
+            onCheckedChange = {
+              switchState = it
+              sharedPrefs.setIsGridLayout(it)
+            },
             modifier = Modifier.align(Alignment.CenterVertically)
           )
         }

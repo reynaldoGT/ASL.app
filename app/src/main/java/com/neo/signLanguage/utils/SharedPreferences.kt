@@ -19,7 +19,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
   private val MEMORY_GAME_RECORD_EASY = "MEMORY_GAME_RECORD_EASY"
   private val MEMORY_GAME_RECORD_MEDIUM = "MEMORY_GAME_RECORD_MEDIUM"
   private val MEMORY_GAME_RECORD_HARD = "MEMORY_GAME_RECORD_HARD"
-  private val GRID_LAYOUT = "GRID_LAYOUT"
+  private val IS_GRID_LAYOUT = "IS_GRID_LAYOUT"
   private val GUESS_GAME_THE_WORD_RECORD = "GUESS_GAME_THE_WORD_RECORD"
   private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
   private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)
@@ -126,13 +126,13 @@ class SharedPreferences(var activity: AppCompatActivity) {
 
   fun getIsGridLayout(): Boolean {
     val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
-    return settings.getBoolean(GRID_LAYOUT, false)
+    return settings.getBoolean(IS_GRID_LAYOUT, false)
   }
 
   fun setIsGridLayout(newState: Boolean) {
     val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
-    editor.putBoolean(GRID_LAYOUT, newState).apply()
+    editor.putBoolean(IS_GRID_LAYOUT, newState).apply()
   }
 
   fun getMemoryRecord(type: String): Int {

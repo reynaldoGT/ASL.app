@@ -20,7 +20,6 @@ class TabAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
             1 -> return LetterAndNumbersFragment()
             2 -> return GiphyFragment()
             /*2 -> return HistoryFragment()*/
-
         }
         return SendMessageFragment()
     }
