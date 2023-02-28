@@ -25,8 +25,10 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGuessTheWordBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.Utils.Companion.getRandomWord
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.hideKeyboard
 import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
 
@@ -43,14 +45,14 @@ class GuessTheWordActivity : AppCompatActivity() {
 
     binding.ActivityGuessTheWordBindingComposeView.setContent {
       MyMaterialTheme(content = {
-        RotatingImages()
+        RotatingImages(onClick = { onBackPressed() })
       })
     }
   }
 
 
   @Composable
-  fun RotatingImages() {
+  fun RotatingImages(onClick: () -> Unit) {
     var correctWord by remember { mutableStateOf(getRandomWord()) }
     var imagesStatus by remember { mutableStateOf(generateListImageSign(correctWord)) }
     var currentImageIndex by remember { mutableStateOf(0) }
@@ -97,6 +99,17 @@ class GuessTheWordActivity : AppCompatActivity() {
         .padding(16.dp),
       horizontalAlignment = Alignment.CenterHorizontally
     ) {
+      Box(
+        modifier = Modifier
+          .align(Alignment.Start)
+          .padding(16.dp)
+      ) {
+        backIcon(
+          onClick = {
+            onClick()
+          }
+        )
+      }
       LazyRow() {
         items(lifes) {
           Box() {
@@ -112,10 +125,11 @@ class GuessTheWordActivity : AppCompatActivity() {
           }
         }
       }
+
       Card(
         modifier = Modifier
           .fillMaxWidth()
-          .weight(0.65f)
+          .weight(0.6f)
       ) {
         Image(
           painter = painter,
@@ -137,8 +151,12 @@ class GuessTheWordActivity : AppCompatActivity() {
         timer.schedule(task, 1000, 1500)
       }) {
         Row() {
-          Icon(Icons.Default.Refresh, contentDescription = "content description")
-          Text("Repetir")
+          Icon(
+            Icons.Default.Refresh,
+            contentDescription = "content description",
+            tint = Color.White
+          )
+          Text(text = getStringByIdName(this@GuessTheWordActivity,"repeat"))
         }
       }
       Row() {
@@ -149,10 +167,11 @@ class GuessTheWordActivity : AppCompatActivity() {
             backgroundColor = Color.Transparent
           ),
           value = text, onValueChange = { newText ->
-          text = newText
-        })
+            text = newText
+          })
         Spacer(modifier = Modifier.width(4.dp))
         FloatingActionButton(
+          backgroundColor = MaterialTheme.colors.primary,
           onClick = {
             hideKeyboard(this@GuessTheWordActivity)
             if (text.text == correctWord) {
@@ -179,7 +198,7 @@ class GuessTheWordActivity : AppCompatActivity() {
             }
           },
         ) {
-          Icon(Icons.Default.Send, contentDescription = "content description")
+          Icon(Icons.Default.Send, contentDescription = "content description", tint = Color.White)
         }
       }
     }

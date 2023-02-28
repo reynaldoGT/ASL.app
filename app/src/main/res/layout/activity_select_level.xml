@@ -7,7 +7,7 @@
     tools:context=".ui.view.fragments.SelectLevelActivity">
 
     <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/greeting"
+        android:id="@+id/compose_view_activity_select_level"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

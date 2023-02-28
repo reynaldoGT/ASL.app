@@ -92,6 +92,7 @@
     <string name="easy">Fácil</string>
     <string name="medium">Medio</string>
     <string name="hard">Difícil</string>
+    <string name="very_hard">Muy difícil</string>
     <string name="select_level">Seleccionar nivel</string>
 
     <string name="download_image">Descargar imagen</string>
@@ -102,4 +103,5 @@
     <string name="letter_title">Letra</string>
     <string name="number_title">Número</string>
 
+    <string name="repeat">Repetir</string>
 </resources>

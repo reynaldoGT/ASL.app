@@ -26,7 +26,6 @@ class GiphyViewHolder(
 
     private val binding = TemplateGiphyBinding.bind(view)
     fun bind(image: String, text: String) {
-
         Glide.with(context)
             .asGif()
             .load(image)
@@ -34,8 +33,6 @@ class GiphyViewHolder(
             .error(R.drawable.ic_x_letter)
             .fitCenter()
             .into(binding.ivDog)
-
-
     }
 
     override fun onClick(v: View?) {

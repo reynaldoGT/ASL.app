@@ -55,7 +55,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-
     viewModelProvider.connected.observe(viewLifecycleOwner) { connected: Boolean ->
 
       if (connected) {
@@ -73,7 +72,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
           requireActivity().findViewById(android.R.id.content),
           getString(R.string.no_connection),
           Snackbar.LENGTH_LONG,
-
           ).setAction("OK") {
         }
           .show()

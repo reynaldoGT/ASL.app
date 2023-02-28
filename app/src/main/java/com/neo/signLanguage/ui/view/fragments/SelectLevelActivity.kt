@@ -23,6 +23,7 @@ import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
 
 import com.neo.signLanguage.ui.view.activities.FindTheLetterGameActivity
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
+import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -34,8 +35,8 @@ class SelectLevelActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivitySelectLevelBinding.inflate(layoutInflater)
     setContentView(binding.root)
-    binding.greeting.setContent {
-      CustomButtonSelectLevel()
+    binding.composeViewActivitySelectLevel.setContent {
+      CustomButtonSelectLevel(onBackPressed = { onBackPressed() })
     }
   }
 }
@@ -47,8 +48,7 @@ fun CustomButton(buttonTitle: String, difficulty: String) {
     modifier = Modifier
       .height(100.dp)
       .fillMaxWidth()
-      .padding(10.dp)
-    ,
+      .padding(10.dp),
     onClick = {
       val intent = Intent(context, FindTheLetterGameActivity::class.java)
       intent.putExtra("difficulty", difficulty)
@@ -60,30 +60,40 @@ fun CustomButton(buttonTitle: String, difficulty: String) {
 }
 
 @Composable
-fun CustomButtonSelectLevel() {
+fun CustomButtonSelectLevel(
+  onBackPressed: () -> Unit
+) {
   val context = LocalContext.current
-  Column(
-    modifier = Modifier.fillMaxWidth(),
-    verticalArrangement = Arrangement.SpaceEvenly,
-    horizontalAlignment = Alignment.CenterHorizontally,
-  ) {
-    Text(
-      text = getStringByIdName(context, "select_level"),
-      modifier = Modifier.padding(10.dp),
-      style = MaterialTheme.typography.h3,
-      color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
-    )
+  Row() {
+    Column(
+      modifier = Modifier.fillMaxWidth(),
+      verticalArrangement = Arrangement.SpaceEvenly,
+      horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      Box(
+        modifier = Modifier
+          .align(Alignment.Start)
+          .padding(16.dp)
+      ) {
+        backIcon(
+          onClick = {
+            onBackPressed.invoke()
+          }
+        )
+      }
+      Text(
+        text = getStringByIdName(context, "select_level"),
+        modifier = Modifier.padding(10.dp),
+        style = MaterialTheme.typography.h3,
+        color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
+      )
 
-    CustomButton(buttonTitle = getStringByIdName(context, "easy"), difficulty = "easy")
-    CustomButton(buttonTitle = getStringByIdName(context, "medium"), difficulty = "medium")
-    CustomButton(buttonTitle = getStringByIdName(context, "hard"), difficulty = "hard")
-    CustomButton(buttonTitle = getStringByIdName(context, "hard"), difficulty = "veryHard")
+      CustomButton(buttonTitle = getStringByIdName(context, "easy"), difficulty = "easy")
+      CustomButton(buttonTitle = getStringByIdName(context, "medium"), difficulty = "medium")
+      CustomButton(buttonTitle = getStringByIdName(context, "hard"), difficulty = "hard")
+      CustomButton(buttonTitle = getStringByIdName(context, "very_hard"), difficulty = "veryHard")
+    }
   }
 }
 
-@Preview
-@Composable
-fun previewText() {
-  CustomButtonSelectLevel()
-}
 

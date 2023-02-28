@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.Game
 import com.neo.signLanguage.utils.Utils.Companion.showSnackBar
 import kotlin.collections.ArrayList
@@ -76,14 +77,17 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     binding.findLetterGameComposeView.setContent {
       MyMaterialTheme(
         content = {
-          ContainerLayout()
+          ContainerLayout(onClick = { onBackPressed() })
         }
       )
     }
   }
 
   @Composable
-  fun ContainerLayout(gameViewModel: GameViewModel = viewModel()) {
+  fun ContainerLayout(
+    gameViewModel: GameViewModel = viewModel(),
+    onClick: () -> Unit
+  ) {
     val randomletters by gameViewModel.randomGameLetters.observeAsState(
       Game(
         ArrayList(), Sign(
@@ -111,7 +115,18 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         /*verticalArrangement = Arrangement.SpaceBetween,*/
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
-
+        Box(
+          modifier = Modifier
+            .align(Alignment.Start)
+            .padding(16.dp)
+        ) {
+          backIcon(
+            onClick = {
+              saveRecord()
+              onClick()
+            }
+          )
+        }
         Row(
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.End,
@@ -152,7 +167,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         )
         LazyVerticalGrid(
 /*          columns = GridCells.Adaptive(128.dp),*/
-          columns = GridCells.Fixed(if (difficulty == "easy") 2 else 3),
+          columns = GridCells.Fixed(if (difficulty == "easy" || difficulty == "medium") 2 else 3),
           content = {
             items(randomletters.data.size) { index ->
               Card(

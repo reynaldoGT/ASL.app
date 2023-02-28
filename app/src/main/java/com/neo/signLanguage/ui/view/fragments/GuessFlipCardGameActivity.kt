@@ -49,7 +49,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     binding = ActivityGamesFlipCardBinding.inflate(layoutInflater)
     setContentView(binding.root)
     model.getRandomToFindEquals(3)
-    binding.greeting.setContent {
+    binding.composeViewGamesFlipCard.setContent {
       Content()
     }
   }

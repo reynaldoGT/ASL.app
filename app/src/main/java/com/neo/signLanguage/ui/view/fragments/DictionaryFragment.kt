@@ -19,7 +19,7 @@ class DictionaryFragment : Fragment() {
   private var _binding: FragmentDictionarySignsBinding? = null
   private val binding get() = _binding!!
   var fragmentAdapter: TabAdapter? = null
-
+  private var currentPosition:Int =0
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -69,6 +69,7 @@ class DictionaryFragment : Fragment() {
     binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
       override fun onTabSelected(tab: TabLayout.Tab?) {
         binding.viewPager2.currentItem = tab!!.position
+        currentPosition = tab.position
       }
       override fun onTabUnselected(tab: TabLayout.Tab?) {
       }
@@ -78,6 +79,7 @@ class DictionaryFragment : Fragment() {
     binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
       override fun onPageSelected(position: Int) {
         binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
+
         super.onPageSelected(position)
       }
     })
@@ -86,5 +88,9 @@ class DictionaryFragment : Fragment() {
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
     super.onCreateOptionsMenu(menu, inflater)
+  }
+  override fun onResume() {
+    super.onResume()
+    binding.viewPager2.setCurrentItem(currentPosition, false)
   }
 }

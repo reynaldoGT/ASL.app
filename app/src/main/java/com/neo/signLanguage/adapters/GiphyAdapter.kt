@@ -24,7 +24,6 @@ class GiphyAdapter(
     }
 
     override fun getItemCount(): Int = images.size
-
     override fun onBindViewHolder(holder: GiphyViewHolder, position: Int) {
         holder.bind(images[position].images.original.url, images[position].title)
     }

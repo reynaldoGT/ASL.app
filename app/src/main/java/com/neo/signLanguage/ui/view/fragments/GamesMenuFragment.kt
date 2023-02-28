@@ -67,7 +67,6 @@ class GamesMenuFragment : Fragment() {
       MenuTitle(
         getStringByIdName(requireContext(), "test_your_memory"),
         getStringByIdName(requireContext(), "guess_letter_number"),
-
         R.drawable.ic_brain,
         SelectLevelActivity()
       )
@@ -80,14 +79,14 @@ class GamesMenuFragment : Fragment() {
         SendMessageWithImagesActivity()
       )
     )
-    titlesMenu.add(
+    /*titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),
         getStringByIdName(requireContext(), "send_message_with_signs"),
         R.drawable.ic_keyboard,
         GuessFlipCardGameActivity()
       )
-    )
+    )*/
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),

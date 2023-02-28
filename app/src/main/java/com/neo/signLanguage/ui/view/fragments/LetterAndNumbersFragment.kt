@@ -32,11 +32,11 @@ import com.neo.signLanguage.databinding.FragmentLettersAndNumberSingBinding
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
-import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
-import androidx.compose.material.darkColors as DarkColors
-import androidx.compose.material.lightColors as LightColors
+import com.neo.signLanguage.utils.Utils
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
+
 
 class LetterAndNumbersFragment : Fragment() {
 
@@ -54,8 +54,7 @@ class LetterAndNumbersFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     /*initLoad(binding.banner)*/
-
-    binding.greeting.setContent {
+    binding.composeViewFragmentLetterAndNumbers.setContent {
       MyMaterialTheme(
         content = {
           ContainerLayout()
@@ -75,7 +74,13 @@ class LetterAndNumbersFragment : Fragment() {
           horizontalArrangement = Arrangement.End,
         ) {
           /*TODO change this*/
-          Text(text = "Opción 1")
+          Text(
+            text = getStringByIdName(requireContext(), "change_layout"),
+            color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(8.dp)
+          )
           Spacer(modifier = Modifier.width(16.dp))
           Switch(
             checked = switchState,

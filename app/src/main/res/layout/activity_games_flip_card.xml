@@ -6,13 +6,8 @@
     android:orientation="vertical"
     tools:context=".ui.view.fragments.SelectLevelActivity">
 
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Level" />-->
-
     <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/greeting"
+        android:id="@+id/compose_view_games_flip_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

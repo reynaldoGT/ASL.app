@@ -118,9 +118,9 @@ class DetailsSignActivity : AppCompatActivity() {
             /*.fillMaxWidth()
             .fillMaxHeight(),*/
             /*textAlign = TextAlign.Center,*/
-            fontSize = 18.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            /*color = Color.Black*/
           )
       }
     }
