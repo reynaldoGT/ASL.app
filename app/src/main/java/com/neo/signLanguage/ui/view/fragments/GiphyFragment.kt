@@ -58,14 +58,15 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
     viewModelProvider.connected.observe(viewLifecycleOwner) { connected: Boolean ->
 
       if (connected) {
-        binding.searchBreed.setOnQueryTextListener(this)
-        binding.searchBreed.visibility = View.VISIBLE
+        binding.searchViewGiphy.setOnQueryTextListener(this)
+        binding.searchViewGiphy.visibility = View.VISIBLE
+
         initRecyclerView()
         searchGiphy("American Sign Language")
         binding.noInternetLayout.layoutNoConnection.visibility = View.GONE
         binding.rvDogs.visibility = View.VISIBLE
       } else {
-        binding.searchBreed.visibility = View.GONE
+        binding.searchViewGiphy.visibility = View.GONE
         binding.rvDogs.visibility = View.GONE
         binding.noInternetLayout.layoutNoConnection.visibility = View.VISIBLE
         Snackbar.make(

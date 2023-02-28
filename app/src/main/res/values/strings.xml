@@ -101,4 +101,7 @@
     <string name="menu_title">Title</string>
 
     <string name="repeat">Repeat</string>
+    <string name="guess_the_word">Guess the word</string>
+    <string name="guess_the_word_desc">Test your knowledge with suggested words</string>
+    <string name="what_is_the_world">Which is the word</string>
 </resources>

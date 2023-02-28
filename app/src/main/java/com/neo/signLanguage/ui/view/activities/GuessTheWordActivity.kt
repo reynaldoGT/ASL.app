@@ -156,12 +156,12 @@ class GuessTheWordActivity : AppCompatActivity() {
             contentDescription = "content description",
             tint = Color.White
           )
-          Text(text = getStringByIdName(this@GuessTheWordActivity,"repeat"))
+          Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"))
         }
       }
       Row() {
         TextField(
-          label = { Text(text = "Adivina la palabra") },
+          label = { Text(text = getStringByIdName(this@GuessTheWordActivity, "guess_the_word")) },
           placeholder = { Text(text = "¿Cual es la palabra?") },
           colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.Transparent

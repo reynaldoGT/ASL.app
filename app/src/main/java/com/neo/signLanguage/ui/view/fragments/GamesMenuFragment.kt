@@ -73,6 +73,14 @@ class GamesMenuFragment : Fragment() {
     )
     titlesMenu.add(
       MenuTitle(
+        getStringByIdName(requireContext(), "guess_the_word"),
+        getStringByIdName(requireContext(), "guess_the_word_desc"),
+        R.drawable.ic_books,
+        GuessTheWordActivity()
+      )
+    )
+    titlesMenu.add(
+      MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),
         getStringByIdName(requireContext(), "send_message_with_signs"),
         R.drawable.ic_keyboard,
@@ -87,14 +95,7 @@ class GamesMenuFragment : Fragment() {
         GuessFlipCardGameActivity()
       )
     )*/
-    titlesMenu.add(
-      MenuTitle(
-        getStringByIdName(requireContext(), "write_your_message"),
-        getStringByIdName(requireContext(), "send_message_with_signs"),
-        R.drawable.speaker,
-        GuessTheWordActivity()
-      )
-    )
+
     Box() {
       LazyVerticalGrid(
         columns = GridCells.Fixed(2),

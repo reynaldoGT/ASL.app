@@ -104,4 +104,7 @@
     <string name="number_title">Número</string>
 
     <string name="repeat">Repetir</string>
+    <string name="guess_the_word">Adivina la palabra</string>
+    <string name="guess_the_word_desc">Pon a prueba tus conocimientos con palabras sugeridas</string>
+    <string name="what_is_the_world">¿Cúal es la palabra?</string>
 </resources>
