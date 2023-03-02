@@ -5,7 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
@@ -14,12 +20,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGuessTheWordBinding
@@ -54,8 +68,8 @@ class GuessTheWordActivity : AppCompatActivity() {
 
   @Composable
   fun RotatingImages(onClick: () -> Unit) {
-    var correctWord by remember { mutableStateOf(getRandomWord()) }
-    var imagesStatus by remember { mutableStateOf(generateListImageSign(correctWord)) }
+    var correctWord = remember { mutableStateOf(getRandomWord()) }
+    var imagesStatus by remember { mutableStateOf(generateListImageSign(correctWord.value)) }
     var currentImageIndex by remember { mutableStateOf(0) }
     var lifes by remember { mutableStateOf(3) }
     var isButtonEnabled by remember { mutableStateOf(true) }
@@ -75,8 +89,8 @@ class GuessTheWordActivity : AppCompatActivity() {
       }
     }
 
-    LaunchedEffect(correctWord) {
-      imagesStatus = generateListImageSign(correctWord)
+    LaunchedEffect(correctWord.value) {
+      imagesStatus = generateListImageSign(correctWord.value)
       currentImageIndex = 0
       isButtonEnabled = true
       text = TextFieldValue("")
@@ -130,7 +144,7 @@ class GuessTheWordActivity : AppCompatActivity() {
       Card(
         modifier = Modifier
           .fillMaxWidth()
-          .weight(0.6f)
+          .height(200.dp)
       ) {
         Image(
           painter = painter,
@@ -146,6 +160,7 @@ class GuessTheWordActivity : AppCompatActivity() {
         )
       }
       Button(enabled = isButtonEnabled, onClick = {
+        Log.d("TAG", "RotatingImages: ${correctWord.value}")
         hideKeyboard(this@GuessTheWordActivity)
         timer.cancel()
         timer = Timer()
@@ -160,7 +175,7 @@ class GuessTheWordActivity : AppCompatActivity() {
           Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"))
         }
       }
-      Row() {
+      /*Row() {
         TextField(
           label = { Text(text = getStringByIdName(this@GuessTheWordActivity, "guess_the_word")) },
           placeholder = { Text(text = "¿Cual es la palabra?") },
@@ -201,6 +216,93 @@ class GuessTheWordActivity : AppCompatActivity() {
           },
         ) {
           Icon(Icons.Default.Send, contentDescription = "content description", tint = Color.White)
+        }
+      }*/
+      GridWord(correctWord)
+    }
+  }
+}
+
+
+@Composable
+fun GridWord(word: MutableState<String>) {
+
+  val focusManager = LocalFocusManager.current
+  /*val wordStates = remember { mutableStateListOf(*word.toCharArray().toTypedArray()) }*/
+    var wordStates = remember {
+      val initialList = mutableListOf<Char>()
+      word.value.forEachIndexed { index, char ->
+        if (index == 0) {
+          initialList.add(char)
+        } else {
+          initialList.add(' ')
+        }
+      }
+      mutableStateListOf(*initialList.toTypedArray())
+    }
+  /*LaunchedEffect(word.value){
+    val initialList = mutableListOf<Char>()
+    word.value.forEachIndexed { index, char ->
+      if (index == 0) {
+        initialList.add(char)
+      } else {
+        initialList.add(' ')
+      }
+    }
+    wordStates = mutableStateListOf(*initialList.toTypedArray())
+  }*/
+  LazyVerticalGrid(
+    columns = GridCells.Fixed(word.value.length),
+    contentPadding = PaddingValues(16.dp),
+    modifier = Modifier.fillMaxSize()
+  ) {
+    items(word.value.length) { index ->
+      Box(
+        modifier = Modifier
+          .fillMaxSize()
+          .padding(4.dp)
+      ) {
+        Card(
+          modifier = Modifier
+            .fillMaxSize()
+            .padding(4.dp),
+          shape = RoundedCornerShape(8.dp),
+          backgroundColor = Color.LightGray
+        ) {
+
+          TextField(
+            value = wordStates[index].toString(),
+            onValueChange = {
+              if (it.isNotEmpty()) {
+                wordStates[index] = it.first()
+                Log.d("TAG", "RotatingImages: ${wordStates.joinToString("")}")
+                if (wordStates.joinToString("") == word.value) {
+                  /*word.value = getRandomWord()*/
+                  /*currentRecord++*/
+                  word.value = getRandomWord()
+                  /*showSnackBarToGames(
+                    getStringByIdName(context, "correct"),
+                    R.color.green_dark,
+                    context.findViewById(android.R.id.content),
+                    context,
+                  )*/
+                }
+                /*TODO reset the main word*/
+                focusManager.moveFocus(FocusDirection.Next)
+              } else {
+                wordStates[index] = ' '
+              }
+            },
+            textStyle = TextStyle(
+              textAlign = TextAlign.Center
+            ),
+            maxLines = 1,
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+            keyboardActions = KeyboardActions(
+              onNext = { focusManager.moveFocus(FocusDirection.Next) }
+            )
+          )
         }
       }
     }
