@@ -26,6 +26,7 @@ import com.neo.signLanguage.databinding.ActivityGuessTheWordBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.Utils.Companion.getRandomWord
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -193,6 +194,7 @@ class GuessTheWordActivity : AppCompatActivity() {
               lifes--
               if (lifes == 0) {
                 sharedPrefs.setGetGuessGameTheWordRecord(currentRecord)
+                AdUtils.checkCounter(this@GuessTheWordActivity)
                 super.onBackPressed()
               }
             }

@@ -32,6 +32,7 @@ import com.neo.signLanguage.databinding.FragmentLettersAndNumberSingBinding
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.ui.view.activities.composables.widgets.CustomSwitch
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils
@@ -66,14 +67,14 @@ class LetterAndNumbersFragment : Fragment() {
   @Composable
   fun ContainerLayout() {
 
-    var switchState by remember { mutableStateOf(sharedPrefs.getIsGridLayout()) }
+    val switchState = remember { mutableStateOf(sharedPrefs.getIsGridLayout()) }
     Box() {
       Column() {
-        Row(
+        /*Row(
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.End,
         ) {
-          /*TODO change this*/
+          *//*TODO change this*//*
           Text(
             text = getStringByIdName(requireContext(), "change_layout"),
             color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black,
@@ -90,8 +91,15 @@ class LetterAndNumbersFragment : Fragment() {
             },
             modifier = Modifier.align(Alignment.CenterVertically)
           )
-        }
-        if (switchState) {
+        }*/
+        CustomSwitch(
+          getStringByIdName(requireContext(), "change_layout"),
+          switchState,
+          onSwitchChanged = {
+            sharedPrefs.setIsGridLayout(it)
+          }
+        )
+        if (switchState.value) {
           LazyVerticalGridDemo()
         } else {
           LazyVerticalHorizontalDemo()

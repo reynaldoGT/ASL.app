@@ -22,7 +22,7 @@
     <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="test_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
 
-    <string name="change_theme">Dark Theme</string>
+    <string name="dark_theme">Dark Theme</string>
     <string name="change_layout">Change layout</string>
     <string name="current_delay_time">Current delay time</string>
     <string name="delay_time">Delay time</string>

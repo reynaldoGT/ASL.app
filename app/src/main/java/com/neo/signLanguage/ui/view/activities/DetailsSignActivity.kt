@@ -52,7 +52,7 @@ class DetailsSignActivity : AppCompatActivity() {
     )
     val imageURL = intent.getStringExtra("imageUrl")
 
-    binding.composeView.setContent {
+    binding.composeViewDetailsActivity.setContent {
       MyMaterialTheme(
         content = {
           ContainerLayout(imageInt, letter!!, imageURL)

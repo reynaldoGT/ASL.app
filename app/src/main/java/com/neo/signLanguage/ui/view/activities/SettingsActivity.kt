@@ -1,142 +1,227 @@
 package com.neo.signLanguage.ui.view.activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.slider.Slider
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import com.google.android.material.snackbar.Snackbar
-import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
-import com.neo.signLanguage.adapters.ColorAdapter
 import com.neo.signLanguage.databinding.SettingsActivityBinding
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
-import android.widget.RadioButton
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.ui.view.activities.composables.widgets.CustomSwitchWithTitle
 import com.neo.signLanguage.utils.DataSign
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var binding: SettingsActivityBinding
-    private var adapter: ColorAdapter? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
+  private lateinit var binding: SettingsActivityBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = SettingsActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding = SettingsActivityBinding.inflate(layoutInflater)
+    setContentView(binding.root)
 
-        binding.detailToolbar.setTitle(R.string.settings_title)
-        this.setSupportActionBar(binding.detailToolbar)
-        val actionbar = supportActionBar
-        actionbar?.setDisplayHomeAsUpEnabled(true)
+    binding.detailToolbar.setTitle(R.string.settings_title)
+    this.setSupportActionBar(binding.detailToolbar)
+    val actionbar = supportActionBar
+    actionbar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.switchChangeTheme.isChecked = sharedPrefs.isDarkTheme()
-        binding.switchChangeVibration.isChecked = sharedPrefs.getVibration()
-        binding.cbTransition.isChecked = sharedPrefs.getShowTransition()
-        binding.currentDelayValue.text = sharedPrefs.getDelay().toString() + "ms."
+    binding.composeViewSettingsActivity.setContent {
+      MyMaterialTheme(
+        content = {
+          SettingsContainer()
+        }
+      )
+    }
+  }
 
-        binding.currentColor.backgroundTintList =
-            ContextCompat.getColorStateList(this, sharedPrefs.getColor())
-        binding.switchChangeTheme.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+  fun showSnackBar(colorName: String) {
+    val snackBar = Snackbar.make(
+      findViewById(android.R.id.content),
+      "${getString(R.string.new_color_changed)} $colorName",
+      Snackbar.LENGTH_LONG,
+    ).setAction("OK") {}
+    snackBar.show()
+  }
+
+  @Composable
+  fun SettingsContainer() {
+    val context = LocalContext.current
+    val isDarkTheme = remember { mutableStateOf(sharedPrefs.isDarkTheme()) }
+    val isVibration = remember { mutableStateOf(sharedPrefs.getVibration()) }
+    var sliderPosition by remember { mutableStateOf(sharedPrefs.getDelay().toFloat()) }
+    var currentSelectedColor by remember { mutableStateOf(sharedPrefs.getColor()) }
+    val colorList = DataSign.getColorsList(this)
+    val options = listOf("opcion1", "opcion2", "opcion3")
+    val selectedOption = remember { mutableStateOf(sharedPrefs.getSelectedTransition()) }
+    val isThereTransition = remember { mutableStateOf(sharedPrefs.getShowTransition()) }
+    Box(
+      modifier = Modifier.padding(8.dp),
+      /*
+      contentAlignment = Alignment.TopStart*/
+
+    ) {
+      Column() {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+          CustomSwitchWithTitle(
+            titleLabel = getStringByIdName(context, "theme"),
+            label = getStringByIdName(context, "dark_theme"),
+            switchState = isDarkTheme,
+            onSwitchChanged = {
+              sharedPrefs.setTheme(it)
+              if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                sharedPrefs.setTheme(isChecked)
                 sharedPrefs.setColor(R.color.gray300)
-
-            } else {
+              } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 sharedPrefs.setColor(R.color.primaryColor)
-                sharedPrefs.setTheme(isChecked)
-            }
-        }
-        binding.switchChangeVibration.setOnCheckedChangeListener { _, isChecked ->
-            sharedPrefs.setVibration(isChecked)
-        }
-
-        binding.slider.value = sharedPrefs.getDelay().toFloat()
-        binding.slider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
-            override fun onStartTrackingTouch(slider: Slider) {
-            }
-
-            override fun onStopTrackingTouch(slider: Slider) {
-                binding.currentDelayValue.text = "${slider.value.toInt()} ms"
-                sharedPrefs.setDelay(slider.value.toInt())
-            }
-        })
-        layoutManager = GridLayoutManager(this, 7)
-        binding.rvColors.layoutManager = layoutManager
-
-        val colorList = DataSign.getColorsList(this)
-        adapter =
-            ColorAdapter(this, colorList, object : ClickListener {
-                override fun onClick(v: View?, position: Int) {
-                    sharedPrefs.setColor(colorList[position].colorValue)
-                    showSnackBar(colorList[position].colorName)
-                    binding.currentColor.backgroundTintList =
-                        resources.getColorStateList(colorList[position].colorValue)
-                }
+              }
             })
-        binding.rvColors.adapter = adapter
-        showOptionsTransition()
-        if (sharedPrefs.getShowTransition()) {
-            setupRadioGroup()
+          CustomSwitchWithTitle(
+            label = getStringByIdName(context, "vibration"),
+            titleLabel = getStringByIdName(context, "vibration"),
+            switchState = isVibration,
+            onSwitchChanged = {
+              sharedPrefs.setVibration(it)
+            })
         }
-    }
 
-    private fun showSnackBar(colorName: String) {
-        val snackBar = Snackbar.make(
-            findViewById(android.R.id.content),
-            "${getString(R.string.new_color_changed)} $colorName",
-            Snackbar.LENGTH_LONG,
-        ).setAction("OK") {}
-        snackBar.show()
-    }
+        labelToShow(getStringByIdName(context, "delay_time"))
+        Slider(
 
-    private fun showOptionsTransition() {
+          value = sliderPosition,
+          steps = 5,
+          onValueChange = {
+            sliderPosition = it
+          },
+          valueRange = 250f..2500f,
+          onValueChangeFinished = {
+            sharedPrefs.setDelay(sliderPosition.toInt())
+          }
+        )
+        labelToShow(
+          getStringByIdName(
+            context,
+            "current_delay_time"
+          ) + " ${sliderPosition.toInt()} ms"
+        )
 
-        if (sharedPrefs.getShowTransition()) {
-            binding.radioGroup.visibility = View.VISIBLE
-            if (sharedPrefs.getSelectedTransition() != -1) {
-                (binding.radioGroup.getChildAt(sharedPrefs.getSelectedTransition()) as RadioButton).isChecked =
-                    true
-            } else {
-                return
+        Text(
+          text = getStringByIdName(
+            context,
+            "change_hand_color"
+          ), style = MaterialTheme.typography.h6
+        )
+        Row() {
+          labelToShow(
+            getStringByIdName(
+              context,
+              "current_hand_color"
+            )
+          )
+          Spacer(modifier = Modifier.width(16.dp))
+          RoundButton(context, currentSelectedColor, onClick = {})
+        }
+        LazyVerticalGrid(
+          columns = GridCells.Adaptive(25.dp),
+          /*columns = GridCells.Fixed(7),*/
+          contentPadding = PaddingValues(16.dp),
+          verticalArrangement = Arrangement.spacedBy(10.dp),
+          horizontalArrangement = Arrangement.spacedBy(10.dp),
+          content = {
+            items(colorList.size) { index: Int ->
+              RoundButton(context, color = colorList[index].colorValue, onClick = {
+                currentSelectedColor = colorList[index].colorValue
+                showSnackBar(colorList[index].colorName)
+                sharedPrefs.setColor(colorList[index].colorValue)
+              })
             }
-
-        } else {
-            binding.radioGroup.visibility = View.GONE
+          },
+        )
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+        ) {
+          labelToShow(
+            getStringByIdName(
+              context,
+              "transition"
+            )
+          )
+          Checkbox(checked = isThereTransition.value, onCheckedChange = {
+            isThereTransition.value = it
+            sharedPrefs.setShowTransition(it)
+          })
         }
 
-        binding.cbTransition.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                binding.radioGroup.visibility = View.VISIBLE
-                sharedPrefs.setShowTransition(true)
-                (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
-                sharedPrefs.setSelectedTransition(0)
-
-
-            } else {
-                binding.radioGroup.visibility = View.GONE
-                sharedPrefs.setShowTransition(false)
-                /*binding.radioGroup.clearCheck()*/
-                sharedPrefs.setSelectedTransition(-1)
-
+        if (isThereTransition.value) {
+          Column() {
+            options.forEachIndexed { index, text ->
+              Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.selectable(
+                  selected = index == selectedOption.value,
+                  onClick = {
+                    selectedOption.value = index
+                    sharedPrefs.setSelectedTransition(index)
+                  }
+                )
+              ) {
+                RadioButton(
+                  selected = index == selectedOption.value, onClick = {
+                    selectedOption.value = index
+                    sharedPrefs.setSelectedTransition(index)
+                  })
+                Text(
+                  text = text,
+                )
+              }
             }
-        }
-    }
-
-    private fun setupRadioGroup() {
-        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val radioButton: View = binding.radioGroup.findViewById(checkedId)
-            val index: Int = binding.radioGroup.indexOfChild(radioButton)
-            sharedPrefs.setSelectedTransition(index)
-
+          }
         }
 
+      }
     }
+  }
 
 
+  @Composable
+  fun labelToShow(label: String) {
+    Text(text = label, style = MaterialTheme.typography.subtitle2)
+  }
+}
+
+
+@Composable
+fun RoundButton(context: Context, color: Int, onClick: () -> Unit) {
+  val colorButton =
+    ContextCompat.getColor(
+      context,
+      color
+    )
+
+  Box(
+    modifier = Modifier
+      .size(25.dp)
+      .background(Color(colorButton), CircleShape)
+      .clickable(onClick = onClick)
+  )
 }

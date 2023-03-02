@@ -31,6 +31,9 @@ class GameViewModel : ViewModel() {
 
   fun setIntents(intentNumber: Int) {
     intents.value?.let { a ->
+      if (a + intentNumber < 0) {
+        intents.value = 0
+      }
       intents.value = a + intentNumber
     }
   }

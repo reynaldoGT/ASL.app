@@ -236,7 +236,7 @@ class DataSign {
       return colorList
     }
 
-    fun generateListImageSign(message:String): SendMessageDC {
+    fun generateListImageSign(message: String): SendMessageDC {
       val arraySentenceSing = ArrayList<Sign>()
       val re = Regex("[^[A-Za-z0-9 ,ñÀ-ú]+\$]")
       var stringCleaned: String = message.trim().lowercase()

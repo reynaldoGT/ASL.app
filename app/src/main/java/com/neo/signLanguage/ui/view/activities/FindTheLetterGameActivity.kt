@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.activities
 
 import android.os.Bundle
+import android.util.Log.d
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
@@ -35,9 +36,8 @@ import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.Game
-import com.neo.signLanguage.utils.Utils.Companion.showSnackBar
+import java.util.logging.Logger
 import kotlin.collections.ArrayList
-import android.graphics.Color as AndroidColor
 
 
 class FindTheLetterGameActivity : AppCompatActivity() {
@@ -88,7 +88,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     gameViewModel: GameViewModel = viewModel(),
     onClick: () -> Unit
   ) {
-    val randomletters by gameViewModel.randomGameLetters.observeAsState(
+    val randomLetters by gameViewModel.randomGameLetters.observeAsState(
       Game(
         ArrayList(), Sign(
           "", 0, "",
@@ -151,25 +151,25 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         }
 
         Text(
-          text = if (randomletters.correctAnswer.type == "letter")
+          text = if (randomLetters.correctAnswer.type == "letter")
             getString(
               R.string.game_find_game_title_letter,
-              randomletters.correctAnswer.letter.uppercase(Locale.getDefault())
+              randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
             )
           else getString(
             R.string.game_find_game_title_number,
-            randomletters.correctAnswer.letter.uppercase(Locale.getDefault())
+            randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
           )
 
         )
         Text(
-          randomletters.correctAnswer.letter.uppercase(Locale.getDefault())
+          randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
         )
         LazyVerticalGrid(
 /*          columns = GridCells.Adaptive(128.dp),*/
           columns = GridCells.Fixed(if (difficulty == "easy" || difficulty == "medium") 2 else 3),
           content = {
-            items(randomletters.data.size) { index ->
+            items(randomLetters.data.size) { index ->
               Card(
                 elevation = 8.dp,
                 shape = RoundedCornerShape(8.dp),
@@ -177,7 +177,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                   .fillMaxSize()
                   .padding(8.dp)
                   .clickable {
-                    if ((randomletters.data[index].letter) == randomletters.correctAnswer.letter) {
+                    if ((randomLetters.data[index].letter) == randomLetters.correctAnswer.letter) {
                       record++
                       showSnackBarToGames(
                         getString(R.string.correct),
@@ -202,7 +202,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                   }
               ) {
                 Image(
-                  painter = painterResource(id = randomletters.data[index].image),
+                  painter = painterResource(id = randomLetters.data[index].image),
                   contentDescription = null,
                   colorFilter = ColorFilter.tint(
                     Color(
