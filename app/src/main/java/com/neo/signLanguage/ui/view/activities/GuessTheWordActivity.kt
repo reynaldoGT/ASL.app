@@ -229,18 +229,27 @@ fun GridWord(word: MutableState<String>) {
 
   val focusManager = LocalFocusManager.current
   /*val wordStates = remember { mutableStateListOf(*word.toCharArray().toTypedArray()) }*/
-    var wordStates = remember {
-      val initialList = mutableListOf<Char>()
-      word.value.forEachIndexed { index, char ->
-        if (index == 0) {
-          initialList.add(char)
-        } else {
-          initialList.add(' ')
-        }
-      }
-      mutableStateListOf(*initialList.toTypedArray())
-    }
-  /*LaunchedEffect(word.value){
+  val textFieldsState = mutableStateListOf(*Array(word.value.length) { ' ' })
+
+  /*fun onTextFieldValueChanged(index: Int, value: Char) {
+    words
+  }*/
+
+// En la función que verifica si se completaron los textfields
+  if (textFieldsState.joinToString("") == word.value) {
+    word.value = getRandomWord()
+
+  }
+
+  // En el ViewModel
+  fun updateWordValue(newWordValue: String) {
+    word.value = newWordValue
+  }
+
+// En el compositor
+  var wordStates by remember { mutableStateOf(mutableListOf(*Array(word.value.length) { ' ' })) }
+
+  LaunchedEffect(word.value) {
     val initialList = mutableListOf<Char>()
     word.value.forEachIndexed { index, char ->
       if (index == 0) {
@@ -250,42 +259,42 @@ fun GridWord(word: MutableState<String>) {
       }
     }
     wordStates = mutableStateListOf(*initialList.toTypedArray())
-  }*/
-  LazyVerticalGrid(
-    columns = GridCells.Fixed(word.value.length),
-    contentPadding = PaddingValues(16.dp),
-    modifier = Modifier.fillMaxSize()
+  }
+  LazyRow(
+    modifier = Modifier
+      .wrapContentWidth()
+      .padding(8.dp),
+    horizontalArrangement = Arrangement.spacedBy(8.dp)
   ) {
-    items(word.value.length) { index ->
+    items(wordStates.size) { index ->
       Box(
         modifier = Modifier
-          .fillMaxSize()
-          .padding(4.dp)
+          .fillMaxSize(),
       ) {
         Card(
           modifier = Modifier
-            .fillMaxSize()
-            .padding(4.dp),
-          shape = RoundedCornerShape(8.dp),
+            .width(50.dp)
+            .height(50.dp),
+          /*.padding(4.dp),*/
+          shape = RoundedCornerShape(4.dp),
           backgroundColor = Color.LightGray
         ) {
-
           TextField(
             value = wordStates[index].toString(),
             onValueChange = {
               if (it.isNotEmpty()) {
-                wordStates[index] = it.first()
+                wordStates.set(index, it[0])
                 Log.d("TAG", "RotatingImages: ${wordStates.joinToString("")}")
                 if (wordStates.joinToString("") == word.value) {
-                  /*word.value = getRandomWord()*/
-                  /*currentRecord++*/
                   word.value = getRandomWord()
-                  /*showSnackBarToGames(
-                    getStringByIdName(context, "correct"),
-                    R.color.green_dark,
-                    context.findViewById(android.R.id.content),
-                    context,
-                  )*/
+                  /* currentRecord++
+                   word.value = getRandomWord()
+                   showSnackBarToGames(
+                     getStringByIdName(context, "correct"),
+                     R.color.green_dark,
+                     context.findViewById(android.R.id.content),
+                     context,
+                   )*/
                 }
                 /*TODO reset the main word*/
                 focusManager.moveFocus(FocusDirection.Next)
@@ -298,7 +307,8 @@ fun GridWord(word: MutableState<String>) {
             ),
             maxLines = 1,
             singleLine = true,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+            /*keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),*/
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(
               onNext = { focusManager.moveFocus(FocusDirection.Next) }
             )
