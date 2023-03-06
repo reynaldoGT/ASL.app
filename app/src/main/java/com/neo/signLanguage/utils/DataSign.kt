@@ -22,11 +22,7 @@ class DataSign {
     private const val number = "number"
     private const val space = "space"
     private val lettersArray = arrayListOf(
-      Sign(
-        "a",
-        R.drawable.ic_a_only_sing,
-        letter
-      ),
+      Sign("a", R.drawable.ic_a_only_sing, letter),
       Sign("b", R.drawable.ic_b_only_sing, letter),
       Sign("c", R.drawable.ic_c_only_sing, letter),
       Sign("d", R.drawable.ic_d_only_sing, letter),
@@ -109,10 +105,13 @@ class DataSign {
     )
 
     fun getLetterArray(addSpace: Boolean = true): ArrayList<Sign> {
+      val array = ArrayList(lettersArray)
+
       if (addSpace) {
-        lettersArray.add(Sign(" ", R.drawable.ic_space, space))
+        array.add(Sign(" ", R.drawable.ic_space, space))
       }
-      return lettersArray
+
+      return array
     }
 
     fun getRandomToFindCorrectLetter(amount: Int): Game {
