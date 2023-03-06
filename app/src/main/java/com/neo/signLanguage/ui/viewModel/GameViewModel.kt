@@ -10,9 +10,7 @@ class GameViewModel : ViewModel() {
 
   val randomGameLetters = MutableLiveData<Game>()
   val sendMessageImages = MutableLiveData<ArrayList<Sign>>()
-  val intents = MutableLiveData<Int>().apply {
-    value = 0
-  }
+
   val gridNumbersMessage = MutableLiveData<Int>().apply {
     value = 5
   }
@@ -29,18 +27,7 @@ class GameViewModel : ViewModel() {
     sendMessageImages.postValue(singList)
   }
 
-  fun setIntents(intentNumber: Int) {
-    intents.value?.let { a ->
-      if (a + intentNumber < 0) {
-        intents.value = 0
-      }
-      intents.value = a + intentNumber
-    }
-  }
-
   fun setGridNumbersMessage(intentNumber: Int) {
     gridNumbersMessage.postValue(intentNumber)
   }
-
-
 }

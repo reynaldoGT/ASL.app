@@ -70,7 +70,7 @@
 
     <string name="current_record">Tu record es de: %1$s</string>
 
-    <string name="hello_from_here">Hola desdes aquí</string>
+    <string name="hello_from_here">Hola desde aquí</string>
     <string name="translate">Traducir</string>
     <string name="dictionary">Diccionario</string>
     <string name="games">Juegos</string>
@@ -83,7 +83,7 @@
     <string name="send_message_with_signs">Enviar mensajes con imágenes</string>
     <string name="find_the_even_signs">Encuentra las señas iguales</string>
     <string name="find_correct_letter_or_sign">Encuentra la letra o número correcto</string>
-    <string name="correct">congratulations is correct</string>
+    <string name="correct">Correcto</string>
     <string name="incorrect">Lo siento, fallaste. Inténtalo de nuevo</string>
     <string name="help_us">Ayúdanos</string>
 

@@ -28,6 +28,12 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -36,7 +42,6 @@ import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.Game
-import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 
@@ -47,6 +52,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
 
   var record: Int = 0
   var difficulty: String = ""
+  var intents = 0
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
@@ -58,26 +64,26 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     when (difficulty) {
       "easy" -> {
         numberElements = 4
-        model.setIntents(7)
+        intents = (7)
       }
       "medium" -> {
         numberElements = 6
-        model.setIntents(5)
+        intents = (5)
       }
       "hard" -> {
         numberElements = 9
-        model.setIntents(3)
+        intents = (3)
       }
       "veryHard" -> {
         numberElements = 12
-        model.setIntents(3)
+        intents = (2)
       }
     }
     model.getRandomToFindLetter(numberElements)
     binding.findLetterGameComposeView.setContent {
       MyMaterialTheme(
         content = {
-          ContainerLayout(onClick = { onBackPressed() })
+          ContainerLayout(onClick = { onBackPressed() }, intents = intents)
         }
       )
     }
@@ -86,8 +92,11 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   @Composable
   fun ContainerLayout(
     gameViewModel: GameViewModel = viewModel(),
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    intents: Int,
   ) {
+    var remainingLives by remember { mutableStateOf(intents) }
+    val allIntents = intents
     val randomLetters by gameViewModel.randomGameLetters.observeAsState(
       Game(
         ArrayList(), Sign(
@@ -95,8 +104,9 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         )
       )
     )
-    val intents by gameViewModel.intents.observeAsState(1)
-    if (intents == 0) {
+
+
+    if (remainingLives == 0) {
       Snackbar.make(
         this@FindTheLetterGameActivity.findViewById(android.R.id.content),
         getString(R.string.incorrect),
@@ -132,19 +142,12 @@ class FindTheLetterGameActivity : AppCompatActivity() {
           horizontalArrangement = Arrangement.End,
         ) {
           Box() {
-            Row() {
-              LazyRow() {
-                items(intents) {
-                  Column() {
-                    Image(
-                      painter = painterResource(id = R.drawable.ic_heart),
-                      contentDescription = "Heart",
-                      modifier = Modifier
-                        .padding(5.dp)
-                        .size(30.dp)
-                    )
-                  }
-                }
+            Row {
+              repeat(remainingLives) {
+                HeartIcon(full = true)
+              }
+              repeat(allIntents - remainingLives) {
+                HeartIcon(full = false)
               }
             }
           }
@@ -197,7 +200,8 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                         this@FindTheLetterGameActivity,
                       )
                       /*showSnackBar(getString(R.string.incorrect), R.color.red_dark)*/
-                      model.setIntents(-1)
+                      /*model.setIntents(-1)*/
+                      remainingLives--
                     }
                   }
               ) {
@@ -223,7 +227,18 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         )
       }
     }
+  }
 
+  @Composable
+  fun HeartIcon(full: Boolean) {
+    Icon(
+      if (full) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
+      contentDescription = "Favorite",
+      tint = Color.Red,
+      modifier = Modifier
+        .size(40.dp)
+        .padding(4.dp)
+    )
   }
 
   private fun saveRecord() {

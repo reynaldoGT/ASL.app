@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
-    binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+    binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
       when (menuItem.itemId) {
 
         R.id.page_2 -> {

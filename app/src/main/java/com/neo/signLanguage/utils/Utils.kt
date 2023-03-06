@@ -19,7 +19,6 @@ import kotlin.random.Random
 
 class Utils {
   companion object {
-
     fun getStringByIdName(context: Context, idName: String): String {
       val res: Resources = context.resources
       return res.getString(res.getIdentifier(idName, "string", context.packageName))
@@ -38,16 +37,11 @@ class Utils {
 
     fun messageToImages(message: String): ArrayList<Sign> {
       val cleanedString = cleanString(message)
-      val arraySentenceSing = ArrayList<Sign>()
-      val stringArray = cleanedString.toCharArray()
-      for (i in stringArray) {
-        for (letterPosition in DataSign.getLetterArray()) {
-          if (letterPosition.letter == i.toString()) {
-            arraySentenceSing.add(letterPosition)
-          }
-        }
-      }
-      return arraySentenceSing
+      val lettersMap = DataSign.getLetterArray().associateBy { it.letter.first() }
+
+      return cleanedString
+        .mapNotNull { lettersMap[it] }
+        .toCollection(arrayListOf())
     }
 
     private fun cleanString(string: String): String {
@@ -62,16 +56,16 @@ class Utils {
     }
 
     fun vibratePhone(context: Context, timer: Long = 200) {
-      val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+      val vibrator = ContextCompat.getSystemService(context, Vibrator::class.java)
       if (Build.VERSION.SDK_INT >= 26) {
-        vibrator.vibrate(
+        vibrator?.vibrate(
           VibrationEffect.createOneShot(
             timer,
             VibrationEffect.DEFAULT_AMPLITUDE
           )
         )
       } else {
-        vibrator.vibrate(timer)
+        vibrator?.vibrate(timer)
       }
     }
 
@@ -108,13 +102,12 @@ class Utils {
         "right",
         "big",
         "high",
-        "different",
+
         "small",
         "large",
         "next",
         "early",
         "young",
-        "important",
         "few",
         "public",
         "bad",
@@ -142,13 +135,11 @@ class Utils {
         "derecho",
         "grande",
         "alto",
-        "diferente",
         "pequeño",
         "grande",
         "próximo",
         "temprano",
         "joven",
-        "importante",
         "pocos",
         "público",
         "malo",
@@ -158,7 +149,7 @@ class Utils {
       val index = Random.nextInt(palabrasIngles.size)
 
       return if (Locale.getDefault().language == "es")
-        palabrasEspanol[index]
+        cleanString(palabrasEspanol[index])
       else
         palabrasIngles[index]
     }

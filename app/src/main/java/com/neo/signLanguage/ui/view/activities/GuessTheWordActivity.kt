@@ -23,11 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -72,7 +74,7 @@ class GuessTheWordActivity : AppCompatActivity() {
     var imagesStatus by remember { mutableStateOf(generateListImageSign(correctWord.value)) }
     var currentImageIndex by remember { mutableStateOf(0) }
     var lifes by remember { mutableStateOf(3) }
-    var isButtonEnabled by remember { mutableStateOf(true) }
+    var isButtonEnabled by remember { mutableStateOf(false) }
     var text by remember { mutableStateOf(TextFieldValue("")) }
     var currentRecord by remember { mutableStateOf(0) }
     var timer = remember { Timer() }
@@ -109,10 +111,9 @@ class GuessTheWordActivity : AppCompatActivity() {
     }
     val painter = painterResource(id = imagesStatus.data[currentImageIndex].image)
     Column(
-      modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp),
-      horizontalAlignment = Alignment.CenterHorizontally
+      modifier = Modifier.fillMaxSize(),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
       Box(
         modifier = Modifier
@@ -125,29 +126,14 @@ class GuessTheWordActivity : AppCompatActivity() {
           }
         )
       }
-      LazyRow() {
-        items(lifes) {
-          Box() {
-            Column() {
-              Image(
-                painter = painterResource(id = R.drawable.ic_heart),
-                contentDescription = "Heart",
-                modifier = Modifier
-                  .padding(5.dp)
-                  .size(30.dp)
-              )
-            }
-          }
-        }
-      }
-
       Card(
         modifier = Modifier
           .fillMaxWidth()
-          .height(200.dp)
+          .padding(16.dp),
       ) {
         Image(
           painter = painter,
+          modifier = Modifier.height(350.dp),
           contentDescription = null,
           colorFilter = ColorFilter.tint(
             Color(
@@ -175,57 +161,15 @@ class GuessTheWordActivity : AppCompatActivity() {
           Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"))
         }
       }
-      /*Row() {
-        TextField(
-          label = { Text(text = getStringByIdName(this@GuessTheWordActivity, "guess_the_word")) },
-          placeholder = { Text(text = "¿Cual es la palabra?") },
-          colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.Transparent
-          ),
-          value = text, onValueChange = { newText ->
-            text = newText
-          })
-        Spacer(modifier = Modifier.width(4.dp))
-        FloatingActionButton(
-          backgroundColor = MaterialTheme.colors.primary,
-          onClick = {
-            hideKeyboard(this@GuessTheWordActivity)
-            if (text.text == correctWord) {
-              currentRecord++
-              correctWord = getRandomWord()
-              showSnackBarToGames(
-                getString(R.string.correct),
-                R.color.green_dark,
-                this@GuessTheWordActivity.findViewById(android.R.id.content),
-                this@GuessTheWordActivity,
-              )
-            } else {
-              showSnackBarToGames(
-                getString(R.string.incorrect),
-                R.color.red_dark,
-                this@GuessTheWordActivity.findViewById(android.R.id.content),
-                this@GuessTheWordActivity,
-              )
-              lifes--
-              if (lifes == 0) {
-                sharedPrefs.setGetGuessGameTheWordRecord(currentRecord)
-                AdUtils.checkCounter(this@GuessTheWordActivity)
-                super.onBackPressed()
-              }
-            }
-          },
-        ) {
-          Icon(Icons.Default.Send, contentDescription = "content description", tint = Color.White)
-        }
-      }*/
-      GridWord(correctWord)
+      GridWord(correctWord, this@GuessTheWordActivity)
     }
   }
 }
 
 
 @Composable
-fun GridWord(word: MutableState<String>) {
+fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
+  val context = LocalContext.current
 
   val focusManager = LocalFocusManager.current
   /*val wordStates = remember { mutableStateListOf(*word.toCharArray().toTypedArray()) }*/
@@ -239,11 +183,6 @@ fun GridWord(word: MutableState<String>) {
   if (textFieldsState.joinToString("") == word.value) {
     word.value = getRandomWord()
 
-  }
-
-  // En el ViewModel
-  fun updateWordValue(newWordValue: String) {
-    word.value = newWordValue
   }
 
 // En el compositor
@@ -287,14 +226,13 @@ fun GridWord(word: MutableState<String>) {
                 Log.d("TAG", "RotatingImages: ${wordStates.joinToString("")}")
                 if (wordStates.joinToString("") == word.value) {
                   word.value = getRandomWord()
-                  /* currentRecord++
-                   word.value = getRandomWord()
-                   showSnackBarToGames(
-                     getStringByIdName(context, "correct"),
-                     R.color.green_dark,
-                     context.findViewById(android.R.id.content),
-                     context,
-                   )*/
+                  /*currentRecord++*/
+                  showSnackBarToGames(
+                    getStringByIdName(view, "correct"),
+                    R.color.green_dark,
+                    view.findViewById(android.R.id.content),
+                    context,
+                  )
                 }
                 /*TODO reset the main word*/
                 focusManager.moveFocus(FocusDirection.Next)
@@ -303,15 +241,18 @@ fun GridWord(word: MutableState<String>) {
               }
             },
             textStyle = TextStyle(
-              textAlign = TextAlign.Center
+              textAlign = TextAlign.Center,
+              fontWeight = FontWeight.Bold,
+              fontSize = 15.sp
             ),
             maxLines = 1,
             singleLine = true,
             /*keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),*/
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            keyboardOptions = (KeyboardOptions.Default.copy(imeAction = ImeAction.Next)),
             keyboardActions = KeyboardActions(
               onNext = { focusManager.moveFocus(FocusDirection.Next) }
             )
+
           )
         }
       }
