@@ -87,14 +87,14 @@ class GamesMenuFragment : Fragment() {
         SendMessageWithImagesActivity()
       )
     )
-    /*titlesMenu.add(
+    titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),
         getStringByIdName(requireContext(), "send_message_with_signs"),
         R.drawable.ic_keyboard,
         GuessFlipCardGameActivity()
       )
-    )*/
+    )
 
     Box() {
       LazyVerticalGrid(
