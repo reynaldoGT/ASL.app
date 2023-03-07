@@ -37,13 +37,15 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     binding.composeViewGamesFlipCard.setContent {
-      Content()
+      Content(onClick = { onBackPressed() })
     }
   }
 }
 
 @Composable
-fun Content() {
+fun Content(
+  onClick: () -> Unit,
+) {
   val xd = DataSign.getRandomToFindEquals(3)
 
   val key = "2"
@@ -56,6 +58,8 @@ fun Content() {
   val blockedElements = remember { mutableStateListOf<Int>() }
 
   fun verifyFlipMatch() {
+    Log.d("verifyFlipMatch FN", "flippedElements: ${flippedElements.size}")
+
     if (flippedElements.size == 2) {
       if (flippedElements[0] == flippedElements[1]) {
         val searchResult =
@@ -66,6 +70,10 @@ fun Content() {
         }
         flippedElements.clear()
         blockedElements.clear()
+        /*Verify is all are Flips is disable*/
+        if(flipSEnable.none { it }){
+          onClick()
+        }
       } else {
         flipsStates[blockedElements[0]].flipToFront()
         flipsStates[blockedElements[1]].flipToFront()
@@ -82,10 +90,16 @@ fun Content() {
         itemsIndexed(xd.data) { index, sign ->
           Flippable(
             onFlippedListener = {
-              if (flippedElements.size < 2) {
-                flippedElements.add(sign.letter)
-                blockedElements.add(index)
-                verifyFlipMatch()
+              if (!blockedElements.contains(index)) {
+                Log.d("TAG", "Elemento agregado: ${index}")
+                if (flippedElements.size < 2) {
+                  flippedElements.add(sign.letter)
+                  blockedElements.add(index)
+                  verifyFlipMatch()
+                }
+              }else{
+                flippedElements.remove(sign.letter)
+                blockedElements.remove(index)
               }
             },
             flipEnabled = flipSEnable[index],

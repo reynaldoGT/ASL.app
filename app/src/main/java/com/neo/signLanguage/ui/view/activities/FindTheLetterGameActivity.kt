@@ -169,7 +169,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
           randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
         )
         LazyVerticalGrid(
-/*          columns = GridCells.Adaptive(128.dp),*/
           columns = GridCells.Fixed(if (difficulty == "easy" || difficulty == "medium") 2 else 3),
           content = {
             items(randomLetters.data.size) { index ->
