@@ -35,6 +35,7 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGamesFlipCardBinding
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 
 import com.neo.signLanguage.utils.DataSign
@@ -126,6 +127,7 @@ fun Content(
 
     ) {
     Column() {
+
       Box(
         modifier = Modifier
           .align(Alignment.Start)
@@ -137,6 +139,12 @@ fun Content(
           }
         )
       }
+      TimerScreen(
+        onTimerEnd = {
+          onClick()
+        },
+        timeInSeconds = 30
+      )
       LazyVerticalGrid(
         columns = GridCells.Fixed(getDiff.second),
         verticalArrangement = Arrangement.spacedBy(4.dp),
