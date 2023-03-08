@@ -66,7 +66,7 @@ class SettingsActivity : AppCompatActivity() {
     val isDarkTheme = remember { mutableStateOf(sharedPrefs.isDarkTheme()) }
     val isVibration = remember { mutableStateOf(sharedPrefs.getVibration()) }
     var sliderPosition by remember { mutableStateOf(sharedPrefs.getDelay().toFloat()) }
-    var currentSelectedColor by remember { mutableStateOf(sharedPrefs.getColor()) }
+    var currentSelectedColor by remember { mutableStateOf(sharedPrefs.getHandColor()) }
     val colorList = DataSign.getColorsList(this)
     val options = listOf("opcion1", "opcion2", "opcion3")
     val selectedOption = remember { mutableStateOf(sharedPrefs.getSelectedTransition()) }
@@ -90,10 +90,10 @@ class SettingsActivity : AppCompatActivity() {
               sharedPrefs.setTheme(it)
               if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                sharedPrefs.setColor(R.color.gray300)
+                sharedPrefs.setHandColor(R.color.gray300)
               } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                sharedPrefs.setColor(R.color.primaryColor)
+                sharedPrefs.setHandColor(R.color.primaryColor)
               }
             })
           CustomSwitchWithTitle(
@@ -152,7 +152,7 @@ class SettingsActivity : AppCompatActivity() {
               RoundButton(context, color = colorList[index].colorValue, onClick = {
                 currentSelectedColor = colorList[index].colorValue
                 showSnackBar(colorList[index].colorName)
-                sharedPrefs.setColor(colorList[index].colorValue)
+                sharedPrefs.setHandColor(colorList[index].colorValue)
               })
             }
           },

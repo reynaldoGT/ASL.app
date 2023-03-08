@@ -20,6 +20,7 @@ import androidx.fragment.app.viewModels
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.FragmentGamesBinding
+import com.neo.signLanguage.ui.view.activities.FindTheLetterGameActivity
 import com.neo.signLanguage.ui.view.activities.GuessTheWordActivity
 import com.neo.signLanguage.ui.view.activities.SendMessageWithImagesActivity
 import com.neo.signLanguage.ui.view.activities.composables.CardWithImage
@@ -68,7 +69,8 @@ class GamesMenuFragment : Fragment() {
         getStringByIdName(requireContext(), "test_your_memory"),
         getStringByIdName(requireContext(), "guess_letter_number"),
         R.drawable.ic_brain,
-        SelectLevelActivity()
+        SelectLevelActivity(),
+        FindTheLetterGameActivity()
       )
     )
     titlesMenu.add(
@@ -92,6 +94,7 @@ class GamesMenuFragment : Fragment() {
         getStringByIdName(requireContext(), "write_your_message"),
         getStringByIdName(requireContext(), "send_message_with_signs"),
         R.drawable.ic_keyboard,
+        SelectLevelActivity(),
         GuessFlipCardGameActivity()
       )
     )
@@ -108,7 +111,11 @@ class GamesMenuFragment : Fragment() {
             subtitle = titlesMenu[index].description,
             image = titlesMenu[index].img,
             onClick = {
-              startActivity(Intent(requireContext(), titlesMenu[index].activity!!::class.java))
+              val intent = Intent(requireContext(), titlesMenu[index].activity!!::class.java)
+              if (titlesMenu[index].afterActivity != null) {
+                intent.putExtra("activityClass", titlesMenu[index].afterActivity!!::class.java)
+              }
+              startActivity(intent)
             }
           )
         }

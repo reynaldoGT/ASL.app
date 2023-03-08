@@ -134,7 +134,7 @@ class DataSign {
       )
     }
 
-    fun getRandomToFindEquals(amount: Int): Game {
+    fun getRandomToFindEquals(amount: Int): ArrayList<Sign> {
       val randomLetters = ArrayList<Sign>()
       val resortList = ArrayList<Sign>()
       val randomInts = generateSequence {
@@ -172,10 +172,7 @@ class DataSign {
       for (i in randomPosition) {
         resortList.add(randomLetters[i])
       }
-      return Game(
-        resortList,
-        resortList[(0 until randomLetters.size - 1).random()]
-      )
+      return resortList
     }
 
     fun getLetterAndSignArray(): ArrayList<Sign> {

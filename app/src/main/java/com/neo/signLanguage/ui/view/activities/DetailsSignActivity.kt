@@ -103,7 +103,7 @@ class DetailsSignActivity : AppCompatActivity() {
             Color(
               ContextCompat.getColor(
                 this@DetailsSignActivity,
-                sharedPrefs.getColor()
+                sharedPrefs.getHandColor()
               )
             )
           ),

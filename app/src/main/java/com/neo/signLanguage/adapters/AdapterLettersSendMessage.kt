@@ -63,17 +63,17 @@ class AdapterLettersSendMessage(
         init {
             image = binding.imageTemplateView
             name = binding.textViewTemplateView
-            if (sharedPrefs.getColor() != 0) {
+            if (sharedPrefs.getHandColor() != 0) {
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(
                         context!!,
-                        sharedPrefs.getColor()
+                        sharedPrefs.getHandColor()
                     )
                 )
                 binding.textViewTemplateView.setTextColor(
                     ContextCompat.getColor(
                         context,
-                        sharedPrefs.getColor()
+                        sharedPrefs.getHandColor()
                     )
                 )
             }

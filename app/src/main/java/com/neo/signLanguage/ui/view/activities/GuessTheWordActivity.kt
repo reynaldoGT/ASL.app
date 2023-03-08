@@ -131,7 +131,7 @@ class GuessTheWordActivity : AppCompatActivity() {
             Color(
               ContextCompat.getColor(
                 this@GuessTheWordActivity,
-                sharedPrefs.getColor()
+                sharedPrefs.getHandColor()
               )
             )
           ),

@@ -9,9 +9,13 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.ui.view.activities.MainActivity
+import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import java.text.Normalizer
 import java.util.*
 import kotlin.random.Random
@@ -169,6 +173,26 @@ class Utils {
         )
         .setTextColor(Color.WHITE)
         .show()
+    }
+
+    fun getHandColor(context: Context): ColorFilter {
+      return ColorFilter.tint(
+        androidx.compose.ui.graphics.Color(
+          ContextCompat.getColor(
+            context,
+            sharedPrefs.getHandColor()
+          )
+        )
+      )
+    }
+
+    fun getHandCurrentColor(context: Context): ComposeColor {
+      return ComposeColor(
+        ContextCompat.getColor(
+          context,
+          sharedPrefs.getHandColor()
+        )
+      )
     }
   }
 

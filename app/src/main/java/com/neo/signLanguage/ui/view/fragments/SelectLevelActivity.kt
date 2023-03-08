@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.fragments
 
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -37,14 +38,17 @@ class SelectLevelActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivitySelectLevelBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    val activityClass = intent.getSerializableExtra("activityClass") as Class<*>
+
     binding.composeViewActivitySelectLevel.setContent {
-      CustomButtonSelectLevel(onBackPressed = { onBackPressed() })
+      CustomButtonSelectLevel(onBackPressed = { onBackPressed() },activityClass)
     }
   }
 }
 
 @Composable
-fun CustomButton(buttonTitle: String, difficulty: String) {
+fun CustomButton(buttonTitle: String, difficulty: Difficulty, activity: Class<*>) {
   val context = LocalContext.current
   Button(
     modifier = Modifier
@@ -52,7 +56,7 @@ fun CustomButton(buttonTitle: String, difficulty: String) {
       .fillMaxWidth()
       .padding(10.dp),
     onClick = {
-      val intent = Intent(context, FindTheLetterGameActivity::class.java)
+      val intent = Intent(context, activity)
       intent.putExtra("difficulty", difficulty)
       context.startActivity(intent)
     }, shape = RoundedCornerShape(100.dp)
@@ -63,7 +67,8 @@ fun CustomButton(buttonTitle: String, difficulty: String) {
 
 @Composable
 fun CustomButtonSelectLevel(
-  onBackPressed: () -> Unit
+  onBackPressed: () -> Unit,
+  activity: Class<*>
 ) {
   val context = LocalContext.current
   Row() {
@@ -92,10 +97,26 @@ fun CustomButtonSelectLevel(
         color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
       )
 
-      CustomButton(buttonTitle = getStringByIdName(context, "easy"), difficulty = "easy")
-      CustomButton(buttonTitle = getStringByIdName(context, "medium"), difficulty = "medium")
-      CustomButton(buttonTitle = getStringByIdName(context, "hard"), difficulty = "hard")
-      CustomButton(buttonTitle = getStringByIdName(context, "very_hard"), difficulty = "veryHard")
+      CustomButton(
+        buttonTitle = getStringByIdName(context, "easy"),
+        difficulty = Difficulty.EASY,
+        activity
+      )
+      CustomButton(
+        buttonTitle = getStringByIdName(context, "medium"),
+        difficulty = Difficulty.MEDIUM,
+        activity
+      )
+      CustomButton(
+        buttonTitle = getStringByIdName(context, "hard"),
+        difficulty = Difficulty.HARD,
+        activity
+      )
+      CustomButton(
+        buttonTitle = getStringByIdName(context, "very_hard"),
+        difficulty = Difficulty.VERY_HARD,
+        activity
+      )
     }
   }
 }

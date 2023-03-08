@@ -23,20 +23,17 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.*
 import com.neo.signLanguage.data.database.entities.SignEntity
-import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.database
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
-import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.SendMessageDC
 import com.neo.signLanguage.utils.Utils
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.*
-import java.text.Normalizer
 import java.util.*
 
 
@@ -74,7 +71,7 @@ class SendMessageFragment : Fragment() {
     AdUtils.initListeners()
 
     val getColorShared = sharedPrefs.getColorShared(activity as AppCompatActivity)
-    if (sharedPrefs.getColor() != 0)
+    if (sharedPrefs.getHandColor() != 0)
       imageView?.setColorFilter(
         getColorShared
       )
@@ -133,7 +130,7 @@ class SendMessageFragment : Fragment() {
 
       imageView!!.scaleType = ImageView.ScaleType.FIT_CENTER
       imageView!!.setImageResource(R.drawable.ic_a_only_sing)
-      if (sharedPrefs.getColor() != 0)
+      if (sharedPrefs.getHandColor() != 0)
         imageView!!.setColorFilter(
           getColorShared
         )
@@ -210,7 +207,7 @@ class SendMessageFragment : Fragment() {
           ForegroundColorSpan(
             ContextCompat.getColor(
               requireActivity().applicationContext,
-              sharedPrefs.getColor()
+              sharedPrefs.getHandColor()
             )
           ),
           index, // start
@@ -281,7 +278,7 @@ class SendMessageFragment : Fragment() {
 
   override fun onResume() {
     super.onResume()
-    if (sharedPrefs.getColor() != 0)
+    if (sharedPrefs.getHandColor() != 0)
       imageView?.setColorFilter(
         sharedPrefs.getColorShared(activity as AppCompatActivity)
       )

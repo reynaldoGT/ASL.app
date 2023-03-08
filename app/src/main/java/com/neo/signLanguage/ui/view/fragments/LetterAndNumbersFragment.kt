@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -35,7 +34,6 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.widgets.CustomSwitch
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -136,7 +134,7 @@ class LetterAndNumbersFragment : Fragment() {
                 Color(
                   ContextCompat.getColor(
                     requireContext(),
-                    sharedPrefs.getColor()
+                    sharedPrefs.getHandColor()
                   )
                 )
               ),
@@ -184,7 +182,7 @@ class LetterAndNumbersFragment : Fragment() {
                 Color(
                   ContextCompat.getColor(
                     requireContext(),
-                    sharedPrefs.getColor()
+                    sharedPrefs.getHandColor()
                   )
                 )
               ),
@@ -197,7 +195,7 @@ class LetterAndNumbersFragment : Fragment() {
               color = Color(
                 ContextCompat.getColor(
                   requireContext(),
-                  sharedPrefs.getColor()
+                  sharedPrefs.getHandColor()
                 )
               ),
               modifier = Modifier

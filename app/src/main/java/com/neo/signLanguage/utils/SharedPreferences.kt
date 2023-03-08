@@ -10,7 +10,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
   private val SETTINGS = "SHARED_PREFERENCES"
   private val DARK_THEME = "DARK_THEME"
   private val DELAY = "DELAY"
-  private val COLOR = "COLOR"
+  private val HAND_COLOR = "HAND_COLOR"
   private val CURRENT_MESSAGE = "CURRENTMESSAGE"
   private val COUNT_AD_INTERTITIAL = "COUNT_AD_INTERTITIAL"
   private val SHOW_TRANSITIONS = "SHOW_TRANSITIONS"
@@ -48,18 +48,18 @@ class SharedPreferences(var activity: AppCompatActivity) {
     editor.putInt(DELAY, state).apply()
   }
 
-  fun getColor(): Int {
+  fun getHandColor(): Int {
     val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getInt(
-      COLOR,
+      HAND_COLOR,
       DataSign.getColorsList(activity.applicationContext)[0].colorValue
     )
   }
 
-  fun setColor(state: Int) {
+  fun setHandColor(state: Int) {
     val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
-    editor.putInt(COLOR, state).apply()
+    editor.putInt(HAND_COLOR, state).apply()
   }
 
   fun getCurrentMessage(): String {
@@ -171,7 +171,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
   fun getColorShared(context: Context): Int {
     return ContextCompat.getColor(
       context,
-      sharedPrefs.getColor()
+      sharedPrefs.getHandColor()
     )
   }
 

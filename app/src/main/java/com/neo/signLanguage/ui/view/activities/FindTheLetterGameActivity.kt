@@ -1,11 +1,9 @@
 package com.neo.signLanguage.ui.view.activities
 
 import android.os.Bundle
-import android.util.Log.d
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,8 +28,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.livedata.observeAsState
@@ -41,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.ui.view.fragments.Difficulty
 import com.neo.signLanguage.utils.Game
 import kotlin.collections.ArrayList
 
@@ -51,30 +48,29 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   private val model: GameViewModel by viewModels()
 
   var record: Int = 0
-  var difficulty: String = ""
+  var difficulty: Difficulty = Difficulty.EASY
   var intents = 0
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    val myIntent = intent
-    difficulty = myIntent.getStringExtra("difficulty")!!
+    difficulty = intent.getSerializableExtra("difficulty") as Difficulty
 
     when (difficulty) {
-      "easy" -> {
+      Difficulty.EASY -> {
         numberElements = 4
         intents = (7)
       }
-      "medium" -> {
+      Difficulty.MEDIUM -> {
         numberElements = 6
         intents = (5)
       }
-      "hard" -> {
+      Difficulty.HARD -> {
         numberElements = 9
         intents = (3)
       }
-      "veryHard" -> {
+      Difficulty.VERY_HARD -> {
         numberElements = 12
         intents = (2)
       }
@@ -169,7 +165,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
           randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
         )
         LazyVerticalGrid(
-          columns = GridCells.Fixed(if (difficulty == "easy" || difficulty == "medium") 2 else 3),
+          columns = GridCells.Fixed(if (difficulty == Difficulty.EASY || difficulty == Difficulty.MEDIUM) 2 else 3),
           content = {
             items(randomLetters.data.size) { index ->
               Card(
@@ -211,7 +207,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                     Color(
                       ContextCompat.getColor(
                         this@FindTheLetterGameActivity,
-                        sharedPrefs.getColor()
+                        sharedPrefs.getHandColor()
                       )
                     )
                   ),
@@ -241,8 +237,8 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   private fun saveRecord() {
-    if (sharedPrefs.getMemoryRecord(difficulty) < record) {
-      sharedPrefs.setMemoryRecord(difficulty, record)
+    if (sharedPrefs.getMemoryRecord(difficulty.toString()) < record) {
+      sharedPrefs.setMemoryRecord(difficulty.toString(), record)
     }
   }
 

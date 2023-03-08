@@ -19,10 +19,6 @@ class GameViewModel : ViewModel() {
     randomGameLetters.postValue(DataSign.getRandomToFindCorrectLetter(amount))
   }
 
-  fun getRandomToFindEquals(amount: Int) {
-    randomGameLetters.postValue(DataSign.getRandomToFindEquals(amount))
-  }
-
   fun setMessageWithImages(singList: ArrayList<Sign>) {
     sendMessageImages.postValue(singList)
   }
