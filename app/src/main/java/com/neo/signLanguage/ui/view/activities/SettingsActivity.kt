@@ -68,7 +68,11 @@ class SettingsActivity : AppCompatActivity() {
     var sliderPosition by remember { mutableStateOf(sharedPrefs.getDelay().toFloat()) }
     var currentSelectedColor by remember { mutableStateOf(sharedPrefs.getHandColor()) }
     val colorList = DataSign.getColorsList(this)
-    val options = listOf("opcion1", "opcion2", "opcion3")
+    val options = listOf(
+      getStringByIdName(context, "fade"),
+      getStringByIdName(context, "left_to_right"),
+      getStringByIdName(context, "right_to_left"),
+    )
     val selectedOption = remember { mutableStateOf(sharedPrefs.getSelectedTransition()) }
     val isThereTransition = remember { mutableStateOf(sharedPrefs.getShowTransition()) }
     Box(
@@ -95,6 +99,7 @@ class SettingsActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 sharedPrefs.setHandColor(R.color.primaryColor)
               }
+              delegate.applyDayNight()
             })
           CustomSwitchWithTitle(
             label = getStringByIdName(context, "vibration"),
@@ -129,7 +134,9 @@ class SettingsActivity : AppCompatActivity() {
           text = getStringByIdName(
             context,
             "change_hand_color"
-          ), style = MaterialTheme.typography.h6
+          ), style = MaterialTheme.typography.h6,
+          modifier = Modifier.padding(vertical = 8.dp),
+          color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
         )
         Row() {
           labelToShow(
@@ -205,7 +212,11 @@ class SettingsActivity : AppCompatActivity() {
 
   @Composable
   fun labelToShow(label: String) {
-    Text(text = label, style = MaterialTheme.typography.subtitle2)
+    Text(
+      text = label,
+      style = MaterialTheme.typography.subtitle2,
+      color = if (sharedPrefs.isDarkTheme()) Color.White else Color.DarkGray,
+    )
   }
 }
 

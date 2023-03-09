@@ -32,6 +32,7 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.utils.AdUtils
+import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 
 
 class DetailsSignActivity : AppCompatActivity() {
@@ -99,14 +100,7 @@ class DetailsSignActivity : AppCompatActivity() {
         Image(
           painter = if (url != null) painter else painterResource(image),
           contentDescription = null,
-          colorFilter = if (url != null) null else ColorFilter.tint(
-            Color(
-              ContextCompat.getColor(
-                this@DetailsSignActivity,
-                sharedPrefs.getHandColor()
-              )
-            )
-          ),
+          colorFilter = if (url != null) null else getHandColor(context),
           modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(0.6f)

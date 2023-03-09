@@ -33,7 +33,7 @@ fun CustomSwitch(
       textAlign = TextAlign.Center,
       modifier = Modifier.padding(8.dp),
 
-    )
+      )
     Spacer(modifier = Modifier.width(16.dp))
     Switch(
       checked = switchState.value,
@@ -55,7 +55,11 @@ fun CustomSwitchWithTitle(
   onSwitchChanged: (Boolean) -> Unit,
 ) {
   Column() {
-    Text(text = titleLabel, style = MaterialTheme.typography.h6)
+    Text(
+      text = titleLabel,
+      style = MaterialTheme.typography.h6,
+      color = if (MainActivity.sharedPrefs.isDarkTheme()) Color.White else Color.Black,
+    )
     Row(
       verticalAlignment = Alignment.CenterVertically,
       horizontalArrangement = Arrangement.End,
@@ -64,8 +68,7 @@ fun CustomSwitchWithTitle(
         text = label,
         color = if (MainActivity.sharedPrefs.isDarkTheme()) Color.White else Color.Black,
         style = MaterialTheme.typography.subtitle1,
-        modifier = Modifier.padding(top = 8.dp),
-
+        /*modifier = Modifier.padding(top = 8.dp),*/
       )
       Spacer(modifier = Modifier.width(16.dp))
       Switch(

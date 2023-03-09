@@ -49,7 +49,7 @@ class Utils {
     }
 
     private fun cleanString(string: String): String {
-      val re = Regex("[^[A-Za-z0-9 ,ñÀ-ú]+\$]")
+      val re = Regex("[^[A-Za-z0-9 ,À-ú]+\$]")
       var stringCleaned = ""
       stringCleaned = string.trim().lowercase()
       stringCleaned = re.replace(stringCleaned, "") // works

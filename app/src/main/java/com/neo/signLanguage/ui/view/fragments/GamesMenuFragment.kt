@@ -91,9 +91,9 @@ class GamesMenuFragment : Fragment() {
     )
     titlesMenu.add(
       MenuTitle(
-        getStringByIdName(requireContext(), "write_your_message"),
-        getStringByIdName(requireContext(), "send_message_with_signs"),
-        R.drawable.ic_keyboard,
+        getStringByIdName(requireContext(), "flip_game_title"),
+        getStringByIdName(requireContext(), "flip_game_subtitle"),
+        R.drawable.ic_clip_card,
         SelectLevelActivity(),
         GuessFlipCardGameActivity()
       )

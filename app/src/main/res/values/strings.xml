@@ -104,4 +104,8 @@
     <string name="guess_the_word">Guess the word</string>
     <string name="guess_the_word_desc">Test your knowledge with suggested words</string>
     <string name="what_is_the_world">Which is the word</string>
+
+    <string name="flip_game_title"> Flipping Cards</string>
+    <string name="flip_game_subtitle">Flip all the cards and find all the pairs.</string>
+
 </resources>

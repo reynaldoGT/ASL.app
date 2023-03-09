@@ -37,6 +37,7 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
+import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getRandomWord
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.hideKeyboard
@@ -127,14 +128,7 @@ class GuessTheWordActivity : AppCompatActivity() {
           painter = painter,
           modifier = Modifier.height(350.dp),
           contentDescription = null,
-          colorFilter = ColorFilter.tint(
-            Color(
-              ContextCompat.getColor(
-                this@GuessTheWordActivity,
-                sharedPrefs.getHandColor()
-              )
-            )
-          ),
+          colorFilter =  getHandColor(this@GuessTheWordActivity),
         )
       }
       Button(enabled = isButtonEnabled, onClick = {
@@ -148,7 +142,7 @@ class GuessTheWordActivity : AppCompatActivity() {
           Icon(
             Icons.Default.Refresh,
             contentDescription = "content description",
-            tint = Color.White
+            tint = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
           )
           Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"))
         }

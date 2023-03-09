@@ -27,18 +27,23 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.fragments.Difficulty
 import com.neo.signLanguage.utils.Game
+import com.neo.signLanguage.utils.Utils
+import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import kotlin.collections.ArrayList
 
 
@@ -101,7 +106,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
       )
     )
 
-
     if (remainingLives == 0) {
       Snackbar.make(
         this@FindTheLetterGameActivity.findViewById(android.R.id.content),
@@ -158,68 +162,75 @@ class FindTheLetterGameActivity : AppCompatActivity() {
           else getString(
             R.string.game_find_game_title_number,
             randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
-          )
-
+          ),
+          style = MaterialTheme.typography.h5,
+          color = if (sharedPrefs.isDarkTheme()) Color.LightGray else Color.DarkGray,
         )
         Text(
-          randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
+          randomLetters.correctAnswer.letter.uppercase(Locale.getDefault()),
+          style = MaterialTheme.typography.h5 + TextStyle(
+            fontWeight = FontWeight.Bold,
+          ),
+          color = if (sharedPrefs.isDarkTheme()) Color.White else Color.DarkGray,
+          modifier = Modifier
+            .padding(vertical = 4.dp)
         )
-        LazyVerticalGrid(
-          columns = GridCells.Fixed(if (difficulty == Difficulty.EASY || difficulty == Difficulty.MEDIUM) 2 else 3),
-          content = {
-            items(randomLetters.data.size) { index ->
-              Card(
-                elevation = 8.dp,
-                shape = RoundedCornerShape(8.dp),
-                modifier = Modifier
-                  .fillMaxSize()
-                  .padding(8.dp)
-                  .clickable {
-                    if ((randomLetters.data[index].letter) == randomLetters.correctAnswer.letter) {
-                      record++
-                      showSnackBarToGames(
-                        getString(R.string.correct),
-                        R.color.green_dark,
-                        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-                        this@FindTheLetterGameActivity,
-                      )
-                      model.getRandomToFindLetter(numberElements)
-                    } else {
-                      if (sharedPrefs.getVibration()) {
-                        vibratePhone(applicationContext, 50)
-                      }
-                      showSnackBarToGames(
-                        getString(R.string.incorrect),
-                        R.color.red_dark,
-                        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-                        this@FindTheLetterGameActivity,
-                      )
-                      /*showSnackBar(getString(R.string.incorrect), R.color.red_dark)*/
-                      /*model.setIntents(-1)*/
-                      remainingLives--
-                    }
-                  }
-              ) {
-                Image(
-                  painter = painterResource(id = randomLetters.data[index].image),
-                  contentDescription = null,
-                  colorFilter = ColorFilter.tint(
-                    Color(
-                      ContextCompat.getColor(
-                        this@FindTheLetterGameActivity,
-                        sharedPrefs.getHandColor()
-                      )
-                    )
-                  ),
+        Box(
+          modifier = Modifier
+            .fillMaxSize()
+        ) {
+          LazyVerticalGrid(
+            columns = GridCells.Fixed(if (difficulty == Difficulty.EASY || difficulty == Difficulty.MEDIUM) 2 else 3),
+            modifier = Modifier.align(Alignment.Center),
+            content = {
+              items(randomLetters.data.size) { index ->
+                Card(
+                  elevation = 8.dp,
+                  shape = RoundedCornerShape(8.dp),
                   modifier = Modifier
                     .fillMaxSize()
-                    .aspectRatio(1f)
                     .padding(8.dp)
-                )
+                    .clickable {
+                      if ((randomLetters.data[index].letter) == randomLetters.correctAnswer.letter) {
+                        record++
+                        showSnackBarToGames(
+                          getString(R.string.correct),
+                          R.color.green_dark,
+                          this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+                          this@FindTheLetterGameActivity,
+                        )
+                        model.getRandomToFindLetter(numberElements)
+                      } else {
+                        if (sharedPrefs.getVibration()) {
+                          vibratePhone(applicationContext, 50)
+                        }
+                        showSnackBarToGames(
+                          getString(R.string.incorrect),
+                          R.color.red_dark,
+                          this@FindTheLetterGameActivity.findViewById(android.R.id.content),
+                          this@FindTheLetterGameActivity,
+                        )
+                        /*showSnackBar(getString(R.string.incorrect), R.color.red_dark)*/
+                        /*model.setIntents(-1)*/
+                        remainingLives--
+                      }
+                    }
+                ) {
+                  Image(
+                    painter = painterResource(id = randomLetters.data[index].image),
+                    contentDescription = null,
+                    colorFilter = getHandColor(this@FindTheLetterGameActivity),
+                    modifier = Modifier
+                      .fillMaxSize()
+                      .aspectRatio(1f)
+                      .padding(8.dp)
+                  )
+                }
               }
             }
-          }
-        )
+          )
+        }
+
       }
     }
   }

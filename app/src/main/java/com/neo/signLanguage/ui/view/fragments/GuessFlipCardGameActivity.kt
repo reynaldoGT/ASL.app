@@ -3,7 +3,6 @@ package com.neo.signLanguage.ui.view.fragments
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -11,17 +10,11 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 
 
@@ -30,13 +23,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGamesFlipCardBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 
 import com.neo.signLanguage.utils.DataSign
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
@@ -57,7 +49,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     binding.composeViewGamesFlipCard.setContent {
       MyMaterialTheme(
         content = {
-          Content(onClick = { onBackPressed() }, difficulty)
+          Content(onClick = { onBackPressed() }, difficulty, this)
         }
       )
     }
@@ -67,11 +59,12 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
 @Composable
 fun Content(
   onClick: () -> Unit,
-  difficulty: Difficulty
+  difficulty: Difficulty,
+  guessFlipCardGameActivity: GuessFlipCardGameActivity
 ) {
   val context = LocalContext
-  val getDiff = generateDifficulty(difficulty)
-  var xd = remember { mutableStateOf(DataSign.getRandomToFindEquals(getDiff.first)) }
+  val getDifficulty = generateDifficulty(difficulty)
+  var xd = remember { mutableStateOf(DataSign.getRandomToFindEquals(getDifficulty.pair.first)) }
 
   val flipsStates =
     remember { mutableStateListOf(*Array(xd.value.size) { FlippableController() }) }
@@ -96,6 +89,7 @@ fun Content(
     // Reinicializar los estados de blockedElements
     blockedElements.clear()
   }
+
   fun verifyFlipMatch() {
     if (flippedElements.size == 2) {
       if (flippedElements[0] == flippedElements[1]) {
@@ -110,6 +104,7 @@ fun Content(
         /*Verify is all are Flips is disable*/
         if (flipSEnable.none { it }) {
           onClick()
+          checkCounter(guessFlipCardGameActivity)
           /*xd.value = DataSign.getRandomToFindEquals(2)*/
         }
       } else {
@@ -127,7 +122,12 @@ fun Content(
 
     ) {
     Column() {
-
+      TimerScreen(
+        onTimerEnd = {
+          onClick()
+        },
+        timeInSeconds = getDifficulty.timeInSeconds
+      )
       Box(
         modifier = Modifier
           .align(Alignment.Start)
@@ -139,84 +139,87 @@ fun Content(
           }
         )
       }
-      TimerScreen(
-        onTimerEnd = {
-          onClick()
-        },
-        timeInSeconds = 30
-      )
-      LazyVerticalGrid(
-        columns = GridCells.Fixed(getDiff.second),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        content = {
-          itemsIndexed(xd.value) { index, sign ->
-            Flippable(
-              onFlippedListener = {
-                if (!blockedElements.contains(index)) {
-                  if (flippedElements.size < 2) {
-                    flippedElements.add(sign.letter)
-                    blockedElements.add(index)
-                    verifyFlipMatch()
+
+      Box(
+        modifier = Modifier
+          .fillMaxSize()
+          .padding(16.dp)
+      ) {
+        LazyVerticalGrid(
+          columns = GridCells.Fixed(getDifficulty.pair.second),
+          verticalArrangement = Arrangement.spacedBy(4.dp),
+          horizontalArrangement = Arrangement.spacedBy(4.dp),
+          modifier = Modifier.align(Alignment.Center),
+          content = {
+            itemsIndexed(xd.value) { index, sign ->
+              Flippable(
+                onFlippedListener = {
+                  if (!blockedElements.contains(index)) {
+                    if (flippedElements.size < 2) {
+                      flippedElements.add(sign.letter)
+                      blockedElements.add(index)
+                      verifyFlipMatch()
+                    }
+                  } else {
+                    flippedElements.remove(sign.letter)
+                    blockedElements.remove(index)
                   }
-                } else {
-                  flippedElements.remove(sign.letter)
-                  blockedElements.remove(index)
-                }
-              },
-              flipEnabled = flipSEnable[index],
-              frontSide = {
-                Card(
-                  modifier = Modifier
-                    .fillMaxSize(),
-                  shape = RoundedCornerShape(8.dp),
-                  elevation = 8.dp,
-                ) {
-                  Box() {
-                    Image(
-                      painter = painterResource(id = R.drawable.ic_help_outline),
-                      contentDescription = null,
-                      colorFilter = getHandColor(context.current),
-                      modifier = Modifier
-                        .fillMaxSize()
-                        .aspectRatio(1f)
-                        .padding(4.dp)
-                    )
-                  }
-                }
-              },
-              backSide = {
-                Card(
-                  shape = RoundedCornerShape(8.dp),
-                  elevation = 8.dp,
-                ) {
-                  Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                },
+                flipEnabled = flipSEnable[index],
+                frontSide = {
+                  Card(
+                    modifier = Modifier
+                      .fillMaxSize(),
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = 6.dp,
                   ) {
-                    Image(
-                      painter = painterResource(id = sign.image),
-                      contentDescription = null,
-                      colorFilter = getHandColor(context.current),
-                      modifier = Modifier
-                        .fillMaxSize()
-                        .aspectRatio(1f)
-                        .padding(8.dp)
-                    )
-                    Text(
-                      sign.letter.uppercase(Locale.getDefault()),
-                      textAlign = TextAlign.Center,
-                      fontSize = (28 - 6).sp,
-                      fontWeight = FontWeight(500),
-                      color = getHandCurrentColor(context.current)
-                    )
+                    Box() {
+                      Image(
+                        painter = painterResource(id = R.drawable.ic_help_outline),
+                        contentDescription = null,
+                        colorFilter = getHandColor(context.current),
+                        modifier = Modifier
+                          .fillMaxSize()
+                          .aspectRatio(1f)
+                          .padding(4.dp)
+                      )
+                    }
                   }
-                }
-              },
-              flipController = flipsStates[index],
-            )
+                },
+                backSide = {
+                  Card(
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = 6.dp,
+                  ) {
+                    Column(
+                      horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                      Image(
+                        painter = painterResource(id = sign.image),
+                        contentDescription = null,
+                        colorFilter = getHandColor(context.current),
+                        modifier = Modifier
+                          .fillMaxSize()
+                          .aspectRatio(1f)
+                          .padding(8.dp)
+                      )
+                      Text(
+                        sign.letter.uppercase(Locale.getDefault()),
+                        textAlign = TextAlign.Center,
+                        fontSize = (28 - getDifficulty.pair.second).sp,
+                        fontWeight = FontWeight(500),
+                        color = getHandCurrentColor(context.current)
+                      )
+                    }
+                  }
+                },
+                flipController = flipsStates[index],
+              )
+            }
           }
-        }
-      )
+        )
+      }
+
     }
   }
 }
@@ -228,13 +231,13 @@ enum class Difficulty {
   VERY_HARD,
 }
 
-fun generateDifficulty(difficulty: Difficulty): Pair<Int, Int> {
+data class GenerateDifficulty(val pair: Pair<Int, Int>, val timeInSeconds: Int)
+
+fun generateDifficulty(difficulty: Difficulty): GenerateDifficulty {
   return when (difficulty) {
-    Difficulty.EASY -> Pair(3, 3)
-    Difficulty.MEDIUM -> Pair(6, 4)
-    Difficulty.HARD -> Pair(8, 4)
-    Difficulty.VERY_HARD -> Pair(18, 6)
-
+    Difficulty.EASY -> GenerateDifficulty(Pair(3, 3), 30)
+    Difficulty.MEDIUM -> GenerateDifficulty(Pair(6, 4), 45)
+    Difficulty.HARD -> GenerateDifficulty(Pair(8, 4), 60)
+    Difficulty.VERY_HARD -> GenerateDifficulty(Pair(18, 6), 90)
   }
-
 }

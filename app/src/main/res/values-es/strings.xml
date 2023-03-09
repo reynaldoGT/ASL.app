@@ -107,4 +107,7 @@
     <string name="guess_the_word">Adivina la palabra</string>
     <string name="guess_the_word_desc">Pon a prueba tus conocimientos con palabras sugeridas</string>
     <string name="what_is_the_world">¿Cúal es la palabra?</string>
+
+    <string name="flip_game_title">Volteo de Cartas</string>
+    <string name="flip_game_subtitle">Dale la vuelta a todas las cartas y encuentra todas las parejas</string>
 </resources>

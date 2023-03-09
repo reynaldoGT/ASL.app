@@ -43,8 +43,10 @@ class MainActivity : AppCompatActivity() {
     showSelectedFragment(DictionaryFragment())
     if (sharedPrefs.isDarkTheme()) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+      delegate.applyDayNight()
     } else {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+      delegate.applyDayNight()
     }
 
     binding.bottomNavigation.setOnItemSelectedListener { menuItem ->

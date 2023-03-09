@@ -34,6 +34,7 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.widgets.CustomSwitch
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
+import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -68,46 +69,26 @@ class LetterAndNumbersFragment : Fragment() {
     val switchState = remember { mutableStateOf(sharedPrefs.getIsGridLayout()) }
     Box() {
       Column() {
-        /*Row(
-          verticalAlignment = Alignment.CenterVertically,
-          horizontalArrangement = Arrangement.End,
-        ) {
-          *//*TODO change this*//*
-          Text(
-            text = getStringByIdName(requireContext(), "change_layout"),
-            color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(8.dp)
-          )
-          Spacer(modifier = Modifier.width(16.dp))
-          Switch(
-            checked = switchState,
-            onCheckedChange = {
-              switchState = it
+        Box(modifier = Modifier.align(Alignment.End)) {
+          CustomSwitch(
+            getStringByIdName(requireContext(), "change_layout"),
+            switchState,
+            onSwitchChanged = {
               sharedPrefs.setIsGridLayout(it)
-            },
-            modifier = Modifier.align(Alignment.CenterVertically)
+            }
           )
-        }*/
-        CustomSwitch(
-          getStringByIdName(requireContext(), "change_layout"),
-          switchState,
-          onSwitchChanged = {
-            sharedPrefs.setIsGridLayout(it)
-          }
-        )
+        }
         if (switchState.value) {
-          LazyVerticalGridDemo()
+          LazyVerticalGridLayout()
         } else {
-          LazyVerticalHorizontalDemo()
+          LazyHorizontalLayout()
         }
       }
     }
   }
 
   @Composable
-  fun LazyVerticalGridDemo() {
+  fun LazyVerticalGridLayout() {
     val lettersToGrid = getLetterAndSignArray()
     LazyVerticalGrid(
       columns = GridCells.Adaptive(128.dp),
@@ -130,14 +111,7 @@ class LetterAndNumbersFragment : Fragment() {
             Image(
               painter = painterResource(id = lettersToGrid[index].image),
               contentDescription = null,
-              colorFilter = ColorFilter.tint(
-                Color(
-                  ContextCompat.getColor(
-                    requireContext(),
-                    sharedPrefs.getHandColor()
-                  )
-                )
-              ),
+              colorFilter = getHandColor(requireContext()),
               modifier = Modifier
                 .fillMaxSize()
                 .aspectRatio(1f)
@@ -150,7 +124,7 @@ class LetterAndNumbersFragment : Fragment() {
   }
 
   @Composable
-  fun LazyVerticalHorizontalDemo() {
+  fun LazyHorizontalLayout() {
     val lettersArrayToHorizontal = getLetterArray(false)
     LazyColumn(
       modifier = Modifier.wrapContentHeight(),
@@ -173,22 +147,15 @@ class LetterAndNumbersFragment : Fragment() {
             modifier = Modifier,
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
-
           ) {
             Image(
               painter = painterResource(id = lettersArrayToHorizontal[index].image),
               contentDescription = null,
-              colorFilter = ColorFilter.tint(
-                Color(
-                  ContextCompat.getColor(
-                    requireContext(),
-                    sharedPrefs.getHandColor()
-                  )
-                )
-              ),
+              colorFilter = getHandColor(requireContext()),
               modifier = Modifier
                 .height(100.dp)
                 .aspectRatio(1f)
+                .padding(4.dp)
             )
             Text(
               text = lettersArrayToHorizontal[index].letter,

@@ -43,9 +43,6 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
       binding.gridListSing.layoutManager = layoutManager
     }
 
-    /*val colorPickerDialog: ColorPickerDialog =
-        ColorPickerDialog.createColorPickerDialog(this, ColorPickerDialog.)*/
-
     model.sendMessageImages.observe(this) {
       adapter =
         AdapterLettersSendMessage(
@@ -53,10 +50,8 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
           it,
           object : ClickListener {
             override fun onClick(v: View?, position: Int) {
-
             }
           })
-
       binding.gridListSing.adapter = adapter
     }
 

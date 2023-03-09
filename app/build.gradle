@@ -15,8 +15,8 @@ android {
         minSdkVersion 22
 
         targetSdkVersion 32
-        versionCode 23
-        versionName "3.2"
+        versionCode 25
+        versionName "3.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
@@ -116,12 +116,12 @@ dependencies {
 
     implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
 
-    // SDK Dialogflow
+    /*// SDK Dialogflow
     implementation 'ai.api:sdk:2.0.7@aar'
     implementation 'ai.api:libai:1.6.12'
 
     // Google Cloud Dialogflow API
-    implementation 'com.google.cloud:google-cloud-dialogflow:3.1.0'
+    implementation 'com.google.cloud:google-cloud-dialogflow:3.1.0'*/
 
     // Java gRPC implementation
     implementation 'io.grpc:grpc-okhttp:1.38.0'
