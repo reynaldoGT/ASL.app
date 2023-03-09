@@ -1,4 +1,4 @@
-package com.neo.signLanguage.ui.view.activities
+package com.neo.signLanguage.ui.view.activities.games
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -33,7 +33,6 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -42,7 +41,6 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.fragments.Difficulty
 import com.neo.signLanguage.utils.Game
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import kotlin.collections.ArrayList
 

@@ -1,7 +1,6 @@
-package com.neo.signLanguage.ui.view.fragments
+package com.neo.signLanguage.ui.view.activities.games
 
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,14 +18,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
 
-import com.neo.signLanguage.ui.view.activities.FindTheLetterGameActivity
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.ui.view.fragments.Difficulty
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 

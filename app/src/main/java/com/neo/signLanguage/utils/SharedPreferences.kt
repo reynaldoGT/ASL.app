@@ -39,6 +39,7 @@ class SharedPreferences(var activity: AppCompatActivity) {
     val settings = activity.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     return settings.getInt(DELAY, maxDelayTime / 2)
   }
+
   fun setDelay(state: Int) {
     if (state > maxDelayTime) {
       return

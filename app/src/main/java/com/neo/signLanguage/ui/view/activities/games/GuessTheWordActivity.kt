@@ -1,4 +1,4 @@
-package com.neo.signLanguage.ui.view.activities
+package com.neo.signLanguage.ui.view.activities.games
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

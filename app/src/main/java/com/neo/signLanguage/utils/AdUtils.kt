@@ -70,6 +70,7 @@ class AdUtils {
       val adRequest = AdRequest.Builder().build()
       adView.loadAd(adRequest)
     }
+
     fun getLanguagePhone(): Boolean {
       val language = Locale.getDefault().displayLanguage.toString().lowercase(Locale.ROOT)
       return language == "english"

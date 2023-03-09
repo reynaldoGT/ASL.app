@@ -1,4 +1,4 @@
-package com.neo.signLanguage.ui.view.activities
+package com.neo.signLanguage.ui.view.activities.games
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
