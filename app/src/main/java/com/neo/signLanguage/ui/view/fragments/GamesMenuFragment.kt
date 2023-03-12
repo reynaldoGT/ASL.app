@@ -20,13 +20,10 @@ import androidx.fragment.app.viewModels
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.FragmentGamesBinding
-import com.neo.signLanguage.ui.view.activities.games.FindTheLetterGameActivity
 
-import com.neo.signLanguage.ui.view.activities.games.SendMessageWithImagesActivity
 import com.neo.signLanguage.ui.view.activities.composables.CardWithImage
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
-import com.neo.signLanguage.ui.view.activities.games.GuessTheWordActivity
-import com.neo.signLanguage.ui.view.activities.games.SelectLevelActivity
+import com.neo.signLanguage.ui.view.activities.games.*
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -105,8 +102,8 @@ class GamesMenuFragment : Fragment() {
         "test de juego de flechas",
         "test de juego de flechas desc",
         R.drawable.ic_clip_card,
-        SelectLevelActivity(),
-        GuessFlipCardGameActivity()
+        CardMatchingWithArrowsActivity(),
+
       )
     )
 

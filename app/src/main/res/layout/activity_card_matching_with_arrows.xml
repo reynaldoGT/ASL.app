@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.view.activities.games.SelectLevelActivity">
+    tools:context=".ui.view.activities.games.CardMatchingWithArrowsActivity">
 
     <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/compose_view_games_flip_card"
+        android:id="@+id/compose_view_card_matching_with_arrows"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 
 </LinearLayout>
+
