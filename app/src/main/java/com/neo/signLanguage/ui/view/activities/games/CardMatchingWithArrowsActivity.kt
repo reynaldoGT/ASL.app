@@ -23,6 +23,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
 
     binding.composeViewCardMatchingWithArrows.setContent {
       MyMaterialTheme(
+        this,
         content = {
           CardMatchingWithArrowsContent()
         }

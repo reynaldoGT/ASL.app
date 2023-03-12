@@ -14,8 +14,8 @@ import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.ui.view.activities.MainActivity
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
+import com.neo.signLanguage.utils.SharedPreferences.getGuessGameTheWordRecord
+import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import java.text.Normalizer
 import java.util.*
 import kotlin.random.Random
@@ -180,7 +180,7 @@ class Utils {
         androidx.compose.ui.graphics.Color(
           ContextCompat.getColor(
             context,
-            sharedPrefs.getHandColor()
+            getSharedPreferencesHandColor(context)
           )
         )
       )
@@ -190,7 +190,7 @@ class Utils {
       return ComposeColor(
         ContextCompat.getColor(
           context,
-          sharedPrefs.getHandColor()
+          getSharedPreferencesHandColor(context)
         )
       )
     }

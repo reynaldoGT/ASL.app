@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
 
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.fragments.Difficulty
+import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -92,7 +92,7 @@ fun CustomButtonSelectLevel(
           .padding(10.dp)
           .align(Alignment.CenterHorizontally),
         style = MaterialTheme.typography.h3 + TextStyle(textAlign = TextAlign.Center),
-        color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
+        color = if (isDarkTheme(context)) Color.White else Color.Black
       )
 
       CustomButton(

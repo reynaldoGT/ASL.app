@@ -34,9 +34,9 @@ import androidx.core.content.ContextCompat
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGuessTheWordBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
+import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getRandomWord
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -55,7 +55,7 @@ class GuessTheWordActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     binding.ActivityGuessTheWordBindingComposeView.setContent {
-      MyMaterialTheme(content = {
+      MyMaterialTheme(this, content = {
         RotatingImages(onClick = { onBackPressed() })
       })
     }
@@ -128,7 +128,7 @@ class GuessTheWordActivity : AppCompatActivity() {
           painter = painter,
           modifier = Modifier.height(350.dp),
           contentDescription = null,
-          colorFilter =  getHandColor(this@GuessTheWordActivity),
+          colorFilter = getHandColor(this@GuessTheWordActivity),
         )
       }
       Button(enabled = isButtonEnabled, onClick = {
@@ -142,7 +142,7 @@ class GuessTheWordActivity : AppCompatActivity() {
           Icon(
             Icons.Default.Refresh,
             contentDescription = "content description",
-            tint = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
+            tint = if (isDarkTheme(LocalContext.current)) Color.White else Color.Black
           )
           Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"))
         }

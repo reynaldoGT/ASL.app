@@ -53,6 +53,7 @@ class GamesMenuFragment : Fragment() {
     initLoad(binding.banner)
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
+        requireContext(),
         content = {
           GamesMenuContent()
         }
@@ -116,6 +117,7 @@ class GamesMenuFragment : Fragment() {
       ) {
         items(titlesMenu.size) { index ->
           CardWithImage(
+            context = requireContext(),
             title = titlesMenu[index].title,
             subtitle = titlesMenu[index].description,
             image = titlesMenu[index].img,

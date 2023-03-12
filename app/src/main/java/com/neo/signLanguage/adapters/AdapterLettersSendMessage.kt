@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.databinding.TemplateLetterSendMessageBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
+import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 
 
 class AdapterLettersSendMessage(
@@ -63,17 +63,17 @@ class AdapterLettersSendMessage(
         init {
             image = binding.imageTemplateView
             name = binding.textViewTemplateView
-            if (sharedPrefs.getHandColor() != 0) {
+            if (getSharedPreferencesHandColor(context!!) != 0) {
                 binding.imageTemplateView.setColorFilter(
                     ContextCompat.getColor(
-                        context!!,
-                        sharedPrefs.getHandColor()
+                        context,
+                        getSharedPreferencesHandColor(context)
                     )
                 )
                 binding.textViewTemplateView.setTextColor(
                     ContextCompat.getColor(
                         context,
-                        sharedPrefs.getHandColor()
+                        getSharedPreferencesHandColor(context)
                     )
                 )
             }

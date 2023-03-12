@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 
 import com.neo.signLanguage.databinding.ActivityDetailsBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import java.util.*
 import coil.ImageLoader
@@ -55,6 +54,7 @@ class DetailsSignActivity : AppCompatActivity() {
 
     binding.composeViewDetailsActivity.setContent {
       MyMaterialTheme(
+        this,
         content = {
           ContainerLayout(imageInt, letter!!, imageURL)
         }

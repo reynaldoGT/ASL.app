@@ -3,6 +3,7 @@ package com.neo.signLanguage.ui.view.fragments
 import android.app.ActionBar
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
@@ -25,12 +26,16 @@ import com.neo.signLanguage.*
 import com.neo.signLanguage.data.database.entities.SignEntity
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.database
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.SendMessageDC
+import com.neo.signLanguage.utils.SharedPreferences.getColorShared
+import com.neo.signLanguage.utils.SharedPreferences.getDelay
+import com.neo.signLanguage.utils.SharedPreferences.getSelectedTransition
+import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import com.neo.signLanguage.utils.Utils
+import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.*
@@ -70,8 +75,8 @@ class SendMessageFragment : Fragment() {
     AdUtils.initAds(requireContext())
     AdUtils.initListeners()
 
-    val getColorShared = sharedPrefs.getColorShared(activity as AppCompatActivity)
-    if (sharedPrefs.getHandColor() != 0)
+    val getColorShared = getColorShared(activity as AppCompatActivity)
+    if (getSharedPreferencesHandColor(requireContext()) != 0)
       imageView?.setColorFilter(
         getColorShared
       )
@@ -130,20 +135,20 @@ class SendMessageFragment : Fragment() {
 
       imageView!!.scaleType = ImageView.ScaleType.FIT_CENTER
       imageView!!.setImageResource(R.drawable.ic_a_only_sing)
-      if (sharedPrefs.getHandColor() != 0)
+      if (getSharedPreferencesHandColor(requireContext()) != 0)
         imageView!!.setColorFilter(
           getColorShared
         )
       imageView
     }
-    setHandAnimation()
+    setHandAnimation(requireContext())
   }
 
-  private fun setHandAnimation() {
+  private fun setHandAnimation(context: Context) {
 
     val out: Animation?
     val `in`: Animation?
-    when (sharedPrefs.getSelectedTransition()) {
+    when (getSelectedTransition(context)) {
       0 -> {
         `in` = AnimationUtils.loadAnimation(activity, android.R.anim.fade_in)
         out = AnimationUtils.loadAnimation(activity, android.R.anim.fade_out)
@@ -172,17 +177,17 @@ class SendMessageFragment : Fragment() {
     binding.edSendMessage.isEnabled = false
     binding.edSendMessage.editText?.setText(sendMessageDC.stringCleaned)
 
-    showMessageWithSing(sendMessageDC)
+    showMessageWithSing(requireContext(), sendMessageDC)
   }
 
-  private fun showMessageWithSing(sendMessageDC: SendMessageDC) {
+  private fun showMessageWithSing(context: Context, sendMessageDC: SendMessageDC) {
     val counter = -1
     job = GlobalScope.launch(context = Dispatchers.Main) {
       for ((index, item) in sendMessageDC.data.withIndex()) {
         binding.btnSendMessageCancel.isVisible = true
         binding.btnSendMessage.isVisible = false
 
-        delay(sharedPrefs.getDelay().toLong())
+        delay(getDelay(context).toLong())
 
         when (item.type) {
           "space" -> {
@@ -207,7 +212,7 @@ class SendMessageFragment : Fragment() {
           ForegroundColorSpan(
             ContextCompat.getColor(
               requireActivity().applicationContext,
-              sharedPrefs.getHandColor()
+              getSharedPreferencesHandColor(requireActivity())
             )
           ),
           index, // start
@@ -278,9 +283,9 @@ class SendMessageFragment : Fragment() {
 
   override fun onResume() {
     super.onResume()
-    if (sharedPrefs.getHandColor() != 0)
+    if (getSharedPreferencesHandColor(requireContext()) != 0)
       imageView?.setColorFilter(
-        sharedPrefs.getColorShared(activity as AppCompatActivity)
+        getColorShared(requireContext())
       )
   }
 

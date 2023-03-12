@@ -29,11 +29,13 @@ import androidx.core.content.ContextCompat
 
 import com.neo.signLanguage.databinding.FragmentLettersAndNumberSingBinding
 import com.neo.signLanguage.ui.view.activities.DetailsSignActivity
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.widgets.CustomSwitch
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
+import com.neo.signLanguage.utils.SharedPreferences.getIsGridLayout
+import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
+import com.neo.signLanguage.utils.SharedPreferences.setIsGridLayout
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
@@ -56,6 +58,7 @@ class LetterAndNumbersFragment : Fragment() {
     /*initLoad(binding.banner)*/
     binding.composeViewFragmentLetterAndNumbers.setContent {
       MyMaterialTheme(
+        requireContext(),
         content = {
           ContainerLayout()
         }
@@ -66,15 +69,16 @@ class LetterAndNumbersFragment : Fragment() {
   @Composable
   fun ContainerLayout() {
 
-    val switchState = remember { mutableStateOf(sharedPrefs.getIsGridLayout()) }
+    val switchState = remember { mutableStateOf(getIsGridLayout(requireContext())) }
     Box() {
       Column() {
         Box(modifier = Modifier.align(Alignment.End)) {
           CustomSwitch(
+            requireContext(),
             getStringByIdName(requireContext(), "change_layout"),
             switchState,
             onSwitchChanged = {
-              sharedPrefs.setIsGridLayout(it)
+              setIsGridLayout(requireContext(),it)
             }
           )
         }
@@ -162,7 +166,7 @@ class LetterAndNumbersFragment : Fragment() {
               color = Color(
                 ContextCompat.getColor(
                   requireContext(),
-                  sharedPrefs.getHandColor()
+                  getSharedPreferencesHandColor(requireContext())
                 )
               ),
               modifier = Modifier

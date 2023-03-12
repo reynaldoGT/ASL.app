@@ -1,5 +1,6 @@
 package com.neo.signLanguage.ui.view.activities.composables.widgets
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
@@ -13,10 +14,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.neo.signLanguage.ui.view.activities.MainActivity
+import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.Utils
 
 @Composable
 fun CustomSwitch(
+  context: Context,
   label: String,
   switchState: MutableState<Boolean>,
   onSwitchChanged: (Boolean) -> Unit
@@ -28,7 +31,7 @@ fun CustomSwitch(
   ) {
     Text(
       text = label,
-      color = if (MainActivity.sharedPrefs.isDarkTheme()) Color.White else Color.Black,
+      color = if (isDarkTheme(context)) Color.White else Color.Black,
       fontWeight = FontWeight.Bold,
       textAlign = TextAlign.Center,
       modifier = Modifier.padding(8.dp),
@@ -49,6 +52,7 @@ fun CustomSwitch(
 
 @Composable
 fun CustomSwitchWithTitle(
+  context: Context,
   label: String,
   titleLabel: String,
   switchState: MutableState<Boolean>,
@@ -58,7 +62,7 @@ fun CustomSwitchWithTitle(
     Text(
       text = titleLabel,
       style = MaterialTheme.typography.h6,
-      color = if (MainActivity.sharedPrefs.isDarkTheme()) Color.White else Color.Black,
+      color = if (isDarkTheme(context)) Color.White else Color.Black,
     )
     Row(
       verticalAlignment = Alignment.CenterVertically,
@@ -66,7 +70,7 @@ fun CustomSwitchWithTitle(
     ) {
       Text(
         text = label,
-        color = if (MainActivity.sharedPrefs.isDarkTheme()) Color.White else Color.Black,
+        color = if (isDarkTheme(context)) Color.White else Color.Black,
         style = MaterialTheme.typography.subtitle1,
         /*modifier = Modifier.padding(top = 8.dp),*/
       )

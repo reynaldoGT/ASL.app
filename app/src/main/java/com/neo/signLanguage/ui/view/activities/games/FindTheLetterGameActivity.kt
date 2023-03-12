@@ -1,5 +1,6 @@
 package com.neo.signLanguage.ui.view.activities.games
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +15,6 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
@@ -33,6 +33,7 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -41,6 +42,10 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.fragments.Difficulty
 import com.neo.signLanguage.utils.Game
+import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
+import com.neo.signLanguage.utils.SharedPreferences.getVibration
+import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
+import com.neo.signLanguage.utils.SharedPreferences.setMemoryRecord
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import kotlin.collections.ArrayList
 
@@ -81,6 +86,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     model.getRandomToFindLetter(numberElements)
     binding.findLetterGameComposeView.setContent {
       MyMaterialTheme(
+        this,
         content = {
           ContainerLayout(onClick = { onBackPressed() }, intents = intents)
         }
@@ -111,7 +117,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         Snackbar.LENGTH_SHORT,
       ).setBackgroundTint(ContextCompat.getColor(this, R.color.red_dark)).show()
       AdUtils.checkCounter(this)
-      saveRecord()
+      saveRecord(this)
       super.onBackPressed()
     }
 
@@ -130,7 +136,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         ) {
           backIcon(
             onClick = {
-              saveRecord()
+              saveRecord(this@FindTheLetterGameActivity)
               onClick()
             }
           )
@@ -162,14 +168,14 @@ class FindTheLetterGameActivity : AppCompatActivity() {
             randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
           ),
           style = MaterialTheme.typography.h5,
-          color = if (sharedPrefs.isDarkTheme()) Color.LightGray else Color.DarkGray,
+          color = if (isDarkTheme(LocalContext.current)) Color.LightGray else Color.DarkGray,
         )
         Text(
           randomLetters.correctAnswer.letter.uppercase(Locale.getDefault()),
           style = MaterialTheme.typography.h5 + TextStyle(
             fontWeight = FontWeight.Bold,
           ),
-          color = if (sharedPrefs.isDarkTheme()) Color.White else Color.DarkGray,
+          color = if (isDarkTheme(LocalContext.current)) Color.White else Color.DarkGray,
           modifier = Modifier
             .padding(vertical = 4.dp)
         )
@@ -199,7 +205,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                         )
                         model.getRandomToFindLetter(numberElements)
                       } else {
-                        if (sharedPrefs.getVibration()) {
+                        if (getVibration(this@FindTheLetterGameActivity)) {
                           vibratePhone(applicationContext, 50)
                         }
                         showSnackBarToGames(
@@ -245,14 +251,14 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     )
   }
 
-  private fun saveRecord() {
-    if (sharedPrefs.getMemoryRecord(difficulty.toString()) < record) {
-      sharedPrefs.setMemoryRecord(difficulty.toString(), record)
+  private fun saveRecord(context: Context) {
+    if (getMemoryRecord(context,difficulty.toString()) < record) {
+      setMemoryRecord(context,difficulty.toString(), record)
     }
   }
 
   override fun onSupportNavigateUp(): Boolean {
-    saveRecord()
+    saveRecord(this)
     finish()
     return true
   }

@@ -16,6 +16,7 @@ import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.AcitivityMainBinding
 import com.neo.signLanguage.ui.view.fragments.*
 import com.neo.signLanguage.utils.SharedPreferences
+import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
   private lateinit var binding: AcitivityMainBinding
 
   companion object {
-    lateinit var sharedPrefs: SharedPreferences
     lateinit var database: SingDatabase
   }
 
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     installSplashScreen()
     binding = AcitivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
-    sharedPrefs = SharedPreferences(this)
     database =
       Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
         .build()
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     fragmentAdapter = TabAdapter(fm, lifecycle)
 
     showSelectedFragment(DictionaryFragment())
-    if (sharedPrefs.isDarkTheme()) {
+    if (isDarkTheme(this)) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
       delegate.applyDayNight()
     } else {

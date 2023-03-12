@@ -48,6 +48,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     val difficulty = intent.getSerializableExtra("difficulty") as Difficulty
     binding.composeViewGamesFlipCard.setContent {
       MyMaterialTheme(
+        this,
         content = {
           Content(onClick = { onBackPressed() }, difficulty, this)
         }

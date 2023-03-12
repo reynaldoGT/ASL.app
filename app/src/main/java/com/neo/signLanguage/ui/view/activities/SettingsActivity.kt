@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.*
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.SettingsActivityBinding
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.selection.selectable
@@ -26,6 +25,20 @@ import androidx.core.content.ContextCompat
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.widgets.CustomSwitchWithTitle
 import com.neo.signLanguage.utils.DataSign
+import com.neo.signLanguage.utils.SharedPreferences.getDelay
+import com.neo.signLanguage.utils.SharedPreferences.getSelectedTransition
+import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
+import com.neo.signLanguage.utils.SharedPreferences.getShowTransition
+import com.neo.signLanguage.utils.SharedPreferences.getVibration
+import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
+import com.neo.signLanguage.utils.SharedPreferences.setDelay
+import com.neo.signLanguage.utils.SharedPreferences.setHandColor
+import com.neo.signLanguage.utils.SharedPreferences.setSelectedTransition
+import com.neo.signLanguage.utils.SharedPreferences.setShowTransition
+import com.neo.signLanguage.utils.SharedPreferences.setVibration
+import com.neo.signLanguage.utils.SharedPreferences.setTheme
+import com.neo.signLanguage.utils.Utils.Companion.getHandColor
+
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 class SettingsActivity : AppCompatActivity() {
@@ -44,6 +57,7 @@ class SettingsActivity : AppCompatActivity() {
 
     binding.composeViewSettingsActivity.setContent {
       MyMaterialTheme(
+        this,
         content = {
           SettingsContainer()
         }
@@ -63,18 +77,18 @@ class SettingsActivity : AppCompatActivity() {
   @Composable
   fun SettingsContainer() {
     val context = LocalContext.current
-    val isDarkTheme = remember { mutableStateOf(sharedPrefs.isDarkTheme()) }
-    val isVibration = remember { mutableStateOf(sharedPrefs.getVibration()) }
-    var sliderPosition by remember { mutableStateOf(sharedPrefs.getDelay().toFloat()) }
-    var currentSelectedColor by remember { mutableStateOf(sharedPrefs.getHandColor()) }
+    val isDarkTheme = remember { mutableStateOf(isDarkTheme(context)) }
+    val isVibration = remember { mutableStateOf(getVibration(context)) }
+    var sliderPosition by remember { mutableStateOf(getDelay(context).toFloat()) }
+    var currentSelectedColor by remember { mutableStateOf(getSharedPreferencesHandColor(context)) }
     val colorList = DataSign.getColorsList(this)
     val options = listOf(
       getStringByIdName(context, "fade"),
       getStringByIdName(context, "left_to_right"),
       getStringByIdName(context, "right_to_left"),
     )
-    val selectedOption = remember { mutableStateOf(sharedPrefs.getSelectedTransition()) }
-    val isThereTransition = remember { mutableStateOf(sharedPrefs.getShowTransition()) }
+    val selectedOption = remember { mutableStateOf(getSelectedTransition(context)) }
+    val isThereTransition = remember { mutableStateOf(getShowTransition(context)) }
     Box(
       modifier = Modifier.padding(8.dp),
       /*
@@ -87,26 +101,28 @@ class SettingsActivity : AppCompatActivity() {
           horizontalArrangement = Arrangement.SpaceBetween
         ) {
           CustomSwitchWithTitle(
+            context = context,
             titleLabel = getStringByIdName(context, "theme"),
             label = getStringByIdName(context, "dark_theme"),
             switchState = isDarkTheme,
             onSwitchChanged = {
-              sharedPrefs.setTheme(it)
+              setTheme(this@SettingsActivity,it)
               if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                sharedPrefs.setHandColor(R.color.gray300)
+                setHandColor(this@SettingsActivity,R.color.gray300)
               } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                sharedPrefs.setHandColor(R.color.primaryColor)
+                setHandColor(this@SettingsActivity,R.color.primaryColor)
               }
               delegate.applyDayNight()
             })
           CustomSwitchWithTitle(
+            context = context,
             label = getStringByIdName(context, "vibration"),
             titleLabel = getStringByIdName(context, "vibration"),
             switchState = isVibration,
             onSwitchChanged = {
-              sharedPrefs.setVibration(it)
+              setVibration(this@SettingsActivity,it)
             })
         }
 
@@ -120,7 +136,7 @@ class SettingsActivity : AppCompatActivity() {
           },
           valueRange = 250f..2500f,
           onValueChangeFinished = {
-            sharedPrefs.setDelay(sliderPosition.toInt())
+            setDelay(this@SettingsActivity,sliderPosition.toInt())
           }
         )
         labelToShow(
@@ -136,7 +152,7 @@ class SettingsActivity : AppCompatActivity() {
             "change_hand_color"
           ), style = MaterialTheme.typography.h6,
           modifier = Modifier.padding(vertical = 8.dp),
-          color = if (sharedPrefs.isDarkTheme()) Color.White else Color.Black
+          color = if (isDarkTheme(this@SettingsActivity)) Color.White else Color.Black
         )
         Row() {
           labelToShow(
@@ -159,7 +175,7 @@ class SettingsActivity : AppCompatActivity() {
               RoundButton(context, color = colorList[index].colorValue, onClick = {
                 currentSelectedColor = colorList[index].colorValue
                 showSnackBar(colorList[index].colorName)
-                sharedPrefs.setHandColor(colorList[index].colorValue)
+                setHandColor(this@SettingsActivity,colorList[index].colorValue)
               })
             }
           },
@@ -175,7 +191,7 @@ class SettingsActivity : AppCompatActivity() {
           )
           Checkbox(checked = isThereTransition.value, onCheckedChange = {
             isThereTransition.value = it
-            sharedPrefs.setShowTransition(it)
+            setShowTransition(this@SettingsActivity,it)
           })
         }
 
@@ -188,14 +204,14 @@ class SettingsActivity : AppCompatActivity() {
                   selected = index == selectedOption.value,
                   onClick = {
                     selectedOption.value = index
-                    sharedPrefs.setSelectedTransition(index)
+                    setSelectedTransition(this@SettingsActivity,index)
                   }
                 )
               ) {
                 RadioButton(
                   selected = index == selectedOption.value, onClick = {
                     selectedOption.value = index
-                    sharedPrefs.setSelectedTransition(index)
+                    setSelectedTransition(this@SettingsActivity,index)
                   })
                 Text(
                   text = text,
@@ -215,7 +231,7 @@ class SettingsActivity : AppCompatActivity() {
     Text(
       text = label,
       style = MaterialTheme.typography.subtitle2,
-      color = if (sharedPrefs.isDarkTheme()) Color.White else Color.DarkGray,
+      color = if (isDarkTheme(this@SettingsActivity)) Color.White else Color.DarkGray,
     )
   }
 }

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
+import com.neo.signLanguage.utils.SharedPreferences.addInOneCounterAd
+import com.neo.signLanguage.utils.SharedPreferences.getAdCount
+import com.neo.signLanguage.utils.SharedPreferences.resetAdCount
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.orhanobut.logger.Logger
 import java.util.*
@@ -45,10 +47,10 @@ class AdUtils {
     }
 
     fun checkCounter(activity: AppCompatActivity) {
-      sharedPrefs.addInOneCounterAd()
-      if (sharedPrefs.getAdCount() == 6) {
+      addInOneCounterAd(activity.applicationContext)
+      if (getAdCount(activity.applicationContext) == 6) {
         this.showAds(activity)
-        sharedPrefs.resetAdCount()
+        resetAdCount(activity.applicationContext)
         initAds(activity)
       }
     }

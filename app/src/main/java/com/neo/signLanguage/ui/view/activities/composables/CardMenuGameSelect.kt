@@ -1,5 +1,6 @@
 package com.neo.signLanguage.ui.view.activities.composables
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -20,12 +21,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.R
-import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.sharedPrefs
+import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 
 @Composable
-fun CardWithImage(title: String, subtitle: String, image: Int, onClick: () -> Unit) {
+fun CardWithImage(context: Context, title: String, subtitle: String, image: Int, onClick: () -> Unit) {
   val color =
-    colorResource(id = if (sharedPrefs.isDarkTheme()) R.color.white else R.color.black)
+    colorResource(id = if (isDarkTheme(context)) R.color.white else R.color.black)
   Card(
     shape = RoundedCornerShape(8.dp),
     elevation = 4.dp,
