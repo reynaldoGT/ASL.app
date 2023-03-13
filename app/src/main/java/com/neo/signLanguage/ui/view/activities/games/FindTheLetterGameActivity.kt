@@ -39,7 +39,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.utils.DataSign
 
 import com.neo.signLanguage.utils.Game
 import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
@@ -48,6 +50,7 @@ import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.SharedPreferences.setMemoryRecord
 import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import kotlin.collections.ArrayList
 
@@ -102,7 +105,9 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   ) {
     var remainingLives by remember { mutableStateOf(intents) }
     val allIntents = intents
+    val showNoMoreIntentsDialog = remember { mutableStateOf(false) }
     val randomLetters by gameViewModel.randomGameLetters.observeAsState(
+
       Game(
         ArrayList(), Sign(
           "", 0, "",
@@ -111,17 +116,32 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     )
 
     if (remainingLives == 0) {
-      Snackbar.make(
-        this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-        getString(R.string.incorrect),
-        Snackbar.LENGTH_SHORT,
-      ).setBackgroundTint(ContextCompat.getColor(this, R.color.red_dark)).show()
+      showNoMoreIntentsDialog.value = true
       AdUtils.checkCounter(this)
       saveRecord(this)
-      super.onBackPressed()
+      /*super.onBackPressed()*/
     }
 
     Box() {
+      if (showNoMoreIntentsDialog.value) {
+        TimeIsUpDialog(
+          onTryAgainClick = {
+            showNoMoreIntentsDialog.value = false
+            remainingLives = allIntents
+          },
+          onGoBackClick = {
+            onClick()
+          },
+          {
+            onClick()
+            showNoMoreIntentsDialog.value = false
+          },
+          getStringByIdName(LocalContext.current, "sorry"),
+          getStringByIdName(LocalContext.current, "try_again"),
+          getStringByIdName(LocalContext.current, "retry"),
+          getStringByIdName(LocalContext.current, "go_back"),
+        )
+      }
       Column(
         modifier = Modifier
           .fillMaxSize()

@@ -110,4 +110,16 @@
 
     <string name="flip_game_title">Volteo de Cartas</string>
     <string name="flip_game_subtitle">Dale la vuelta a todas las cartas y encuentra todas las parejas</string>
+
+    <string name="sorry">Lo siento, has perdido todas tus vidas</string>
+    <string name="try_again">¿Quieres intentarlo de nuevo?</string>
+    <string name="retry">Volver a intentar</string>
+    <string name="go_back">Ir atrás</string>
+
+    <string name="times_over">¡Se te acabó el tiempo!</string>
+    <string name="time_up">¡Ups! Tu tiempo se ha agotado</string>
+
+    <string name="level_completed">¡Nivel completado!</string>
+    <string name="play_again">Jugar de nuevo</string>
+    <string name="try_next_level">Quizás deberías intentar el siguiente nivel.</string>
 </resources>

@@ -108,4 +108,18 @@
     <string name="flip_game_title"> Flipping Cards</string>
     <string name="flip_game_subtitle">Flip all the cards and find all the pairs.</string>
 
+    <string name="sorry">Sorry, you have lost all your lives</string>
+    <string name="try_again">Do you want to try again?</string>
+    <string name="retry">Retry</string>
+    <string name="go_back">Go back</string>
+
+    <string name="times_over">Times over!</string>
+    <string name="time_up">Oops! Your time is up.</string>
+
+    <string name="level_completed">Level completed!</string>
+    <string name="play_again">Play again</string>
+    <string name="try_next_level">Maybe you should try the next level.</string>
+
+
+
 </resources>

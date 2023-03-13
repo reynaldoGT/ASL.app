@@ -34,8 +34,10 @@ import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 
 import com.neo.signLanguage.utils.DataSign
+import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.FlippableController
@@ -53,7 +55,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     binding.composeViewGamesFlipCard.setContent {
       MyMaterialTheme(
         content = {
-          Content(onClick = { onBackPressed() }, difficulty, this)
+          Content(onClick = { onBackPressed() }, difficulty,)
         }
       )
     }
@@ -64,7 +66,6 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
 fun Content(
   onClick: () -> Unit,
   difficulty: Difficulty,
-  guessFlipCardGameActivity: GuessFlipCardGameActivity
 ) {
   val context = LocalContext
   val getDifficulty = generateDifficulty(difficulty)
@@ -151,10 +152,10 @@ fun Content(
           onClick()
           showTimesUpDialog.value = false
         },
-        "¡Se te acabó el tiempo!",
-        "¿Qué quieres hacer ahora?",
-        "Volver a intentar",
-        "Ir atrás",
+        Utils.getStringByIdName(LocalContext.current, "times_over"),
+        Utils.getStringByIdName(LocalContext.current, "time_up"),
+        Utils.getStringByIdName(LocalContext.current, "retry"),
+        Utils.getStringByIdName(LocalContext.current, "go_back"),
       )
     }
     if (showCompletedSuccessDialog.value) {
@@ -170,10 +171,11 @@ fun Content(
           onClick()
           showCompletedSuccessDialog.value = false
         },
-        "¡Nivel completado!",
-        "Tal vez deberias probar el siguiente nivel",
-        "Jugar de nuevo",
-        "Ir atrás",
+        getStringByIdName(LocalContext.current, "level_completed"),
+        getStringByIdName(LocalContext.current, "try_next_level"),
+        getStringByIdName(LocalContext.current, "play_again"),
+        getStringByIdName(LocalContext.current, "go_back"),
+
       )
     }
     Column() {

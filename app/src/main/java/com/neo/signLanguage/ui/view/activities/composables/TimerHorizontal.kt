@@ -31,7 +31,7 @@ fun TimerScreen(
 
   LaunchedEffect(timerActive.value) {
     if (timerActive.value) {
-      remainingTimeSeconds = timeInSeconds
+      remainingTimeSeconds = timeInSeconds + 1
       while (remainingTimeSeconds > 0) {
         delay(1000)
         remainingTimeSeconds -= 1
@@ -40,7 +40,6 @@ fun TimerScreen(
           onTimerEnd()
         }
       }
-
     }
   }
 

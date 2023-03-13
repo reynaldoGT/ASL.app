@@ -48,7 +48,7 @@ class AdUtils {
 
     fun checkCounter(activity: AppCompatActivity) {
       addInOneCounterAd(activity.applicationContext)
-      if (getAdCount(activity.applicationContext) == 6) {
+      if (getAdCount(activity.applicationContext) == 7) {
         this.showAds(activity)
         resetAdCount(activity.applicationContext)
         initAds(activity)
