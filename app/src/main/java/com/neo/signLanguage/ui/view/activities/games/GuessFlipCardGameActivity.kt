@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 
@@ -31,8 +32,10 @@ import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 
 import com.neo.signLanguage.utils.DataSign
+import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
+import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.FlippableController
 import java.util.*
@@ -120,14 +123,14 @@ fun Content(
     modifier = Modifier
       .fillMaxSize()
       .padding(8.dp),
-
-    ) {
+  ) {
     Column() {
       TimerScreen(
         onTimerEnd = {
           onClick()
         },
-        timeInSeconds = getDifficulty.timeInSeconds
+        timeInSeconds = getDifficulty.timeInSeconds,
+        color = getDifficulty.colorDifficulty
       )
       Box(
         modifier = Modifier
@@ -232,13 +235,17 @@ enum class Difficulty {
   VERY_HARD,
 }
 
-data class GenerateDifficulty(val pair: Pair<Int, Int>, val timeInSeconds: Int)
+data class GenerateDifficulty(
+  val pair: Pair<Int, Int>,
+  val timeInSeconds: Int,
+  var colorDifficulty: Color
+)
 
 fun generateDifficulty(difficulty: Difficulty): GenerateDifficulty {
   return when (difficulty) {
-    Difficulty.EASY -> GenerateDifficulty(Pair(3, 3), 30)
-    Difficulty.MEDIUM -> GenerateDifficulty(Pair(6, 4), 45)
-    Difficulty.HARD -> GenerateDifficulty(Pair(8, 4), 60)
-    Difficulty.VERY_HARD -> GenerateDifficulty(Pair(18, 6), 90)
+    Difficulty.EASY -> GenerateDifficulty(Pair(3, 3), 30, setColorByDifficulty(difficulty))
+    Difficulty.MEDIUM -> GenerateDifficulty(Pair(6, 4), 45, setColorByDifficulty(difficulty))
+    Difficulty.HARD -> GenerateDifficulty(Pair(8, 4), 60, setColorByDifficulty(difficulty))
+    Difficulty.VERY_HARD -> GenerateDifficulty(Pair(18, 6), 90, setColorByDifficulty(difficulty))
   }
 }

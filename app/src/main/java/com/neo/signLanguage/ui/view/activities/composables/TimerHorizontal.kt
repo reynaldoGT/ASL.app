@@ -23,6 +23,7 @@ import kotlinx.coroutines.delay
 fun TimerScreen(
   onTimerEnd: () -> Unit,
   timeInSeconds: Int = 30,
+  color: Color = Color.Blue
 ) {
   var remainingTimeSeconds by remember { mutableStateOf(timeInSeconds) }
   val progressAnimDuration = 1500
@@ -45,6 +46,7 @@ fun TimerScreen(
   ) {
     LinearProgressIndicator(
       progress = progressAnimation,
+      color = color,
       modifier = Modifier
         .fillMaxWidth()
         .height(6.dp)

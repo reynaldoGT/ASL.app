@@ -46,7 +46,9 @@ import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
 import com.neo.signLanguage.utils.SharedPreferences.getVibration
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.SharedPreferences.setMemoryRecord
+import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
+import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import kotlin.collections.ArrayList
 
 
@@ -62,7 +64,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
     setContentView(binding.root)
-
     difficulty = intent.getSerializableExtra("difficulty") as Difficulty
 
     when (difficulty) {
@@ -240,11 +241,11 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   @Composable
-  fun HeartIcon(full: Boolean) {
+  fun HeartIcon(full: Boolean, color: Color = Color.Red) {
     Icon(
       if (full) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder,
       contentDescription = "Favorite",
-      tint = Color.Red,
+      tint = setColorByDifficulty(difficulty),
       modifier = Modifier
         .size(40.dp)
         .padding(4.dp)
@@ -252,8 +253,8 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   private fun saveRecord(context: Context) {
-    if (getMemoryRecord(context,difficulty.toString()) < record) {
-      setMemoryRecord(context,difficulty.toString(), record)
+    if (getMemoryRecord(context, difficulty.toString()) < record) {
+      setMemoryRecord(context, difficulty.toString(), record)
     }
   }
 

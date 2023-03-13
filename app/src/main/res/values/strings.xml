@@ -94,7 +94,7 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
     <string name="very_hard">Very hard</string>
-    <string name="select_level">Select level</string>
+    <string name="select_level">Select difficulty level</string>
     <string name="download_image">Download image</string>
     <string name="element_deleted">Element deleted</string>
     <string name="vibration">Vibration</string>

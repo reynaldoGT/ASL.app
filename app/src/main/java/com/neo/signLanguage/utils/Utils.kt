@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.ui.view.fragments.Difficulty
 import com.neo.signLanguage.utils.SharedPreferences.getGuessGameTheWordRecord
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import java.text.Normalizer
@@ -194,6 +195,15 @@ class Utils {
         )
       )
     }
-  }
 
+    fun setColorByDifficulty(difficulty: Difficulty): ComposeColor {
+      return when (difficulty) {
+        Difficulty.EASY -> ComposeColor(0xFF47C87C) // Verde claro
+        Difficulty.MEDIUM -> ComposeColor(0xFFFFC800) // Amarillo
+        Difficulty.HARD -> ComposeColor(0xFFF56342) // Naranja
+        Difficulty.VERY_HARD -> ComposeColor(0xFFD9483B) // Rojo oscuro
+        // Color primario de Material Design
+      }
+    }
+  }
 }

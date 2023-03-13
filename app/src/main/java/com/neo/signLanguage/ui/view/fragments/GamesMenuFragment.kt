@@ -125,6 +125,7 @@ class GamesMenuFragment : Fragment() {
               val intent = Intent(requireContext(), titlesMenu[index].activity!!::class.java)
               if (titlesMenu[index].afterActivity != null) {
                 intent.putExtra("activityClass", titlesMenu[index].afterActivity!!::class.java)
+                intent.putExtra("gameName", titlesMenu[index].title)
               }
               startActivity(intent)
             }
