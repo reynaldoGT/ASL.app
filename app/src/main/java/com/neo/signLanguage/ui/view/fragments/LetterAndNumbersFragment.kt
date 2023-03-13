@@ -58,7 +58,7 @@ class LetterAndNumbersFragment : Fragment() {
     /*initLoad(binding.banner)*/
     binding.composeViewFragmentLetterAndNumbers.setContent {
       MyMaterialTheme(
-        requireContext(),
+
         content = {
           ContainerLayout()
         }
@@ -74,7 +74,6 @@ class LetterAndNumbersFragment : Fragment() {
       Column() {
         Box(modifier = Modifier.align(Alignment.End)) {
           CustomSwitch(
-            requireContext(),
             getStringByIdName(requireContext(), "change_layout"),
             switchState,
             onSwitchChanged = {

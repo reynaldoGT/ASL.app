@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
 
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
-import com.neo.signLanguage.ui.view.fragments.Difficulty
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty

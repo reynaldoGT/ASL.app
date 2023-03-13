@@ -40,7 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
-import com.neo.signLanguage.ui.view.fragments.Difficulty
+
 import com.neo.signLanguage.utils.Game
 import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
 import com.neo.signLanguage.utils.SharedPreferences.getVibration
@@ -87,7 +87,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     model.getRandomToFindLetter(numberElements)
     binding.findLetterGameComposeView.setContent {
       MyMaterialTheme(
-        this,
         content = {
           ContainerLayout(onClick = { onBackPressed() }, intents = intents)
         }

@@ -34,7 +34,7 @@
             android:name=".ui.view.activities.games.SelectLevelActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.fragments.GuessFlipCardGameActivity"
+            android:name=".ui.view.activities.games.GuessFlipCardGameActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.activities.games.SendMessageWithImagesActivity"

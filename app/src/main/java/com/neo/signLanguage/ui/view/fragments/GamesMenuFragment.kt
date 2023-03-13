@@ -53,7 +53,7 @@ class GamesMenuFragment : Fragment() {
     initLoad(binding.banner)
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
-        requireContext(),
+
         content = {
           GamesMenuContent()
         }
@@ -108,16 +108,16 @@ class GamesMenuFragment : Fragment() {
       )
     )
 
-
     Box() {
       LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(16.dp),
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+
+
       ) {
         items(titlesMenu.size) { index ->
           CardWithImage(
-            context = requireContext(),
             title = titlesMenu[index].title,
             subtitle = titlesMenu[index].description,
             image = titlesMenu[index].img,

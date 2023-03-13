@@ -1,9 +1,11 @@
-package com.neo.signLanguage.ui.view.fragments
+package com.neo.signLanguage.ui.view.activities.games
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -27,12 +29,11 @@ import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGamesFlipCardBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
-import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 
 import com.neo.signLanguage.utils.DataSign
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
@@ -51,7 +52,6 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     val difficulty = intent.getSerializableExtra("difficulty") as Difficulty
     binding.composeViewGamesFlipCard.setContent {
       MyMaterialTheme(
-        this,
         content = {
           Content(onClick = { onBackPressed() }, difficulty, this)
         }
@@ -68,30 +68,44 @@ fun Content(
 ) {
   val context = LocalContext
   val getDifficulty = generateDifficulty(difficulty)
-  var xd = remember { mutableStateOf(DataSign.getRandomToFindEquals(getDifficulty.pair.first)) }
+  val time = remember { mutableStateOf(getDifficulty.timeInSeconds) }
+  val xd = remember { mutableStateOf(DataSign.getRandomToFindEquals(getDifficulty.pair.first)) }
 
   val flipsStates =
     remember { mutableStateListOf(*Array(xd.value.size) { FlippableController() }) }
   var flipSEnable =
     remember { mutableStateListOf(*Array(xd.value.size) { true }) }
 
-  var flippedElements = remember { mutableStateListOf<String>() }
-  var blockedElements = remember { mutableStateListOf<Int>() }
+  val flippedElements = remember { mutableStateListOf<String>() }
+  val blockedElements = remember { mutableStateListOf<Int>() }
 
+  val showTimesUpDialog = remember {
+    mutableStateOf(false)
+  }
+  val showCompletedSuccessDialog = remember {
+    mutableStateOf(false)
+  }
+  val startTimer = remember {
+    mutableStateOf(true)
+  }
   LaunchedEffect(xd.value) {
-    // Reinicializar los estados de flipsStates
-    flipsStates.forEach { it.flipToFront() }
 
-    // Reinicializar los estados de flipSEnable
-    flipSEnable.forEachIndexed { index, mutableState ->
-      flipSEnable[index] = true
-    }
+    startTimer.value = true
+    // Crear una copia inmutable de flipsStates
+    val flipsStatesCopy = flipsStates.toList()
+
+    // Reinicializar los estados de flipsStates
+    flipsStatesCopy.forEach { it.flipToFront() }
+
+    // Restablecer los estados de flipSEnable
+    flipSEnable = List(xd.value.size) { true }.toMutableStateList()
 
     // Reinicializar los estados de flippedElements
     flippedElements.clear()
 
     // Reinicializar los estados de blockedElements
     blockedElements.clear()
+    time.value = getDifficulty.timeInSeconds
   }
 
   fun verifyFlipMatch() {
@@ -107,9 +121,9 @@ fun Content(
         blockedElements.clear()
         /*Verify is all are Flips is disable*/
         if (flipSEnable.none { it }) {
-          onClick()
-          checkCounter(guessFlipCardGameActivity)
-          /*xd.value = DataSign.getRandomToFindEquals(2)*/
+/*          onClick()
+          checkCounter(guessFlipCardGameActivity)*/
+          showCompletedSuccessDialog.value = true
         }
       } else {
         flipsStates[blockedElements[0]].flipToFront()
@@ -122,15 +136,55 @@ fun Content(
   Box(
     modifier = Modifier
       .fillMaxSize()
-      .padding(8.dp),
+      .padding(horizontal = 8.dp),
   ) {
+    if (showTimesUpDialog.value) {
+      TimeIsUpDialog(
+        onTryAgainClick = {
+          showTimesUpDialog.value = false
+          xd.value = DataSign.getRandomToFindEquals(getDifficulty.pair.first)
+        },
+        onGoBackClick = {
+          onClick()
+        },
+        {
+          onClick()
+          showTimesUpDialog.value = false
+        },
+        "¡Se te acabó el tiempo!",
+        "¿Qué quieres hacer ahora?",
+        "Volver a intentar",
+        "Ir atrás",
+      )
+    }
+    if (showCompletedSuccessDialog.value) {
+      TimeIsUpDialog(
+        onTryAgainClick = {
+          showCompletedSuccessDialog.value = false
+          xd.value = DataSign.getRandomToFindEquals(getDifficulty.pair.first)
+        },
+        onGoBackClick = {
+          onClick()
+        },
+        onDismissRequest = {
+          onClick()
+          showCompletedSuccessDialog.value = false
+        },
+        "¡Nivel completado!",
+        "Tal vez deberias probar el siguiente nivel",
+        "Jugar de nuevo",
+        "Ir atrás",
+      )
+    }
     Column() {
       TimerScreen(
         onTimerEnd = {
-          onClick()
+          /*onClick()*/
+          showTimesUpDialog.value = true
         },
-        timeInSeconds = getDifficulty.timeInSeconds,
-        color = getDifficulty.colorDifficulty
+        timeInSeconds = time.value,
+        color = getDifficulty.colorDifficulty,
+        timerActive = startTimer
       )
       Box(
         modifier = Modifier
@@ -149,6 +203,7 @@ fun Content(
           .fillMaxSize()
           .padding(16.dp)
       ) {
+
         LazyVerticalGrid(
           columns = GridCells.Fixed(getDifficulty.pair.second),
           verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -173,7 +228,12 @@ fun Content(
                 frontSide = {
                   Card(
                     modifier = Modifier
-                      .fillMaxSize(),
+                      .fillMaxSize()
+                      .border(
+                        width = 2.dp,
+                        color = getHandCurrentColor(context.current),
+                        shape = RoundedCornerShape(8.dp)
+                      ),
                     shape = RoundedCornerShape(8.dp),
                     elevation = 6.dp,
                   ) {
@@ -194,6 +254,13 @@ fun Content(
                   Card(
                     shape = RoundedCornerShape(8.dp),
                     elevation = 6.dp,
+                    modifier = Modifier
+                      .fillMaxSize()
+                      .border(
+                        width = 2.dp,
+                        color = getHandCurrentColor(context.current),
+                        shape = RoundedCornerShape(8.dp)
+                      ),
                   ) {
                     Column(
                       horizontalAlignment = Alignment.CenterHorizontally,
@@ -223,7 +290,6 @@ fun Content(
           }
         )
       }
-
     }
   }
 }

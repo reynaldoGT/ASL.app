@@ -23,7 +23,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
 
     binding.composeViewCardMatchingWithArrows.setContent {
       MyMaterialTheme(
-        this,
         content = {
           CardMatchingWithArrowsContent()
         }
@@ -39,7 +38,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
 
     Scaffold(
       scaffoldState = scaffoldState,
-
       topBar = { TopAppBar(title = { Text("TopAppBar") })},
       floatingActionButtonPosition = FabPosition.End,
       floatingActionButton = {

@@ -57,7 +57,6 @@ class SettingsActivity : AppCompatActivity() {
 
     binding.composeViewSettingsActivity.setContent {
       MyMaterialTheme(
-        this,
         content = {
           SettingsContainer()
         }
@@ -101,7 +100,6 @@ class SettingsActivity : AppCompatActivity() {
           horizontalArrangement = Arrangement.SpaceBetween
         ) {
           CustomSwitchWithTitle(
-            context = context,
             titleLabel = getStringByIdName(context, "theme"),
             label = getStringByIdName(context, "dark_theme"),
             switchState = isDarkTheme,
@@ -117,7 +115,6 @@ class SettingsActivity : AppCompatActivity() {
               delegate.applyDayNight()
             })
           CustomSwitchWithTitle(
-            context = context,
             label = getStringByIdName(context, "vibration"),
             titleLabel = getStringByIdName(context, "vibration"),
             switchState = isVibration,

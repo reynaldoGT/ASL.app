@@ -14,8 +14,7 @@ import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.ui.view.fragments.Difficulty
-import com.neo.signLanguage.utils.SharedPreferences.getGuessGameTheWordRecord
+import com.neo.signLanguage.ui.view.activities.games.Difficulty
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import java.text.Normalizer
 import java.util.*

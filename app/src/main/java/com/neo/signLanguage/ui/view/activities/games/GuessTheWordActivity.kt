@@ -56,7 +56,7 @@ class GuessTheWordActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     binding.ActivityGuessTheWordBindingComposeView.setContent {
-      MyMaterialTheme(this, content = {
+      MyMaterialTheme( content = {
         RotatingImages(onClick = { onBackPressed() })
       })
     }

@@ -54,7 +54,7 @@ class DetailsSignActivity : AppCompatActivity() {
 
     binding.composeViewDetailsActivity.setContent {
       MyMaterialTheme(
-        this,
+
         content = {
           ContainerLayout(imageInt, letter!!, imageURL)
         }

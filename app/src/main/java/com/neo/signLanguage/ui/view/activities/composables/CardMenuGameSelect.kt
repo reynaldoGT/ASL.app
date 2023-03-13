@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,7 +25,8 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 
 @Composable
-fun CardWithImage(context: Context, title: String, subtitle: String, image: Int, onClick: () -> Unit) {
+fun CardWithImage( title: String, subtitle: String, image: Int, onClick: () -> Unit) {
+  val context = LocalContext.current
   val color =
     colorResource(id = if (isDarkTheme(context)) R.color.white else R.color.black)
   Card(

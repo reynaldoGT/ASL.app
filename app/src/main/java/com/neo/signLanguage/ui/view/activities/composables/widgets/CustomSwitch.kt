@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
@@ -19,12 +20,11 @@ import com.neo.signLanguage.utils.Utils
 
 @Composable
 fun CustomSwitch(
-  context: Context,
   label: String,
   switchState: MutableState<Boolean>,
   onSwitchChanged: (Boolean) -> Unit
 ) {
-
+  val context = LocalContext.current
   Row(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.End,
@@ -35,8 +35,7 @@ fun CustomSwitch(
       fontWeight = FontWeight.Bold,
       textAlign = TextAlign.Center,
       modifier = Modifier.padding(8.dp),
-
-      )
+    )
     Spacer(modifier = Modifier.width(16.dp))
     Switch(
       checked = switchState.value,
@@ -52,12 +51,13 @@ fun CustomSwitch(
 
 @Composable
 fun CustomSwitchWithTitle(
-  context: Context,
+
   label: String,
   titleLabel: String,
   switchState: MutableState<Boolean>,
   onSwitchChanged: (Boolean) -> Unit,
 ) {
+  val context = LocalContext.current
   Column() {
     Text(
       text = titleLabel,
