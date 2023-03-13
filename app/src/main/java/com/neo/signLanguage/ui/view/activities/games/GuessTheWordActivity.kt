@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -87,7 +88,7 @@ class GuessTheWordActivity : AppCompatActivity() {
     LaunchedEffect(correctWord.value) {
       imagesStatus = generateListImageSign(correctWord.value)
       currentImageIndex = 0
-      isButtonEnabled = true
+      isButtonEnabled = false
       text = TextFieldValue("")
 
       timer.cancel()
@@ -131,20 +132,25 @@ class GuessTheWordActivity : AppCompatActivity() {
           colorFilter = getHandColor(this@GuessTheWordActivity),
         )
       }
-      Button(enabled = isButtonEnabled, onClick = {
-        Log.d("TAG", "RotatingImages: ${correctWord.value}")
-        hideKeyboard(this@GuessTheWordActivity)
-        timer.cancel()
-        timer = Timer()
-        timer.schedule(task, 1000, 1500)
-      }) {
-        Row() {
+      Button(enabled = isButtonEnabled,
+        shape = RoundedCornerShape(40.dp), onClick = {
+          Log.d("TAG", "RotatingImages: ${correctWord.value}")
+          isButtonEnabled = false
+          hideKeyboard(this@GuessTheWordActivity)
+          timer.cancel()
+          timer = Timer()
+          timer.schedule(task, 1000, 1500)
+
+        }) {
+        Row(
+          modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp),
+        ) {
           Icon(
             Icons.Default.Refresh,
             contentDescription = "content description",
-            tint = if (isDarkTheme(LocalContext.current)) Color.White else Color.Black
+            tint = Color.White
           )
-          Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"))
+          Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"), color = Color.White)
         }
       }
       GridWord(correctWord, this@GuessTheWordActivity)
@@ -204,7 +210,7 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
           shape = RoundedCornerShape(4.dp),
           backgroundColor = Color.LightGray
         ) {
-          TextField(
+          OutlinedTextField(
             value = wordStates[index].toString(),
             onValueChange = {
               if (it.isNotEmpty()) {
@@ -231,15 +237,21 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
               fontWeight = FontWeight.Bold,
               fontSize = 15.sp
             ),
+            /*onFocusEvent = { focusState ->
+              if (focusState.isFocused) {
+                text = text.copy(selection = TextRange(0, text.text.length))
+              }
+            },*/
             maxLines = 1,
             singleLine = true,
             /*keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),*/
             keyboardOptions = (KeyboardOptions.Default.copy(imeAction = ImeAction.Next)),
             keyboardActions = KeyboardActions(
               onNext = { focusManager.moveFocus(FocusDirection.Next) }
+            ),
+
             )
 
-          )
         }
       }
     }
