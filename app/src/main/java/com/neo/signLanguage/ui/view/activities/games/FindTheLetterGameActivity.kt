@@ -21,6 +21,7 @@ import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
 import java.util.*
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -36,11 +37,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 import com.neo.signLanguage.utils.DataSign
 
 import com.neo.signLanguage.utils.Game
@@ -107,27 +110,33 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     val allIntents = intents
     val showNoMoreIntentsDialog = remember { mutableStateOf(false) }
     val randomLetters by gameViewModel.randomGameLetters.observeAsState(
-
       Game(
         ArrayList(), Sign(
           "", 0, "",
         )
       )
     )
+    val getRecordByDifficulty = remember { mutableStateOf(getMemoryRecord(this, difficulty)) }
+    val currentRecord = remember { mutableStateOf(0) }
 
     if (remainingLives == 0) {
       showNoMoreIntentsDialog.value = true
-      AdUtils.checkCounter(this)
+      checkCounter(this)
       saveRecord(this)
       /*super.onBackPressed()*/
     }
-
+    val textStyle = TextStyle(
+      color = MaterialTheme.colors.onBackground,
+      fontWeight = FontWeight.W600,
+      fontSize = 16.sp,
+    )
     Box() {
       if (showNoMoreIntentsDialog.value) {
         TimeIsUpDialog(
           onTryAgainClick = {
             showNoMoreIntentsDialog.value = false
             remainingLives = allIntents
+            currentRecord.value = 0
           },
           onGoBackClick = {
             onClick()
@@ -136,6 +145,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
             onClick()
             showNoMoreIntentsDialog.value = false
           },
+          true,
           getStringByIdName(LocalContext.current, "sorry"),
           getStringByIdName(LocalContext.current, "try_again"),
           getStringByIdName(LocalContext.current, "retry"),
@@ -146,20 +156,41 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         modifier = Modifier
           .fillMaxSize()
           .padding(16.dp),
-        /*verticalArrangement = Arrangement.SpaceBetween,*/
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
         Box(
           modifier = Modifier
-            .align(Alignment.Start)
             .padding(16.dp)
+            .fillMaxWidth()
         ) {
-          backIcon(
-            onClick = {
-              saveRecord(this@FindTheLetterGameActivity)
-              onClick()
+          Row(
+            modifier = Modifier
+              .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+          ) {
+            backIcon(
+              onClick = {
+                saveRecord(this@FindTheLetterGameActivity)
+                onClick()
+              }
+            )
+            Column(
+            ) {
+              Text(
+                style = textStyle,
+                text = getStringByIdName(LocalContext.current, "hits") + ": " + currentRecord.value,
+              )
+              Text(
+                style = textStyle,
+                text = getStringByIdName(
+                  LocalContext.current,
+                  "record"
+                ) + ": " + getRecordByDifficulty.value,
+              )
             }
-          )
+
+          }
         }
         Row(
           verticalAlignment = Alignment.CenterVertically,
@@ -217,6 +248,11 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                     .clickable {
                       if ((randomLetters.data[index].letter) == randomLetters.correctAnswer.letter) {
                         record++
+                        currentRecord.value = record
+                        if (currentRecord.value > getRecordByDifficulty.value) {
+                          getRecordByDifficulty.value = currentRecord.value
+                          saveRecord(this@FindTheLetterGameActivity)
+                        }
                         showSnackBarToGames(
                           getString(R.string.correct),
                           R.color.green_dark,
@@ -272,8 +308,8 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   }
 
   private fun saveRecord(context: Context) {
-    if (getMemoryRecord(context, difficulty.toString()) < record) {
-      setMemoryRecord(context, difficulty.toString(), record)
+    if (getMemoryRecord(context, difficulty) < record) {
+      setMemoryRecord(context, difficulty, record)
     }
   }
 

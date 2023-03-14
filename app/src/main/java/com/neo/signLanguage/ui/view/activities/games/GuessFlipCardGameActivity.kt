@@ -32,9 +32,9 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 
 import com.neo.signLanguage.utils.DataSign
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -55,7 +55,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     binding.composeViewGamesFlipCard.setContent {
       MyMaterialTheme(
         content = {
-          Content(onClick = { onBackPressed() }, difficulty,)
+          Content(onClick = { onBackPressed() }, difficulty, this)
         }
       )
     }
@@ -66,7 +66,9 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
 fun Content(
   onClick: () -> Unit,
   difficulty: Difficulty,
+  guessFlipCardGameActivity: GuessFlipCardGameActivity,
 ) {
+
   val context = LocalContext
   val getDifficulty = generateDifficulty(difficulty)
   val time = remember { mutableStateOf(getDifficulty.timeInSeconds) }
@@ -80,18 +82,16 @@ fun Content(
   val flippedElements = remember { mutableStateListOf<String>() }
   val blockedElements = remember { mutableStateListOf<Int>() }
 
-  val showTimesUpDialog = remember {
-    mutableStateOf(false)
-  }
-  val showCompletedSuccessDialog = remember {
-    mutableStateOf(false)
-  }
-  val startTimer = remember {
-    mutableStateOf(true)
-  }
+  val showTimesUpDialog = remember { mutableStateOf(false) }
+  val showCompletedSuccessDialog = remember { mutableStateOf(false) }
+  val startTimer = remember { mutableStateOf(true) }
+  val timerPaused = remember { mutableStateOf(false) }
+
+
   LaunchedEffect(xd.value) {
 
     startTimer.value = true
+    timerPaused.value = false
     // Crear una copia inmutable de flipsStates
     val flipsStatesCopy = flipsStates.toList()
 
@@ -123,8 +123,11 @@ fun Content(
         /*Verify is all are Flips is disable*/
         if (flipSEnable.none { it }) {
 /*          onClick()
-          checkCounter(guessFlipCardGameActivity)*/
+          */
+          checkCounter(guessFlipCardGameActivity)
+          timerPaused.value = true
           showCompletedSuccessDialog.value = true
+
         }
       } else {
         flipsStates[blockedElements[0]].flipToFront()
@@ -150,43 +153,44 @@ fun Content(
         },
         {
           onClick()
-          showTimesUpDialog.value = false
         },
-        Utils.getStringByIdName(LocalContext.current, "times_over"),
-        Utils.getStringByIdName(LocalContext.current, "time_up"),
-        Utils.getStringByIdName(LocalContext.current, "retry"),
-        Utils.getStringByIdName(LocalContext.current, "go_back"),
+        true,
+        getStringByIdName(LocalContext.current, "times_over"),
+        getStringByIdName(LocalContext.current, "time_up"),
+        getStringByIdName(LocalContext.current, "retry"),
+        getStringByIdName(LocalContext.current, "go_back"),
       )
     }
     if (showCompletedSuccessDialog.value) {
       TimeIsUpDialog(
         onTryAgainClick = {
-          showCompletedSuccessDialog.value = false
-          xd.value = DataSign.getRandomToFindEquals(getDifficulty.pair.first)
+          onClick()
         },
         onGoBackClick = {
+          xd.value = DataSign.getRandomToFindEquals(getDifficulty.pair.first)
           onClick()
         },
         onDismissRequest = {
-          onClick()
           showCompletedSuccessDialog.value = false
         },
+        false,
         getStringByIdName(LocalContext.current, "level_completed"),
         getStringByIdName(LocalContext.current, "try_next_level"),
-        getStringByIdName(LocalContext.current, "play_again"),
+        getStringByIdName(LocalContext.current, "go_back"),
         getStringByIdName(LocalContext.current, "go_back"),
 
-      )
+        )
     }
     Column() {
       TimerScreen(
         onTimerEnd = {
-          /*onClick()*/
+          checkCounter(guessFlipCardGameActivity)
           showTimesUpDialog.value = true
         },
         timeInSeconds = time.value,
         color = getDifficulty.colorDifficulty,
-        timerActive = startTimer
+        timerActive = startTimer,
+        timerPaused = timerPaused,
       )
       Box(
         modifier = Modifier
@@ -205,7 +209,6 @@ fun Content(
           .fillMaxSize()
           .padding(16.dp)
       ) {
-
         LazyVerticalGrid(
           columns = GridCells.Fixed(getDifficulty.pair.second),
           verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -317,3 +320,25 @@ fun generateDifficulty(difficulty: Difficulty): GenerateDifficulty {
     Difficulty.VERY_HARD -> GenerateDifficulty(Pair(18, 6), 90, setColorByDifficulty(difficulty))
   }
 }
+
+fun getNextDifficulty(difficulty: Difficulty): Difficulty {
+  val values = Difficulty.values()
+  val currentIndex = values.indexOf(difficulty)
+  return if (currentIndex == values.lastIndex) {
+    difficulty
+  } else {
+    values[currentIndex + 1]
+  }
+}
+
+/*
+fun goNextLevel(context: Context, difficulty: Difficulty) {
+  val intent = Intent(context, GuessFlipCardGameActivity::class.java)
+  intent.putExtra("difficulty", getNextDifficulty(difficulty))
+  context.startActivity(intent)
+}
+
+@Composable
+fun GoNextLevelWrapper(context: Context, difficulty: Difficulty) {
+  goNextLevel(context, difficulty)
+}*/

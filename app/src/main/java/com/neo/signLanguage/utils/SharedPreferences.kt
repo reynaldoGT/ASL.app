@@ -2,6 +2,7 @@ package com.neo.signLanguage.utils
 
 import android.content.Context
 import androidx.core.content.ContextCompat
+import com.neo.signLanguage.ui.view.activities.games.Difficulty
 
 object SharedPreferences {
   private val SETTINGS = "SHARED_PREFERENCES"
@@ -18,6 +19,7 @@ object SharedPreferences {
   private val MEMORY_GAME_RECORD_HARD = "MEMORY_GAME_RECORD_HARD"
   private val IS_GRID_LAYOUT = "IS_GRID_LAYOUT"
   private val GUESS_GAME_THE_WORD_RECORD = "GUESS_GAME_THE_WORD_RECORD"
+
   /*private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
   private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)*/
   private val minDelayTime = 250
@@ -135,34 +137,39 @@ object SharedPreferences {
     editor.putBoolean(IS_GRID_LAYOUT, newState).apply()
   }
 
-  fun getMemoryRecord(context: Context, type: String): Int {
+  fun getMemoryRecord(context: Context, difficulty: Difficulty): Int {
     val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
-    when (type) {
-      "easy" -> {
-        return settings.getInt(MEMORY_GAME_RECORD_EASY, 0)
+    return when (difficulty) {
+      Difficulty.EASY -> {
+        settings.getInt(MEMORY_GAME_RECORD_EASY, 0)
       }
-      "medium" -> {
-        return settings.getInt(MEMORY_GAME_RECORD_MEDIUM, 0)
+      Difficulty.MEDIUM -> {
+        settings.getInt(MEMORY_GAME_RECORD_MEDIUM, 0)
       }
-      "hard" -> {
-        return settings.getInt(MEMORY_GAME_RECORD_HARD, 0)
+      Difficulty.HARD -> {
+        settings.getInt(MEMORY_GAME_RECORD_HARD, 0)
+      }
+      Difficulty.VERY_HARD -> {
+        settings.getInt(MEMORY_GAME_RECORD_HARD, 0)
       }
     }
-    return 0
   }
 
-  fun setMemoryRecord(context: Context, type: String, newState: Int) {
+  fun setMemoryRecord(context: Context, difficulty: Difficulty, newState: Int) {
     val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
 
-    when (type) {
-      "easy" -> {
+    when (difficulty) {
+      Difficulty.EASY -> {
         editor.putInt(MEMORY_GAME_RECORD_EASY, newState).apply()
       }
-      "medium" -> {
+      Difficulty.MEDIUM -> {
         editor.putInt(MEMORY_GAME_RECORD_MEDIUM, newState).apply()
       }
-      "hard" -> {
+      Difficulty.HARD -> {
+        editor.putInt(MEMORY_GAME_RECORD_HARD, newState).apply()
+      }
+      Difficulty.VERY_HARD -> {
         editor.putInt(MEMORY_GAME_RECORD_HARD, newState).apply()
       }
     }

@@ -122,4 +122,7 @@
     <string name="level_completed">¡Nivel completado!</string>
     <string name="play_again">Jugar de nuevo</string>
     <string name="try_next_level">Quizás deberías intentar el siguiente nivel.</string>
+
+    <string name="hits">Aciertos</string>
+    <string name="record">Record</string>
 </resources>

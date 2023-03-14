@@ -98,7 +98,7 @@ class GamesMenuFragment : Fragment() {
         GuessFlipCardGameActivity()
       )
     )
-    titlesMenu.add(
+    /*titlesMenu.add(
       MenuTitle(
         "test de juego de flechas",
         "test de juego de flechas desc",
@@ -106,7 +106,7 @@ class GamesMenuFragment : Fragment() {
         CardMatchingWithArrowsActivity(),
 
       )
-    )
+    )*/
 
     Box() {
       LazyVerticalGrid(

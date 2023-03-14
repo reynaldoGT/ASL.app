@@ -23,15 +23,16 @@ fun TimeIsUpDialog(
   onTryAgainClick: () -> Unit,
   onGoBackClick: () -> Unit,
   onDismissRequest: () -> Unit,
-  title:String,
-  subtitle:String,
-  confirmText:String,
-  cancelText:String
+  onlyConfirmButton: Boolean = false,
+  title: String,
+  subtitle: String,
+  confirmText: String,
+  cancelText: String
 ) {
   val context = LocalContext.current
 
-  MyMaterialTheme (){
-     AlertDialog(
+  MyMaterialTheme() {
+    AlertDialog(
 
       onDismissRequest = {
         onDismissRequest()
@@ -57,18 +58,21 @@ fun TimeIsUpDialog(
       buttons = {
         Row(
           modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceBetween
+          horizontalArrangement = if (onlyConfirmButton) Arrangement.SpaceBetween else Arrangement.End
         ) {
-          Button(
-            onClick = onGoBackClick,
-            modifier = Modifier.padding(8.dp),
-            colors = ButtonDefaults.buttonColors(
-              backgroundColor = Color(0xFFBBD4D8),
-              contentColor = Color.White
-            )
-          ) {
-            Text(text = cancelText)
+          if (onlyConfirmButton) {
+            Button(
+              onClick = onGoBackClick,
+              modifier = Modifier.padding(8.dp),
+              colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(0xFFBBD4D8),
+                contentColor = Color.White
+              )
+            ) {
+              Text(text = cancelText)
+            }
           }
+
           Button(
             onClick = onTryAgainClick,
             modifier = Modifier.padding(8.dp),

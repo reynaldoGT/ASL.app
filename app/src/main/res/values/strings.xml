@@ -120,6 +120,8 @@
     <string name="play_again">Play again</string>
     <string name="try_next_level">Maybe you should try the next level.</string>
 
+    <string name="hits">Hits</string>
+    <string name="record">Record</string>
 
 
 </resources>

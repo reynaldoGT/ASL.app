@@ -20,7 +20,8 @@ fun TimerScreen(
   onTimerEnd: () -> Unit,
   timeInSeconds: Int = 30,
   color: Color = Color.Blue,
-  timerActive: MutableState<Boolean>
+  timerActive: MutableState<Boolean>,
+  timerPaused: MutableState<Boolean>
 ) {
   var remainingTimeSeconds by remember { mutableStateOf(timeInSeconds) }
   val progressAnimDuration = 1500
@@ -29,33 +30,31 @@ fun TimerScreen(
     animationSpec = tween(durationMillis = progressAnimDuration, easing = FastOutSlowInEasing)
   )
 
-  LaunchedEffect(timerActive.value) {
+  suspend fun runTimer() {
     if (timerActive.value) {
       remainingTimeSeconds = timeInSeconds + 1
       while (remainingTimeSeconds > 0) {
-        delay(1000)
-        remainingTimeSeconds -= 1
-        if (remainingTimeSeconds == 0) {
-          timerActive.value = false
-          onTimerEnd()
+        if (!timerPaused.value) {
+          delay(1000)
+          remainingTimeSeconds -= 1
+          if (remainingTimeSeconds == 0) {
+            timerActive.value = false
+            onTimerEnd()
+          }
+        } else {
+          // If timer is paused, don't decrement remainingTimeSeconds
+          delay(100)
         }
       }
     }
   }
 
+  LaunchedEffect(timerActive.value) {
+    runTimer()
+  }
+
   LaunchedEffect(Unit) {
-    if (timerActive.value) {
-      while (remainingTimeSeconds > 0) {
-        delay(1000)
-        remainingTimeSeconds -= 1
-        if (remainingTimeSeconds == 0) {
-          timerActive.value = false
-
-          onTimerEnd()
-        }
-      }
-    }
-
+    runTimer()
   }
 
   Box(
@@ -72,10 +71,3 @@ fun TimerScreen(
     )
   }
 }
-
-/*
-fun restartTimer() {
-  remainingTimeSeconds = timeInSeconds
-  timerActiveState = true
-}
-*/
