@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.games.Difficulty
-import com.neo.signLanguage.utils.SharedPreferences.getColorShared
 import com.neo.signLanguage.utils.SharedPreferences.getPlaySoundInGames
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import com.neo.signLanguage.utils.SharedPreferences.getVibration
@@ -73,7 +72,7 @@ class Utils {
           )
         )
       } else {
-        vibrator?.vibrate(timer)
+        vibrator?.vibrate(VibrationEffect.createOneShot(timer, VibrationEffect.DEFAULT_AMPLITUDE))
       }
     }
 
@@ -137,8 +136,17 @@ class Utils {
         Difficulty.MEDIUM -> ComposeColor(0xFFFFC800) // Amarillo
         Difficulty.HARD -> ComposeColor(0xFFF56342) // Naranja
         Difficulty.VERY_HARD -> ComposeColor(0xFFD9483B) // Rojo oscuro
-        // Color primario de Material Design
       }
     }
+    /*private val difficultyColors = mapOf(
+      Difficulty.EASY to ComposeColor(0xFF47C87C), // Verde claro
+      Difficulty.MEDIUM to ComposeColor(0xFFFFC800), // Amarillo
+      Difficulty.HARD to ComposeColor(0xFFF56342), // Naranja
+      Difficulty.VERY_HARD to ComposeColor(0xFFD9483B) // Rojo oscuro
+    )
+
+    fun setColorByDifficulty(difficulty: Difficulty): ComposeColor {
+      return difficultyColors[difficulty] ?: ComposeColor.Black
+    }*/
   }
 }

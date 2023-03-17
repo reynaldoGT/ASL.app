@@ -29,14 +29,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityGuessTheWordBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.GamesUtils.Companion.getRandomWord
-import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.hideKeyboard
@@ -65,10 +63,8 @@ class GuessTheWordActivity : AppCompatActivity() {
     var correctWord = remember { mutableStateOf(getRandomWord()) }
     var imagesStatus by remember { mutableStateOf(generateListImageSign(correctWord.value)) }
     var currentImageIndex by remember { mutableStateOf(0) }
-    var lifes by remember { mutableStateOf(3) }
     var isButtonEnabled by remember { mutableStateOf(false) }
     var text by remember { mutableStateOf(TextFieldValue("")) }
-    var currentRecord by remember { mutableStateOf(0) }
     var timer = remember { Timer() }
 
     val task = object : TimerTask() {
