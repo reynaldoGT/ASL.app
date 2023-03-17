@@ -1,6 +1,8 @@
 package com.neo.signLanguage.ui.view.activities.games
 
 
+import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -58,257 +60,265 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
     binding.composeViewGamesFlipCard.setContent {
       MyMaterialTheme(
         content = {
-          Content(onClick = { onBackPressed() }, difficulty, this)
+          Content(onClick = { onBackPressed() }, difficulty)
         }
       )
     }
   }
-}
 
-@Composable
-fun Content(
-  onClick: () -> Unit,
-  difficulty: Difficulty,
-  guessFlipCardGameActivity: GuessFlipCardGameActivity,
-) {
-
-  val context = LocalContext
-  val getDifficulty = generateDifficulty(difficulty)
-  val time = remember { mutableStateOf(getDifficulty.timeInSeconds) }
-  val xd = remember { mutableStateOf(getRandomToFindEquals(getDifficulty.pair.first)) }
-
-  val flipsStates =
-    remember { mutableStateListOf(*Array(xd.value.size) { FlippableController() }) }
-  var flipSEnable =
-    remember { mutableStateListOf(*Array(xd.value.size) { true }) }
-
-  val flippedElements = remember { mutableStateListOf<String>() }
-  val blockedElements = remember { mutableStateListOf<Int>() }
-
-  val showTimesUpDialog = remember { mutableStateOf(false) }
-  val showCompletedSuccessDialog = remember { mutableStateOf(false) }
-  val startTimer = remember { mutableStateOf(true) }
-  val timerPaused = remember { mutableStateOf(false) }
-
-  val mediaPlayer = remember {
-    MediaPlayer.create(guessFlipCardGameActivity, R.raw.correct2_sound)
-  }
-  DisposableEffect(mediaPlayer) {
-    onDispose {
-      mediaPlayer.release()
-    }
-  }
-
-  LaunchedEffect(xd.value) {
-
-    startTimer.value = true
-    timerPaused.value = false
-    // Crear una copia inmutable de flipsStates
-    val flipsStatesCopy = flipsStates.toList()
-
-    // Reinicializar los estados de flipsStates
-    flipsStatesCopy.forEach { it.flipToFront() }
-
-    // Restablecer los estados de flipSEnable
-    flipSEnable = List(xd.value.size) { true }.toMutableStateList()
-
-    // Reinicializar los estados de flippedElements
-    flippedElements.clear()
-
-    // Reinicializar los estados de blockedElements
-    blockedElements.clear()
-    time.value = getDifficulty.timeInSeconds
-  }
-
-  fun verifyFlipMatch() {
-    if (flippedElements.size == 2) {
-      if (flippedElements[0] == flippedElements[1]) {
-        Utils.playCorrectSound(guessFlipCardGameActivity, mediaPlayer)
-        val searchResult =
-          xd.value.withIndex().filter { (_, sign) -> sign.letter == flippedElements[0] }
-        val indices = searchResult.map { (index, _) -> index }
-        indices.forEach {
-          flipSEnable[it] = false
-        }
-        flippedElements.clear()
-        blockedElements.clear()
-        /*Verify is all are Flips is disable*/
-        if (flipSEnable.none { it }) {
-          checkCounter(guessFlipCardGameActivity)
-          timerPaused.value = true
-          showCompletedSuccessDialog.value = true
-
-        }
-      } else {
-        vibratePhone(guessFlipCardGameActivity)
-        flipsStates[blockedElements[0]].flipToFront()
-        flipsStates[blockedElements[1]].flipToFront()
-        blockedElements.clear()
-        flippedElements.clear()
-      }
-    }
-  }
-  Box(
-    modifier = Modifier
-      .fillMaxSize()
-      .padding(horizontal = 8.dp),
+  @Composable
+  fun Content(
+    onClick: () -> Unit,
+    difficulty: Difficulty,
   ) {
-    if (showTimesUpDialog.value) {
-      TimeIsUpDialog(
-        onTryAgainClick = {
-          showTimesUpDialog.value = false
-          xd.value = getRandomToFindEquals(getDifficulty.pair.first)
-        },
-        onGoBackClick = {
-          onClick()
-        },
-        {
-          onClick()
-        },
-        true,
-        getStringByIdName(LocalContext.current, "times_over"),
-        getStringByIdName(LocalContext.current, "time_up"),
-        getStringByIdName(LocalContext.current, "retry"),
-        getStringByIdName(LocalContext.current, "go_back"),
-      )
-    }
-    if (showCompletedSuccessDialog.value) {
-      TimeIsUpDialog(
-        onTryAgainClick = {
-          onClick()
-        },
-        onGoBackClick = {
-          xd.value = getRandomToFindEquals(getDifficulty.pair.first)
-          onClick()
-        },
-        onDismissRequest = {
-          showCompletedSuccessDialog.value = false
-        },
-        false,
-        getStringByIdName(LocalContext.current, "level_completed"),
-        getStringByIdName(LocalContext.current, "try_next_level"),
-        getStringByIdName(LocalContext.current, "go_back"),
-        getStringByIdName(LocalContext.current, "go_back"),
 
-        )
+    val context = LocalContext
+    val getDifficulty = generateDifficulty(difficulty)
+    val time = remember { mutableStateOf(getDifficulty.timeInSeconds) }
+    val xd = remember { mutableStateOf(getRandomToFindEquals(getDifficulty.pair.first)) }
+
+    val flipsStates =
+      remember { mutableStateListOf(*Array(xd.value.size) { FlippableController() }) }
+    var flipSEnable =
+      remember { mutableStateListOf(*Array(xd.value.size) { true }) }
+
+    val flippedElements = remember { mutableStateListOf<String>() }
+    val blockedElements = remember { mutableStateListOf<Int>() }
+
+    val showTimesUpDialog = remember { mutableStateOf(false) }
+    val showCompletedSuccessDialog = remember { mutableStateOf(false) }
+    val startTimer = remember { mutableStateOf(true) }
+    val timerPaused = remember { mutableStateOf(false) }
+
+    val correctSound = remember {
+      MediaPlayer.create(this@GuessFlipCardGameActivity, R.raw.correct2_sound)
     }
-    Column() {
-      TimerScreen(
-        onTimerEnd = {
-          checkCounter(guessFlipCardGameActivity)
-          showTimesUpDialog.value = true
-        },
-        timeInSeconds = time.value,
-        color = getDifficulty.colorDifficulty,
-        timerActive = startTimer,
-        timerPaused = timerPaused,
-      )
-      Box(
-        modifier = Modifier
-          .align(Alignment.Start)
-          .padding(16.dp)
-      ) {
-        backIcon(
-          onClick = {
-            onClick()
+    val wrongSound = remember {
+      MediaPlayer.create(this@GuessFlipCardGameActivity, R.raw.wrong_sound)
+    }
+    val loseSound = remember {
+      MediaPlayer.create(this@GuessFlipCardGameActivity, R.raw.wrong_sound)
+    }
+    DisposableEffect(wrongSound) {
+      onDispose {
+        wrongSound.release()
+        loseSound.release()
+        correctSound.release()
+      }
+    }
+
+    LaunchedEffect(xd.value) {
+
+      startTimer.value = true
+      timerPaused.value = false
+      // Crear una copia inmutable de flipsStates
+      val flipsStatesCopy = flipsStates.toList()
+
+      // Reinicializar los estados de flipsStates
+      flipsStatesCopy.forEach { it.flipToFront() }
+
+      // Restablecer los estados de flipSEnable
+      flipSEnable = List(xd.value.size) { true }.toMutableStateList()
+
+      // Reinicializar los estados de flippedElements
+      flippedElements.clear()
+
+      // Reinicializar los estados de blockedElements
+      blockedElements.clear()
+      time.value = getDifficulty.timeInSeconds
+    }
+
+    fun verifyFlipMatch() {
+      if (flippedElements.size == 2) {
+        if (flippedElements[0] == flippedElements[1]) {
+          Utils.playCorrectSound(this@GuessFlipCardGameActivity, correctSound)
+          val searchResult =
+            xd.value.withIndex().filter { (_, sign) -> sign.letter == flippedElements[0] }
+          val indices = searchResult.map { (index, _) -> index }
+          indices.forEach {
+            flipSEnable[it] = false
           }
+          flippedElements.clear()
+          blockedElements.clear()
+          /*Verify is all are Flips is disable*/
+          if (flipSEnable.none { it }) {
+            checkCounter(this@GuessFlipCardGameActivity)
+            timerPaused.value = true
+            showCompletedSuccessDialog.value = true
+          }
+        } else {
+          Utils.playCorrectSound(this@GuessFlipCardGameActivity, wrongSound)
+          vibratePhone(this@GuessFlipCardGameActivity)
+          flipsStates[blockedElements[0]].flipToFront()
+          flipsStates[blockedElements[1]].flipToFront()
+          blockedElements.clear()
+          flippedElements.clear()
+        }
+      }
+    }
+    Box(
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(horizontal = 8.dp),
+    ) {
+      if (showTimesUpDialog.value) {
+        TimeIsUpDialog(
+          onTryAgainClick = {
+            Utils.playCorrectSound(this@GuessFlipCardGameActivity, loseSound)
+            showTimesUpDialog.value = false
+            xd.value = getRandomToFindEquals(getDifficulty.pair.first)
+          },
+          onGoBackClick = {
+            onClick()
+          },
+          {
+            onClick()
+          },
+          true,
+          getStringByIdName(LocalContext.current, "times_over"),
+          getStringByIdName(LocalContext.current, "time_up"),
+          getStringByIdName(LocalContext.current, "retry"),
+          getStringByIdName(LocalContext.current, "go_back"),
         )
       }
-
-      Box(
-        modifier = Modifier
-          .fillMaxSize()
-          .padding(16.dp)
-      ) {
-        LazyVerticalGrid(
-          columns = GridCells.Fixed(getDifficulty.pair.second),
-          verticalArrangement = Arrangement.spacedBy(4.dp),
-          horizontalArrangement = Arrangement.spacedBy(4.dp),
-          modifier = Modifier.align(Alignment.Center),
-          content = {
-            itemsIndexed(xd.value) { index, sign ->
-              Flippable(
-                onFlippedListener = {
-                  if (!blockedElements.contains(index)) {
-                    if (flippedElements.size < 2) {
-                      flippedElements.add(sign.letter)
-                      blockedElements.add(index)
-                      verifyFlipMatch()
-                    }
-                  } else {
-                    flippedElements.remove(sign.letter)
-                    blockedElements.remove(index)
-                  }
-                },
-                flipEnabled = flipSEnable[index],
-                frontSide = {
-                  Card(
-                    modifier = Modifier
-                      .fillMaxSize()
-                      .border(
-                        width = 2.dp,
-                        color = getHandCurrentColor(context.current),
-                        shape = RoundedCornerShape(8.dp)
-                      ),
-                    shape = RoundedCornerShape(8.dp),
-                    elevation = 6.dp,
-                  ) {
-                    Box() {
-                      Image(
-                        painter = painterResource(id = R.drawable.ic_help_outline),
-                        contentDescription = null,
-                        colorFilter = getHandColor(context.current),
-                        modifier = Modifier
-                          .fillMaxSize()
-                          .aspectRatio(1f)
-                          .padding(4.dp)
-                      )
-                    }
-                  }
-                },
-                backSide = {
-                  Card(
-                    shape = RoundedCornerShape(8.dp),
-                    elevation = 6.dp,
-                    modifier = Modifier
-                      .fillMaxSize()
-                      .border(
-                        width = 2.dp,
-                        color = getHandCurrentColor(context.current),
-                        shape = RoundedCornerShape(8.dp)
-                      ),
-                  ) {
-                    Column(
-                      horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                      Image(
-                        painter = painterResource(id = sign.image),
-                        contentDescription = null,
-                        colorFilter = getHandColor(context.current),
-                        modifier = Modifier
-                          .fillMaxSize()
-                          .aspectRatio(1f)
-                          .padding(8.dp)
-                      )
-                      Text(
-                        sign.letter.uppercase(Locale.getDefault()),
-                        textAlign = TextAlign.Center,
-                        fontSize = (28 - getDifficulty.pair.second).sp,
-                        fontWeight = FontWeight(500),
-                        color = getHandCurrentColor(context.current)
-                      )
-                    }
-                  }
-                },
-                flipController = flipsStates[index],
-              )
-            }
-          }
+      if (showCompletedSuccessDialog.value) {
+        TimeIsUpDialog(
+          onTryAgainClick = {
+            /*onClick()*/
+            goNextLevel(this@GuessFlipCardGameActivity, difficulty)
+          },
+          onGoBackClick = {
+            xd.value = getRandomToFindEquals(getDifficulty.pair.first)
+            onClick()
+          },
+          onDismissRequest = {
+            showCompletedSuccessDialog.value = false
+          },
+          false,
+          getStringByIdName(LocalContext.current, "level_completed"),
+          getStringByIdName(LocalContext.current, "try_next_level"),
+          getStringByIdName(LocalContext.current, "go_back"),
+          getStringByIdName(LocalContext.current, "go_back"),
         )
+      }
+      Column() {
+        TimerScreen(
+          onTimerEnd = {
+            checkCounter(this@GuessFlipCardGameActivity)
+            showTimesUpDialog.value = true
+          },
+          timeInSeconds = time.value,
+          color = getDifficulty.colorDifficulty,
+          timerActive = startTimer,
+          timerPaused = timerPaused,
+        )
+        Box(
+          modifier = Modifier
+            .align(Alignment.Start)
+            .padding(16.dp)
+        ) {
+          backIcon(
+            onClick = {
+              onClick()
+            }
+          )
+        }
+        Box(
+          modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+        ) {
+          LazyVerticalGrid(
+            columns = GridCells.Fixed(getDifficulty.pair.second),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = Modifier.align(Alignment.Center),
+            content = {
+              itemsIndexed(xd.value) { index, sign ->
+                Flippable(
+                  onFlippedListener = {
+                    if (!blockedElements.contains(index)) {
+                      if (flippedElements.size < 2) {
+                        flippedElements.add(sign.letter)
+                        blockedElements.add(index)
+                        verifyFlipMatch()
+                      }
+                    } else {
+                      flippedElements.remove(sign.letter)
+                      blockedElements.remove(index)
+                    }
+                  },
+                  flipEnabled = flipSEnable[index],
+                  frontSide = {
+                    Card(
+                      modifier = Modifier
+                        .fillMaxSize()
+                        .border(
+                          width = 2.dp,
+                          color = getHandCurrentColor(context.current),
+                          shape = RoundedCornerShape(8.dp)
+                        ),
+                      shape = RoundedCornerShape(8.dp),
+                      elevation = 6.dp,
+                    ) {
+                      Box() {
+                        Image(
+                          painter = painterResource(id = R.drawable.ic_help_outline),
+                          contentDescription = null,
+                          colorFilter = getHandColor(context.current),
+                          modifier = Modifier
+                            .fillMaxSize()
+                            .aspectRatio(1f)
+                            .padding(4.dp)
+                        )
+                      }
+                    }
+                  },
+                  backSide = {
+                    Card(
+                      shape = RoundedCornerShape(8.dp),
+                      elevation = 6.dp,
+                      modifier = Modifier
+                        .fillMaxSize()
+                        .border(
+                          width = 2.dp,
+                          color = getHandCurrentColor(context.current),
+                          shape = RoundedCornerShape(8.dp)
+                        ),
+                    ) {
+                      Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                      ) {
+                        Image(
+                          painter = painterResource(id = sign.image),
+                          contentDescription = null,
+                          colorFilter = getHandColor(context.current),
+                          modifier = Modifier
+                            .fillMaxSize()
+                            .aspectRatio(1f)
+                            .padding(8.dp)
+                        )
+                        Text(
+                          sign.letter.uppercase(Locale.getDefault()),
+                          textAlign = TextAlign.Center,
+                          fontSize = (28 - getDifficulty.pair.second).sp,
+                          fontWeight = FontWeight(500),
+                          color = getHandCurrentColor(context.current)
+                        )
+                      }
+                    }
+                  },
+                  flipController = flipsStates[index],
+                )
+              }
+            }
+          )
+        }
       }
     }
   }
 }
+
 
 enum class Difficulty {
   EASY,
@@ -342,12 +352,13 @@ fun getNextDifficulty(difficulty: Difficulty): Difficulty {
   }
 }
 
-/*
 fun goNextLevel(context: Context, difficulty: Difficulty) {
   val intent = Intent(context, GuessFlipCardGameActivity::class.java)
   intent.putExtra("difficulty", getNextDifficulty(difficulty))
   context.startActivity(intent)
 }
+/*
+
 
 @Composable
 fun GoNextLevelWrapper(context: Context, difficulty: Difficulty) {

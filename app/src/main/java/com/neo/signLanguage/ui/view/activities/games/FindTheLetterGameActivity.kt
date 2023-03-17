@@ -12,12 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
-import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
-import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
 import java.util.*
@@ -44,11 +41,9 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
-import com.neo.signLanguage.utils.DataSign
 
 import com.neo.signLanguage.utils.Game
 import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
-import com.neo.signLanguage.utils.SharedPreferences.getVibration
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.SharedPreferences.setMemoryRecord
 import com.neo.signLanguage.utils.Utils
@@ -119,17 +114,25 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     val getRecordByDifficulty = remember { mutableStateOf(getMemoryRecord(this, difficulty)) }
     val currentRecord = remember { mutableStateOf(0) }
 
-    val mediaPlayer = remember {
+    val correctAnswerSound = remember {
       MediaPlayer.create(this@FindTheLetterGameActivity, R.raw.correct2_sound)
     }
+    val loseSound = remember {
+      MediaPlayer.create(this@FindTheLetterGameActivity, R.raw.lose_sound2)
+    }
+    val wrongSound = remember {
+      MediaPlayer.create(this@FindTheLetterGameActivity, R.raw.wrong_sound)
+    }
 
-    DisposableEffect(mediaPlayer) {
+    DisposableEffect(correctAnswerSound) {
       onDispose {
-        mediaPlayer.release()
+        correctAnswerSound.release()
+        loseSound.release()
       }
     }
 
     if (remainingLives == 0) {
+      loseSound.start()
       showNoMoreIntentsDialog.value = true
       checkCounter(this)
       saveRecord(this)
@@ -258,28 +261,29 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                     .clickable {
                       if ((randomLetters.data[index].letter) == randomLetters.correctAnswer.letter) {
                         /*Check this*/
-                        Utils.playCorrectSound(this@FindTheLetterGameActivity, mediaPlayer)
+                        Utils.playCorrectSound(this@FindTheLetterGameActivity, correctAnswerSound)
                         record++
                         currentRecord.value = record
                         if (currentRecord.value > getRecordByDifficulty.value) {
                           getRecordByDifficulty.value = currentRecord.value
                           saveRecord(this@FindTheLetterGameActivity)
                         }
-                        showSnackBarToGames(
+                        /*showSnackBarToGames(
                           getString(R.string.correct),
                           R.color.green_dark,
                           this@FindTheLetterGameActivity.findViewById(android.R.id.content),
                           this@FindTheLetterGameActivity,
-                        )
+                        )*/
                         model.getRandomToFindLetter(numberElements)
                       } else {
-                        vibratePhone(applicationContext, 50)
-                        showSnackBarToGames(
+                        vibratePhone(applicationContext)
+                        Utils.playCorrectSound(this@FindTheLetterGameActivity, wrongSound)
+                        /*showSnackBarToGames(
                           getString(R.string.incorrect),
                           R.color.red_dark,
                           this@FindTheLetterGameActivity.findViewById(android.R.id.content),
                           this@FindTheLetterGameActivity,
-                        )
+                        )*/
                         /*showSnackBar(getString(R.string.incorrect), R.color.red_dark)*/
                         /*model.setIntents(-1)*/
                         remainingLives--

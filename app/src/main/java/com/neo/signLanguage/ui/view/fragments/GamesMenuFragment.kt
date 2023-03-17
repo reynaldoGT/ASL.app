@@ -53,7 +53,6 @@ class GamesMenuFragment : Fragment() {
     initLoad(binding.banner)
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
-
         content = {
           GamesMenuContent()
         }

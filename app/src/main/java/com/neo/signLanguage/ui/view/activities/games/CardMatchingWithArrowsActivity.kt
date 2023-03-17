@@ -4,7 +4,6 @@ package com.neo.signLanguage.ui.view.activities.games
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,10 +30,7 @@ import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
-import com.neo.signLanguage.utils.GamesUtils
 import com.neo.signLanguage.utils.GamesUtils.Companion.generateOptionsToQuiz
-import com.neo.signLanguage.utils.SharedPreferences
-import com.neo.signLanguage.utils.SharedPreferences.getVibration
 import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
 
@@ -69,9 +65,21 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
     val mediaPlayer = remember {
       MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.correct2_sound)
     }
+    val playLooseRound = remember {
+      MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.lose_sound2)
+    }
+    val mediaPlayerWin = remember {
+      MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.win_sound)
+    }
+    val wrongSound = remember {
+      MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.wrong_sound)
+    }
     DisposableEffect(mediaPlayer) {
       onDispose {
         mediaPlayer.release()
+        mediaPlayerWin.release()
+        playLooseRound.release()
+        wrongSound.release()
       }
     }
     fun verifyAnswer() {
@@ -79,10 +87,8 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
       selectedIndex = -1
       if (optionSelected == generateOptionsToQuiz.value.correctAnswer) {
         /*Play sound*/
-        /*mediaPlayer.start()*/
         playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayer)
         /*Select the options selected*/
-
         optionSelected = ""
         generateOptionsToQuiz.value = generateOptionsToQuiz()
 
@@ -92,10 +98,13 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           currentStep = 0
         }
       } else {
+        /*Play sound*/
+        playCorrectSound(this@CardMatchingWithArrowsActivity, wrongSound)
         lifesAmount--
         Utils.vibratePhone(applicationContext)
         if (lifesAmount == 0) {
           /*onClick()*/
+          playCorrectSound(this@CardMatchingWithArrowsActivity, playLooseRound)
           showDialogWithoutIntents = true
         }
       }
@@ -121,6 +130,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               currentStep = currentStep,
               onStepClick = { currentStep++ },
               onProgressComplete = {
+                playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayerWin)
                 showDialogLevelCompleted = true
               },
               modifier = Modifier
@@ -140,7 +150,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               onClick()
             },
             onGoBackClick = {
-
               onBack()
             },
             onDismissRequest = {
@@ -151,7 +160,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             Utils.getStringByIdName(LocalContext.current, "try_next_level"),
             Utils.getStringByIdName(LocalContext.current, "go_back"),
             Utils.getStringByIdName(LocalContext.current, "go_back"),
-            )
+          )
         }
         if (showDialogLevelCompleted) {
           TimeIsUpDialog(
@@ -169,8 +178,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             Utils.getStringByIdName(LocalContext.current, "try_next_level"),
             Utils.getStringByIdName(LocalContext.current, "go_back"),
             Utils.getStringByIdName(LocalContext.current, "go_back"),
-
-            )
+          )
         }
         Text(
           text = "¿Que dice la palabra?",
@@ -227,7 +235,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
                   .clickable {
                     selectedIndex = index
                     optionSelected = generateOptionsToQuiz.value.options[index]
-
                   }
               ) {
                 Text(

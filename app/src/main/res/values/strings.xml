@@ -17,10 +17,11 @@
     <string name="letter_title">Letter</string>
     <string name="number_title">Number</string>
 
-    <string name="test_id_application_admob" translatable="false">ca-app-pub-8271313080297168~9117641883</string>
-    <string name="test_banner_id" translatable="false">ca-app-pub-8271313080297168/3160406492</string>
-    <string name="test_interstitial_id" translatable="false">ca-app-pub-8271313080297168/5336989604</string>
-    <string name="test_reward_id" translatable="false">ca-app-pub-8271313080297168/3695225208</string>
+    <string name="test_id_application_admob" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="test_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="test_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
+
 
     <string name="dark_theme">Dark Theme</string>
     <string name="change_layout">Change layout</string>
