@@ -98,15 +98,14 @@ class GamesMenuFragment : Fragment() {
         GuessFlipCardGameActivity()
       )
     )
-    /*titlesMenu.add(
+    titlesMenu.add(
       MenuTitle(
-        "test de juego de flechas",
-        "test de juego de flechas desc",
+        "Adivina la palabra",
+        "Adivina que palabra se generar atravez de las letras",
         R.drawable.ic_clip_card,
         CardMatchingWithArrowsActivity(),
-
       )
-    )*/
+    )
 
     Box() {
       LazyVerticalGrid(

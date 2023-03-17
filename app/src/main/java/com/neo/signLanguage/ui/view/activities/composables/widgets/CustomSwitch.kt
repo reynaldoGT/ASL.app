@@ -1,6 +1,5 @@
 package com.neo.signLanguage.ui.view.activities.composables.widgets
 
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
@@ -12,11 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import com.neo.signLanguage.ui.view.activities.MainActivity
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
-import com.neo.signLanguage.utils.Utils
 
 @Composable
 fun CustomSwitch(
@@ -51,7 +47,6 @@ fun CustomSwitch(
 
 @Composable
 fun CustomSwitchWithTitle(
-
   label: String,
   titleLabel: String,
   switchState: MutableState<Boolean>,

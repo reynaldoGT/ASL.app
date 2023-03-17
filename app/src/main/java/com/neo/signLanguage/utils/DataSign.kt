@@ -114,67 +114,6 @@ class DataSign {
       return array
     }
 
-    fun getRandomToFindCorrectLetter(amount: Int): Game {
-      val randomLetters = ArrayList<Sign>()
-      val randomInts = generateSequence {
-        // this lambda is the source of the sequence's values
-        Random.nextInt(0 until this.getLetterArray(false).size)
-      }
-        .distinct()
-        .take(amount)
-        .toSet()
-
-      for (i in randomInts) {
-        randomLetters.add(this.getLetterArray(false)[i])
-      }
-
-      return Game(
-        randomLetters,
-        randomLetters[(0 until randomLetters.size - 1).random()]
-      )
-    }
-
-    fun getRandomToFindEquals(amount: Int): ArrayList<Sign> {
-      val randomLetters = ArrayList<Sign>()
-      val resortList = ArrayList<Sign>()
-      val randomInts = generateSequence {
-        // this lambda is the source of the sequence's values
-        Random.nextInt(0 until this.getLetterArray(false).size)
-      }
-        .distinct()
-        .take(amount)
-        .toSet()
-      val randomPosition = generateSequence {
-        // this lambda is the source of the sequence's values
-        Random.nextInt(0 until amount * 2)
-      }
-        .distinct()
-        .take(amount * 2)
-        .toSet()
-
-      for (i in randomInts) {
-        randomLetters.add(
-          Sign(
-            this.getLetterArray()[i].letter,
-            this.getLetterArray()[i].image,
-            "letter",
-          ),
-        )
-        randomLetters.add(
-          Sign(
-            this.getLetterArray()[i].letter,
-            this.getLetterArray()[i].image,
-            "image",
-          )
-        )
-
-      }
-      for (i in randomPosition) {
-        resortList.add(randomLetters[i])
-      }
-      return resortList
-    }
-
     fun getLetterAndSignArray(): ArrayList<Sign> {
       return letterWithSignArray
     }
@@ -245,7 +184,6 @@ class DataSign {
       var stringCleaned: String = message.trim().lowercase()
       stringCleaned = re.replace(stringCleaned, "") // works
       stringCleaned = stringCleaned.replace("\\s+".toRegex(), " ")
-
       stringCleaned = Normalizer.normalize(stringCleaned, Normalizer.Form.NFD)
 
       val stringArray = stringCleaned.toCharArray()

@@ -34,7 +34,7 @@ import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 
-import com.neo.signLanguage.utils.DataSign
+import com.neo.signLanguage.utils.GamesUtils.Companion.getRandomToFindEquals
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -72,7 +72,7 @@ fun Content(
   val context = LocalContext
   val getDifficulty = generateDifficulty(difficulty)
   val time = remember { mutableStateOf(getDifficulty.timeInSeconds) }
-  val xd = remember { mutableStateOf(DataSign.getRandomToFindEquals(getDifficulty.pair.first)) }
+  val xd = remember { mutableStateOf(getRandomToFindEquals(getDifficulty.pair.first)) }
 
   val flipsStates =
     remember { mutableStateListOf(*Array(xd.value.size) { FlippableController() }) }
@@ -146,7 +146,7 @@ fun Content(
       TimeIsUpDialog(
         onTryAgainClick = {
           showTimesUpDialog.value = false
-          xd.value = DataSign.getRandomToFindEquals(getDifficulty.pair.first)
+          xd.value = getRandomToFindEquals(getDifficulty.pair.first)
         },
         onGoBackClick = {
           onClick()
@@ -167,7 +167,7 @@ fun Content(
           onClick()
         },
         onGoBackClick = {
-          xd.value = DataSign.getRandomToFindEquals(getDifficulty.pair.first)
+          xd.value = getRandomToFindEquals(getDifficulty.pair.first)
           onClick()
         },
         onDismissRequest = {

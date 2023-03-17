@@ -2,8 +2,8 @@ package com.neo.signLanguage.ui.viewModel
 
 import androidx.lifecycle.*
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.utils.DataSign
 import com.neo.signLanguage.utils.Game
+import com.neo.signLanguage.utils.GamesUtils.Companion.getRandomToFindCorrectLetter
 
 
 class GameViewModel : ViewModel() {
@@ -16,7 +16,7 @@ class GameViewModel : ViewModel() {
   }
 
   fun getRandomToFindLetter(amount: Int) {
-    randomGameLetters.postValue(DataSign.getRandomToFindCorrectLetter(amount))
+    randomGameLetters.postValue(getRandomToFindCorrectLetter(amount))
   }
 
   fun setMessageWithImages(singList: ArrayList<Sign>) {

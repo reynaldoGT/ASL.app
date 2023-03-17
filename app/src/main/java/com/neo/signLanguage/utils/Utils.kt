@@ -18,7 +18,6 @@ import com.neo.signLanguage.ui.view.activities.games.Difficulty
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import java.text.Normalizer
 import java.util.*
-import kotlin.random.Random
 
 
 class Utils {
@@ -48,7 +47,7 @@ class Utils {
         .toCollection(arrayListOf())
     }
 
-    private fun cleanString(string: String): String {
+    fun cleanString(string: String): String {
       val re = Regex("[^[A-Za-z0-9 ,À-ú]+\$]")
       var stringCleaned = ""
       stringCleaned = string.trim().lowercase()
@@ -84,79 +83,9 @@ class Utils {
       imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun getRandomWord(): String {
-      val palabrasIngles = listOf(
-        "time",
-        "people",
-        "way",
-        "day",
-        "man",
-        "woman",
-        "year",
-        "good",
-        "new",
-        "first",
-        "last",
-        "long",
-        "great",
-        "little",
-        "own",
-        "other",
-        "old",
-        "right",
-        "big",
-        "high",
 
-        "small",
-        "large",
-        "next",
-        "early",
-        "young",
-        "few",
-        "public",
-        "bad",
-        "same",
-        "able"
-      )
-      val palabrasEspanol = listOf(
-        "tiempo",
-        "gente",
-        "camino",
-        "dia",
-        "hombre",
-        "mujer",
-        "año",
-        "bueno",
-        "nuevo",
-        "primero",
-        "ultimo",
-        "largo",
-        "genial",
-        "pequeño",
-        "propio",
-        "otro",
-        "viejo",
-        "derecho",
-        "grande",
-        "alto",
-        "pequeño",
-        "grande",
-        "proximo",
-        "temprano",
-        "joven",
-        "pocos",
-        "publico",
-        "malo",
-        "mismo",
-        "capaz"
-      )
-      val index = Random.nextInt(palabrasIngles.size)
 
-      return if (Locale.getDefault().language == "es")
-        cleanString(palabrasEspanol[index])
-      else
-        palabrasIngles[index]
-    }
+
 
     fun showSnackBarToGames(message: String, color: Int, view: View, context: Context) {
       Snackbar

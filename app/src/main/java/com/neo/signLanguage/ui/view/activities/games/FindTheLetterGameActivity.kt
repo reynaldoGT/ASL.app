@@ -21,7 +21,6 @@ import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
 import java.util.*
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
