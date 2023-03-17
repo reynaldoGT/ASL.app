@@ -27,13 +27,16 @@ import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityCardMatchingWithArrowsBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
+import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
+import com.neo.signLanguage.utils.GamesUtils
 import com.neo.signLanguage.utils.GamesUtils.Companion.generateOptionsToQuiz
 import com.neo.signLanguage.utils.SharedPreferences
 import com.neo.signLanguage.utils.SharedPreferences.getVibration
 import com.neo.signLanguage.utils.Utils
+import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
 
 
 class CardMatchingWithArrowsActivity : AppCompatActivity() {
@@ -60,6 +63,9 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
     var lifesAmount by remember { mutableStateOf(5) }
     var selectedIndex by remember { mutableStateOf(-1) }
     var optionSelected by remember { mutableStateOf("") }
+    var showDialogWithoutIntents by remember { mutableStateOf(false) }
+    var showDialogLevelCompleted by remember { mutableStateOf(false) }
+
     val mediaPlayer = remember {
       MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.correct2_sound)
     }
@@ -73,8 +79,10 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
       selectedIndex = -1
       if (optionSelected == generateOptionsToQuiz.value.correctAnswer) {
         /*Play sound*/
-        mediaPlayer.start()
+        /*mediaPlayer.start()*/
+        playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayer)
         /*Select the options selected*/
+
         optionSelected = ""
         generateOptionsToQuiz.value = generateOptionsToQuiz()
 
@@ -85,11 +93,10 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
         }
       } else {
         lifesAmount--
-        if (getVibration(this@CardMatchingWithArrowsActivity)) {
-          Utils.vibratePhone(applicationContext, 50)
-        }
+        Utils.vibratePhone(applicationContext)
         if (lifesAmount == 0) {
-          onClick()
+          /*onClick()*/
+          showDialogWithoutIntents = true
         }
       }
     }
@@ -108,11 +115,14 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
                 onBack()
               }
             )
+
             ProgressGameIndicator(
               maxSteps = maxSteps,
               currentStep = currentStep,
               onStepClick = { currentStep++ },
-              onProgressComplete = { },
+              onProgressComplete = {
+                showDialogLevelCompleted = true
+              },
               modifier = Modifier
                 .weight(1f)
                 .height(16.dp)
@@ -122,6 +132,45 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             LivesCounter(lifesAmount)
           }
 
+        }
+        /*TODO change the strings*/
+        if (showDialogWithoutIntents) {
+          TimeIsUpDialog(
+            onTryAgainClick = {
+              onClick()
+            },
+            onGoBackClick = {
+
+              onBack()
+            },
+            onDismissRequest = {
+              showDialogWithoutIntents = false
+            },
+            false,
+            Utils.getStringByIdName(LocalContext.current, "level_completed"),
+            Utils.getStringByIdName(LocalContext.current, "try_next_level"),
+            Utils.getStringByIdName(LocalContext.current, "go_back"),
+            Utils.getStringByIdName(LocalContext.current, "go_back"),
+            )
+        }
+        if (showDialogLevelCompleted) {
+          TimeIsUpDialog(
+            onTryAgainClick = {
+              onClick()
+            },
+            onGoBackClick = {
+              onBack()
+            },
+            onDismissRequest = {
+              showDialogWithoutIntents = false
+            },
+            false,
+            Utils.getStringByIdName(LocalContext.current, "level_completed"),
+            Utils.getStringByIdName(LocalContext.current, "try_next_level"),
+            Utils.getStringByIdName(LocalContext.current, "go_back"),
+            Utils.getStringByIdName(LocalContext.current, "go_back"),
+
+            )
         }
         Text(
           text = "¿Que dice la palabra?",
@@ -133,6 +182,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           fontWeight = FontWeight.W600
         )
         LazyVerticalGrid(
+          modifier = Modifier.padding(vertical = 16.dp),
           columns = GridCells.Fixed(generateOptionsToQuiz.value.signList.size),
           /*modifier = Modifier.align(Alignment.Center),*/
           content = {
@@ -210,6 +260,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             text = "Comprobar",
             modifier = Modifier.padding(vertical = 10.dp),
             fontSize = 16.sp,
+            color = Color.White
           )
         }
       }

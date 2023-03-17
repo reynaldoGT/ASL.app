@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.activities.games
 
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -35,10 +36,12 @@ import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 
 import com.neo.signLanguage.utils.GamesUtils.Companion.getRandomToFindEquals
+import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
+import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.FlippableController
 import java.util.*
@@ -87,6 +90,14 @@ fun Content(
   val startTimer = remember { mutableStateOf(true) }
   val timerPaused = remember { mutableStateOf(false) }
 
+  val mediaPlayer = remember {
+    MediaPlayer.create(guessFlipCardGameActivity, R.raw.correct2_sound)
+  }
+  DisposableEffect(mediaPlayer) {
+    onDispose {
+      mediaPlayer.release()
+    }
+  }
 
   LaunchedEffect(xd.value) {
 
@@ -112,6 +123,7 @@ fun Content(
   fun verifyFlipMatch() {
     if (flippedElements.size == 2) {
       if (flippedElements[0] == flippedElements[1]) {
+        Utils.playCorrectSound(guessFlipCardGameActivity, mediaPlayer)
         val searchResult =
           xd.value.withIndex().filter { (_, sign) -> sign.letter == flippedElements[0] }
         val indices = searchResult.map { (index, _) -> index }
@@ -122,14 +134,13 @@ fun Content(
         blockedElements.clear()
         /*Verify is all are Flips is disable*/
         if (flipSEnable.none { it }) {
-/*          onClick()
-          */
           checkCounter(guessFlipCardGameActivity)
           timerPaused.value = true
           showCompletedSuccessDialog.value = true
 
         }
       } else {
+        vibratePhone(guessFlipCardGameActivity)
         flipsStates[blockedElements[0]].flipToFront()
         flipsStates[blockedElements[1]].flipToFront()
         blockedElements.clear()

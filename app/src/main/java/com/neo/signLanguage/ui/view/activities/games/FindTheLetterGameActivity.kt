@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.activities.games
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -117,6 +118,16 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     )
     val getRecordByDifficulty = remember { mutableStateOf(getMemoryRecord(this, difficulty)) }
     val currentRecord = remember { mutableStateOf(0) }
+
+    val mediaPlayer = remember {
+      MediaPlayer.create(this@FindTheLetterGameActivity, R.raw.correct2_sound)
+    }
+
+    DisposableEffect(mediaPlayer) {
+      onDispose {
+        mediaPlayer.release()
+      }
+    }
 
     if (remainingLives == 0) {
       showNoMoreIntentsDialog.value = true
@@ -246,6 +257,8 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                     .padding(8.dp)
                     .clickable {
                       if ((randomLetters.data[index].letter) == randomLetters.correctAnswer.letter) {
+                        /*Check this*/
+                        Utils.playCorrectSound(this@FindTheLetterGameActivity, mediaPlayer)
                         record++
                         currentRecord.value = record
                         if (currentRecord.value > getRecordByDifficulty.value) {
@@ -260,9 +273,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                         )
                         model.getRandomToFindLetter(numberElements)
                       } else {
-                        if (getVibration(this@FindTheLetterGameActivity)) {
-                          vibratePhone(applicationContext, 50)
-                        }
+                        vibratePhone(applicationContext, 50)
                         showSnackBarToGames(
                           getString(R.string.incorrect),
                           R.color.red_dark,

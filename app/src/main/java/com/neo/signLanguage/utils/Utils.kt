@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -15,7 +16,10 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.games.Difficulty
+import com.neo.signLanguage.utils.SharedPreferences.getColorShared
+import com.neo.signLanguage.utils.SharedPreferences.getPlaySoundInGames
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
+import com.neo.signLanguage.utils.SharedPreferences.getVibration
 import java.text.Normalizer
 import java.util.*
 
@@ -59,6 +63,7 @@ class Utils {
     }
 
     fun vibratePhone(context: Context, timer: Long = 200) {
+      if (!getVibration(context)) return
       val vibrator = ContextCompat.getSystemService(context, Vibrator::class.java)
       if (Build.VERSION.SDK_INT >= 26) {
         vibrator?.vibrate(
@@ -72,6 +77,11 @@ class Utils {
       }
     }
 
+    fun playCorrectSound(context: Context, mediaPlayer: MediaPlayer) {
+      if (!getPlaySoundInGames(context)) return
+      mediaPlayer.start()
+    }
+
     fun hideKeyboard(activity: Activity) {
       val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
       //Find the currently focused view, so we can grab the correct window token from it.
@@ -82,9 +92,6 @@ class Utils {
       }
       imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-
-
 
 
     fun showSnackBarToGames(message: String, color: Int, view: View, context: Context) {

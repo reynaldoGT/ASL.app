@@ -123,5 +123,7 @@
     <string name="hits">Hits</string>
     <string name="record">Record</string>
 
+    <string name="sound_in_games">Sound in games</string>
+    <string name="sound">Sound</string>
 
 </resources>

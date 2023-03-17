@@ -125,4 +125,7 @@
 
     <string name="hits">Aciertos</string>
     <string name="record">Record</string>
+
+    <string name="sound_in_games">Sonido en juegos</string>
+    <string name="sound">Sonido</string>
 </resources>

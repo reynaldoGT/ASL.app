@@ -26,6 +26,7 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.widgets.CustomSwitchWithTitle
 import com.neo.signLanguage.utils.DataSign
 import com.neo.signLanguage.utils.SharedPreferences.getDelay
+import com.neo.signLanguage.utils.SharedPreferences.getPlaySoundInGames
 import com.neo.signLanguage.utils.SharedPreferences.getSelectedTransition
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import com.neo.signLanguage.utils.SharedPreferences.getShowTransition
@@ -33,6 +34,7 @@ import com.neo.signLanguage.utils.SharedPreferences.getVibration
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.SharedPreferences.setDelay
 import com.neo.signLanguage.utils.SharedPreferences.setHandColor
+import com.neo.signLanguage.utils.SharedPreferences.setPlaySoundInGames
 import com.neo.signLanguage.utils.SharedPreferences.setSelectedTransition
 import com.neo.signLanguage.utils.SharedPreferences.setShowTransition
 import com.neo.signLanguage.utils.SharedPreferences.setVibration
@@ -78,6 +80,7 @@ class SettingsActivity : AppCompatActivity() {
     val context = LocalContext.current
     val isDarkTheme = remember { mutableStateOf(isDarkTheme(context)) }
     val isVibration = remember { mutableStateOf(getVibration(context)) }
+    val isPlaySoundInGames = remember { mutableStateOf(getPlaySoundInGames(context)) }
     var sliderPosition by remember { mutableStateOf(getDelay(context).toFloat()) }
     var currentSelectedColor by remember { mutableStateOf(getSharedPreferencesHandColor(context)) }
     val colorList = DataSign.getColorsList(this)
@@ -104,13 +107,13 @@ class SettingsActivity : AppCompatActivity() {
             label = getStringByIdName(context, "dark_theme"),
             switchState = isDarkTheme,
             onSwitchChanged = {
-              setTheme(this@SettingsActivity,it)
+              setTheme(this@SettingsActivity, it)
               if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                setHandColor(this@SettingsActivity,R.color.gray300)
+                setHandColor(this@SettingsActivity, R.color.gray300)
               } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                setHandColor(this@SettingsActivity,R.color.primaryColor)
+                setHandColor(this@SettingsActivity, R.color.primaryColor)
               }
               delegate.applyDayNight()
             })
@@ -119,13 +122,21 @@ class SettingsActivity : AppCompatActivity() {
             titleLabel = getStringByIdName(context, "vibration"),
             switchState = isVibration,
             onSwitchChanged = {
-              setVibration(this@SettingsActivity,it)
-            })
+              setVibration(this@SettingsActivity, it)
+            }
+          )
         }
+        CustomSwitchWithTitle(
+          titleLabel = getStringByIdName(context, "sound"),
+          label = getStringByIdName(context, "sound_in_games"),
+          switchState = isPlaySoundInGames,
+          onSwitchChanged = {
+            setPlaySoundInGames(this@SettingsActivity, it)
+          }
+        )
 
         labelToShow(getStringByIdName(context, "delay_time"))
         Slider(
-
           value = sliderPosition,
           steps = 5,
           onValueChange = {
@@ -133,7 +144,7 @@ class SettingsActivity : AppCompatActivity() {
           },
           valueRange = 250f..2500f,
           onValueChangeFinished = {
-            setDelay(this@SettingsActivity,sliderPosition.toInt())
+            setDelay(this@SettingsActivity, sliderPosition.toInt())
           }
         )
         labelToShow(
@@ -172,7 +183,7 @@ class SettingsActivity : AppCompatActivity() {
               RoundButton(context, color = colorList[index].colorValue, onClick = {
                 currentSelectedColor = colorList[index].colorValue
                 showSnackBar(colorList[index].colorName)
-                setHandColor(this@SettingsActivity,colorList[index].colorValue)
+                setHandColor(this@SettingsActivity, colorList[index].colorValue)
               })
             }
           },
@@ -188,7 +199,7 @@ class SettingsActivity : AppCompatActivity() {
           )
           Checkbox(checked = isThereTransition.value, onCheckedChange = {
             isThereTransition.value = it
-            setShowTransition(this@SettingsActivity,it)
+            setShowTransition(this@SettingsActivity, it)
           })
         }
 
@@ -201,14 +212,14 @@ class SettingsActivity : AppCompatActivity() {
                   selected = index == selectedOption.value,
                   onClick = {
                     selectedOption.value = index
-                    setSelectedTransition(this@SettingsActivity,index)
+                    setSelectedTransition(this@SettingsActivity, index)
                   }
                 )
               ) {
                 RadioButton(
                   selected = index == selectedOption.value, onClick = {
                     selectedOption.value = index
-                    setSelectedTransition(this@SettingsActivity,index)
+                    setSelectedTransition(this@SettingsActivity, index)
                   })
                 Text(
                   text = text,

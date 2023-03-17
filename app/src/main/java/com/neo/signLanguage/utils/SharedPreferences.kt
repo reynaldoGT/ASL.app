@@ -19,6 +19,7 @@ object SharedPreferences {
   private val MEMORY_GAME_RECORD_HARD = "MEMORY_GAME_RECORD_HARD"
   private val IS_GRID_LAYOUT = "IS_GRID_LAYOUT"
   private val GUESS_GAME_THE_WORD_RECORD = "GUESS_GAME_THE_WORD_RECORD"
+  private val SOUND_IN_GAMES = "SOUND_IN_GAMES"
 
   /*private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
   private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)*/
@@ -191,5 +192,16 @@ object SharedPreferences {
     val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putInt(GUESS_GAME_THE_WORD_RECORD, newState).apply()
+  }
+
+  fun getPlaySoundInGames(context: Context): Boolean {
+    val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    return settings.getBoolean(SOUND_IN_GAMES, true)
+  }
+
+  fun setPlaySoundInGames(context: Context, newState: Boolean) {
+    val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    val editor = settings.edit()
+    editor.putBoolean(SOUND_IN_GAMES, newState).apply()
   }
 }
