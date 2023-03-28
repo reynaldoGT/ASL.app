@@ -36,6 +36,8 @@ import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
+import com.neo.signLanguage.utils.DialogGameDC
+import com.neo.signLanguage.utils.GameResult
 
 import com.neo.signLanguage.utils.GamesUtils.Companion.getRandomToFindEquals
 import com.neo.signLanguage.utils.Utils
@@ -142,9 +144,18 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
           blockedElements.clear()
           /*Verify is all are Flips is disable*/
           if (flipSEnable.none { it }) {
-            checkCounter(this@GuessFlipCardGameActivity)
+         /*   checkCounter(this@GuessFlipCardGameActivity)
             timerPaused.value = true
-            showCompletedSuccessDialog.value = true
+            showCompletedSuccessDialog.value = true*/
+            var xd = DialogGameDC(
+              title = "Level Completed",
+              subtitle = "Do you want to go to the next level?",
+              audio = R.raw.wrong_sound,
+              image = R.drawable.ic_help_outline,
+              buttonText = "Go to next level",
+              GameResult.WIN
+            )
+            goResultScreen(this@GuessFlipCardGameActivity,xd)
           }
         } else {
           Utils.playCorrectSound(this@GuessFlipCardGameActivity, wrongSound)
@@ -204,8 +215,17 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
       Column() {
         TimerScreen(
           onTimerEnd = {
-            checkCounter(this@GuessFlipCardGameActivity)
-            showTimesUpDialog.value = true
+            /*checkCounter(this@GuessFlipCardGameActivity)
+            showTimesUpDialog.value = true*/
+            var xd = DialogGameDC(
+              title = "TIME IS UP",
+              subtitle = "Do you want to go to the next level?",
+              audio = R.raw.wrong_sound,
+              image = R.drawable.ic_help_outline,
+              buttonText = "Go to next level",
+              GameResult.WIN
+              )
+            goResultScreen(this@GuessFlipCardGameActivity,xd)
           },
           timeInSeconds = time.value,
           color = getDifficulty.colorDifficulty,
@@ -355,6 +375,12 @@ fun getNextDifficulty(difficulty: Difficulty): Difficulty {
 fun goNextLevel(context: Context, difficulty: Difficulty) {
   val intent = Intent(context, GuessFlipCardGameActivity::class.java)
   intent.putExtra("difficulty", getNextDifficulty(difficulty))
+  context.startActivity(intent)
+}
+fun goResultScreen(context: Context,dialogGameDC: DialogGameDC) {
+
+  val intent = Intent(context, GameResultActivity::class.java)
+  intent.putExtra("dialogGameDC", dialogGameDC)
   context.startActivity(intent)
 }
 /*

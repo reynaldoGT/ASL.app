@@ -1,6 +1,7 @@
 package com.neo.signLanguage.ui.view.activities.games
 
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,8 +29,11 @@ import com.neo.signLanguage.databinding.ActivityCardMatchingWithArrowsBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.ui.view.activities.composables.widgets.DialogGameResult
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
+import com.neo.signLanguage.utils.DialogGameDC
+import com.neo.signLanguage.utils.GameResult
 import com.neo.signLanguage.utils.GamesUtils.Companion.generateOptionsToQuiz
 import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
@@ -42,10 +46,22 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
     binding = ActivityCardMatchingWithArrowsBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
+
     binding.composeViewCardMatchingWithArrows.setContent {
       MyMaterialTheme(
         content = {
           CardMatchingWithArrowsContent(onClick = { onBackPressed() }, onBack = { onBackPressed() })
+          /*DialogGameResult(
+            this, DialogGameDC(
+              audio = R.raw.win_sound,
+              title = "¡Felicidades!",
+              subtitle = "Has completado el juego",
+              buttonText = "Volver al menú",
+              image = R.drawable.ic_f_letter,
+            ),
+            Color.Green,
+            onClick = { onBackPressed() }
+          )*/
         }
       )
     }
@@ -85,11 +101,12 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
     fun verifyAnswer() {
       /*Reset the selected item*/
       selectedIndex = -1
+
       if (optionSelected == generateOptionsToQuiz.value.correctAnswer) {
+      optionSelected = ""
         /*Play sound*/
         playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayer)
         /*Select the options selected*/
-        optionSelected = ""
         generateOptionsToQuiz.value = generateOptionsToQuiz()
 
         if (currentStep < maxSteps) {
@@ -99,13 +116,24 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
         }
       } else {
         /*Play sound*/
+        optionSelected = ""
         playCorrectSound(this@CardMatchingWithArrowsActivity, wrongSound)
         lifesAmount--
         Utils.vibratePhone(applicationContext)
         if (lifesAmount == 0) {
           /*onClick()*/
-          playCorrectSound(this@CardMatchingWithArrowsActivity, playLooseRound)
-          showDialogWithoutIntents = true
+
+          var intent = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
+          val dialogGameDC = DialogGameDC(
+            "Perdiste",
+            "Mejor suerte para la proxima",
+            R.raw.lose_sound2,
+            R.drawable.ic_clip_card,
+            "Regresar al menú",
+            GameResult.LOSE,
+          )
+          intent.putExtra("dialogGameDC", dialogGameDC)
+          startActivity(intent)
         }
       }
     }
@@ -130,8 +158,18 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               currentStep = currentStep,
               onStepClick = { currentStep++ },
               onProgressComplete = {
-                playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayerWin)
-                showDialogLevelCompleted = true
+                /*playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayerWin)*/
+                var intentYouWIn = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
+                val dialogGameDC = DialogGameDC(
+                  "Título",
+                  "Subtítulo",
+                  R.raw.win_sound,
+                  R.drawable.ic_clip_card,
+                  "Texto del botón",
+                  GameResult.WIN,
+                )
+                intentYouWIn.putExtra("dialogGameDC", dialogGameDC)
+                startActivity(intentYouWIn)
               },
               modifier = Modifier
                 .weight(1f)
@@ -144,42 +182,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
 
         }
         /*TODO change the strings*/
-        if (showDialogWithoutIntents) {
-          TimeIsUpDialog(
-            onTryAgainClick = {
-              onClick()
-            },
-            onGoBackClick = {
-              onBack()
-            },
-            onDismissRequest = {
-              showDialogWithoutIntents = false
-            },
-            false,
-            Utils.getStringByIdName(LocalContext.current, "level_completed"),
-            Utils.getStringByIdName(LocalContext.current, "try_next_level"),
-            Utils.getStringByIdName(LocalContext.current, "go_back"),
-            Utils.getStringByIdName(LocalContext.current, "go_back"),
-          )
-        }
-        if (showDialogLevelCompleted) {
-          TimeIsUpDialog(
-            onTryAgainClick = {
-              onClick()
-            },
-            onGoBackClick = {
-              onBack()
-            },
-            onDismissRequest = {
-              showDialogWithoutIntents = false
-            },
-            false,
-            Utils.getStringByIdName(LocalContext.current, "level_completed"),
-            Utils.getStringByIdName(LocalContext.current, "try_next_level"),
-            Utils.getStringByIdName(LocalContext.current, "go_back"),
-            Utils.getStringByIdName(LocalContext.current, "go_back"),
-          )
-        }
+
         Text(
           text = "¿Que dice la palabra?",
           modifier = Modifier

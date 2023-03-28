@@ -1,8 +1,12 @@
 package com.neo.signLanguage.utils
 
+import android.content.Context
+import android.os.Parcelable
+import androidx.compose.ui.graphics.Color
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
+import kotlinx.parcelize.Parcelize
 import java.util.*
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -176,8 +180,24 @@ class GamesUtils {
   }
 
 }
+
 data class OptionsToQuiz(
   val correctAnswer: String,
   val options: List<String>,
   val signList: ArrayList<Sign>
 )
+
+
+@Parcelize
+data class DialogGameDC(
+  val title: String,
+  val subtitle: String,
+  val audio: Int,
+  val image: Int,
+  val buttonText: String,
+  var gameResult: GameResult
+) : Parcelable
+
+enum class GameResult {
+  WIN, LOSE, TIME_IS_UP
+}

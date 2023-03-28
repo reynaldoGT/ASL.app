@@ -33,7 +33,6 @@ fun TimeIsUpDialog(
 
   MyMaterialTheme() {
     AlertDialog(
-
       onDismissRequest = {
         onDismissRequest()
       },
