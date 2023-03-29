@@ -46,6 +46,7 @@ import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
+import com.neo.signLanguage.utils.getWinIcons
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.FlippableController
 import java.util.*
@@ -151,7 +152,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
               title = "Level Completed",
               subtitle = "Do you want to go to the next level?",
               audio = R.raw.wrong_sound,
-              image = R.drawable.ic_win_trophy,
+              getWinIcons(),
               buttonText = "Go to next level",
               GameResult.WIN
             )

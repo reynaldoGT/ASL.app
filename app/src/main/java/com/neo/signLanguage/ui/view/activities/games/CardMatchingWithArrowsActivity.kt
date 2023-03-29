@@ -32,10 +32,8 @@ import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.activities.composables.widgets.DialogGameResult
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
-import com.neo.signLanguage.utils.DialogGameDC
-import com.neo.signLanguage.utils.GameResult
+import com.neo.signLanguage.utils.*
 import com.neo.signLanguage.utils.GamesUtils.Companion.generateOptionsToQuiz
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
 
 
@@ -128,7 +126,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             "Perdiste",
             "Mejor suerte para la proxima",
             R.raw.lose_sound2,
-            R.drawable.ic_sad,
+            getLoseIcons(),
             "Regresar al menú",
             GameResult.LOSE,
           )
@@ -160,12 +158,12 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               onStepClick = { currentStep++ },
               onProgressComplete = {
                 /*playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayerWin)*/
-                var intentYouWIn = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
+                val intentYouWIn = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
                 val dialogGameDC = DialogGameDC(
                   "Título",
                   "Subtítulo",
                   R.raw.win_sound,
-                  R.drawable.ic_clip_card,
+                  getWinIcons(),
                   "Texto del botón",
                   GameResult.WIN,
                 )

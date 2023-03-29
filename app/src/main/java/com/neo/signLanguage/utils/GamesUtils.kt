@@ -3,6 +3,7 @@ package com.neo.signLanguage.utils
 import android.content.Context
 import android.os.Parcelable
 import androidx.compose.ui.graphics.Color
+import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
@@ -179,6 +180,28 @@ class GamesUtils {
     }
   }
 
+}
+
+fun getWinIcons(): Int {
+  val imagesArray = intArrayOf(
+    R.drawable.ic_win_trophy,
+    R.drawable.ic_victory2,
+    R.drawable.ic_victory3,
+  )
+  val randomIndex = (imagesArray.indices).random()
+// Obtener la imagen correspondiente al índice aleatorio
+  return imagesArray[randomIndex]
+}
+
+fun getLoseIcons(): Int {
+  val imagesArray = intArrayOf(
+    R.drawable.ic_sad,
+    R.drawable.ic_sad2,
+    R.drawable.ic_sad3,
+  )
+  val randomIndex = (imagesArray.indices).random()
+// Obtener la imagen correspondiente al índice aleatorio
+  return imagesArray[randomIndex]
 }
 
 data class OptionsToQuiz(
