@@ -147,11 +147,11 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
          /*   checkCounter(this@GuessFlipCardGameActivity)
             timerPaused.value = true
             showCompletedSuccessDialog.value = true*/
-            var xd = DialogGameDC(
+            val xd = DialogGameDC(
               title = "Level Completed",
               subtitle = "Do you want to go to the next level?",
               audio = R.raw.wrong_sound,
-              image = R.drawable.ic_help_outline,
+              image = R.drawable.ic_win_trophy,
               buttonText = "Go to next level",
               GameResult.WIN
             )

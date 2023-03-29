@@ -128,7 +128,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             "Perdiste",
             "Mejor suerte para la proxima",
             R.raw.lose_sound2,
-            R.drawable.ic_clip_card,
+            R.drawable.ic_sad,
             "Regresar al menú",
             GameResult.LOSE,
           )
