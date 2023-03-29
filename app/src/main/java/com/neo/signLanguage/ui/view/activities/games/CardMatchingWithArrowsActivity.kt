@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.times
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityCardMatchingWithArrowsBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
@@ -184,7 +185,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
 
         }
         /*TODO change the strings*/
-
         Text(
           text = "¿Que dice la palabra?",
           modifier = Modifier
@@ -195,17 +195,25 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           fontWeight = FontWeight.W600
         )
         LazyVerticalGrid(
-          modifier = Modifier.padding(vertical = 16.dp),
+          modifier = Modifier.padding(vertical = 8.dp),
           columns = GridCells.Fixed(generateOptionsToQuiz.value.signList.size),
-          /*modifier = Modifier.align(Alignment.Center),*/
+          contentPadding = PaddingValues(0.dp),
+          verticalArrangement = Arrangement.Center,
+
           content = {
+            val numItems = generateOptionsToQuiz.value.signList.size
+            val padding = if (numItems > 5) {
+              4.dp
+            } else {
+              (8 - numItems) * 2.dp
+            }
             items(generateOptionsToQuiz.value.signList.size) { index ->
               Card(
                 elevation = 8.dp,
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier
                   .fillMaxSize()
-                  .padding(8.dp)
+                  .padding(padding)
               ) {
                 Image(
                   painter = painterResource(id = generateOptionsToQuiz.value.signList[index].image),
