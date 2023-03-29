@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
   companion object {
     lateinit var database: SingDatabase
+
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +40,13 @@ class MainActivity : AppCompatActivity() {
     val fm: FragmentManager = supportFragmentManager
     fragmentAdapter = TabAdapter(fm, lifecycle)
 
-    showSelectedFragment(DictionaryFragment())
+    val games = intent.getBooleanExtra("games", false)
+    if (games) {
+      showSelectedFragment(GamesMenuFragment())
+      binding.bottomNavigation.selectedItemId = R.id.page_4
+    } else {
+      showSelectedFragment(DictionaryFragment())
+    }
     if (isDarkTheme(this)) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
       delegate.applyDayNight()
@@ -50,17 +57,11 @@ class MainActivity : AppCompatActivity() {
 
     binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
       when (menuItem.itemId) {
-
         R.id.page_2 -> {
           showSelectedFragment(DictionaryFragment())
           true
         }
-        /*R.id.page_3 -> {
-            showSelectedFragment(ViewNumbersFragment())
-            true
-        }*/
         R.id.page_4 -> {
-          /*showSelectedFragment(FindPairLetters())*/
           showSelectedFragment(GamesMenuFragment())
           true
         }
@@ -94,9 +95,10 @@ class MainActivity : AppCompatActivity() {
     menuInflater.inflate(R.menu.menu_toolbar, menu)
     return super.onCreateOptionsMenu(menu)
   }
+
   private var isFragmentTransactionInProgress = false
 
-  private fun showSelectedFragment(fragment: Fragment) {
+  fun showSelectedFragment(fragment: Fragment) {
     if (!isFragmentTransactionInProgress) {
       isFragmentTransactionInProgress = true
       val transaction = supportFragmentManager.beginTransaction()
@@ -106,6 +108,15 @@ class MainActivity : AppCompatActivity() {
       supportFragmentManager.addOnBackStackChangedListener {
         isFragmentTransactionInProgress = false
       }
+    }
+  }
+
+
+  override fun onBackPressed() {
+    if (supportFragmentManager.backStackEntryCount == 1) {
+      finish() // Cerrar la actividad
+    } else {
+      super.onBackPressed()
     }
   }
 }

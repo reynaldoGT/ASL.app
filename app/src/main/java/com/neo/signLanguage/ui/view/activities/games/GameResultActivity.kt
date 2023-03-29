@@ -27,17 +27,12 @@ class GameResultActivity : AppCompatActivity() {
           dialogGameDC = dialogGameDC,
           setColorByResult(dialogGameDC.gameResult),
           onClick = {
-            var contadorBotonAtras = 2
-
-            if (contadorBotonAtras > 2) {
-              for (i in 1..contadorBotonAtras) {
-                onBackPressed()
-              }
-            } else {
-              onBackPressed()
-            }
-          })
-      })
+            val intent = Intent(this, MainActivity::class.java)
+            /*intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)*/
+            intent.putExtra("games", true)
+            startActivity(intent)
+            finish()
+          }) })
     }
   }
 

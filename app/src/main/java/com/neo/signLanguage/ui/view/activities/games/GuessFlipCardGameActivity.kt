@@ -156,6 +156,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
               GameResult.WIN
             )
             goResultScreen(this@GuessFlipCardGameActivity,xd)
+            finish()
           }
         } else {
           Utils.playCorrectSound(this@GuessFlipCardGameActivity, wrongSound)
@@ -216,16 +217,8 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
         TimerScreen(
           onTimerEnd = {
             /*checkCounter(this@GuessFlipCardGameActivity)
-            showTimesUpDialog.value = true*/
-            var xd = DialogGameDC(
-              title = "TIME IS UP",
-              subtitle = "Do you want to go to the next level?",
-              audio = R.raw.wrong_sound,
-              image = R.drawable.ic_help_outline,
-              buttonText = "Go to next level",
-              GameResult.WIN
-              )
-            goResultScreen(this@GuessFlipCardGameActivity,xd)
+            */
+            showTimesUpDialog.value = true
           },
           timeInSeconds = time.value,
           color = getDifficulty.colorDifficulty,

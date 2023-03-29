@@ -134,6 +134,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           )
           intent.putExtra("dialogGameDC", dialogGameDC)
           startActivity(intent)
+          finish()
         }
       }
     }
