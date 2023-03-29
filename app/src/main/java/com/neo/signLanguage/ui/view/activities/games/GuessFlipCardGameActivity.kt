@@ -145,18 +145,20 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
           blockedElements.clear()
           /*Verify is all are Flips is disable*/
           if (flipSEnable.none { it }) {
-         /*   checkCounter(this@GuessFlipCardGameActivity)
-            timerPaused.value = true
-            showCompletedSuccessDialog.value = true*/
-            val xd = DialogGameDC(
-              title = "Level Completed",
-              subtitle = "Do you want to go to the next level?",
-              audio = R.raw.wrong_sound,
-              getWinIcons(),
-              buttonText = "Go to next level",
-              GameResult.WIN
+            /*   checkCounter(this@GuessFlipCardGameActivity)
+               timerPaused.value = true
+               showCompletedSuccessDialog.value = true*/
+
+            goResultScreen(
+              this@GuessFlipCardGameActivity, DialogGameDC(
+                title = "Level Completed",
+                subtitle = "Do you want to go to the next level?",
+                audio = R.raw.wrong_sound,
+                getWinIcons(),
+                buttonText = "Go to next level",
+                GameResult.WIN
+              )
             )
-            goResultScreen(this@GuessFlipCardGameActivity,xd)
             finish()
           }
         } else {
@@ -371,7 +373,8 @@ fun goNextLevel(context: Context, difficulty: Difficulty) {
   intent.putExtra("difficulty", getNextDifficulty(difficulty))
   context.startActivity(intent)
 }
-fun goResultScreen(context: Context,dialogGameDC: DialogGameDC) {
+
+fun goResultScreen(context: Context, dialogGameDC: DialogGameDC) {
 
   val intent = Intent(context, GameResultActivity::class.java)
   intent.putExtra("dialogGameDC", dialogGameDC)

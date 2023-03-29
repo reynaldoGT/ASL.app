@@ -2,4 +2,5 @@
 <resources>
     <integer name="min_delay">250</integer>
     <integer name="max_delay">2500</integer>
+
 </resources>

@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
   companion object {
     lateinit var database: SingDatabase
-
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

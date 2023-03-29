@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/bottom_navigation_padding"
     tools:context=".ui.view.fragments.GamesMenuFragment">
 
     <LinearLayout
@@ -34,7 +35,5 @@
             android:layout_marginBottom="64dp"
             ads:adSize="BANNER"
             ads:adUnitId="@string/test_banner_id" />
-
     </LinearLayout>
-
 </FrameLayout>

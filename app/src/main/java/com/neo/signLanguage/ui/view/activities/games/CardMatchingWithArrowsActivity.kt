@@ -101,7 +101,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
       selectedIndex = -1
 
       if (optionSelected == generateOptionsToQuiz.value.correctAnswer) {
-      optionSelected = ""
+        optionSelected = ""
         /*Play sound*/
         playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayer)
         /*Select the options selected*/
@@ -121,7 +121,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
         if (lifesAmount == 0) {
           /*onClick()*/
 
-          var intent = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
+          val intent = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
           val dialogGameDC = DialogGameDC(
             "Perdiste",
             "Mejor suerte para la proxima",
@@ -157,18 +157,21 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               currentStep = currentStep,
               onStepClick = { currentStep++ },
               onProgressComplete = {
-                /*playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayerWin)*/
-                val intentYouWIn = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
-                val dialogGameDC = DialogGameDC(
-                  "Título",
-                  "Subtítulo",
-                  R.raw.win_sound,
-                  getWinIcons(),
-                  "Texto del botón",
-                  GameResult.WIN,
+                val intentYouWIn =
+                  Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
+
+                intentYouWIn.putExtra(
+                  "dialogGameDC", DialogGameDC(
+                    "Título",
+                    "Subtítulo",
+                    R.raw.win_sound,
+                    getWinIcons(),
+                    "Texto del botón",
+                    GameResult.WIN,
+                  )
                 )
-                intentYouWIn.putExtra("dialogGameDC", dialogGameDC)
                 startActivity(intentYouWIn)
+                finish()
               },
               modifier = Modifier
                 .weight(1f)

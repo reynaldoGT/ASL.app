@@ -28,17 +28,17 @@ class GameResultActivity : AppCompatActivity() {
           setColorByResult(dialogGameDC.gameResult),
           onClick = {
             val intent = Intent(this, MainActivity::class.java)
-            /*intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)*/
             intent.putExtra("games", true)
             startActivity(intent)
             finish()
-          }) })
+          })
+      })
     }
   }
 
   private fun setColorByResult(gameResult: GameResult): Color {
     return when (gameResult) {
-      GameResult.WIN -> Color.Green
+      GameResult.WIN -> Color(0xFF00C853)
       GameResult.LOSE -> Color.Red
       GameResult.TIME_IS_UP -> Color.Yellow
     }
