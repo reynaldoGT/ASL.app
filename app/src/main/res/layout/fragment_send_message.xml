@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutSendMessage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="?android:attr/actionBarSize">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonSpeech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/simple_description"
+        app:backgroundTint="?attr/colorPrimary"
+        app:srcCompat="@drawable/ic_mic"
+        app:tint="@color/white" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -88,54 +97,37 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="2" />
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSendMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center_horizontal"
-                    android:paddingHorizontal="50dp"
-                    android:paddingVertical="15dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:paddingVertical="12dp"
                     android:text="@string/send_message"
-                    app:cornerRadius="1000dp" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
+                    app:cornerRadius="1000dp"
+                    app:icon="@drawable/ic_baseline_send_24"
+                    app:iconGravity="end"
+                    app:iconSize="24dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSendMessageCancel"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:paddingHorizontal="50dp"
                     android:paddingVertical="15dp"
                     android:text="@string/cancel"
                     android:visibility="gone"
-                    app:cornerRadius="40dp" />
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_baseline_stop_circle_24"
+                    app:iconGravity="end"
+                    app:iconSize="24dp" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/speech"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/simple_description"
-                    app:backgroundTint="?attr/colorPrimary"
-                    app:srcCompat="@drawable/ic_mic"
-                    app:tint="@color/white" />
             </LinearLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 

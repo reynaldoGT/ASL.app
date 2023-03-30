@@ -20,6 +20,7 @@ object SharedPreferences {
   private val IS_GRID_LAYOUT = "IS_GRID_LAYOUT"
   private val GUESS_GAME_THE_WORD_RECORD = "GUESS_GAME_THE_WORD_RECORD"
   private val SOUND_IN_GAMES = "SOUND_IN_GAMES"
+  private val CHANGE_LAYOUT_SEND_MESSAGE = "CHANGE_LAYOUT_SEND_MESSAGE"
 
   /*private val minDelayTime = activity.applicationContext.resources.getInteger(R.integer.min_delay)
   private val maxDelayTime = activity.applicationContext.resources.getInteger(R.integer.max_delay)*/
@@ -136,6 +137,16 @@ object SharedPreferences {
     val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putBoolean(IS_GRID_LAYOUT, newState).apply()
+  }
+  fun getIsSendMessageSliderActive(context: Context): Boolean {
+    val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    return settings.getBoolean(CHANGE_LAYOUT_SEND_MESSAGE, false)
+  }
+
+  fun setIsSendMessageSliderActive(context: Context, newState: Boolean) {
+    val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    val editor = settings.edit()
+    editor.putBoolean(CHANGE_LAYOUT_SEND_MESSAGE, newState).apply()
   }
 
   fun getMemoryRecord(context: Context, difficulty: Difficulty): Int {

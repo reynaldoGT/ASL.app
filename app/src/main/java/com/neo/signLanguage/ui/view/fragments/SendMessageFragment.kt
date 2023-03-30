@@ -39,8 +39,10 @@ import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.SendMessageDC
+import com.neo.signLanguage.utils.SharedPreferences
 import com.neo.signLanguage.utils.SharedPreferences.getColorShared
 import com.neo.signLanguage.utils.SharedPreferences.getDelay
+import com.neo.signLanguage.utils.SharedPreferences.getIsSendMessageSliderActive
 import com.neo.signLanguage.utils.SharedPreferences.getSelectedTransition
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import com.neo.signLanguage.utils.Utils
@@ -123,8 +125,17 @@ class SendMessageFragment : Fragment() {
         return false
       }
     })
-
+    binding.swChangeLayout.isChecked =
+      SharedPreferences.getIsSendMessageSliderActive(requireContext())
+    if (SharedPreferences.getIsSendMessageSliderActive(requireContext())) {
+      binding.sendMessageWithImageContainer.visibility = View.VISIBLE
+      binding.sendMessageSlideContainer.visibility = View.GONE
+    } else {
+      binding.sendMessageWithImageContainer.visibility = View.GONE
+      binding.sendMessageSlideContainer.visibility = View.VISIBLE
+    }
     binding.swChangeLayout.setOnCheckedChangeListener { _, isChecked ->
+      SharedPreferences.setIsSendMessageSliderActive(requireContext(), isChecked)
       if (isChecked) {
         binding.sendMessageWithImageContainer.visibility = View.VISIBLE
         binding.sendMessageSlideContainer.visibility = View.GONE
@@ -133,7 +144,7 @@ class SendMessageFragment : Fragment() {
         binding.sendMessageSlideContainer.visibility = View.VISIBLE
       }
     }
-    binding.speech.setOnClickListener {
+    binding.floatingActionButtonSpeech.setOnClickListener {
       startSpeech()
     }
 
@@ -349,17 +360,22 @@ class SendMessageFragment : Fragment() {
       )
   }
 
+  @Deprecated("Deprecated in Java")
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
     when (requestCode) {
       RECOGNIZE_SPEECH_ACTIVITY -> {
         if (resultCode == Activity.RESULT_OK && null != data) {
           val info = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
           val text = info?.get(0)
-          /*textToShow?.text = text*/
-          binding.edSendMessage.editText?.setText(text)
-          cancelMessage()
-          sendMessage(text!!)
+
+          if (getIsSendMessageSliderActive(requireContext())) {
+            binding.edSendMessage.editText?.setText(text)
+            cancelMessage()
+            sendMessage(text!!)
+          } else {
+            binding.edSendMessageWithImage.editText?.setText(text)
+          }
+
         }
       }
     }
