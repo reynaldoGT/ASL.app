@@ -49,7 +49,7 @@ class GamesMenuFragment : Fragment() {
 
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
     binding.gamesToolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-    binding.gamesToolbar.setTitle(R.string.game_and_message)
+    binding.gamesToolbar.setTitle(R.string.games)
     initLoad(binding.banner)
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
@@ -80,14 +80,14 @@ class GamesMenuFragment : Fragment() {
         GuessTheWordActivity()
       )
     )
-    titlesMenu.add(
+    /*titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "write_your_message"),
         getStringByIdName(requireContext(), "send_message_with_signs"),
         R.drawable.ic_keyboard,
         SendMessageWithImagesActivity()
       )
-    )
+    )*/
     titlesMenu.add(
       MenuTitle(
         getStringByIdName(requireContext(), "flip_game_title"),

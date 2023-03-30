@@ -7,8 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.Animation
@@ -20,12 +22,19 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import com.neo.signLanguage.*
+import com.neo.signLanguage.adapters.AdapterLettersSendMessage
+import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.data.database.entities.SignEntity
 import com.neo.signLanguage.databinding.FragmentSendMessageBinding
 import com.neo.signLanguage.ui.view.activities.MainActivity.Companion.database
+import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.ui.viewModel.GiphyViewModel
 import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
@@ -35,7 +44,6 @@ import com.neo.signLanguage.utils.SharedPreferences.getDelay
 import com.neo.signLanguage.utils.SharedPreferences.getSelectedTransition
 import com.neo.signLanguage.utils.SharedPreferences.getSharedPreferencesHandColor
 import com.neo.signLanguage.utils.Utils
-import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.*
@@ -53,6 +61,13 @@ class SendMessageFragment : Fragment() {
   private var imageView: ImageView? = null
 
   private val giphyViewModel: GiphyViewModel by activityViewModels()
+
+
+  private var layoutManager: RecyclerView.LayoutManager? = null
+  private var adapter: AdapterLettersSendMessage? = null
+
+  private val model: GameViewModel by viewModels()
+
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -109,9 +124,15 @@ class SendMessageFragment : Fragment() {
       }
     })
 
-    /*binding.ivSing.setOnClickListener {
-        changeImage()
-    }*/
+    binding.swChangeLayout.setOnCheckedChangeListener { _, isChecked ->
+      if (isChecked) {
+        binding.sendMessageWithImageContainer.visibility = View.VISIBLE
+        binding.sendMessageSlideContainer.visibility = View.GONE
+      } else {
+        binding.sendMessageWithImageContainer.visibility = View.GONE
+        binding.sendMessageSlideContainer.visibility = View.VISIBLE
+      }
+    }
     binding.speech.setOnClickListener {
       startSpeech()
     }
@@ -142,10 +163,49 @@ class SendMessageFragment : Fragment() {
       imageView
     }
     setHandAnimation(requireContext())
+
+    /*Functions of message with images*/
+
+    model.setMessageWithImages(Utils.messageToImages(resources.getString(R.string.hello_from_here)))
+
+    model.gridNumbersMessage.observe(requireActivity()) {
+      layoutManager = GridLayoutManager(requireContext(), it)
+      binding.gridListSing.layoutManager = layoutManager
+    }
+
+    model.sendMessageImages.observe(requireActivity()) {
+      adapter =
+        AdapterLettersSendMessage(
+          requireContext(),
+          it,
+          object : ClickListener {
+            override fun onClick(v: View?, position: Int) {}
+          })
+      binding.gridListSing.adapter = adapter
+    }
+
+    binding.edSendMessageWithImage.editText?.setText(
+      Utils.getStringByIdName(
+        requireContext(),
+        "hello_from_here"
+      )
+    )
+    binding.edSendMessageWithImage.editText?.addTextChangedListener(object : TextWatcher {
+      override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+      override fun onTextChanged(string: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        model.setMessageWithImages(Utils.messageToImages(string.toString()))
+      }
+
+      override fun afterTextChanged(p0: Editable?) {}
+    })
+
+    binding.slider.value = 7F
+    binding.slider.addOnChangeListener(Slider.OnChangeListener { slider, value, fromUser ->
+      model.setGridNumbersMessage(slider.value.toInt())
+    })
   }
 
   private fun setHandAnimation(context: Context) {
-
     val out: Animation?
     val `in`: Animation?
     when (getSelectedTransition(context)) {

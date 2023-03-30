@@ -28,7 +28,6 @@
     <string name="current_delay_time">Current delay time</string>
     <string name="delay_time">Delay time</string>
     <string name="settings_title">Settings</string>
-    <string name="game_and_message" translatable="false">Games and messages</string>
 
     <string name="purple">Purple</string>
     <string name="blue">Blue</string>
