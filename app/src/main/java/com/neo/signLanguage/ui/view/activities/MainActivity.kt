@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
   private var isFragmentTransactionInProgress = false
 
-  fun showSelectedFragment(fragment: Fragment) {
+  private fun showSelectedFragment(fragment: Fragment) {
     if (!isFragmentTransactionInProgress) {
       isFragmentTransactionInProgress = true
       val transaction = supportFragmentManager.beginTransaction()

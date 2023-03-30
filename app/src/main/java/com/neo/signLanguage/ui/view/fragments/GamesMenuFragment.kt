@@ -92,16 +92,16 @@ class GamesMenuFragment : Fragment() {
       MenuTitle(
         getStringByIdName(requireContext(), "flip_game_title"),
         getStringByIdName(requireContext(), "flip_game_subtitle"),
-        R.drawable.ic_clip_card,
+        R.drawable.ic_rotate,
         SelectLevelActivity(),
         GuessFlipCardGameActivity()
       )
     )
     titlesMenu.add(
       MenuTitle(
-        "Adivina la palabra",
-        "Adivina que palabra se generar atravez de las letras",
-        R.drawable.ic_clip_card,
+        getStringByIdName(requireContext(), "game_word_in_Sight"),
+        getStringByIdName(requireContext(), "game_word_in_sight_subtitle"),
+        R.drawable.ic_word_game,
         CardMatchingWithArrowsActivity(),
       )
     )
@@ -113,7 +113,7 @@ class GamesMenuFragment : Fragment() {
         modifier = Modifier.fillMaxSize(),
 
 
-      ) {
+        ) {
         items(titlesMenu.size) { index ->
           CardWithImage(
             title = titlesMenu[index].title,

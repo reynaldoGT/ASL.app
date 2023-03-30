@@ -4,13 +4,13 @@
     <item
         android:id="@+id/page_2"
         android:enabled="true"
-        android:icon="@drawable/ic_a_letter"
+        android:icon="@drawable/ic_dictionary"
         android:title="@string/dictionary" />
 
     <item
         android:id="@+id/page_4"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_airplay_24"
+        android:icon="@drawable/ic_puzzles"
         android:title="@string/games" />
 
 </menu>

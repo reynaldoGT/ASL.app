@@ -22,7 +22,6 @@
     <string name="test_interstitial_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="test_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
 
-
     <string name="dark_theme">Dark Theme</string>
     <string name="change_layout">Change layout</string>
     <string name="current_delay_time">Current delay time</string>
@@ -57,7 +56,7 @@
     <string name="theme">Theme</string>
     <string name="movement_signs">Movement ASL</string>
     <string name="search_words">Search words</string>
-    <string name="letter_and_numbers">Letter and numbers</string>
+    <string name="letter_and_numbers">Letters and numbers</string>
     <string name="simple_description">simple_description</string>
     <string name="history">History</string>
     <string name="help_us">Help us</string>
@@ -125,5 +124,16 @@
 
     <string name="sound_in_games">Sound in games</string>
     <string name="sound">Sound</string>
+
+    <string name="game_word_in_Sight">Word in Sight</string>
+    <string name="game_word_in_sight_subtitle">Challenge yourself and uncover the word at hand</string>
+
+    <string name="go_to_the_next_level">Do you want to go to the next level?</string>
+    <string name="go_to_next_level">Go to next level</string>
+
+    <string name="better_luck">Mejor suerte para la próxima</string>
+    <string name="return_menu">Regresar al menú</string>
+    <string name="you_lost">Perdiste</string>
+
 
 </resources>

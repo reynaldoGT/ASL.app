@@ -66,6 +66,7 @@ class DictionaryFragment : Fragment() {
         )
       )
     )
+
     binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
       override fun onTabSelected(tab: TabLayout.Tab?) {
         binding.viewPager2.currentItem = tab!!.position
@@ -86,7 +87,7 @@ class DictionaryFragment : Fragment() {
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    activity?.menuInflater?.inflate(R.menu.menu_navigation, menu)
+    activity?.menuInflater?.inflate(R.menu.menu_bottom_navigation, menu)
     super.onCreateOptionsMenu(menu, inflater)
   }
   override fun onResume() {

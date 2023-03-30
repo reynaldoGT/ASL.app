@@ -35,7 +35,6 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
-import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
 import com.neo.signLanguage.utils.DialogGameDC
 import com.neo.signLanguage.utils.GameResult
 
@@ -151,11 +150,11 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
 
             goResultScreen(
               this@GuessFlipCardGameActivity, DialogGameDC(
-                title = "Level Completed",
-                subtitle = "Do you want to go to the next level?",
-                audio = R.raw.wrong_sound,
+                title = getStringByIdName(this, "level_completed"),
+                subtitle =  getStringByIdName(this, "go_to_the_next_level"),
+                audio = R.raw.win_sound,
                 getWinIcons(),
-                buttonText = "Go to next level",
+                buttonText = getStringByIdName(this,"go_to_next_level"),
                 GameResult.WIN
               )
             )

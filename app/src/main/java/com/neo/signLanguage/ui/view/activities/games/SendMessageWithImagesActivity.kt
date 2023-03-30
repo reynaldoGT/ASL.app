@@ -18,7 +18,7 @@ import com.neo.signLanguage.adapters.AdapterLettersSendMessage
 import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.databinding.ActivitySendMessageWithImagesBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
-import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
+import com.neo.signLanguage.utils.AdUtils.Companion.checkAdCounter
 import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
 
@@ -103,7 +103,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
           val info = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
           val text = info?.get(0)
           binding.edSendMessage.editText?.setText(text)
-          checkCounter(this)
+          checkAdCounter(this)
           model.setMessageWithImages(messageToImages(text!!))
         }
       }

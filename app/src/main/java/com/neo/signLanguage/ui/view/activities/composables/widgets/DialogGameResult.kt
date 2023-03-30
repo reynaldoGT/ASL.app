@@ -59,8 +59,8 @@ fun DialogGameResult(
         ),
         modifier = Modifier
           .padding(8.dp)
-          .width(150.dp)
-          .height(150.dp)
+          .width(175.dp)
+          .height(175.dp)
       )
       Text(
         text = title,

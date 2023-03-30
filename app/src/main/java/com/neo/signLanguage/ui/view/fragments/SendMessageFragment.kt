@@ -342,7 +342,7 @@ class SendMessageFragment : Fragment() {
     binding.btnSendMessage.isEnabled = true
     binding.edSendMessage.isEnabled = true
     binding.btnSendMessage.isVisible = true
-    AdUtils.checkCounter(requireActivity() as AppCompatActivity)
+    AdUtils.checkAdCounter(requireActivity() as AppCompatActivity)
   }
 
 
@@ -368,7 +368,7 @@ class SendMessageFragment : Fragment() {
           val info = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
           val text = info?.get(0)
 
-          if (getIsSendMessageSliderActive(requireContext())) {
+          if (!getIsSendMessageSliderActive(requireContext())) {
             binding.edSendMessage.editText?.setText(text)
             cancelMessage()
             sendMessage(text!!)

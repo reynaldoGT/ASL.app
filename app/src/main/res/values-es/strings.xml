@@ -127,4 +127,16 @@
 
     <string name="sound_in_games">Sonido en juegos</string>
     <string name="sound">Sonido</string>
+
+    <string name="game_word_in_Sight">Palabra a la Vista</string>
+
+    <string name="game_word_in_sight_subtitle">Ponte a prueba y descubre la palabra en cuestión</string>
+
+    <string name="go_to_the_next_level">Prueba el siguiente nivel</string>
+    <string name="go_to_next_level">Ir al siguiente nivel</string>
+
+    <string name="better_luck">Mejor suerte para la próxima</string>
+    <string name="return_menu">Regresar al menú</string>
+    <string name="you_lost">Perdiste</string>
+
 </resources>

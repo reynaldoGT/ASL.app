@@ -16,7 +16,6 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
-import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
 import java.util.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -40,7 +39,7 @@ import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
-import com.neo.signLanguage.utils.AdUtils.Companion.checkCounter
+import com.neo.signLanguage.utils.AdUtils.Companion.checkAdCounter
 
 import com.neo.signLanguage.utils.Game
 import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
@@ -134,7 +133,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     if (remainingLives == 0) {
       loseSound.start()
       showNoMoreIntentsDialog.value = true
-      checkCounter(this)
+      checkAdCounter(this)
       saveRecord(this)
       /*super.onBackPressed()*/
     }

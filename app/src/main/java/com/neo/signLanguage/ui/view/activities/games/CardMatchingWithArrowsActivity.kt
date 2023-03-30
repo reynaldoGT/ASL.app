@@ -34,7 +34,9 @@ import com.neo.signLanguage.ui.view.activities.composables.widgets.DialogGameRes
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
 import com.neo.signLanguage.utils.*
+import com.neo.signLanguage.utils.AdUtils.Companion.checkAdCounter
 import com.neo.signLanguage.utils.GamesUtils.Companion.generateOptionsToQuiz
+import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
 
 
@@ -120,15 +122,14 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
         lifesAmount--
         Utils.vibratePhone(applicationContext)
         if (lifesAmount == 0) {
-          /*onClick()*/
-
+          checkAdCounter(this@CardMatchingWithArrowsActivity)
           val intent = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
           val dialogGameDC = DialogGameDC(
-            "Perdiste",
-            "Mejor suerte para la proxima",
+            getStringByIdName(this@CardMatchingWithArrowsActivity, "you_lost"),
+            getStringByIdName(this@CardMatchingWithArrowsActivity, "better_luck"),
             R.raw.lose_sound2,
             getLoseIcons(),
-            "Regresar al menú",
+            getStringByIdName(this@CardMatchingWithArrowsActivity, "return_menu"),
             GameResult.LOSE,
           )
           intent.putExtra("dialogGameDC", dialogGameDC)
@@ -163,12 +164,21 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
 
                 intentYouWIn.putExtra(
                   "dialogGameDC", DialogGameDC(
-                    "Título",
-                    "Subtítulo",
-                    R.raw.win_sound,
+                    title = getStringByIdName(
+                      this@CardMatchingWithArrowsActivity,
+                      "level_completed"
+                    ),
+                    subtitle = getStringByIdName(
+                      this@CardMatchingWithArrowsActivity,
+                      "go_to_the_next_level"
+                    ),
+                    audio = R.raw.win_sound,
                     getWinIcons(),
-                    "Texto del botón",
-                    GameResult.WIN,
+                    buttonText = getStringByIdName(
+                      this@CardMatchingWithArrowsActivity,
+                      "go_to_next_level"
+                    ),
+                    GameResult.WIN
                   )
                 )
                 startActivity(intentYouWIn)

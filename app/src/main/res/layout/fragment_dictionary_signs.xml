@@ -18,7 +18,9 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar" />
+        android:layout_below="@id/toolbar"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
