@@ -47,22 +47,10 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
     binding = ActivityCardMatchingWithArrowsBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-
     binding.composeViewCardMatchingWithArrows.setContent {
       MyMaterialTheme(
         content = {
           CardMatchingWithArrowsContent(onClick = { onBackPressed() }, onBack = { onBackPressed() })
-          /*DialogGameResult(
-            this, DialogGameDC(
-              audio = R.raw.win_sound,
-              title = "¡Felicidades!",
-              subtitle = "Has completado el juego",
-              buttonText = "Volver al menú",
-              image = R.drawable.ic_f_letter,
-            ),
-            Color.Green,
-            onClick = { onBackPressed() }
-          )*/
         }
       )
     }
@@ -123,7 +111,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
         Utils.vibratePhone(applicationContext)
         if (lifesAmount == 0) {
           checkAdCounter(this@CardMatchingWithArrowsActivity)
-          val intent = Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
           val dialogGameDC = DialogGameDC(
             getStringByIdName(this@CardMatchingWithArrowsActivity, "you_lost"),
             getStringByIdName(this@CardMatchingWithArrowsActivity, "better_luck"),
@@ -132,8 +119,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             getStringByIdName(this@CardMatchingWithArrowsActivity, "return_menu"),
             GameResult.LOSE,
           )
-          intent.putExtra("dialogGameDC", dialogGameDC)
-          startActivity(intent)
+          goResultActivity(this@CardMatchingWithArrowsActivity, dialogGameDC)
           finish()
         }
       }
@@ -159,29 +145,24 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               currentStep = currentStep,
               onStepClick = { currentStep++ },
               onProgressComplete = {
-                val intentYouWIn =
-                  Intent(this@CardMatchingWithArrowsActivity, GameResultActivity::class.java)
-
-                intentYouWIn.putExtra(
-                  "dialogGameDC", DialogGameDC(
-                    title = getStringByIdName(
-                      this@CardMatchingWithArrowsActivity,
-                      "level_completed"
-                    ),
-                    subtitle = getStringByIdName(
-                      this@CardMatchingWithArrowsActivity,
-                      "go_to_the_next_level"
-                    ),
-                    audio = R.raw.win_sound,
-                    getWinIcons(),
-                    buttonText = getStringByIdName(
-                      this@CardMatchingWithArrowsActivity,
-                      "go_to_next_level"
-                    ),
-                    GameResult.WIN
-                  )
+                val dialogGameDC = DialogGameDC(
+                  title = getStringByIdName(
+                    this@CardMatchingWithArrowsActivity,
+                    "level_completed"
+                  ),
+                  subtitle = getStringByIdName(
+                    this@CardMatchingWithArrowsActivity,
+                    "go_to_the_next_level"
+                  ),
+                  audio = R.raw.win_sound,
+                  getWinIcons(),
+                  buttonText = getStringByIdName(
+                    this@CardMatchingWithArrowsActivity,
+                    "go_to_next_level"
+                  ),
+                  GameResult.WIN
                 )
-                startActivity(intentYouWIn)
+                goResultActivity(this@CardMatchingWithArrowsActivity, dialogGameDC)
                 finish()
               },
               modifier = Modifier

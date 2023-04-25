@@ -37,15 +37,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
-import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
+import com.neo.signLanguage.utils.*
 import com.neo.signLanguage.utils.AdUtils.Companion.checkAdCounter
 
-import com.neo.signLanguage.utils.Game
 import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 import com.neo.signLanguage.utils.SharedPreferences.setMemoryRecord
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
@@ -102,7 +100,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
   ) {
     var remainingLives by remember { mutableStateOf(intents) }
     val allIntents = intents
-    val showNoMoreIntentsDialog = remember { mutableStateOf(false) }
+
     val randomLetters by gameViewModel.randomGameLetters.observeAsState(
       Game(
         ArrayList(), Sign(
@@ -131,9 +129,18 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     }
 
     if (remainingLives == 0) {
-      loseSound.start()
-      showNoMoreIntentsDialog.value = true
-      checkAdCounter(this)
+      val thisContext = this@FindTheLetterGameActivity
+      val dialogGameDC = DialogGameDC(
+        getStringByIdName(thisContext, "you_lost"),
+        getStringByIdName(thisContext, "better_luck"),
+        R.raw.lose_sound2,
+        getLoseIcons(),
+        getStringByIdName(thisContext, "return_menu"),
+        GameResult.LOSE,
+      )
+      goResultActivity(thisContext, dialogGameDC)
+      
+      /*checkAdCounter(this)*/
       saveRecord(this)
       /*super.onBackPressed()*/
     }
@@ -143,27 +150,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
       fontSize = 16.sp,
     )
     Box() {
-      if (showNoMoreIntentsDialog.value) {
-        TimeIsUpDialog(
-          onTryAgainClick = {
-            showNoMoreIntentsDialog.value = false
-            remainingLives = allIntents
-            currentRecord.value = 0
-          },
-          onGoBackClick = {
-            onClick()
-          },
-          {
-            onClick()
-            showNoMoreIntentsDialog.value = false
-          },
-          true,
-          getStringByIdName(LocalContext.current, "sorry"),
-          getStringByIdName(LocalContext.current, "try_again"),
-          getStringByIdName(LocalContext.current, "retry"),
-          getStringByIdName(LocalContext.current, "go_back"),
-        )
-      }
+
       Column(
         modifier = Modifier
           .fillMaxSize()
@@ -267,24 +254,10 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                           getRecordByDifficulty.value = currentRecord.value
                           saveRecord(this@FindTheLetterGameActivity)
                         }
-                        /*showSnackBarToGames(
-                          getString(R.string.correct),
-                          R.color.green_dark,
-                          this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-                          this@FindTheLetterGameActivity,
-                        )*/
                         model.getRandomToFindLetter(numberElements)
                       } else {
                         vibratePhone(applicationContext)
                         Utils.playCorrectSound(this@FindTheLetterGameActivity, wrongSound)
-                        /*showSnackBarToGames(
-                          getString(R.string.incorrect),
-                          R.color.red_dark,
-                          this@FindTheLetterGameActivity.findViewById(android.R.id.content),
-                          this@FindTheLetterGameActivity,
-                        )*/
-                        /*showSnackBar(getString(R.string.incorrect), R.color.red_dark)*/
-                        /*model.setIntents(-1)*/
                         remainingLives--
                       }
                     }

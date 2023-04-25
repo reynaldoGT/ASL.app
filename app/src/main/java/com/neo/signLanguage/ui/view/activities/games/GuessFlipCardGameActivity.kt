@@ -374,7 +374,6 @@ fun goNextLevel(context: Context, difficulty: Difficulty) {
 }
 
 fun goResultScreen(context: Context, dialogGameDC: DialogGameDC) {
-
   val intent = Intent(context, GameResultActivity::class.java)
   intent.putExtra("dialogGameDC", dialogGameDC)
   context.startActivity(intent)

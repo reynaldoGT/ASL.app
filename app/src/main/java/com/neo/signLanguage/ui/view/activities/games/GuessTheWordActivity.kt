@@ -52,7 +52,7 @@ class GuessTheWordActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     binding.ActivityGuessTheWordBindingComposeView.setContent {
-      MyMaterialTheme( content = {
+      MyMaterialTheme(content = {
         RotatingImages(onClick = { onBackPressed() })
       })
     }
@@ -60,7 +60,7 @@ class GuessTheWordActivity : AppCompatActivity() {
 
   @Composable
   fun RotatingImages(onClick: () -> Unit) {
-    var correctWord = remember { mutableStateOf(getRandomWord()) }
+    val correctWord = remember { mutableStateOf(getRandomWord()) }
     var imagesStatus by remember { mutableStateOf(generateListImageSign(correctWord.value)) }
     var currentImageIndex by remember { mutableStateOf(0) }
     var isButtonEnabled by remember { mutableStateOf(false) }
@@ -128,7 +128,6 @@ class GuessTheWordActivity : AppCompatActivity() {
       }
       Button(enabled = isButtonEnabled,
         shape = RoundedCornerShape(40.dp), onClick = {
-          Log.d("TAG", "RotatingImages: ${correctWord.value}")
           isButtonEnabled = false
           hideKeyboard(this@GuessTheWordActivity)
           timer.cancel()
@@ -161,14 +160,9 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
   /*val wordStates = remember { mutableStateListOf(*word.toCharArray().toTypedArray()) }*/
   val textFieldsState = mutableStateListOf(*Array(word.value.length) { ' ' })
 
-  /*fun onTextFieldValueChanged(index: Int, value: Char) {
-    words
-  }*/
-
 // En la función que verifica si se completaron los textfields
   if (textFieldsState.joinToString("") == word.value) {
     word.value = getRandomWord()
-
   }
 
 // En el compositor
@@ -209,7 +203,6 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
             onValueChange = {
               if (it.isNotEmpty()) {
                 wordStates.set(index, it[0])
-                Log.d("TAG", "RotatingImages: ${wordStates.joinToString("")}")
                 if (wordStates.joinToString("") == word.value) {
                   word.value = getRandomWord()
                   /*currentRecord++*/
@@ -231,11 +224,7 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
               fontWeight = FontWeight.Bold,
               fontSize = 15.sp
             ),
-            /*onFocusEvent = { focusState ->
-              if (focusState.isFocused) {
-                text = text.copy(selection = TextRange(0, text.text.length))
-              }
-            },*/
+
             maxLines = 1,
             singleLine = true,
             /*keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),*/
@@ -243,9 +232,7 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
             keyboardActions = KeyboardActions(
               onNext = { focusManager.moveFocus(FocusDirection.Next) }
             ),
-
-            )
-
+          )
         }
       }
     }

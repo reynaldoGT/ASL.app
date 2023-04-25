@@ -1,10 +1,13 @@
 package com.neo.signLanguage.utils
 
 import android.content.Context
+import android.content.Intent
 import android.os.Parcelable
 import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat.startActivity
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.Sign
+import com.neo.signLanguage.ui.view.activities.games.GameResultActivity
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
 import kotlinx.parcelize.Parcelize
@@ -285,7 +288,12 @@ class GamesUtils {
       )
     }
   }
+}
 
+fun goResultActivity(context: Context, dialogGameDC: DialogGameDC) {
+  val intent = Intent(context, GameResultActivity::class.java)
+  intent.putExtra("dialogGameDC", dialogGameDC)
+  startActivity(context, intent, null)
 }
 
 fun getWinIcons(): Int {

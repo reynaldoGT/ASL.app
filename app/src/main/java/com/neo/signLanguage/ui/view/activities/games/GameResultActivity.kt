@@ -17,7 +17,6 @@ class GameResultActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityGameResultBinding.inflate(layoutInflater)
     setContentView(binding.root)
-
     val dialogGameDC: DialogGameDC = intent.getParcelableExtra("dialogGameDC")!!
 
     binding.gameResultComposeView.setContent {
