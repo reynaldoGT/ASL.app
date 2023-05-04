@@ -9,12 +9,12 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/detail_toolbar"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/history_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:titleCentered="true"
+            app:title="@string/history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/history_toolbar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/deleteAllActionButton"
@@ -60,7 +60,7 @@
                 android:layout_width="320dp"
                 android:layout_height="320dp"
                 android:layout_gravity="center"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/simple_description"
                 android:src="@drawable/ic_history" />
 
             <TextView

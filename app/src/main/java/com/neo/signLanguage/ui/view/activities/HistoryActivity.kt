@@ -39,7 +39,7 @@ class HistoryActivity : AppCompatActivity() {
 
     binding.deleteAllActionButton.setOnClickListener {
       AlertDialog.Builder(this)
-        .setTitle(getStringByIdName(this, "delete_question"))
+          .setTitle(getStringByIdName(this, "delete_question"))
         .setMessage(getStringByIdName(this, "delete_question"))
         .setPositiveButton(
           getStringByIdName(this, "delete"),
@@ -57,8 +57,7 @@ class HistoryActivity : AppCompatActivity() {
     binding.btnSendMessage.setOnClickListener {
       onBackPressed()
     }
-    binding.detailToolbar.title = getStringByIdName(this, "history")
-    this.setSupportActionBar(binding.detailToolbar)
+    this.setSupportActionBar(binding.historyToolbar)
     val actionbar = supportActionBar
     actionbar?.setDisplayHomeAsUpEnabled(true)
   }
