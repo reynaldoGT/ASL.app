@@ -13,9 +13,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -77,7 +77,7 @@ class LetterAndNumbersFragment : Fragment() {
             getStringByIdName(requireContext(), "change_layout"),
             switchState,
             onSwitchChanged = {
-              setIsGridLayout(requireContext(),it)
+              setIsGridLayout(requireContext(), it)
             }
           )
         }
@@ -98,7 +98,6 @@ class LetterAndNumbersFragment : Fragment() {
       content = {
         items(lettersToGrid.size) { index ->
           Card(
-            elevation = 8.dp,
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
               .fillMaxSize()
@@ -143,7 +142,6 @@ class LetterAndNumbersFragment : Fragment() {
                 lettersArrayToHorizontal[index].type
               )
             },
-          elevation = 8.dp,
           shape = RoundedCornerShape(16.dp)
         ) {
           Row(
@@ -170,7 +168,7 @@ class LetterAndNumbersFragment : Fragment() {
               ),
               modifier = Modifier
                 .fillMaxSize(),
-              style = MaterialTheme.typography.h2,
+              style = MaterialTheme.typography.bodyMedium,
               textAlign = TextAlign.Center,
               fontWeight = FontWeight.W400,
             )

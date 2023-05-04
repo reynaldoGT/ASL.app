@@ -1,9 +1,9 @@
 package com.neo.signLanguage.ui.view.activities.composables.widgets
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,11 +28,10 @@ fun CustomSwitch(
     Text(
       text = label,
       color = if (isDarkTheme(context)) Color.White else Color.Black,
-      fontWeight = FontWeight.Bold,
+      style = MaterialTheme.typography.titleSmall,
       textAlign = TextAlign.Center,
-      modifier = Modifier.padding(8.dp),
     )
-    Spacer(modifier = Modifier.width(16.dp))
+    Spacer(modifier = Modifier.width(8.dp))
     Switch(
       checked = switchState.value,
       onCheckedChange = {
@@ -56,7 +55,7 @@ fun CustomSwitchWithTitle(
   Column() {
     Text(
       text = titleLabel,
-      style = MaterialTheme.typography.h6,
+      style = MaterialTheme.typography.labelMedium,
       color = if (isDarkTheme(context)) Color.White else Color.Black,
     )
     Row(
@@ -66,7 +65,7 @@ fun CustomSwitchWithTitle(
       Text(
         text = label,
         color = if (isDarkTheme(context)) Color.White else Color.Black,
-        style = MaterialTheme.typography.subtitle1,
+        style = MaterialTheme.typography.titleSmall,
         /*modifier = Modifier.padding(top = 8.dp),*/
       )
       Spacer(modifier = Modifier.width(16.dp))

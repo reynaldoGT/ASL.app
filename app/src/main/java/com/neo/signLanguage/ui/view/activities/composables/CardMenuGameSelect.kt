@@ -1,6 +1,5 @@
 package com.neo.signLanguage.ui.view.activities.composables
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -8,8 +7,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -25,13 +25,12 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 
 @Composable
-fun CardWithImage( title: String, subtitle: String, image: Int, onClick: () -> Unit) {
+fun CardWithImage(title: String, subtitle: String, image: Int, onClick: () -> Unit) {
   val context = LocalContext.current
   val color =
     colorResource(id = if (isDarkTheme(context)) R.color.white else R.color.black)
   Card(
     shape = RoundedCornerShape(8.dp),
-    elevation = 4.dp,
     modifier = Modifier
       .fillMaxWidth()
       .padding(16.dp)
@@ -40,7 +39,7 @@ fun CardWithImage( title: String, subtitle: String, image: Int, onClick: () -> U
       }
   ) {
     Column(
-      modifier = Modifier.padding(16.dp)
+      modifier = Modifier.padding(8.dp)
     ) {
       Image(
         painter = painterResource(id = image),
@@ -53,16 +52,14 @@ fun CardWithImage( title: String, subtitle: String, image: Int, onClick: () -> U
       )
       Text(
         text = title,
-        fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
         textAlign = TextAlign.Center,
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier.padding(vertical = 8.dp),
+        style = MaterialTheme.typography.titleMedium,
       )
       Text(
         text = subtitle,
-        fontSize = 13.sp,
         textAlign = TextAlign.Center,
-        modifier = Modifier.padding(top = 8.dp)
+        style = MaterialTheme.typography.bodySmall,
       )
     }
   }

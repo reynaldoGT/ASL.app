@@ -9,7 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -90,11 +90,8 @@ fun CustomButtonSelectLevel(
             modifier = Modifier
               .padding(vertical = 5.dp)
               .align(Alignment.CenterHorizontally),
-            style = MaterialTheme.typography.h3 + TextStyle(
-              textAlign = TextAlign.Center,
-              fontSize = 32.sp,
-              fontWeight = FontWeight.Bold
-            ),
+            style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
             color = if (isDarkTheme(context)) Color.White else Color.DarkGray
           )
           Text(
@@ -102,11 +99,8 @@ fun CustomButtonSelectLevel(
             modifier = Modifier
               .padding(10.dp)
               .align(Alignment.CenterHorizontally),
-            style = MaterialTheme.typography.h4 + TextStyle(
-              textAlign = TextAlign.Center,
-              fontSize = 24.sp,
-              fontWeight = FontWeight.Bold
-            ),
+            style = MaterialTheme.typography.headlineSmall,
+            textAlign = TextAlign.Center,
             color = if (isDarkTheme(context)) Color.White else Color.DarkGray
           )
 
@@ -141,13 +135,14 @@ fun CustomButton(buttonTitle: String, difficulty: Difficulty, activity: Class<*>
   val context = LocalContext.current
   Button(
     colors = ButtonDefaults.buttonColors(
-      backgroundColor = setColorByDifficulty(difficulty),
+      /*backgroundColor = setColorByDifficulty(difficulty),*/
       contentColor = Color.White
     ),
     modifier = Modifier
-      .height(100.dp)
+      .height(80.dp)
       .fillMaxWidth()
       .padding(10.dp),
+
     onClick = {
       val intent = Intent(context, activity)
       intent.putExtra("difficulty", difficulty)

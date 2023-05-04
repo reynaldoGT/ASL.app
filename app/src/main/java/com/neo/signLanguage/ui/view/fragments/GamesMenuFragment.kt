@@ -2,9 +2,7 @@ package com.neo.signLanguage.ui.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,7 +12,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.neo.signLanguage.R
@@ -25,7 +22,6 @@ import com.neo.signLanguage.ui.view.activities.composables.CardWithImage
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.games.*
 import com.neo.signLanguage.ui.viewModel.GameViewModel
-import com.neo.signLanguage.utils.AdUtils.Companion.initLoad
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -46,11 +42,10 @@ class GamesMenuFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    //! toolbar important to show menu
+    (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
 
-  /*  (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
-    binding.gamesToolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-    binding.gamesToolbar.setTitle(R.string.games)
-    initLoad(binding.banner)*/
+    /*initLoad(binding.banner) */
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
         content = {
@@ -112,7 +107,6 @@ class GamesMenuFragment : Fragment() {
         contentPadding = PaddingValues(16.dp),
         modifier = Modifier.fillMaxSize(),
 
-
         ) {
         items(titlesMenu.size) { index ->
           CardWithImage(
@@ -131,5 +125,6 @@ class GamesMenuFragment : Fragment() {
         }
       }
     }
+
   }
 }

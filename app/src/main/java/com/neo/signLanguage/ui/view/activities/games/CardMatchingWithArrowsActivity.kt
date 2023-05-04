@@ -1,7 +1,5 @@
 package com.neo.signLanguage.ui.view.activities.games
 
-
-import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,13 +10,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -28,9 +25,7 @@ import androidx.compose.ui.unit.times
 import com.neo.signLanguage.R
 import com.neo.signLanguage.databinding.ActivityCardMatchingWithArrowsBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
-import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
-import com.neo.signLanguage.ui.view.activities.composables.widgets.DialogGameResult
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
 import com.neo.signLanguage.utils.*
@@ -128,8 +123,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
     Box() {
       Column() {
         Box(
-          modifier = Modifier
-            .padding(8.dp)
+          modifier = Modifier.padding(8.dp)
         ) {
           Row(
             verticalAlignment = Alignment.CenterVertically
@@ -175,15 +169,13 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           }
 
         }
-        /*TODO change the strings*/
         Text(
-          text = "¿Que dice la palabra?",
+          text = getStringByIdName(this@CardMatchingWithArrowsActivity, "what_does_the_word_say"),
           modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
           textAlign = TextAlign.Center,
-          fontSize = 22.sp,
-          fontWeight = FontWeight.W600
+          style = MaterialTheme.typography.titleLarge
         )
         LazyVerticalGrid(
           modifier = Modifier.padding(vertical = 8.dp),
@@ -200,7 +192,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             }
             items(generateOptionsToQuiz.value.signList.size) { index ->
               Card(
-                elevation = 8.dp,
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier
                   .fillMaxSize()
@@ -226,7 +217,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           content = {
             items(generateOptionsToQuiz.value.options.size) { index ->
               Card(
-                elevation = 8.dp,
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier
                   .fillMaxSize()
@@ -243,9 +233,8 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               ) {
                 Text(
                   text = generateOptionsToQuiz.value.options[index],
-                  style = MaterialTheme.typography.h6,
+                  style = MaterialTheme.typography.titleMedium,
                   textAlign = TextAlign.Center,
-                  fontWeight = FontWeight.Bold,
                   modifier = Modifier
                     .fillMaxSize()
                     .padding(vertical = 40.dp, horizontal = 16.dp)

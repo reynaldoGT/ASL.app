@@ -2,14 +2,15 @@ package com.neo.signLanguage.ui.view.activities.games
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material3.*
+import androidx.compose.material.OutlinedTextField
+
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
@@ -117,11 +118,16 @@ class GuessTheWordActivity : AppCompatActivity() {
       Card(
         modifier = Modifier
           .fillMaxWidth()
+
           .padding(16.dp),
-      ) {
+
+
+        ) {
         Image(
           painter = painter,
-          modifier = Modifier.height(350.dp),
+          modifier = Modifier
+            .height(350.dp)
+            .align(alignment = Alignment.CenterHorizontally),
           contentDescription = null,
           colorFilter = getHandColor(this@GuessTheWordActivity),
         )
@@ -133,10 +139,9 @@ class GuessTheWordActivity : AppCompatActivity() {
           timer.cancel()
           timer = Timer()
           timer.schedule(task, 1000, 1500)
-
         }) {
         Row(
-          modifier = Modifier.padding(horizontal = 32.dp, vertical = 8.dp),
+          modifier = Modifier.padding(horizontal = 32.dp /*vertical = 8.dp*/),
         ) {
           Icon(
             Icons.Default.Refresh,
@@ -196,7 +201,6 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
             .height(50.dp),
           /*.padding(4.dp),*/
           shape = RoundedCornerShape(4.dp),
-          backgroundColor = Color.LightGray
         ) {
           OutlinedTextField(
             value = wordStates[index].toString(),
@@ -224,7 +228,6 @@ fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
               fontWeight = FontWeight.Bold,
               fontSize = 15.sp
             ),
-
             maxLines = 1,
             singleLine = true,
             /*keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),*/

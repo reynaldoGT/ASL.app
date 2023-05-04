@@ -138,5 +138,6 @@
     <string name="better_luck">Mejor suerte para la próxima</string>
     <string name="return_menu">Regresar al menú</string>
     <string name="you_lost">Perdiste</string>
+    <string name="what_does_the_word_say">¿Cuál es la palabra correcta?</string>
 
 </resources>

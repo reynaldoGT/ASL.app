@@ -14,8 +14,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 
@@ -151,10 +151,10 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
             goResultScreen(
               this@GuessFlipCardGameActivity, DialogGameDC(
                 title = getStringByIdName(this, "level_completed"),
-                subtitle =  getStringByIdName(this, "go_to_the_next_level"),
+                subtitle = getStringByIdName(this, "go_to_the_next_level"),
                 audio = R.raw.win_sound,
                 getWinIcons(),
-                buttonText = getStringByIdName(this,"go_to_next_level"),
+                buttonText = getStringByIdName(this, "go_to_next_level"),
                 GameResult.WIN
               )
             )
@@ -274,7 +274,6 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
                           shape = RoundedCornerShape(8.dp)
                         ),
                       shape = RoundedCornerShape(8.dp),
-                      elevation = 6.dp,
                     ) {
                       Box() {
                         Image(
@@ -292,7 +291,6 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
                   backSide = {
                     Card(
                       shape = RoundedCornerShape(8.dp),
-                      elevation = 6.dp,
                       modifier = Modifier
                         .fillMaxSize()
                         .border(

@@ -4,7 +4,7 @@
     android:id="@+id/layoutSendMessage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="?android:attr/actionBarSize">
+    android:paddingBottom="80dp">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonSpeech"
@@ -12,17 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="8dp"
+
         android:contentDescription="@string/simple_description"
-        app:backgroundTint="?attr/colorPrimary"
-        app:srcCompat="@drawable/ic_mic"
-        app:tint="@color/white" />
+        app:srcCompat="@drawable/ic_mic" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/swChangeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,14 +46,14 @@
                 android:textSize="24sp"
                 android:visibility="visible" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_view"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:padding="8dp"
-                app:cardCornerRadius="4dp">
+                app:cardCornerRadius="8dp"
+                app:strokeWidth="1dp">
 
                 <ImageSwitcher
                     android:id="@+id/imageSwitcher"
@@ -62,37 +61,35 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:contentDescription="@string/app_name"
+                    android:padding="8dp"
                     android:src="@drawable/ic_a_only_sing"
                     app:tint="?attr/colorPrimary" />
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:id="@+id/seeCurrentMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="8dp"
+                android:layout_marginHorizontal="8dp"
                 android:text="@string/here_see_your_text"
                 android:textAlignment="center"
-                android:textSize="32sp"
+                android:paddingVertical="8dp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:visibility="visible" />
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edSendMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:hint="@string/write_your_text_here"
                 app:endIconMode="clear_text">
 
-                <com.neo.signLanguage.utils.CustomEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="8dp"
-                    android:background="@android:color/transparent"
-                    android:inputType="textCapSentences" />
+                    android:layout_height="wrap_content" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -122,7 +119,6 @@
                     app:icon="@drawable/ic_baseline_stop_circle_24"
                     app:iconGravity="end"
                     app:iconSize="24dp" />
-
             </LinearLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 

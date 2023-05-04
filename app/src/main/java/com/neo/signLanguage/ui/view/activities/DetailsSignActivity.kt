@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -109,12 +109,7 @@ class DetailsSignActivity : AppCompatActivity() {
           Text(
             text = letter,
             modifier = Modifier,
-            /*.fillMaxWidth()
-            .fillMaxHeight(),*/
-            /*textAlign = TextAlign.Center,*/
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            /*color = Color.Black*/
+            style = MaterialTheme.typography.titleMedium,
           )
       }
     }

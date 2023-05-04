@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
+
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +22,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Card
+import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -139,13 +140,13 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         GameResult.LOSE,
       )
       goResultActivity(thisContext, dialogGameDC)
-      
+
       /*checkAdCounter(this)*/
       saveRecord(this)
       /*super.onBackPressed()*/
     }
     val textStyle = TextStyle(
-      color = MaterialTheme.colors.onBackground,
+      color = MaterialTheme.colorScheme.onBackground,
       fontWeight = FontWeight.W600,
       fontSize = 16.sp,
     )
@@ -188,7 +189,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                 ) + ": " + getRecordByDifficulty.value,
               )
             }
-
           }
         }
         Row(
@@ -217,12 +217,12 @@ class FindTheLetterGameActivity : AppCompatActivity() {
             R.string.game_find_game_title_number,
             randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
           ),
-          style = MaterialTheme.typography.h5,
+          style = MaterialTheme.typography.titleMedium,
           color = if (isDarkTheme(LocalContext.current)) Color.LightGray else Color.DarkGray,
         )
         Text(
           randomLetters.correctAnswer.letter.uppercase(Locale.getDefault()),
-          style = MaterialTheme.typography.h5 + TextStyle(
+          style = MaterialTheme.typography.titleMedium + TextStyle(
             fontWeight = FontWeight.Bold,
           ),
           color = if (isDarkTheme(LocalContext.current)) Color.White else Color.DarkGray,
@@ -239,7 +239,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
             content = {
               items(randomLetters.data.size) { index ->
                 Card(
-                  elevation = 8.dp,
                   shape = RoundedCornerShape(8.dp),
                   modifier = Modifier
                     .fillMaxSize()

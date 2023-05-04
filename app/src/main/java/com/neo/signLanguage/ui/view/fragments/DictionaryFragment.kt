@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
-import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.databinding.FragmentDictionarySignsBinding
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
@@ -19,7 +18,7 @@ class DictionaryFragment : Fragment() {
   private var _binding: FragmentDictionarySignsBinding? = null
   private val binding get() = _binding!!
   var fragmentAdapter: TabAdapter? = null
-  private var currentPosition:Int =0
+  private var currentPosition: Int = 0
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -31,9 +30,7 @@ class DictionaryFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    //toolbar
-
-    /*change text color*/
+    //! toolbar important to show menu
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
 
     val fm: FragmentManager = parentFragmentManager
@@ -71,19 +68,21 @@ class DictionaryFragment : Fragment() {
         binding.viewPager2.currentItem = tab!!.position
         currentPosition = tab.position
       }
+
       override fun onTabUnselected(tab: TabLayout.Tab?) {
       }
+
       override fun onTabReselected(tab: TabLayout.Tab?) {
       }
     })
     binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
       override fun onPageSelected(position: Int) {
         binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
-
         super.onPageSelected(position)
       }
     })
   }
+
   override fun onResume() {
     super.onResume()
     binding.viewPager2.setCurrentItem(currentPosition, false)

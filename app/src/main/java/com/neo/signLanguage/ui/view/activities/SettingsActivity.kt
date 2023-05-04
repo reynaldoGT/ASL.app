@@ -14,7 +14,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +39,6 @@ import com.neo.signLanguage.utils.SharedPreferences.setSelectedTransition
 import com.neo.signLanguage.utils.SharedPreferences.setShowTransition
 import com.neo.signLanguage.utils.SharedPreferences.setVibration
 import com.neo.signLanguage.utils.SharedPreferences.setTheme
-import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
@@ -92,9 +91,6 @@ class SettingsActivity : AppCompatActivity() {
     val isThereTransition = remember { mutableStateOf(getShowTransition(context)) }
     Box(
       modifier = Modifier.padding(8.dp),
-      /*
-      contentAlignment = Alignment.TopStart*/
-
     ) {
       Column() {
         Row(
@@ -146,22 +142,24 @@ class SettingsActivity : AppCompatActivity() {
             setDelay(this@SettingsActivity, sliderPosition.toInt())
           }
         )
+
         labelToShow(
           getStringByIdName(
             context,
             "current_delay_time"
           ) + " ${sliderPosition.toInt()} ms"
         )
-
-        Text(
-          text = getStringByIdName(
+        Spacer(modifier = Modifier.height(8.dp))
+        labelToShow(
+          getStringByIdName(
             context,
             "change_hand_color"
-          ), style = MaterialTheme.typography.h6,
-          modifier = Modifier.padding(vertical = 8.dp),
-          color = if (isDarkTheme(this@SettingsActivity)) Color.White else Color.Black
+          ),
         )
-        Row() {
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(
+          verticalAlignment = Alignment.CenterVertically
+        ) {
           labelToShow(
             getStringByIdName(
               context,
@@ -188,7 +186,7 @@ class SettingsActivity : AppCompatActivity() {
           },
         )
         Row(
-          verticalAlignment = Alignment.CenterVertically,
+          verticalAlignment = Alignment.CenterVertically
         ) {
           labelToShow(
             getStringByIdName(
@@ -237,7 +235,7 @@ class SettingsActivity : AppCompatActivity() {
   fun labelToShow(label: String) {
     Text(
       text = label,
-      style = MaterialTheme.typography.subtitle2,
+      style = MaterialTheme.typography.titleMedium,
       color = if (isDarkTheme(this@SettingsActivity)) Color.White else Color.DarkGray,
     )
   }

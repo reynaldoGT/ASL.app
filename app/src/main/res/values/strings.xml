@@ -106,7 +106,7 @@
     <string name="guess_the_word_desc">Test your knowledge with suggested words</string>
     <string name="what_is_the_world">Which is the word</string>
 
-    <string name="flip_game_title"> Flipping Cards</string>
+    <string name="flip_game_title">Flipping Cards</string>
     <string name="flip_game_subtitle">Flip all the cards and find all the pairs.</string>
 
     <string name="sorry">Sorry, you have lost all your lives</string>
@@ -136,6 +136,8 @@
     <string name="better_luck">Mejor suerte para la próxima</string>
     <string name="return_menu">Regresar al menú</string>
     <string name="you_lost">Perdiste</string>
+    <string name="what_does_the_word_say">What does the word say?</string>
+
 
 
 </resources>

@@ -64,7 +64,6 @@ class SendMessageFragment : Fragment() {
 
   private val giphyViewModel: GiphyViewModel by activityViewModels()
 
-
   private var layoutManager: RecyclerView.LayoutManager? = null
   private var adapter: AdapterLettersSendMessage? = null
 
@@ -94,9 +93,7 @@ class SendMessageFragment : Fragment() {
 
     val getColorShared = getColorShared(activity as AppCompatActivity)
     if (getSharedPreferencesHandColor(requireContext()) != 0)
-      imageView?.setColorFilter(
-        getColorShared
-      )
+      imageView?.setColorFilter(getColorShared)
 
     binding.edSendMessage.setOnKeyListener(View.OnKeyListener { _, keyCode, _ ->
       binding.seeCurrentMessage.visibility = View.VISIBLE
@@ -104,7 +101,6 @@ class SendMessageFragment : Fragment() {
       if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
         binding.seeCurrentMessage.text = binding.edSendMessage.editText?.text
-        /*seeCurrentMessage?.visibility = View.VISIBLE*/
         val createMessage = binding.edSendMessage.editText?.text.toString()
 
         sendMessage(createMessage)
@@ -126,8 +122,8 @@ class SendMessageFragment : Fragment() {
       }
     })
     binding.swChangeLayout.isChecked =
-      SharedPreferences.getIsSendMessageSliderActive(requireContext())
-    if (SharedPreferences.getIsSendMessageSliderActive(requireContext())) {
+      getIsSendMessageSliderActive(requireContext())
+    if (getIsSendMessageSliderActive(requireContext())) {
       binding.sendMessageWithImageContainer.visibility = View.VISIBLE
       binding.sendMessageSlideContainer.visibility = View.GONE
     } else {
