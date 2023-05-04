@@ -54,7 +54,11 @@
     <string name="history">Historial</string>
     <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
     <string name="change_layout">Cambiar vista</string>
-    <string name="delete_question">¿Limpiar historial?</string>
+
+    <string name="confirm_delete_title">¿Está seguro de que desea borrar las frases y palabras guardadas?</string>
+    <string name="confirm_delete_subtitle">Al borrar las frases y palabras guardadas, se eliminará toda la información que haya guardado en su dispositivo. ¿Desea continuar?</string>
+
+
     <string name="clear_history_question">Desea limpiar todo el historial</string>
     <string name="delete">Eliminar</string>
     <string name="empty">VACÍO</string>

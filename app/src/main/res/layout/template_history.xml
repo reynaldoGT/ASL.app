@@ -6,12 +6,13 @@
     android:orientation="vertical">
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
-        android:text="@string/app_name" />
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"

@@ -11,7 +11,7 @@
         android:id="@+id/settings_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/app_name"
+        app:title="@string/settings_title"
         app:titleCentered="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

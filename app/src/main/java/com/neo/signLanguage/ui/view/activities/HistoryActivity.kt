@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.neo.signLanguage.adapters.ClickListener
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.HistoryAdapter
@@ -38,9 +39,9 @@ class HistoryActivity : AppCompatActivity() {
     initRecyclerView()
 
     binding.deleteAllActionButton.setOnClickListener {
-      AlertDialog.Builder(this)
-          .setTitle(getStringByIdName(this, "delete_question"))
-        .setMessage(getStringByIdName(this, "delete_question"))
+      MaterialAlertDialogBuilder(this)
+          .setTitle(getStringByIdName(this, "confirm_delete_title"))
+        .setMessage(getStringByIdName(this, "confirm_delete_subtitle"))
         .setPositiveButton(
           getStringByIdName(this, "delete"),
         ) { _, _ ->

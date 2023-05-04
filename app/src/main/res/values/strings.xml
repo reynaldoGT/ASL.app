@@ -63,11 +63,12 @@
     <string name="history">History</string>
     <string name="help_us">Help us</string>
     <string name="no_microphone">This device does not have a voice recorder</string>
-    <string name="delete_question">Clear browsing data</string>
+    <string name="confirm_delete_title">Are you sure you want to delete saved phrases and words?</string>
+    <string name="confirm_delete_subtitle">By deleting the saved phrases and words, all the information you have saved on your device will be deleted. Do you want to continue?</string>
     <string name="clear_history_question">Do you want to clear the history?</string>
     <string name="delete">Delete</string>
     <string name="empty">EMPTY</string>
-    <string name="your_history_is_empty">Your History is empty</string>
+    <string name="your_history_is_empty">Your history is empty</string>
     <string name="current_hand_color">Current hand color</string>
     <string name="maximum_number_characters">The maximum number of characters is %1$d</string>
 
@@ -137,7 +138,6 @@
     <string name="return_menu">Regresar al menú</string>
     <string name="you_lost">Perdiste</string>
     <string name="what_does_the_word_say">What does the word say?</string>
-
 
 
 </resources>
