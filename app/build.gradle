@@ -69,7 +69,6 @@ dependencies {
     implementation 'com.orhanobut:logger:2.2.0'
 
 
-    implementation 'com.google.android.gms:play-services-ads:21.0.0'
     implementation platform('com.google.firebase:firebase-bom:29.3.0')
     // Declare the dependencies for the Remote Config and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -77,6 +76,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-analytics'
+    /*ADMOB*/
+    implementation 'com.google.android.gms:play-services-ads:22.0.0'
 
     /*to get gif */
     implementation 'com.github.bumptech.glide:glide:4.12.0'

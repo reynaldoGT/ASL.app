@@ -32,9 +32,8 @@ class DictionaryFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     //toolbar
-    binding.toolbar.setTitle(R.string.app_name)
+
     /*change text color*/
-    binding.toolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
 
     val fm: FragmentManager = parentFragmentManager
@@ -84,11 +83,6 @@ class DictionaryFragment : Fragment() {
         super.onPageSelected(position)
       }
     })
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    activity?.menuInflater?.inflate(R.menu.menu_bottom_navigation, menu)
-    super.onCreateOptionsMenu(menu, inflater)
   }
   override fun onResume() {
     super.onResume()

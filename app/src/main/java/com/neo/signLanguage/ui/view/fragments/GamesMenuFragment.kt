@@ -47,10 +47,10 @@ class GamesMenuFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
+  /*  (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
     binding.gamesToolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.white))
     binding.gamesToolbar.setTitle(R.string.games)
-    initLoad(binding.banner)
+    initLoad(binding.banner)*/
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
         content = {

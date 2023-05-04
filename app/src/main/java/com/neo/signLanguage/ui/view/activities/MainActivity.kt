@@ -10,12 +10,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.room.Room
+import com.google.android.gms.ads.MobileAds
 import com.neo.signLanguage.R
 import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.AcitivityMainBinding
 import com.neo.signLanguage.ui.view.fragments.*
-import com.neo.signLanguage.utils.SharedPreferences
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 
 
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     installSplashScreen()
+    MobileAds.initialize(this)
     binding = AcitivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
     database =
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     val games = intent.getBooleanExtra("games", false)
     if (games) {
       showSelectedFragment(GamesMenuFragment())
-      binding.bottomNavigation.selectedItemId = R.id.page_4
+      binding.bottomNavigation.selectedItemId = R.id.games_page
     } else {
       showSelectedFragment(DictionaryFragment())
     }
@@ -56,11 +57,11 @@ class MainActivity : AppCompatActivity() {
 
     binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
       when (menuItem.itemId) {
-        R.id.page_2 -> {
+        R.id.dictionary_page -> {
           showSelectedFragment(DictionaryFragment())
           true
         }
-        R.id.page_4 -> {
+        R.id.games_page -> {
           showSelectedFragment(GamesMenuFragment())
           true
         }

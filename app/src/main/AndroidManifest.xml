@@ -13,6 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_rounded"
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_id" />
+
         <activity
             android:name=".ui.view.activities.games.GameResultActivity"
             android:exported="false">
@@ -71,9 +76,6 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/test_id_application_admob" />
     </application>
 
 </manifest>

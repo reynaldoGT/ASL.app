@@ -74,7 +74,7 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
       }
 
     })
-    initActionBar()
+    /*initActionBar()*/
 
     binding.slider.value = 7F
     binding.slider.addOnChangeListener(OnChangeListener { slider, value, fromUser ->
@@ -126,12 +126,12 @@ class SendMessageWithImagesActivity : AppCompatActivity() {
     }
   }
 
-  private fun initActionBar() {
+  /*private fun initActionBar() {
     binding.detailToolbar.title = getString(R.string.send_message_with_images)
     this.setSupportActionBar(binding.detailToolbar)
     val actionbar = supportActionBar
     actionbar?.setDisplayHomeAsUpEnabled(true)
-  }
+  }*/
 
   override fun onSupportNavigateUp(): Boolean {
     finish()
