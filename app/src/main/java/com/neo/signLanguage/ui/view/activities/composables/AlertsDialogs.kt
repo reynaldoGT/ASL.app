@@ -71,7 +71,6 @@ fun TimeIsUpDialog(
               Text(text = cancelText)
             }
           }
-
           Button(
             onClick = onTryAgainClick,
             modifier = Modifier.padding(8.dp),

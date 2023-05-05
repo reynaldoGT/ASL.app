@@ -63,7 +63,7 @@
     <string name="history">History</string>
     <string name="help_us">Help us</string>
     <string name="no_microphone">This device does not have a voice recorder</string>
-    <string name="confirm_delete_title">Are you sure you want to delete saved phrases and words?</string>
+    <string name="confirm_delete_title">Are you sure you want to delete saved words?</string>
     <string name="confirm_delete_subtitle">By deleting the saved phrases and words, all the information you have saved on your device will be deleted. Do you want to continue?</string>
     <string name="clear_history_question">Do you want to clear the history?</string>
     <string name="delete">Delete</string>
@@ -134,10 +134,11 @@
     <string name="go_to_the_next_level">Do you want to go to the next level?</string>
     <string name="go_to_next_level">Go to next level</string>
 
-    <string name="better_luck">Mejor suerte para la próxima</string>
-    <string name="return_menu">Regresar al menú</string>
-    <string name="you_lost">Perdiste</string>
+    <string name="better_luck">Better luck next time"</string>
+    <string name="return_menu">Return menu</string>
+    <string name="you_lost">You lost</string>
     <string name="what_does_the_word_say">What does the word say?</string>
+    <string name="check">Check</string>
 
 
 </resources>

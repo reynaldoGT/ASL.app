@@ -168,7 +168,7 @@ class LetterAndNumbersFragment : Fragment() {
               ),
               modifier = Modifier
                 .fillMaxSize(),
-              style = MaterialTheme.typography.bodyMedium,
+              style = MaterialTheme.typography.headlineLarge,
               textAlign = TextAlign.Center,
               fontWeight = FontWeight.W400,
             )

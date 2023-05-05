@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -30,7 +30,9 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.games.*
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.AdUtils
+import com.neo.signLanguage.utils.GamesUtils
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
+import com.neo.signLanguage.utils.getMenuGamesActivities
 
 
 class GamesMenuFragment : Fragment() {
@@ -54,7 +56,7 @@ class GamesMenuFragment : Fragment() {
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
 
     MobileAds.initialize(requireContext())
-    AdUtils.initLoad(binding.fragmentBannerAd)
+
 
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
@@ -67,75 +69,45 @@ class GamesMenuFragment : Fragment() {
 
   @Composable
   fun GamesMenuContent() {
-    val titlesMenu = ArrayList<MenuTitle>()
-    titlesMenu.add(
-      MenuTitle(
-        getStringByIdName(requireContext(), "test_your_memory"),
-        getStringByIdName(requireContext(), "guess_letter_number"),
-        R.drawable.ic_brain,
-        SelectLevelActivity(),
-        TestYourMemoryGameActivity()
-      )
-    )
-    titlesMenu.add(
-      MenuTitle(
-        getStringByIdName(requireContext(), "guess_the_word"),
-        getStringByIdName(requireContext(), "guess_the_word_desc"),
-        R.drawable.ic_books,
-        GuessTheWordActivity()
-      )
-    )
-    /*titlesMenu.add(
-      MenuTitle(
-        getStringByIdName(requireContext(), "write_your_message"),
-        getStringByIdName(requireContext(), "send_message_with_signs"),
-        R.drawable.ic_keyboard,
-        SendMessageWithImagesActivity()
-      )
-    )*/
-    titlesMenu.add(
-      MenuTitle(
-        getStringByIdName(requireContext(), "flip_game_title"),
-        getStringByIdName(requireContext(), "flip_game_subtitle"),
-        R.drawable.ic_rotate,
-        SelectLevelActivity(),
-        GuessFlipCardGameActivity()
-      )
-    )
-    titlesMenu.add(
-      MenuTitle(
-        getStringByIdName(requireContext(), "game_word_in_Sight"),
-        getStringByIdName(requireContext(), "game_word_in_sight_subtitle"),
-        R.drawable.ic_word_game,
-        CardMatchingWithArrowsActivity(),
-      )
-    )
+    val getMenuTitles = getMenuGamesActivities(requireContext())
 
-    Box() {
-      LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(16.dp),
-        modifier = Modifier.fillMaxSize(),
+    Box(
+      modifier = Modifier
+        .fillMaxSize()
+        .fillMaxHeight()
+        .padding(bottom = 64.dp)
+    ) {
+      Column(
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+          .fillMaxSize()
+          .fillMaxHeight()
+      ) {
+        LazyVerticalGrid(
+          columns = GridCells.Fixed(2),
+          contentPadding = PaddingValues(16.dp),
 
-        ) {
-        items(titlesMenu.size) { index ->
-          CardWithImage(
-            title = titlesMenu[index].title,
-            subtitle = titlesMenu[index].description,
-            image = titlesMenu[index].img,
-            onClick = {
-              val intent = Intent(requireContext(), titlesMenu[index].activity!!::class.java)
-              if (titlesMenu[index].afterActivity != null) {
-                intent.putExtra("activityClass", titlesMenu[index].afterActivity!!::class.java)
-                intent.putExtra("gameName", titlesMenu[index].title)
+          ) {
+
+          items(getMenuTitles.size) { index ->
+            CardWithImage(
+              title = getMenuTitles[index].title,
+              subtitle = getMenuTitles[index].description,
+              image = getMenuTitles[index].img,
+              onClick = {
+                val intent = Intent(requireContext(), getMenuTitles[index].activity!!::class.java)
+                if (getMenuTitles[index].afterActivity != null) {
+                  intent.putExtra("activityClass", getMenuTitles[index].afterActivity!!::class.java)
+                  intent.putExtra("gameName", getMenuTitles[index].title)
+                }
+                startActivity(intent)
               }
-              startActivity(intent)
-            }
-          )
+            )
+          }
         }
+        BannerAdView()
       }
-      Spacer()
-      BannerAdView()
     }
 
   }

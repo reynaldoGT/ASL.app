@@ -11,6 +11,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -39,7 +40,9 @@ fun CardWithImage(title: String, subtitle: String, image: Int, onClick: () -> Un
       }
   ) {
     Column(
-      modifier = Modifier.padding(8.dp)
+      horizontalAlignment = Alignment.CenterHorizontally,
+      modifier = Modifier.padding(8.dp),
+
     ) {
       Image(
         painter = painterResource(id = image),

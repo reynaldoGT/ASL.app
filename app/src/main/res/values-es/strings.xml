@@ -55,7 +55,7 @@
     <string name="no_microphone">Este dispostivo no cuenta con grabador de voz</string>
     <string name="change_layout">Cambiar vista</string>
 
-    <string name="confirm_delete_title">¿Está seguro de que desea borrar las frases y palabras guardadas?</string>
+    <string name="confirm_delete_title">¿Está seguro de que desea borrar palabras guardadas?</string>
     <string name="confirm_delete_subtitle">Al borrar las frases y palabras guardadas, se eliminará toda la información que haya guardado en su dispositivo. ¿Desea continuar?</string>
 
 
@@ -143,5 +143,6 @@
     <string name="return_menu">Regresar al menú</string>
     <string name="you_lost">Perdiste</string>
     <string name="what_does_the_word_say">¿Cuál es la palabra correcta?</string>
+    <string name="check">Comprobar</string>
 
 </resources>

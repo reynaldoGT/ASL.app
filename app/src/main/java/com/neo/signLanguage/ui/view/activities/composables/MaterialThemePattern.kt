@@ -6,13 +6,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.darkColors
 import androidx.compose.material3.*
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.lightColorScheme
+import com.neo.signLanguage.R
+import androidx.compose.material3.darkColorScheme
+
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.lightColors
+import androidx.compose.material3.DividerDefaults.color
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.google.android.material.color.utilities.Scheme.dark
@@ -24,26 +31,22 @@ fun MyMaterialTheme(
   content: @Composable () -> Unit
 ) {
   val context = LocalContext.current
+  val colorText = TextStyle(color = if (isDarkTheme(context)) Color.White else Color.Black)
   val typography = Typography(
     // Establecer el color de texto predeterminado en blanco
-    bodyMedium = TextStyle(color = if (isDarkTheme(context)) Color.White else Color.Black),
+    bodyMedium = colorText,
+    titleMedium = colorText,
     // Agregar otros estilos de texto aquí si es necesario
   )
 
   /*val colors = if (isDarkTheme(context)) ColorScheme.dark else ColorScheme.light*/
   MaterialTheme(
     content = content, typography = typography,
-    colorScheme = MaterialTheme.colorScheme.copy(
-      // Puedes reemplazar el esquema de color por defecto aquí:
-      // lightColors() para el modo claro
-      // darkColors() para el modo oscuro
-      /*color = if (isDarkTheme(context)) ColorScheme.dark else ColorScheme.light,*/
-
-        // También puedes definir colores personalizados:
-      primary = Color(0xFF123456),
-      onPrimary = Color.White
-
-    ),
+    colorScheme = if (isDarkTheme(context)) darkColorScheme() else lightColorScheme(
+      primary = colorResource(id = R.color.primaryColor),
+      /*= colorResource(id = R.color.primaryColorVariant),*/
+      onPrimary = colorResource(id = R.color.primaryLightColor),
+    )
   )
 }
 

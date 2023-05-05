@@ -6,8 +6,9 @@ import android.os.Parcelable
 import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat.startActivity
 import com.neo.signLanguage.R
+import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.data.models.Sign
-import com.neo.signLanguage.ui.view.activities.games.GameResultActivity
+import com.neo.signLanguage.ui.view.activities.games.*
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
 import kotlinx.parcelize.Parcelize
@@ -294,6 +295,52 @@ fun goResultActivity(context: Context, dialogGameDC: DialogGameDC) {
   val intent = Intent(context, GameResultActivity::class.java)
   intent.putExtra("dialogGameDC", dialogGameDC)
   startActivity(context, intent, null)
+}
+fun getMenuGamesActivities(context:Context): ArrayList<MenuTitle>{
+  val titlesMenu = ArrayList<MenuTitle>()
+  titlesMenu.add(
+    MenuTitle(
+      Utils.getStringByIdName(context, "test_your_memory"),
+      Utils.getStringByIdName(context, "guess_letter_number"),
+      R.drawable.ic_brain,
+      SelectLevelActivity(),
+      TestYourMemoryGameActivity()
+    )
+  )
+  titlesMenu.add(
+    MenuTitle(
+      Utils.getStringByIdName(context, "guess_the_word"),
+      Utils.getStringByIdName(context, "guess_the_word_desc"),
+      R.drawable.ic_books,
+      GuessTheWordActivity()
+    )
+  )
+  /*titlesMenu.add(
+    MenuTitle(
+      getStringByIdName(context, "write_your_message"),
+      getStringByIdName(context, "send_message_with_signs"),
+      R.drawable.ic_keyboard,
+      SendMessageWithImagesActivity()
+    )
+  )*/
+  titlesMenu.add(
+    MenuTitle(
+      Utils.getStringByIdName(context, "flip_game_title"),
+      Utils.getStringByIdName(context, "flip_game_subtitle"),
+      R.drawable.ic_rotate,
+      SelectLevelActivity(),
+      GuessFlipCardGameActivity()
+    )
+  )
+  titlesMenu.add(
+    MenuTitle(
+      Utils.getStringByIdName(context, "game_word_in_Sight"),
+      Utils.getStringByIdName(context, "game_word_in_sight_subtitle"),
+      R.drawable.ic_word_game,
+      CardMatchingWithArrowsActivity(),
+    )
+  )
+  return titlesMenu
 }
 
 fun getWinIcons(): Int {

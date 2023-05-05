@@ -27,12 +27,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/fragment_banner_ad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="64dp"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/test_banner_id" />
     </LinearLayout>
 </FrameLayout>

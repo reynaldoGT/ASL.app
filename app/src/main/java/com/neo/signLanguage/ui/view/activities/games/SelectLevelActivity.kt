@@ -135,7 +135,7 @@ fun CustomButton(buttonTitle: String, difficulty: Difficulty, activity: Class<*>
   val context = LocalContext.current
   Button(
     colors = ButtonDefaults.buttonColors(
-      /*backgroundColor = setColorByDifficulty(difficulty),*/
+      containerColor = setColorByDifficulty(difficulty),
       contentColor = Color.White
     ),
     modifier = Modifier

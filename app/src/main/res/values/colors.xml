@@ -14,8 +14,8 @@
 
 
     <color name="primaryColor">#4CAF50</color>
-    <color name="primaryLightColor">#C8E6C9</color>
     <color name="primaryDarkColor">#388E3C</color>
+    <color name="primaryLightColor">#C8E6C9</color>
 
 
     <color name="splash_background">#00BCD4</color>

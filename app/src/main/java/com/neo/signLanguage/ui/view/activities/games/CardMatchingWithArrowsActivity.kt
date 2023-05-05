@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,7 +28,6 @@ import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
 import com.neo.signLanguage.utils.*
-import com.neo.signLanguage.utils.AdUtils.Companion
 import com.neo.signLanguage.utils.GamesUtils.Companion.generateOptionsToQuiz
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
@@ -177,7 +175,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             .padding(8.dp)
             .fillMaxWidth(),
           textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.titleLarge
+          style = MaterialTheme.typography.titleMedium,
         )
         LazyVerticalGrid(
           modifier = Modifier.padding(vertical = 8.dp),
@@ -258,7 +256,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           }, shape = RoundedCornerShape(100.dp)
         ) {
           Text(
-            text = "Comprobar",
+            text = getStringByIdName(this@CardMatchingWithArrowsActivity, "check"),
             modifier = Modifier.padding(vertical = 10.dp),
             fontSize = 16.sp,
             color = Color.White

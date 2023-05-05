@@ -3,12 +3,12 @@ package com.neo.signLanguage.ui.view.activities.composables.widgets
 import android.content.Context
 import android.media.MediaPlayer
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -64,16 +63,15 @@ fun DialogGameResult(
       )
       Text(
         text = title,
-        fontSize = 32.sp,
         modifier = Modifier.padding(top = 32.dp),
-        fontWeight = FontWeight.W600
+        style = MaterialTheme.typography.titleLarge,
+        textAlign = TextAlign.Center
       )
       Text(
         text = subtitle,
-        fontSize = 20.sp,
         modifier = Modifier.padding(16.dp, 24.dp),
-        fontWeight = FontWeight.W400,
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
+        style = MaterialTheme.typography.titleLarge,
       )
       ButtonAction(
         color = color,
@@ -90,8 +88,7 @@ fun DialogGameResult(
 fun ButtonAction(color: Color, text: String, onClick: () -> Unit) {
   Button(
     colors = ButtonDefaults.buttonColors(
-      /*backgroundColor = Color(0xFF47C87C),*/
-      backgroundColor = color,
+      containerColor = color,
       contentColor = Color.White
     ),
     onClick = { onClick() },
@@ -105,7 +102,8 @@ fun ButtonAction(color: Color, text: String, onClick: () -> Unit) {
       fontWeight = FontWeight.Bold,
       color = Color.White,
       modifier = Modifier.padding(70.dp, 5.dp),
-      textAlign = TextAlign.Center
-    )
+      textAlign = TextAlign.Center,
+
+      )
   }
 }
