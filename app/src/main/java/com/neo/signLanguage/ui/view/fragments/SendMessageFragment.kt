@@ -80,6 +80,11 @@ class SendMessageFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
+    /*Init ads */
+    AdUtils.initAds(requireContext())
+    AdUtils.initListeners()
+
     giphyViewModel.currentMessage
       .observe(viewLifecycleOwner) {
         binding.seeCurrentMessage.text =
@@ -88,8 +93,6 @@ class SendMessageFragment : Fragment() {
       }
     Logger.addLogAdapter(AndroidLogAdapter())
 
-    AdUtils.initAds(requireContext())
-    AdUtils.initListeners()
 
     val getColorShared = getColorShared(activity as AppCompatActivity)
     if (getSharedPreferencesHandColor(requireContext()) != 0)

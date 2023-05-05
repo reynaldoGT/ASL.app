@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.ActivityFindLetterGameBinding
+import com.neo.signLanguage.databinding.ActivityTestYourMemoryGameBinding
 import com.neo.signLanguage.ui.viewModel.GameViewModel
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import java.util.*
@@ -40,7 +40,6 @@ import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.*
-import com.neo.signLanguage.utils.AdUtils.Companion.checkAdCounter
 
 import com.neo.signLanguage.utils.SharedPreferences.getMemoryRecord
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
@@ -51,17 +50,24 @@ import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import kotlin.collections.ArrayList
 
 
-class FindTheLetterGameActivity : AppCompatActivity() {
-  private lateinit var binding: ActivityFindLetterGameBinding
+class TestYourMemoryGameActivity : AppCompatActivity() {
+  private lateinit var binding: ActivityTestYourMemoryGameBinding
   private var numberElements: Int = 0
   private val model: GameViewModel by viewModels()
+
 
   var record: Int = 0
   var difficulty: Difficulty = Difficulty.EASY
   var intents = 0
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = ActivityFindLetterGameBinding.inflate(layoutInflater)
+
+    /*Ad initialization*/
+    AdUtils.initAds(this)
+    AdUtils.initListeners()
+
+    binding = ActivityTestYourMemoryGameBinding.inflate(layoutInflater)
     setContentView(binding.root)
     difficulty = intent.getSerializableExtra("difficulty") as Difficulty
 
@@ -113,13 +119,13 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     val currentRecord = remember { mutableStateOf(0) }
 
     val correctAnswerSound = remember {
-      MediaPlayer.create(this@FindTheLetterGameActivity, R.raw.correct2_sound)
+      MediaPlayer.create(this@TestYourMemoryGameActivity, R.raw.correct2_sound)
     }
     val loseSound = remember {
-      MediaPlayer.create(this@FindTheLetterGameActivity, R.raw.lose_sound2)
+      MediaPlayer.create(this@TestYourMemoryGameActivity, R.raw.lose_sound2)
     }
     val wrongSound = remember {
-      MediaPlayer.create(this@FindTheLetterGameActivity, R.raw.wrong_sound)
+      MediaPlayer.create(this@TestYourMemoryGameActivity, R.raw.wrong_sound)
     }
 
     DisposableEffect(correctAnswerSound) {
@@ -130,7 +136,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
     }
 
     if (remainingLives == 0) {
-      val thisContext = this@FindTheLetterGameActivity
+      val thisContext = this@TestYourMemoryGameActivity
       val dialogGameDC = DialogGameDC(
         getStringByIdName(thisContext, "you_lost"),
         getStringByIdName(thisContext, "better_luck"),
@@ -139,11 +145,10 @@ class FindTheLetterGameActivity : AppCompatActivity() {
         getStringByIdName(thisContext, "return_menu"),
         GameResult.LOSE,
       )
-      goResultActivity(thisContext, dialogGameDC)
-
-      /*checkAdCounter(this)*/
       saveRecord(this)
-      /*super.onBackPressed()*/
+      goResultActivity(thisContext, dialogGameDC)
+      AdUtils.checkAdCounter(this)
+
     }
     val textStyle = TextStyle(
       color = MaterialTheme.colorScheme.onBackground,
@@ -151,7 +156,6 @@ class FindTheLetterGameActivity : AppCompatActivity() {
       fontSize = 16.sp,
     )
     Box() {
-
       Column(
         modifier = Modifier
           .fillMaxSize()
@@ -171,7 +175,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
           ) {
             backIcon(
               onClick = {
-                saveRecord(this@FindTheLetterGameActivity)
+                saveRecord(this@TestYourMemoryGameActivity)
                 onClick()
               }
             )
@@ -246,17 +250,17 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                     .clickable {
                       if ((randomLetters.data[index].letter) == randomLetters.correctAnswer.letter) {
                         /*Check this*/
-                        Utils.playCorrectSound(this@FindTheLetterGameActivity, correctAnswerSound)
+                        Utils.playCorrectSound(this@TestYourMemoryGameActivity, correctAnswerSound)
                         record++
                         currentRecord.value = record
                         if (currentRecord.value > getRecordByDifficulty.value) {
                           getRecordByDifficulty.value = currentRecord.value
-                          saveRecord(this@FindTheLetterGameActivity)
+                          saveRecord(this@TestYourMemoryGameActivity)
                         }
                         model.getRandomToFindLetter(numberElements)
                       } else {
                         vibratePhone(applicationContext)
-                        Utils.playCorrectSound(this@FindTheLetterGameActivity, wrongSound)
+                        Utils.playCorrectSound(this@TestYourMemoryGameActivity, wrongSound)
                         remainingLives--
                       }
                     }
@@ -264,7 +268,7 @@ class FindTheLetterGameActivity : AppCompatActivity() {
                   Image(
                     painter = painterResource(id = randomLetters.data[index].image),
                     contentDescription = null,
-                    colorFilter = getHandColor(this@FindTheLetterGameActivity),
+                    colorFilter = getHandColor(this@TestYourMemoryGameActivity),
                     modifier = Modifier
                       .fillMaxSize()
                       .aspectRatio(1f)

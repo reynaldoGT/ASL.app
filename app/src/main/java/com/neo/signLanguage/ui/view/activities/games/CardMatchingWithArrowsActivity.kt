@@ -29,7 +29,7 @@ import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
 import com.neo.signLanguage.ui.view.activities.composables.widgets.ProgressGameIndicator
 import com.neo.signLanguage.utils.*
-import com.neo.signLanguage.utils.AdUtils.Companion.checkAdCounter
+import com.neo.signLanguage.utils.AdUtils.Companion
 import com.neo.signLanguage.utils.GamesUtils.Companion.generateOptionsToQuiz
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
@@ -39,6 +39,10 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
   private lateinit var binding: ActivityCardMatchingWithArrowsBinding
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    // Inicializa los anuncios
+    AdUtils.initAds(this)
+    AdUtils.initListeners()
+
     binding = ActivityCardMatchingWithArrowsBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
@@ -105,7 +109,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
         lifesAmount--
         Utils.vibratePhone(applicationContext)
         if (lifesAmount == 0) {
-          checkAdCounter(this@CardMatchingWithArrowsActivity)
           val dialogGameDC = DialogGameDC(
             getStringByIdName(this@CardMatchingWithArrowsActivity, "you_lost"),
             getStringByIdName(this@CardMatchingWithArrowsActivity, "better_luck"),
@@ -115,7 +118,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             GameResult.LOSE,
           )
           goResultActivity(this@CardMatchingWithArrowsActivity, dialogGameDC)
-          finish()
+          AdUtils.checkAdCounter(this@CardMatchingWithArrowsActivity)
         }
       }
     }
@@ -157,7 +160,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
                   GameResult.WIN
                 )
                 goResultActivity(this@CardMatchingWithArrowsActivity, dialogGameDC)
-                finish()
+                AdUtils.checkAdCounter(this@CardMatchingWithArrowsActivity)
               },
               modifier = Modifier
                 .weight(1f)
@@ -167,7 +170,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             )
             LivesCounter(lifesAmount)
           }
-
         }
         Text(
           text = getStringByIdName(this@CardMatchingWithArrowsActivity, "what_does_the_word_say"),
@@ -210,7 +212,6 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
             }
           }
         )
-
         LazyVerticalGrid(
           columns = GridCells.Fixed(2),
           /*modifier = Modifier.align(Alignment.Center),*/

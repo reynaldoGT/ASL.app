@@ -35,17 +35,14 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
-import com.neo.signLanguage.utils.DialogGameDC
-import com.neo.signLanguage.utils.GameResult
+import com.neo.signLanguage.utils.*
 
 import com.neo.signLanguage.utils.GamesUtils.Companion.getRandomToFindEquals
-import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getHandCurrentColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
-import com.neo.signLanguage.utils.getWinIcons
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.FlippableController
 import java.util.*
@@ -56,6 +53,10 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
   private lateinit var binding: ActivityGamesFlipCardBinding
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    AdUtils.initAds(this)
+    AdUtils.initListeners()
+
     binding = ActivityGamesFlipCardBinding.inflate(layoutInflater)
     setContentView(binding.root)
     val difficulty = intent.getSerializableExtra("difficulty") as Difficulty
@@ -144,21 +145,16 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
           blockedElements.clear()
           /*Verify is all are Flips is disable*/
           if (flipSEnable.none { it }) {
-            /*   checkCounter(this@GuessFlipCardGameActivity)
-               timerPaused.value = true
-               showCompletedSuccessDialog.value = true*/
-
-            goResultScreen(
-              this@GuessFlipCardGameActivity, DialogGameDC(
-                title = getStringByIdName(this, "level_completed"),
-                subtitle = getStringByIdName(this, "go_to_the_next_level"),
-                audio = R.raw.win_sound,
-                getWinIcons(),
-                buttonText = getStringByIdName(this, "go_to_next_level"),
-                GameResult.WIN
-              )
+            val dialogGameDC = DialogGameDC(
+              title = getStringByIdName(this, "level_completed"),
+              subtitle = getStringByIdName(this, "go_to_the_next_level"),
+              audio = R.raw.win_sound,
+              getWinIcons(),
+              buttonText = getStringByIdName(this, "go_to_next_level"),
+              GameResult.WIN
             )
-            finish()
+            goResultActivity(this@GuessFlipCardGameActivity, dialogGameDC)
+            AdUtils.checkAdCounter(this@GuessFlipCardGameActivity)
           }
         } else {
           Utils.playCorrectSound(this@GuessFlipCardGameActivity, wrongSound)
@@ -218,8 +214,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
       Column() {
         TimerScreen(
           onTimerEnd = {
-            /*checkCounter(this@GuessFlipCardGameActivity)
-            */
+            AdUtils.checkAdCounter(this@GuessFlipCardGameActivity)
             showTimesUpDialog.value = true
           },
           timeInSeconds = time.value,
@@ -371,11 +366,7 @@ fun goNextLevel(context: Context, difficulty: Difficulty) {
   context.startActivity(intent)
 }
 
-fun goResultScreen(context: Context, dialogGameDC: DialogGameDC) {
-  val intent = Intent(context, GameResultActivity::class.java)
-  intent.putExtra("dialogGameDC", dialogGameDC)
-  context.startActivity(intent)
-}
+
 /*
 
 

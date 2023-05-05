@@ -2,6 +2,7 @@ package com.neo.signLanguage.ui.view.activities.games
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -118,10 +119,7 @@ class GuessTheWordActivity : AppCompatActivity() {
       Card(
         modifier = Modifier
           .fillMaxWidth()
-
           .padding(16.dp),
-
-
         ) {
         Image(
           painter = painter,
@@ -133,12 +131,14 @@ class GuessTheWordActivity : AppCompatActivity() {
         )
       }
       Button(enabled = isButtonEnabled,
-        shape = RoundedCornerShape(40.dp), onClick = {
+        shape = RoundedCornerShape(40.dp),
+        onClick = {
           isButtonEnabled = false
           hideKeyboard(this@GuessTheWordActivity)
           timer.cancel()
           timer = Timer()
           timer.schedule(task, 1000, 1500)
+          Log.d("TAG", "correctWord.value: ${correctWord.value}")
         }) {
         Row(
           modifier = Modifier.padding(horizontal = 32.dp /*vertical = 8.dp*/),

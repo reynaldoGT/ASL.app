@@ -12,8 +12,10 @@ import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.orhanobut.logger.Logger
 import java.util.*
 
+
 class AdUtils {
   companion object {
+    private var isAdLoaded = false
     private var interstitial: InterstitialAd? = null
     fun initAds(context: Context) {
       val adRequest = AdRequest.Builder().build()
@@ -24,10 +26,12 @@ class AdUtils {
         object : InterstitialAdLoadCallback() {
           override fun onAdLoaded(interstitialAd: InterstitialAd) {
             interstitial = interstitialAd
+            isAdLoaded = true
           }
 
           override fun onAdFailedToLoad(p0: LoadAdError) {
             interstitial = null
+            isAdLoaded = false
           }
         })
     }
@@ -46,14 +50,35 @@ class AdUtils {
       }
     }
 
-    fun checkAdCounter(activity: AppCompatActivity) {
-      addInOneCounterAd(activity.applicationContext)
-      if (getAdCount(activity.applicationContext) == 7) {
-        this.showAds(activity)
+    private fun showInterstitialAd(activity: AppCompatActivity) {
+      if (isAdLoaded) {
+        interstitial?.show(activity)
+        isAdLoaded = false
         resetAdCount(activity.applicationContext)
-        initAds(activity)
       }
     }
+
+    fun checkAdCounter(activity: AppCompatActivity) {
+      Logger.d(
+        "AdUtils :${getAdCount(activity.applicationContext)}",
+        "valor==>  ${getAdCount(activity.applicationContext)}"
+      )
+      addInOneCounterAd(activity.applicationContext)
+      Logger.d(
+        "AdUtils :${getAdCount(activity.applicationContext)}",
+        "valor==>  ${getAdCount(activity.applicationContext)}"
+      )
+      if (getAdCount(activity.applicationContext) == 7) {
+        showInterstitialAd(activity)
+        resetAdCount(activity.applicationContext)
+        return
+      }
+      if (getAdCount(activity.applicationContext) > 7) {
+        showInterstitialAd(activity)
+        resetAdCount(activity.applicationContext)
+      }
+    }
+
 
     fun showAddDirectly(activity: AppCompatActivity) {
       this.showAds(activity)
@@ -61,17 +86,17 @@ class AdUtils {
     }
 
     private fun showAds(activity: AppCompatActivity) {
-      Logger.d("Show add")
       interstitial?.show(
         activity
       )
     }
 
     fun initLoad(adView: AdView) {
-      /*AdView*/
+      // Cargar el anuncio en AdView
       val adRequest = AdRequest.Builder().build()
       adView.loadAd(adRequest)
     }
+
 
     fun getLanguagePhone(): Boolean {
       val language = Locale.getDefault().displayLanguage.toString().lowercase(Locale.ROOT)

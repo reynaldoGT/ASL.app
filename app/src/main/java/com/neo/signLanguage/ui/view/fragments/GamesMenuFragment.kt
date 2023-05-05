@@ -6,14 +6,21 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.databinding.FragmentGamesBinding
@@ -22,6 +29,7 @@ import com.neo.signLanguage.ui.view.activities.composables.CardWithImage
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.games.*
 import com.neo.signLanguage.ui.viewModel.GameViewModel
+import com.neo.signLanguage.utils.AdUtils
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
 
@@ -45,7 +53,9 @@ class GamesMenuFragment : Fragment() {
     //! toolbar important to show menu
     (activity as AppCompatActivity?)!!.setSupportActionBar(binding.gamesToolbar)
 
-    /*initLoad(binding.banner) */
+    MobileAds.initialize(requireContext())
+    AdUtils.initLoad(binding.fragmentBannerAd)
+
     binding.fragmentGamesComposeView.setContent {
       MyMaterialTheme(
         content = {
@@ -64,7 +74,7 @@ class GamesMenuFragment : Fragment() {
         getStringByIdName(requireContext(), "guess_letter_number"),
         R.drawable.ic_brain,
         SelectLevelActivity(),
-        FindTheLetterGameActivity()
+        TestYourMemoryGameActivity()
       )
     )
     titlesMenu.add(
@@ -124,7 +134,24 @@ class GamesMenuFragment : Fragment() {
           )
         }
       }
+      Spacer()
+      BannerAdView()
     }
 
+  }
+
+  @Composable
+  fun BannerAdView() {
+    val unitId = stringResource(id = R.string.test_banner_id)
+
+    AndroidView(
+      factory = { context ->
+        AdView(context).apply {
+          setAdSize(AdSize.BANNER)
+          adUnitId = unitId
+          loadAd(AdRequest.Builder().build())
+        }
+      }
+    )
   }
 }

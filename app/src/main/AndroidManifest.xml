@@ -52,7 +52,7 @@
             android:name=".ui.view.activities.games.SendMessageWithImagesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.activities.games.FindTheLetterGameActivity"
+            android:name=".ui.view.activities.games.TestYourMemoryGameActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.activities.SettingsActivity"
@@ -71,7 +71,6 @@
             android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
