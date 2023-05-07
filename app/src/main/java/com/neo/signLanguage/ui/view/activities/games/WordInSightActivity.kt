@@ -176,7 +176,7 @@ class WordInSightActivity : AppCompatActivity() {
             .padding(8.dp)
             .fillMaxWidth(),
           textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.titleMedium,
+          style = MaterialTheme.typography.titleLarge,
         )
         LazyVerticalGrid(
           modifier = Modifier.padding(vertical = 8.dp),

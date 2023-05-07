@@ -222,7 +222,7 @@ class TestYourMemoryGameActivity : AppCompatActivity() {
             R.string.game_find_game_title_number,
             randomLetters.correctAnswer.letter.uppercase(Locale.getDefault())
           ),
-          style = MaterialTheme.typography.titleMedium,
+          style = MaterialTheme.typography.titleLarge,
           color = if (isDarkTheme(LocalContext.current)) Color.LightGray else Color.DarkGray,
         )
         Text(

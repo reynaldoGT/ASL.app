@@ -5,6 +5,7 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -89,10 +90,13 @@ class DetailsSignActivity : AppCompatActivity() {
       }).build(), imageLoader = imageLoader
     )
     Box(
+      modifier = Modifier.fillMaxSize().background(Color.Red),
 
+      contentAlignment = Alignment.Center
     ) {
       Column(
         modifier = Modifier
+          .background(Color.Blue)
           .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -109,7 +113,7 @@ class DetailsSignActivity : AppCompatActivity() {
           Text(
             text = letter,
             modifier = Modifier,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleLarge,
           )
       }
     }

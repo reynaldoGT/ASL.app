@@ -30,7 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.ActivityGamesFlipCardBinding
+import com.neo.signLanguage.databinding.ActivityFlippingCardsGameBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.TimeIsUpDialog
 import com.neo.signLanguage.ui.view.activities.composables.TimerScreen
@@ -45,19 +45,20 @@ import com.neo.signLanguage.utils.Utils.Companion.setColorByDifficulty
 import com.neo.signLanguage.utils.Utils.Companion.vibratePhone
 import com.wajahatkarim.flippable.Flippable
 import com.wajahatkarim.flippable.FlippableController
+import okhttp3.internal.applyConnectionSpec
 import java.util.*
 
 
 class GuessFlipCardGameActivity : AppCompatActivity() {
 
-  private lateinit var binding: ActivityGamesFlipCardBinding
+  private lateinit var binding: ActivityFlippingCardsGameBinding
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
     AdUtils.initAds(this)
     AdUtils.initListeners()
 
-    binding = ActivityGamesFlipCardBinding.inflate(layoutInflater)
+    binding = ActivityFlippingCardsGameBinding.inflate(layoutInflater)
     setContentView(binding.root)
     val difficulty = intent.getSerializableExtra("difficulty") as Difficulty
     binding.composeViewGamesFlipCard.setContent {
@@ -261,40 +262,19 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
                   },
                   flipEnabled = flipSEnable[index],
                   frontSide = {
-                    Card(
-                      modifier = Modifier
-                        .fillMaxSize()
-                        .border(
-                          width = 2.dp,
-                          color = getHandCurrentColor(context.current),
-                          shape = RoundedCornerShape(8.dp)
-                        ),
-                      shape = RoundedCornerShape(8.dp),
-                    ) {
-                      Box() {
-                        Image(
-                          painter = painterResource(id = R.drawable.ic_help_outline),
-                          contentDescription = null,
-                          colorFilter = getHandColor(context.current),
-                          modifier = Modifier
-                            .fillMaxSize()
-                            .aspectRatio(1f)
-                            .padding(4.dp)
-                        )
-                      }
+                    CardWithBox {
+                      Image(
+                        painter = painterResource(id = R.drawable.ic_help_outline),
+                        contentDescription = null,
+                        colorFilter = getHandColor(context.current),
+                        modifier = Modifier
+                          .fillMaxSize()
+                          .padding(8.dp)
+                      )
                     }
                   },
                   backSide = {
-                    Card(
-                      shape = RoundedCornerShape(8.dp),
-                      modifier = Modifier
-                        .fillMaxSize()
-                        .border(
-                          width = 2.dp,
-                          color = getHandCurrentColor(context.current),
-                          shape = RoundedCornerShape(8.dp)
-                        ),
-                    ) {
+                    CardWithBox {
                       Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                       ) {
@@ -304,7 +284,6 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
                           colorFilter = getHandColor(context.current),
                           modifier = Modifier
                             .fillMaxSize()
-                            .aspectRatio(1f)
                             .padding(8.dp)
                         )
                         Text(
@@ -324,6 +303,29 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
           )
         }
       }
+    }
+  }
+}
+
+@Composable
+fun CardWithBox(content: @Composable () -> Unit) {
+
+  Card(
+    modifier = Modifier
+      .fillMaxSize()
+      .border(
+        width = 2.dp,
+        color = getHandCurrentColor(LocalContext.current),
+        shape = RoundedCornerShape(8.dp)
+      ),
+    shape = RoundedCornerShape(8.dp),
+  ) {
+    Box(
+      modifier = Modifier
+        .fillMaxSize()
+        .aspectRatio(0.80f)
+    ) {
+      content()
     }
   }
 }

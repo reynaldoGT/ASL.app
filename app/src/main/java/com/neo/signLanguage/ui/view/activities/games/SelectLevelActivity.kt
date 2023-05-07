@@ -24,6 +24,7 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.neo.signLanguage.databinding.ActivitySelectLevelBinding
+import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
@@ -45,11 +46,14 @@ class SelectLevelActivity : AppCompatActivity() {
     val gameName = intent.getStringExtra("gameName")
 
     binding.composeViewActivitySelectLevel.setContent {
-      CustomButtonSelectLevel(
-        onBackPressed = { onBackPressed() },
-        activityClass,
-        gameName = gameName!!
-      )
+      MyMaterialTheme {
+        CustomButtonSelectLevel(
+          onBackPressed = { onBackPressed() },
+          activityClass,
+          gameName = gameName!!
+        )
+      }
+
     }
   }
 }
@@ -149,7 +153,11 @@ fun CustomButton(buttonTitle: String, difficulty: Difficulty, activity: Class<*>
       context.startActivity(intent)
     }, shape = RoundedCornerShape(100.dp)
   ) {
-    Text(text = buttonTitle, modifier = Modifier.padding(10.dp), style = MaterialTheme.typography.bodyLarge)
+    Text(
+      text = buttonTitle,
+      modifier = Modifier.padding(10.dp),
+      style = MaterialTheme.typography.bodyLarge
+    )
   }
 }
 
