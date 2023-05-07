@@ -148,6 +148,7 @@ class TestYourMemoryGameActivity : AppCompatActivity() {
       saveRecord(this)
       goResultActivity(thisContext, dialogGameDC)
       AdUtils.checkAdCounter(this)
+      finish()
 
     }
     val textStyle = TextStyle(

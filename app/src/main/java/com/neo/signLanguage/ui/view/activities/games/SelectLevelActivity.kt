@@ -90,7 +90,7 @@ fun CustomButtonSelectLevel(
             modifier = Modifier
               .padding(vertical = 5.dp)
               .align(Alignment.CenterHorizontally),
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
             color = if (isDarkTheme(context)) Color.White else Color.DarkGray
           )
@@ -99,7 +99,7 @@ fun CustomButtonSelectLevel(
             modifier = Modifier
               .padding(10.dp)
               .align(Alignment.CenterHorizontally),
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center,
             color = if (isDarkTheme(context)) Color.White else Color.DarkGray
           )
@@ -149,7 +149,7 @@ fun CustomButton(buttonTitle: String, difficulty: Difficulty, activity: Class<*>
       context.startActivity(intent)
     }, shape = RoundedCornerShape(100.dp)
   ) {
-    Text(text = buttonTitle, modifier = Modifier.padding(10.dp), fontSize = 20.sp)
+    Text(text = buttonTitle, modifier = Modifier.padding(10.dp), style = MaterialTheme.typography.bodyLarge)
   }
 }
 

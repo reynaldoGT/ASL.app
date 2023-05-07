@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
 import com.neo.signLanguage.R
-import com.neo.signLanguage.databinding.ActivityCardMatchingWithArrowsBinding
+import com.neo.signLanguage.databinding.ActivityWordInSightActivityBinding
 import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.ui.view.activities.composables.widgets.LivesCounter
@@ -33,15 +33,15 @@ import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.playCorrectSound
 
 
-class CardMatchingWithArrowsActivity : AppCompatActivity() {
-  private lateinit var binding: ActivityCardMatchingWithArrowsBinding
+class WordInSightActivity : AppCompatActivity() {
+  private lateinit var binding: ActivityWordInSightActivityBinding
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     // Inicializa los anuncios
     AdUtils.initAds(this)
     AdUtils.initListeners()
 
-    binding = ActivityCardMatchingWithArrowsBinding.inflate(layoutInflater)
+    binding = ActivityWordInSightActivityBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
     binding.composeViewCardMatchingWithArrows.setContent {
@@ -57,7 +57,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
   fun CardMatchingWithArrowsContent(onClick: () -> Unit, onBack: () -> Unit) {
     val generateOptionsToQuiz = remember { mutableStateOf(generateOptionsToQuiz()) }
     var currentStep by remember { mutableStateOf(0) }
-    var maxSteps by remember { mutableStateOf(5) }
+    val maxSteps by remember { mutableStateOf(5) }
     var lifesAmount by remember { mutableStateOf(5) }
     var selectedIndex by remember { mutableStateOf(-1) }
     var optionSelected by remember { mutableStateOf("") }
@@ -65,16 +65,16 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
     var showDialogLevelCompleted by remember { mutableStateOf(false) }
 
     val mediaPlayer = remember {
-      MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.correct2_sound)
+      MediaPlayer.create(this@WordInSightActivity, R.raw.correct2_sound)
     }
     val playLooseRound = remember {
-      MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.lose_sound2)
+      MediaPlayer.create(this@WordInSightActivity, R.raw.lose_sound2)
     }
     val mediaPlayerWin = remember {
-      MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.win_sound)
+      MediaPlayer.create(this@WordInSightActivity, R.raw.win_sound)
     }
     val wrongSound = remember {
-      MediaPlayer.create(this@CardMatchingWithArrowsActivity, R.raw.wrong_sound)
+      MediaPlayer.create(this@WordInSightActivity, R.raw.wrong_sound)
     }
     DisposableEffect(mediaPlayer) {
       onDispose {
@@ -91,7 +91,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
       if (optionSelected == generateOptionsToQuiz.value.correctAnswer) {
         optionSelected = ""
         /*Play sound*/
-        playCorrectSound(this@CardMatchingWithArrowsActivity, mediaPlayer)
+        playCorrectSound(this@WordInSightActivity, mediaPlayer)
         /*Select the options selected*/
         generateOptionsToQuiz.value = generateOptionsToQuiz()
 
@@ -103,20 +103,21 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
       } else {
         /*Play sound*/
         optionSelected = ""
-        playCorrectSound(this@CardMatchingWithArrowsActivity, wrongSound)
+        playCorrectSound(this@WordInSightActivity, wrongSound)
         lifesAmount--
         Utils.vibratePhone(applicationContext)
         if (lifesAmount == 0) {
           val dialogGameDC = DialogGameDC(
-            getStringByIdName(this@CardMatchingWithArrowsActivity, "you_lost"),
-            getStringByIdName(this@CardMatchingWithArrowsActivity, "better_luck"),
+            getStringByIdName(this@WordInSightActivity, "you_lost"),
+            getStringByIdName(this@WordInSightActivity, "better_luck"),
             R.raw.lose_sound2,
             getLoseIcons(),
-            getStringByIdName(this@CardMatchingWithArrowsActivity, "return_menu"),
+            getStringByIdName(this@WordInSightActivity, "return_menu"),
             GameResult.LOSE,
           )
-          goResultActivity(this@CardMatchingWithArrowsActivity, dialogGameDC)
-          AdUtils.checkAdCounter(this@CardMatchingWithArrowsActivity)
+          goResultActivity(this@WordInSightActivity, dialogGameDC)
+          AdUtils.checkAdCounter(this@WordInSightActivity)
+          finish()
         }
       }
     }
@@ -142,23 +143,23 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
               onProgressComplete = {
                 val dialogGameDC = DialogGameDC(
                   title = getStringByIdName(
-                    this@CardMatchingWithArrowsActivity,
+                    this@WordInSightActivity,
                     "level_completed"
                   ),
                   subtitle = getStringByIdName(
-                    this@CardMatchingWithArrowsActivity,
+                    this@WordInSightActivity,
                     "go_to_the_next_level"
                   ),
                   audio = R.raw.win_sound,
                   getWinIcons(),
                   buttonText = getStringByIdName(
-                    this@CardMatchingWithArrowsActivity,
+                    this@WordInSightActivity,
                     "go_to_next_level"
                   ),
                   GameResult.WIN
                 )
-                goResultActivity(this@CardMatchingWithArrowsActivity, dialogGameDC)
-                AdUtils.checkAdCounter(this@CardMatchingWithArrowsActivity)
+                goResultActivity(this@WordInSightActivity, dialogGameDC)
+                AdUtils.checkAdCounter(this@WordInSightActivity)
               },
               modifier = Modifier
                 .weight(1f)
@@ -170,7 +171,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           }
         }
         Text(
-          text = getStringByIdName(this@CardMatchingWithArrowsActivity, "what_does_the_word_say"),
+          text = getStringByIdName(this@WordInSightActivity, "what_does_the_word_say"),
           modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
@@ -200,7 +201,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
                 Image(
                   painter = painterResource(id = generateOptionsToQuiz.value.signList[index].image),
                   contentDescription = null,
-                  colorFilter = Utils.getHandColor(this@CardMatchingWithArrowsActivity),
+                  colorFilter = Utils.getHandColor(this@WordInSightActivity),
                   modifier = Modifier
                     .fillMaxSize()
                     .aspectRatio(1f)
@@ -256,7 +257,7 @@ class CardMatchingWithArrowsActivity : AppCompatActivity() {
           }, shape = RoundedCornerShape(100.dp)
         ) {
           Text(
-            text = getStringByIdName(this@CardMatchingWithArrowsActivity, "check"),
+            text = getStringByIdName(this@WordInSightActivity, "check"),
             modifier = Modifier.padding(vertical = 10.dp),
             fontSize = 16.sp,
             color = Color.White

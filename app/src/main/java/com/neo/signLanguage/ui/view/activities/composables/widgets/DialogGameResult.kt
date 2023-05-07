@@ -71,7 +71,7 @@ fun DialogGameResult(
         text = subtitle,
         modifier = Modifier.padding(16.dp, 24.dp),
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.titleLarge,
+        style = MaterialTheme.typography.titleMedium,
       )
       ButtonAction(
         color = color,

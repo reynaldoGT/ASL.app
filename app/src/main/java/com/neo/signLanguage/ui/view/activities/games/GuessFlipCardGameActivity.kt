@@ -155,6 +155,7 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
             )
             goResultActivity(this@GuessFlipCardGameActivity, dialogGameDC)
             AdUtils.checkAdCounter(this@GuessFlipCardGameActivity)
+            finish()
           }
         } else {
           Utils.playCorrectSound(this@GuessFlipCardGameActivity, wrongSound)

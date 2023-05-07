@@ -3,7 +3,6 @@ package com.neo.signLanguage.utils
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
-import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat.startActivity
 import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.MenuTitle
@@ -337,7 +336,7 @@ fun getMenuGamesActivities(context:Context): ArrayList<MenuTitle>{
       Utils.getStringByIdName(context, "game_word_in_Sight"),
       Utils.getStringByIdName(context, "game_word_in_sight_subtitle"),
       R.drawable.ic_word_game,
-      CardMatchingWithArrowsActivity(),
+      WordInSightActivity(),
     )
   )
   return titlesMenu

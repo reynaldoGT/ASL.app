@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.view.activities.games.CardMatchingWithArrowsActivity">
+    tools:context=".ui.view.activities.games.WordInSightActivity">
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/compose_view_card_matching_with_arrows"

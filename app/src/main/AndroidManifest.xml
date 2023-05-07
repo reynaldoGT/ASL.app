@@ -26,7 +26,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.view.activities.games.CardMatchingWithArrowsActivity"
+            android:name=".ui.view.activities.games.WordInSightActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
