@@ -144,5 +144,7 @@
     <string name="you_lost">Perdiste</string>
     <string name="what_does_the_word_say">¿Cuál es la palabra correcta?</string>
     <string name="check">Comprobar</string>
+    <string name="skip">skip</string>
+    <string name="start">Start</string>
 
 </resources>

@@ -139,6 +139,8 @@
     <string name="you_lost">You lost</string>
     <string name="what_does_the_word_say">What does the word say?</string>
     <string name="check">Check</string>
+    <string name="skip">skip</string>
+    <string name="start">Start</string>
 
 
 </resources>

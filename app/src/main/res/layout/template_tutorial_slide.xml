@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivTutorialImage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/simple_description"
+        android:src="@drawable/ic_0_number" />
+
+    <TextView
+        android:id="@+id/tutorial_title"
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:text="@string/simple_description" />
+
+    <TextView
+        android:id="@+id/tutorial_subtitle"
+        style="@style/TextAppearance.Material3.BodyMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/simple_description"
+        android:textColor="#000" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

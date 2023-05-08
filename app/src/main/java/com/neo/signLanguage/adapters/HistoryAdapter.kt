@@ -18,10 +18,9 @@ class HistoryAdapter(
   itemsHistory: ArrayList<SingDbModel>,
   var clickListener: ClickListener
 ) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+
   var itemsHistory: ArrayList<SingDbModel>? = null
   var viewHolder: ViewHolder? = null
-
-
   var context: Context? = null
 
   init {
@@ -60,9 +59,7 @@ class HistoryAdapter(
     RecyclerView.ViewHolder(vista),
     View.OnClickListener {
     private val binding = TemplateHistoryBinding.bind(vista)
-
     var tvHistory: TextView? = null
-
     var listenerRef: WeakReference<ClickListener>? = null
 
     init {
