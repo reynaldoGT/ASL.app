@@ -147,6 +147,9 @@
     <string name="skip">Saltar</string>
     <string name="start">Comenzar</string>
 
+    <string name="welcome_title">Bienvenido a Lenguaje de Señas APP</string>
+    <string name="welcome_subtitle">Este tutorial es para que puedas aprender lenguaje de Señas </string>
+
     <string name="slider_title_1">Comunicación y Mensajería</string>
     <string name="slider_subtitle_1">Envía mensajes a tus amigos y familiares desde la aplicación. Mantente en contacto con tus seres queridos desde cualquier lugar.</string>
 
