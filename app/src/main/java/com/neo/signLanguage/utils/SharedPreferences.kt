@@ -7,6 +7,7 @@ import com.neo.signLanguage.ui.view.activities.games.Difficulty
 object SharedPreferences {
   private val SETTINGS = "SHARED_PREFERENCES"
   private val DARK_THEME = "DARK_THEME"
+  private val IS_FIRST_TIME = "IS_FIRST_TIME"
   private val DELAY = "DELAY"
   private val HAND_COLOR = "HAND_COLOR"
   private val CURRENT_MESSAGE = "CURRENTMESSAGE"
@@ -214,5 +215,15 @@ object SharedPreferences {
     val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     val editor = settings.edit()
     editor.putBoolean(SOUND_IN_GAMES, newState).apply()
+  }
+  fun getIsFirstTime(context: Context): Boolean {
+    val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    return settings.getBoolean(IS_FIRST_TIME, true)
+  }
+
+  fun setIsFirstTime(context: Context, newState: Boolean) {
+    val settings = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
+    val editor = settings.edit()
+    editor.putBoolean(IS_FIRST_TIME, newState).apply()
   }
 }

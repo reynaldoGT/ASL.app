@@ -13,6 +13,7 @@ import com.neo.signLanguage.adapters.WelcomeSliderAdapter
 import com.neo.signLanguage.data.models.TutorialWelcome
 
 import com.neo.signLanguage.databinding.ActivityWelcomeBinding
+import com.neo.signLanguage.utils.SharedPreferences
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -110,20 +111,19 @@ class WelcomeActivity : AppCompatActivity() {
     )
   }
 
-  fun setupButtons() {
+  private fun setupButtons() {
     binding.btnSkip.setOnClickListener {
       startApplication()
     }
     binding.btnStart.setOnClickListener {
       startApplication()
     }
-    binding.btnSkip.setOnClickListener {
-      startApplication()
-    }
+
   }
 
-  fun startApplication() {
+  private fun startApplication() {
     /*Change this */
+    SharedPreferences.setIsFirstTime(this,false)
     val intent = Intent(this, MainActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     startActivity(intent)
