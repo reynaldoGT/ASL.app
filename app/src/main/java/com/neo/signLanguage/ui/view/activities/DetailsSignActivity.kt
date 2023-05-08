@@ -90,13 +90,10 @@ class DetailsSignActivity : AppCompatActivity() {
       }).build(), imageLoader = imageLoader
     )
     Box(
-      modifier = Modifier.fillMaxSize().background(Color.Red),
-
       contentAlignment = Alignment.Center
     ) {
       Column(
         modifier = Modifier
-          .background(Color.Blue)
           .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
