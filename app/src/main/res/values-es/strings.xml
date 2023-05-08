@@ -144,7 +144,16 @@
     <string name="you_lost">Perdiste</string>
     <string name="what_does_the_word_say">¿Cuál es la palabra correcta?</string>
     <string name="check">Comprobar</string>
-    <string name="skip">skip</string>
-    <string name="start">Start</string>
+    <string name="skip">Saltar</string>
+    <string name="start">Comenzar</string>
+
+    <string name="slider_title_1">Comunicación y Mensajería</string>
+    <string name="slider_subtitle_1">Envía mensajes a tus amigos y familiares desde la aplicación. Mantente en contacto con tus seres queridos desde cualquier lugar.</string>
+
+    <string name="slider_title_2">Aprendizaje y Educación</string>
+    <string name="slider_subtitle_2">Aprende cosas nuevas sobre diferentes temas desde la aplicación. Desarrolla tus habilidades y conocimientos a través de lecciones interactivas.</string>
+
+    <string name="slider_title_3">Juegos y Entretenimiento</string>
+    <string name="slider_subtitle_3">Diviértete jugando diferentes juegos dentro de la aplicación. Encuentra juegos para toda la familia y compite con tus amigos.</string>
 
 </resources>

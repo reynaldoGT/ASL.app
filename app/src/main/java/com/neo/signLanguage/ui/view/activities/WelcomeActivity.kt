@@ -14,6 +14,7 @@ import com.neo.signLanguage.data.models.TutorialWelcome
 
 import com.neo.signLanguage.databinding.ActivityWelcomeBinding
 import com.neo.signLanguage.utils.SharedPreferences
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -56,31 +57,33 @@ class WelcomeActivity : AppCompatActivity() {
     arrayTutorialWelcome = ArrayList(
       arrayListOf(
         TutorialWelcome(
-          "Welcome to Sign Language",
-          "This is a tutorial for you to learn sign language",
-          R.drawable.ic_launcher_background
+          getString(R.string.welcome_title),
+          getString(R.string.welcome_subtitle),
+          R.drawable.logo_app
         ),
         TutorialWelcome(
-          "Welcome to Sign Language",
-          "This is a tutorial for you to learn sign language",
-          R.drawable.ic_launcher_background
+          getString(R.string.slider_title_1),
+          getString(R.string.slider_subtitle_1),
+          R.drawable.comunicate_slider_ic
         ),
         TutorialWelcome(
-          "Welcome to Sign Language",
-          "This is a tutorial for you to learn sign language",
-          R.drawable.ic_launcher_background
+          getString(R.string.slider_title_2),
+          getString(R.string.slider_subtitle_2),
+          R.drawable.learn_slider_ic
         ),
         TutorialWelcome(
-          "Welcome to Sign Language",
-          "This is a tutorial for you to learn sign language",
-          R.drawable.ic_launcher_background
-        )
+          getString(R.string.slider_title_3),
+          getString(R.string.slider_subtitle_3),
+          R.drawable.machine_writer_ic
+        ),
       )
     )
 
     welcomeSliderAdapter = WelcomeSliderAdapter(this, arrayTutorialWelcome)
-
+    /*dotsIndicator.attachTo(binding.dotsIndicator)*/
     setUpViewPager(showElementLiveData)
+
+    binding.dotsIndicator.attachTo(binding.viewPagerWelcome)
     setupButtons()
 
   }
@@ -92,20 +95,19 @@ class WelcomeActivity : AppCompatActivity() {
     binding.viewPagerWelcome.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
     //select any page you want as your starting page
-    val currentPageIndex = 1
+    val currentPageIndex = 0
     binding.viewPagerWelcome.currentItem = currentPageIndex
 
     // registering for page change callback
-    binding.viewPagerWelcome.registerOnPageChangeCallback(
-      object : ViewPager2.OnPageChangeCallback() {
+    binding.viewPagerWelcome.registerOnPageChangeCallback(object :
+      ViewPager2.OnPageChangeCallback() {
 
-        override fun onPageSelected(position: Int) {
-          super.onPageSelected(position)
-          showElementLiveData.postValue(position == arrayTutorialWelcome.size - 1)
+      override fun onPageSelected(position: Int) {
+        super.onPageSelected(position)
+        showElementLiveData.postValue(position == arrayTutorialWelcome.size - 1)
 
-        }
       }
-    )
+    })
   }
 
   private fun setupButtons() {
@@ -120,7 +122,7 @@ class WelcomeActivity : AppCompatActivity() {
 
   private fun startApplication() {
     /*Change this */
-    SharedPreferences.setIsFirstTime(this,false)
+    SharedPreferences.setIsFirstTime(this, false)
     val intent = Intent(this, MainActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     startActivity(intent)

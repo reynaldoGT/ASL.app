@@ -35,13 +35,11 @@ class MainActivity : AppCompatActivity() {
     binding = AcitivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    if(SharedPreferences.getIsFirstTime(this)){
+    if (SharedPreferences.getIsFirstTime(this)) {
       val intent = Intent(this, WelcomeActivity::class.java)
       startActivity(intent)
       finish()
     }
-    /*val intent = Intent(this, WelcomeActivity::class.java)
-    startActivity(intent)*/
     database =
       Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
         .build()

@@ -38,7 +38,6 @@ class WelcomeSliderAdapter(
 
   override fun onBindViewHolder(holder: ViewPagerHolder, position: Int) {
     val item = itemSlideTutorial?.get(position)
-    /*holder.tvHistory?.text = item?.sing*/
     holder.tvSubTitleSliderTutorial?.text = item?.subTitle
     holder.tvTitleSliderTutorial?.text = item?.title
     holder.ivTutorialImage?.setImageResource(item?.image!!)
