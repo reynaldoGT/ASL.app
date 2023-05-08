@@ -14,6 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SingLanguage">
         <activity
+            android:name=".ui.view.activities.LoadingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.view.activities.WelcomeActivity"
             android:exported="false">
             <meta-data

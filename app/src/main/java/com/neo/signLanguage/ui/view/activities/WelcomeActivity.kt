@@ -25,10 +25,9 @@ class WelcomeActivity : AppCompatActivity() {
     binding = ActivityWelcomeBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    val showElementLiveData = MutableLiveData<Boolean>(false)
+    val showElementLiveData = MutableLiveData(false)
     showElementLiveData.observe(this) { showElement ->
       // Actualiza la visibilidad del elemento en función del valor de showElement
-      /*binding.btnSkip.visibility = if (showElement) View.VISIBLE else View.GONE*/
       if (showElement) {
         if (binding.btnStart.alpha < 1f) {
           // El botón está invisible o semi-visible, así que lo animamos para hacerlo visible
@@ -54,7 +53,7 @@ class WelcomeActivity : AppCompatActivity() {
       }
     }
 
-    arrayTutorialWelcome = ArrayList<TutorialWelcome>(
+    arrayTutorialWelcome = ArrayList(
       arrayListOf(
         TutorialWelcome(
           "Welcome to Sign Language",
@@ -89,9 +88,7 @@ class WelcomeActivity : AppCompatActivity() {
   private fun setUpViewPager(showElementLiveData: MutableLiveData<Boolean>) {
 
     binding.viewPagerWelcome.adapter = welcomeSliderAdapter
-
     //set the orientation of the viewpager using ViewPager2.orientation
-    /*binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL*/
     binding.viewPagerWelcome.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
     //select any page you want as your starting page

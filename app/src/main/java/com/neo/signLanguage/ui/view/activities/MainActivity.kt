@@ -16,6 +16,7 @@ import com.neo.signLanguage.adapters.TabAdapter
 import com.neo.signLanguage.data.database.entities.SingDatabase
 import com.neo.signLanguage.databinding.AcitivityMainBinding
 import com.neo.signLanguage.ui.view.fragments.*
+import com.neo.signLanguage.utils.SharedPreferences
 import com.neo.signLanguage.utils.SharedPreferences.isDarkTheme
 
 
@@ -34,8 +35,13 @@ class MainActivity : AppCompatActivity() {
     binding = AcitivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    val intent = Intent(this, WelcomeActivity::class.java)
-    startActivity(intent)
+    if(SharedPreferences.getIsFirstTime(this)){
+      val intent = Intent(this, WelcomeActivity::class.java)
+      startActivity(intent)
+      finish()
+    }
+    /*val intent = Intent(this, WelcomeActivity::class.java)
+    startActivity(intent)*/
     database =
       Room.databaseBuilder(this, SingDatabase::class.java, "sign_db").allowMainThreadQueries()
         .build()
