@@ -59,7 +59,7 @@ class WelcomeActivity : AppCompatActivity() {
         TutorialWelcome(
           getString(R.string.welcome_title),
           getString(R.string.welcome_subtitle),
-          R.drawable.logo_app
+          R.drawable.asl_new_logo
         ),
         TutorialWelcome(
           getString(R.string.slider_title_1),
