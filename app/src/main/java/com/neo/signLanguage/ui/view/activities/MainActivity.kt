@@ -89,11 +89,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         true
       }
-      R.id.videoReward -> {
+      /*R.id.videoReward -> {
         val intent = Intent(this, VideReward::class.java)
         startActivity(intent)
         true
-      }
+      }*/
       else -> super.onOptionsItemSelected(item)
     }
   }
