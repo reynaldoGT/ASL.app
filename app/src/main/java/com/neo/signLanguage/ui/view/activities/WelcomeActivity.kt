@@ -101,11 +101,9 @@ class WelcomeActivity : AppCompatActivity() {
     // registering for page change callback
     binding.viewPagerWelcome.registerOnPageChangeCallback(object :
       ViewPager2.OnPageChangeCallback() {
-
       override fun onPageSelected(position: Int) {
         super.onPageSelected(position)
         showElementLiveData.postValue(position == arrayTutorialWelcome.size - 1)
-
       }
     })
   }

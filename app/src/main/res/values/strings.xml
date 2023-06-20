@@ -148,13 +148,13 @@
     <string name="welcome_title">Welcome to ASL</string>
     <string name="welcome_subtitle">This is a tutorial for you to learn sign language</string>
 
-    <string name="slider_title_1">Communication and Messaging</string>
+    <string name="slider_title_1">Communication and messaging</string>
     <string name="slider_subtitle_1">Send messages to your friends and family from the app</string>
 
-    <string name="slider_title_2">Learning and Education</string>
+    <string name="slider_title_2">Learning and education</string>
     <string name="slider_subtitle_2">Learn new things on various topics from the app</string>
 
-    <string name="slider_title_3">Games and Entertainment</string>
+    <string name="slider_title_3">Games and entertainment</string>
     <string name="slider_subtitle_3">Have fun playing different games within the app</string>
 
 

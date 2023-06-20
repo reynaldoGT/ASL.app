@@ -18,11 +18,11 @@
         android:text="@string/skip" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:layout_marginTop="120dp"
         android:id="@+id/view_pager_welcome"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="380dp"
         android:layout_gravity="center_vertical"
+        android:layout_marginTop="120dp"
         android:orientation="vertical" />
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         app:dotsColor="@color/gray300"
         app:dotsCornerRadius="8dp"
         app:dotsSize="16dp"
