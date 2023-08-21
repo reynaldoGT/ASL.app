@@ -39,7 +39,6 @@ import com.neo.signLanguage.utils.SharedPreferences.setIsGridLayout
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 
-
 class LetterAndNumbersFragment : Fragment() {
 
   private var _binding: FragmentLettersAndNumberSingBinding? = null
@@ -52,7 +51,6 @@ class LetterAndNumbersFragment : Fragment() {
     _binding = FragmentLettersAndNumberSingBinding.inflate(inflater, container, false)
     return binding.root
   }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     /*initLoad(binding.banner)*/
@@ -184,6 +182,9 @@ class LetterAndNumbersFragment : Fragment() {
     myIntent.putExtra("image", image)
     myIntent.putExtra("letter", letter)
     myIntent.putExtra("type", type)
+
+
+
     startActivity(myIntent)
   }
 }

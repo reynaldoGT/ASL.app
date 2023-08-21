@@ -48,7 +48,6 @@ class DetailsSignActivity : AppCompatActivity() {
 
     binding.composeViewDetailsActivity.setContent {
       MyMaterialTheme(
-
         content = {
           ContainerLayout(imageInt, letter!!, imageURL)
         }
@@ -83,28 +82,32 @@ class DetailsSignActivity : AppCompatActivity() {
       }).build(), imageLoader = imageLoader
     )
     Box(
-      contentAlignment = Alignment.Center
+      contentAlignment = Alignment.Center,
+      modifier = Modifier
+        .padding(16.dp),
     ) {
-      Column(
-        modifier = Modifier
-          .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-      ) {
-        Image(
-          painter = if (url != null) painter else painterResource(image),
-          contentDescription = null,
-          colorFilter = if (url != null) null else getHandColor(context),
+      Card() {
+        Column(
           modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.6f)
-        )
-        if (url === null)
-          Text(
-            text = letter,
-            modifier = Modifier,
-            style = MaterialTheme.typography.titleLarge,
+            .padding(16.dp),
+          verticalArrangement = Arrangement.Center,
+          horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+          Image(
+            painter = if (url != null) painter else painterResource(image),
+            contentDescription = null,
+            colorFilter = if (url != null) null else getHandColor(context),
+            modifier = Modifier
+              .fillMaxWidth()
+              .fillMaxHeight(0.6f)
           )
+          if (url === null)
+            Text(
+              text = letter,
+              modifier = Modifier,
+              style = MaterialTheme.typography.displayMedium,
+            )
+        }
       }
     }
 

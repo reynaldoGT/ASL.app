@@ -137,7 +137,6 @@ class GiphyFragment : Fragment(), SearchView.OnQueryTextListener {
         }
       }
     }
-
     fillRecyclerView(getQuery)
   }
 
