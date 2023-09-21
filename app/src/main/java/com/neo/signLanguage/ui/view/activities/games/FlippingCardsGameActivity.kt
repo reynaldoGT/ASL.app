@@ -276,16 +276,27 @@ class GuessFlipCardGameActivity : AppCompatActivity() {
                   backSide = {
                     CardWithBox {
                       Column(
+                        modifier = Modifier
+                          .align(Alignment.Center)
+                          .padding(
+                            4.dp
+                          ),
+                        verticalArrangement = Arrangement.Center, // Centra verticalmente
                         horizontalAlignment = Alignment.CenterHorizontally,
                       ) {
-                        Image(
-                          painter = painterResource(id = sign.image),
-                          contentDescription = null,
-                          colorFilter = getHandColor(context.current),
+                        Box(
                           modifier = Modifier
-                            .fillMaxSize()
-                            .padding(8.dp)
-                        )
+                            .fillMaxWidth()
+                            .weight(1f)
+                        ) {
+                          Image(
+                            painter = painterResource(id = sign.image),
+                            contentDescription = null,
+                            colorFilter = getHandColor(context.current),
+                            modifier = Modifier.align(Alignment.Center),
+                          )
+                        }
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
                           sign.letter.uppercase(Locale.getDefault()),
                           textAlign = TextAlign.Center,

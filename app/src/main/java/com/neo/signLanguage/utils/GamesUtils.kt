@@ -8,6 +8,7 @@ import com.neo.signLanguage.R
 import com.neo.signLanguage.data.models.MenuTitle
 import com.neo.signLanguage.data.models.Sign
 import com.neo.signLanguage.ui.view.activities.games.*
+import com.neo.signLanguage.utils.DataSign.Companion.getLetterAndSignArray
 import com.neo.signLanguage.utils.DataSign.Companion.getLetterArray
 import com.neo.signLanguage.utils.Utils.Companion.messageToImages
 import kotlinx.parcelize.Parcelize
@@ -190,6 +191,8 @@ class GamesUtils {
     )
 
     fun getRandomToFindEquals(amount: Int): ArrayList<Sign> {
+      val letterArray = getLetterAndSignArray()
+
       val randomLetters = ArrayList<Sign>()
       val resortList = ArrayList<Sign>()
       val randomInts = generateSequence {
