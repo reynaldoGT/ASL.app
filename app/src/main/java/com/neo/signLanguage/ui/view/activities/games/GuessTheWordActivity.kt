@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -37,10 +38,12 @@ import com.neo.signLanguage.ui.view.activities.composables.MyMaterialTheme
 import com.neo.signLanguage.ui.view.activities.composables.backIcon
 import com.neo.signLanguage.utils.DataSign.Companion.generateListImageSign
 import com.neo.signLanguage.utils.GamesUtils.Companion.getRandomWord
+import com.neo.signLanguage.utils.Utils
 import com.neo.signLanguage.utils.Utils.Companion.getHandColor
 import com.neo.signLanguage.utils.Utils.Companion.getStringByIdName
 import com.neo.signLanguage.utils.Utils.Companion.hideKeyboard
 import com.neo.signLanguage.utils.Utils.Companion.showSnackBarToGames
+import com.neo.signLanguage.utils.processWord
 
 
 import java.util.*
@@ -120,7 +123,7 @@ class GuessTheWordActivity : AppCompatActivity() {
         modifier = Modifier
           .fillMaxWidth()
           .padding(16.dp),
-        ) {
+      ) {
         Image(
           painter = painter,
           modifier = Modifier
@@ -151,93 +154,59 @@ class GuessTheWordActivity : AppCompatActivity() {
           Text(text = getStringByIdName(this@GuessTheWordActivity, "repeat"), color = Color.White)
         }
       }
-      GridWord(correctWord, this@GuessTheWordActivity)
+      GridWord(correctWord.value, onCorrectWord = {
+        hideKeyboard(this@GuessTheWordActivity)
+        Utils.showSnackBar(
+          this@GuessTheWordActivity,
+          R.string.correct,
+        )
+        correctWord.value = getRandomWord()
+      })
     }
   }
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GridWord(word: MutableState<String>, view: GuessTheWordActivity) {
+fun GridWord(word: String, onCorrectWord: () -> Unit) {
   val context = LocalContext.current
+  var text by remember { mutableStateOf("") }
 
-  val focusManager = LocalFocusManager.current
-  /*val wordStates = remember { mutableStateListOf(*word.toCharArray().toTypedArray()) }*/
-  val textFieldsState = mutableStateListOf(*Array(word.value.length) { ' ' })
+  // En la función que verifica si se completaron los textfields
 
-// En la función que verifica si se completaron los textfields
-  if (textFieldsState.joinToString("") == word.value) {
-    word.value = getRandomWord()
-  }
-
-// En el compositor
-  var wordStates by remember { mutableStateOf(mutableListOf(*Array(word.value.length) { ' ' })) }
-
-  LaunchedEffect(word.value) {
-    val initialList = mutableListOf<Char>()
-    word.value.forEachIndexed { index, char ->
-      if (index == 0) {
-        initialList.add(char)
-      } else {
-        initialList.add(' ')
-      }
-    }
-    wordStates = mutableStateListOf(*initialList.toTypedArray())
-  }
-  LazyRow(
+  Box(
     modifier = Modifier
       .wrapContentWidth()
       .padding(8.dp),
-    horizontalArrangement = Arrangement.spacedBy(8.dp)
   ) {
-    items(wordStates.size) { index ->
-      Box(
-        modifier = Modifier
-          .fillMaxSize(),
-      ) {
-        Card(
-          modifier = Modifier
-            .width(50.dp)
-            .height(50.dp),
-          /*.padding(4.dp),*/
-          shape = RoundedCornerShape(4.dp),
-        ) {
-          OutlinedTextField(
-            value = wordStates[index].toString(),
-            onValueChange = {
-              if (it.isNotEmpty()) {
-                wordStates.set(index, it[0])
-                if (wordStates.joinToString("") == word.value) {
-                  word.value = getRandomWord()
-                  /*currentRecord++*/
-                  showSnackBarToGames(
-                    getStringByIdName(view, "correct"),
-                    R.color.green_dark,
-                    view.findViewById(android.R.id.content),
-                    context,
-                  )
-                }
-                /*TODO reset the main word*/
-                focusManager.moveFocus(FocusDirection.Next)
-              } else {
-                wordStates[index] = ' '
-              }
-            },
-            textStyle = TextStyle(
-              textAlign = TextAlign.Center,
-              fontWeight = FontWeight.Bold,
-              fontSize = 15.sp
-            ),
-            maxLines = 1,
-            singleLine = true,
-            /*keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),*/
-            keyboardOptions = (KeyboardOptions.Default.copy(imeAction = ImeAction.Next)),
-            keyboardActions = KeyboardActions(
-              onNext = { focusManager.moveFocus(FocusDirection.Next) }
-            ),
-          )
+    OutlinedTextField(
+      maxLines = 1,
+      value = text,
+      textStyle = MaterialTheme.typography.displayLarge.copy(
+        textAlign = TextAlign.Center
+      ),
+
+      onValueChange = {
+        text = it.lowercase()
+        Log.d("TAG", "text: $text")
+        if (it == word) {
+          text = ""
+          onCorrectWord()
         }
-      }
-    }
+      },
+      label = {
+        Text(processWord(word), style = MaterialTheme.typography.titleLarge.copy(
+          letterSpacing = 5.sp,
+        ))
+      },
+      supportingText = {
+        Text(
+          text = "${text.length} / ${word.length}",
+          modifier = Modifier.fillMaxWidth(),
+          textAlign = TextAlign.End,
+        )
+      },
+    )
   }
 }

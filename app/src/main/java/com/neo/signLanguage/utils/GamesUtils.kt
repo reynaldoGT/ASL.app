@@ -385,3 +385,18 @@ data class DialogGameDC(
 enum class GameResult {
   WIN, LOSE, TIME_IS_UP
 }
+
+fun processWord(word: String): String {
+  if (word.length < 2) {
+    // If the word has fewer than 2 characters, we can't hide letters, so return it as is.
+    return word
+  }
+
+  val firstLetter = word[0]
+  val lastLetter = word[word.length - 1]
+
+  // Use a regular expression to replace intermediate letters with underscores.
+  val processedWord = word.substring(1, word.length - 1).replace("[a-zA-Z]".toRegex(), "_")
+
+  return "$firstLetter$processedWord$lastLetter"
+}
